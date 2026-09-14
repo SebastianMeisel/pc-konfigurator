@@ -27,9 +27,12 @@ jobs:
         run: |
           node --check app.js
           node --check education.js
+          node --check evaluation.js
           test -s index.html
+          test -s evaluation.html
           test -s styles.css
           test -s education.css
+          test -s evaluation.css
           test -s favicon.svg
           grep -q 'id="pc-view"' index.html
           grep -q 'id="port-view"' index.html
@@ -40,6 +43,9 @@ jobs:
           grep -q 'generation-badge' app.js
           grep -q 'id:"b550m"' app.js
           grep -q 'id:"3080"' app.js
+          grep -q 'buildbench-evaluation-v1' app.js
+          grep -q 'id="scenario-grid"' evaluation.html
+          grep -q 'const scenarios' evaluation.js
       - name: Pages konfigurieren
         uses: actions/configure-pages@v5
         with:

@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Gewichtete und begründete Eignungsbewertung einer PC-Konfiguration für fünf berufliche Anwendungsszenarien.">
+  <meta name="theme-color" content="#09111f">
+  <title>BuildBench – Auswertung</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="evaluation.css">
+  <script src="evaluation.js" defer></script>
+</head>
+<body>
+  <header class="topbar evaluation-topbar">
+    <a class="brand" href="index.html" aria-label="Zurück zum PC-Konfigurator">
+      <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+      <span><strong>BuildBench</strong><small>Szenario-Auswertung</small></span>
+    </a>
+    <nav class="evaluation-nav" aria-label="Seitennavigation">
+      <button class="btn btn-ghost" id="print-button" type="button">Drucken</button>
+      <a class="btn btn-primary" href="index.html">Konfiguration bearbeiten</a>
+    </nav>
+  </header>
+
+  <main class="evaluation-page">
+    <section class="evaluation-hero">
+      <div>
+        <p class="eyebrow">Unterrichtsmaterial · Nutzwertanalyse</p>
+        <h1>Wie gut passt der Bauvorschlag zum Einsatzzweck?</h1>
+        <p>Jedes Szenario verwendet eigene Kriteriengewichte. Die Bewertung trennt technische Eignung, Energiebedarf und Wirtschaftlichkeit und macht jeden Punkt nachvollziehbar.</p>
+      </div>
+      <div class="method-badge"><strong>100</strong><span>maximale Punktzahl</span></div>
+    </section>
+
+    <section class="snapshot-panel" id="snapshot-panel" aria-labelledby="snapshot-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Übernommene Konfiguration</p>
+          <h2 id="snapshot-title">Bauvorschlag</h2>
+        </div>
+        <span class="snapshot-state" id="snapshot-state">wird geladen</span>
+      </div>
+      <div class="snapshot-chips" id="snapshot-chips"></div>
+      <div class="snapshot-warning" id="snapshot-warning" hidden></div>
+    </section>
+
+    <section aria-labelledby="scenario-title">
+      <div class="section-heading scenario-heading">
+        <div>
+          <p class="eyebrow">Vergleich</p>
+          <h2 id="scenario-title">Anwendungsszenarien</h2>
+        </div>
+        <p>Karte wählen, um die vollständige Begründung anzuzeigen.</p>
+      </div>
+      <div class="scenario-grid" id="scenario-grid"></div>
+    </section>
+
+    <section class="detail-panel" id="detail-panel" aria-labelledby="detail-title">
+      <div class="detail-heading">
+        <div>
+          <p class="eyebrow" id="detail-kicker">Detailauswertung</p>
+          <h2 id="detail-title">Office-Arbeitsplatz</h2>
+          <p id="detail-description"></p>
+        </div>
+        <div class="score-ring" id="score-ring" style="--score-percent:0%">
+          <strong id="detail-score">0</strong>
+          <span>Punkte</span>
+        </div>
+      </div>
+
+      <div class="verdict" id="verdict"></div>
+
+      <div class="detail-layout">
+        <div class="criteria-panel">
+          <h3>Gewichtete Kriterien</h3>
+          <div class="criteria-table-wrap">
+            <table class="criteria-table">
+              <thead>
+                <tr><th>Kriterium</th><th>Gewicht</th><th>Wertung</th><th>Beitrag</th><th>Begründung</th></tr>
+              </thead>
+              <tbody id="criteria-body"></tbody>
+            </table>
+          </div>
+        </div>
+        <aside class="recommendation-panel">
+          <section>
+            <h3>Stärken</h3>
+            <ul id="strength-list"></ul>
+          </section>
+          <section>
+            <h3>Verbesserungsbedarf</h3>
+            <ul id="improvement-list"></ul>
+          </section>
+        </aside>
+      </div>
+    </section>
+
+    <details class="method-panel">
+      <summary>Bewertungsmethode und Grenzen</summary>
+      <div>
+        <p>Die Nutzwertanalyse multipliziert für jedes Kriterium die Teilwertung von 0 bis 100 mit dem Szenariogewicht. Die Summe der gewichteten Beiträge ergibt die Gesamtwertung.</p>
+        <p>Die Werte sind didaktische Modellwerte und keine Benchmarks. Treiber, konkrete Herstellerausführung, Software, Datensätze und Arbeitsabläufe können das Ergebnis verändern. Für Beschaffung und produktive Planung sind reale Benchmarks und Herstellerfreigaben hinzuzuziehen.</p>
+      </div>
+    </details>
+  </main>
+</body>
+</html>

@@ -370,6 +370,16 @@
       const item = selected(category.id);
       return `<div class="build-row ${item ? "" : "empty"}"><span class="build-category">${category.label}</span><span class="build-item">${item ? item.name : "noch offen"}</span><span class="build-price">${item ? money(item.price) : "–"}</span></div>`;
     }).join("");
+
+    try {
+      localStorage.setItem("buildbench-evaluation-v1", JSON.stringify({
+        version: 1,
+        updatedAt: new Date().toISOString(),
+        total,
+        power,
+        components: Object.fromEntries(categories.map(category => [category.id, selected(category.id)]))
+      }));
+    } catch (_) {}
   }
 
   const svgText = (x,y,text,size=12,fill="#90a6c0",anchor="start") => `<text x="${x}" y="${y}" font-size="${size}" fill="${fill}" text-anchor="${anchor}">${text}</text>`;

@@ -14,6 +14,8 @@ Die Anwendung bewertet unter anderem Sockel, Formfaktor, Arbeitsspeicherstandard
 - Automatische Berücksichtigung der Netzwerk-Erweiterungen im Gesamtpreis
 - Klar markierte Komponenten aus ein bis zwei Vorgängergenerationen für Plattformvergleich, Budgetplanung und Gebrauchtmarkt-Szenarien
 - Gemischte AM5-, AM4-, LGA1851- und LGA1700-Plattformen mit DDR5-/DDR4-Prüfung sowie PCIe-Abwärtskompatibilität
+- Zweite Seite „Auswertung“ mit gewichteter Nutzwertanalyse für Office, Entwicklung, CAD, Videoschnitt und lokale KI
+- Transparente Teilwertungen, gewichtete Beiträge, Begründungen, Stärken, Verbesserungsbedarf und Druckansicht
 
 ## Start
 
