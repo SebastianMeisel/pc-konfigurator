@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Interaktiver PC-Konfigurator mit nachvollziehbarer Kompatibilitätsprüfung und dynamischer SVG-Montageansicht.">
+  <meta name="theme-color" content="#09111f">
+  <title>BuildBench – PC-Konfigurator</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="BuildBench – zum Anfang">
+      <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+      <span><strong>BuildBench</strong><small>PC-Konfigurator</small></span>
+    </a>
+    <div class="top-stats" aria-live="polite">
+      <div><span>Fortschritt</span><strong id="progress-label">0 / 12</strong></div>
+      <div><span>Leistungsbedarf</span><strong id="power-label">–</strong></div>
+      <div><span>Gesamt</span><strong id="price-label">0 €</strong></div>
+    </div>
+    <div class="header-actions">
+      <button class="btn btn-ghost" id="example-button" type="button">Beispiel-Build</button>
+      <button class="btn btn-outline" id="reset-button" type="button">Zurücksetzen</button>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <aside class="step-panel" aria-label="Komponentengruppen">
+      <div class="panel-heading">
+        <p class="eyebrow">Montagereihenfolge</p>
+        <h2>Komponenten</h2>
+      </div>
+      <nav id="category-nav" class="category-nav"></nav>
+      <div class="legend">
+        <span><i class="legend-dot selected"></i> ausgewählt</span>
+        <span><i class="legend-dot blocked"></i> nicht passend</span>
+        <span><i class="legend-dot needed"></i> noch erforderlich</span>
+      </div>
+    </aside>
+
+    <section class="selection-panel" aria-labelledby="category-title">
+      <div class="selection-header">
+        <div>
+          <p class="eyebrow" id="category-kicker">Schritt 1 von 12</p>
+          <h1 id="category-title">Gehäuse auswählen</h1>
+          <p id="category-description" class="category-description"></p>
+        </div>
+        <div class="selection-count" id="selection-count"></div>
+      </div>
+      <div class="context-note" id="context-note" hidden></div>
+      <div id="component-grid" class="component-grid"></div>
+      <div class="step-actions">
+        <button class="btn btn-ghost" id="previous-button" type="button">Zurück</button>
+        <button class="btn btn-primary" id="next-button" type="button">Weiter</button>
+      </div>
+    </section>
+
+    <aside class="visual-panel">
+      <div class="visual-heading">
+        <div>
+          <p class="eyebrow">2D-Montageansicht</p>
+          <h2 id="build-name">Dein System</h2>
+        </div>
+        <span class="view-chip">Seitenansicht</span>
+      </div>
+      <div class="svg-frame">
+        <svg id="pc-view" viewBox="0 0 680 720" role="img" aria-labelledby="svg-title svg-description">
+          <title id="svg-title">Schnittansicht des zusammengestellten PCs</title>
+          <desc id="svg-description">Die gewählten Komponenten werden maßstäblich angenähert im Gehäuse dargestellt.</desc>
+        </svg>
+      </div>
+      <div class="view-legend" id="view-legend"></div>
+    </aside>
+
+    <section class="diagnostics-panel" aria-labelledby="diagnostics-title">
+      <div class="diagnostics-heading">
+        <div>
+          <p class="eyebrow">Live-Prüfung</p>
+          <h2 id="diagnostics-title">Kompatibilität</h2>
+        </div>
+        <span id="health-badge" class="health-badge neutral">Auswahl beginnen</span>
+      </div>
+      <div id="diagnostics-list" class="diagnostics-list" aria-live="polite"></div>
+    </section>
+
+    <section class="build-panel" aria-labelledby="build-title">
+      <div class="build-heading">
+        <div>
+          <p class="eyebrow">Stückliste</p>
+          <h2 id="build-title">Aktuelle Auswahl</h2>
+        </div>
+        <button class="btn btn-ghost compact" id="copy-button" type="button">Liste kopieren</button>
+      </div>
+      <div id="build-list" class="build-list"></div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <noscript>Für den interaktiven Konfigurator muss JavaScript aktiviert sein.</noscript>
+</body>
+</html>
