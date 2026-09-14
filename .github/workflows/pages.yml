@@ -33,6 +33,8 @@ jobs:
           grep -q 'const categories' app.js
       - name: Pages konfigurieren
         uses: actions/configure-pages@v5
+        with:
+          enablement: true
       - name: Statische Dateien paketieren
         uses: actions/upload-pages-artifact@v3
         with:
