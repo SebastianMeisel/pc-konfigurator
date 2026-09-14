@@ -37,6 +37,9 @@ jobs:
           grep -q 'id="network-options"' index.html
           grep -q 'const categories' app.js
           grep -q 'const lessons' education.js
+          grep -q 'generation-badge' app.js
+          grep -q 'id:"b550m"' app.js
+          grep -q 'id:"3080"' app.js
       - name: Pages konfigurieren
         uses: actions/configure-pages@v5
         with:

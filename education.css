@@ -267,3 +267,29 @@
   .header-actions #safety-button { display: none; }
   .view-button { padding-inline: 6px; }
 }
+.component-card.legacy-card {
+  border-style: dashed;
+  background: linear-gradient(150deg, rgba(48,45,66,.78), rgba(20,28,45,.86));
+}
+.component-card.legacy-card.selected {
+  border-style: solid;
+  border-color: var(--accent);
+}
+.generation-badge {
+  display: inline-block;
+  margin-top: 5px;
+  padding: 2px 6px;
+  border: 1px solid rgba(255,200,87,.45);
+  border-radius: 99px;
+  color: var(--warning);
+  background: rgba(255,200,87,.08);
+  font: 600 .59rem "JetBrains Mono", monospace;
+  letter-spacing: .02em;
+  white-space: nowrap;
+}
+.generation-badge.generation-2 {
+  border-color: rgba(180,157,225,.45);
+  color: #c9b5ef;
+  background: rgba(180,157,225,.08);
+}
+.network-card .generation-badge { margin: 3px 0 1px; }

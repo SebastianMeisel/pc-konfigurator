@@ -24,10 +24,13 @@
       { id:"nr200p", maker:"Cooler Master", name:"NR200P V2", price:119, form:["ITX"], maxGpu:356, maxCooler:67, psu:["SFX","SFX-L"], radiators:[120,240,280], drives:["M.2","2.5"], thread:"6-32", size:"Mini-ITX", specs:["ITX","GPU 356 mm","SFX-Netzteil"] }
     ],
     motherboard: [
-      { id:"x870", maker:"MSI", name:"MAG X870 Tomahawk WiFi", price:319, form:"ATX", socket:"AM5", memory:"DDR5", m2:4, sata:4, standoff:9, specs:["AM5","ATX","4× M.2 · Wi-Fi 7"], recommended:true },
-      { id:"b850m", maker:"ASRock", name:"B850M Pro RS WiFi", price:199, form:"mATX", socket:"AM5", memory:"DDR5", m2:3, sata:4, standoff:8, specs:["AM5","mATX","3× M.2 · Wi-Fi 6E"] },
-      { id:"z890", maker:"Gigabyte", name:"Z890 AORUS Elite WiFi7", price:299, form:"ATX", socket:"LGA1851", memory:"DDR5", m2:4, sata:4, standoff:9, specs:["LGA1851","ATX","4× M.2 · Wi-Fi 7"] },
-      { id:"b860i", maker:"ASUS", name:"ROG Strix B860-I Gaming WiFi", price:239, form:"ITX", socket:"LGA1851", memory:"DDR5", m2:2, sata:2, standoff:4, specs:["LGA1851","ITX","2× M.2 · Wi-Fi 7"] }
+      { id:"x870", maker:"MSI", name:"MAG X870 Tomahawk WiFi", price:319, form:"ATX", socket:"AM5", memory:"DDR5", m2:4, m2Gen:5, sata:4, standoff:9, specs:["AM5","ATX","4× M.2 · Wi-Fi 7"], recommended:true },
+      { id:"b850m", maker:"ASRock", name:"B850M Pro RS WiFi", price:199, form:"mATX", socket:"AM5", memory:"DDR5", m2:3, m2Gen:5, sata:4, standoff:8, specs:["AM5","mATX","3× M.2 · Wi-Fi 6E"] },
+      { id:"z890", maker:"Gigabyte", name:"Z890 AORUS Elite WiFi7", price:299, form:"ATX", socket:"LGA1851", memory:"DDR5", m2:4, m2Gen:5, sata:4, standoff:9, specs:["LGA1851","ATX","4× M.2 · Wi-Fi 7"] },
+      { id:"b860i", maker:"ASUS", name:"ROG Strix B860-I Gaming WiFi", price:239, form:"ITX", socket:"LGA1851", memory:"DDR5", m2:2, m2Gen:5, sata:2, standoff:4, specs:["LGA1851","ITX","2× M.2 · Wi-Fi 7"] },
+      { id:"b650", maker:"MSI", name:"B650 Gaming Plus WiFi", price:159, form:"ATX", socket:"AM5", memory:"DDR5", m2:2, m2Gen:4, sata:4, standoff:9, generation:1, specs:["AM5","ATX · DDR5","PCIe 4.0 · Wi-Fi 6E"] },
+      { id:"z790d4", maker:"MSI", name:"PRO Z790-P WiFi DDR4", price:179, form:"ATX", socket:"LGA1700", memory:"DDR4", m2:4, m2Gen:4, sata:4, standoff:9, generation:1, specs:["LGA1700","ATX · DDR4","4× M.2 · Wi-Fi 6E"] },
+      { id:"b550m", maker:"MSI", name:"B550M PRO-VDH WiFi", price:109, form:"mATX", socket:"AM4", memory:"DDR4", m2:2, m2Gen:4, sata:4, standoff:8, generation:2, specs:["AM4","mATX · DDR4","PCIe 4.0 · Wi-Fi 5"] }
     ],
     cpu: [
       { id:"9600x", maker:"AMD", name:"Ryzen 5 9600X", price:235, socket:"AM5", cores:6, power:88, label:"R5", specs:["6C / 12T","bis 5,4 GHz","88 W PPT"], recommended:true },
@@ -35,41 +38,56 @@
       { id:"9950x3d", maker:"AMD", name:"Ryzen 9 9950X3D", price:749, socket:"AM5", cores:16, power:230, label:"R9", specs:["16C / 32T","3D V-Cache","230 W PPT"] },
       { id:"245k", maker:"Intel", name:"Core Ultra 5 245K", price:299, socket:"LGA1851", cores:14, power:159, label:"U5", specs:["14 Kerne","bis 5,2 GHz","159 W Turbo"] },
       { id:"265k", maker:"Intel", name:"Core Ultra 7 265K", price:399, socket:"LGA1851", cores:20, power:250, label:"U7", specs:["20 Kerne","bis 5,5 GHz","250 W Turbo"] },
-      { id:"285k", maker:"Intel", name:"Core Ultra 9 285K", price:589, socket:"LGA1851", cores:24, power:250, label:"U9", specs:["24 Kerne","bis 5,7 GHz","250 W Turbo"] }
+      { id:"285k", maker:"Intel", name:"Core Ultra 9 285K", price:589, socket:"LGA1851", cores:24, power:250, label:"U9", specs:["24 Kerne","bis 5,7 GHz","250 W Turbo"] },
+      { id:"7600", maker:"AMD", name:"Ryzen 5 7600", price:169, socket:"AM5", cores:6, power:88, label:"R5", generation:1, specs:["6C / 12T","Zen 4 · AM5","88 W PPT"] },
+      { id:"7800x3d", maker:"AMD", name:"Ryzen 7 7800X3D", price:329, socket:"AM5", cores:8, power:162, label:"R7", generation:1, specs:["8C / 16T","Zen 4 · 3D V-Cache","162 W PPT"] },
+      { id:"14600k", maker:"Intel", name:"Core i5-14600K", price:219, socket:"LGA1700", cores:14, power:181, label:"i5", generation:1, specs:["14 Kerne / 20 Threads","Raptor Lake Refresh","181 W Turbo"] },
+      { id:"5800x3d", maker:"AMD", name:"Ryzen 7 5800X3D", price:229, socket:"AM4", cores:8, power:142, label:"R7", generation:2, specs:["8C / 16T","Zen 3 · 3D V-Cache","142 W PPT"] },
+      { id:"12700k", maker:"Intel", name:"Core i7-12700K", price:199, socket:"LGA1700", cores:12, power:190, label:"i7", generation:2, specs:["12 Kerne / 20 Threads","Alder Lake","190 W Turbo"] }
     ],
     gpu: [
       { id:"5060ti", maker:"NVIDIA", name:"GeForce RTX 5060 Ti 16 GB", price:499, length:242, power:180, connector:"8-pin", label:"5060 Ti", specs:["16 GB GDDR7","242 mm","180 W"], recommended:true },
       { id:"5070", maker:"NVIDIA", name:"GeForce RTX 5070 12 GB", price:649, length:242, power:250, connector:"12V-2x6", label:"RTX 5070", specs:["12 GB GDDR7","242 mm","250 W"] },
       { id:"5080", maker:"NVIDIA", name:"GeForce RTX 5080 16 GB", price:1199, length:304, power:360, connector:"12V-2x6", label:"RTX 5080", specs:["16 GB GDDR7","304 mm","360 W"] },
       { id:"9070", maker:"AMD", name:"Radeon RX 9070 16 GB", price:659, length:289, power:220, connector:"2× 8-pin", label:"RX 9070", specs:["16 GB GDDR6","289 mm","220 W"] },
-      { id:"9070xt", maker:"AMD", name:"Radeon RX 9070 XT 16 GB", price:759, length:304, power:304, connector:"3× 8-pin", label:"9070 XT", specs:["16 GB GDDR6","304 mm","304 W"] }
+      { id:"9070xt", maker:"AMD", name:"Radeon RX 9070 XT 16 GB", price:759, length:304, power:304, connector:"3× 8-pin", label:"9070 XT", specs:["16 GB GDDR6","304 mm","304 W"] },
+      { id:"4070super", maker:"NVIDIA", name:"GeForce RTX 4070 SUPER 12 GB", price:499, length:267, power:220, connector:"12V-2x6", label:"4070 S", generation:1, specs:["12 GB GDDR6X","267 mm","220 W"] },
+      { id:"7800xt", maker:"AMD", name:"Radeon RX 7800 XT 16 GB", price:449, length:267, power:263, connector:"2× 8-pin", label:"7800 XT", generation:1, specs:["16 GB GDDR6","267 mm","263 W"] },
+      { id:"3080", maker:"NVIDIA", name:"GeForce RTX 3080 10 GB", price:349, length:285, power:320, connector:"2× 8-pin", label:"RTX 3080", generation:2, specs:["10 GB GDDR6X","285 mm","320 W"] },
+      { id:"6800xt", maker:"AMD", name:"Radeon RX 6800 XT 16 GB", price:329, length:267, power:300, connector:"2× 8-pin", label:"6800 XT", generation:2, specs:["16 GB GDDR6","267 mm","300 W"] }
     ],
     ram: [
       { id:"32-6000", maker:"G.Skill", name:"Flare X5 32 GB", price:109, type:"DDR5", modules:2, capacity:32, speed:6000, specs:["2× 16 GB","DDR5-6000","CL30"], recommended:true },
       { id:"64-6000", maker:"Kingston", name:"Fury Beast 64 GB", price:209, type:"DDR5", modules:2, capacity:64, speed:6000, specs:["2× 32 GB","DDR5-6000","CL30"] },
       { id:"64-6400", maker:"Corsair", name:"Vengeance RGB 64 GB", price:229, type:"DDR5", modules:2, capacity:64, speed:6400, specs:["2× 32 GB","DDR5-6400","RGB"] },
-      { id:"96-6400", maker:"Crucial", name:"Pro 96 GB", price:289, type:"DDR5", modules:2, capacity:96, speed:6400, specs:["2× 48 GB","DDR5-6400","CL40"] }
+      { id:"96-6400", maker:"Crucial", name:"Pro 96 GB", price:289, type:"DDR5", modules:2, capacity:96, speed:6400, specs:["2× 48 GB","DDR5-6400","CL40"] },
+      { id:"32-3600", maker:"G.Skill", name:"Ripjaws V 32 GB", price:69, type:"DDR4", modules:2, capacity:32, speed:3600, generation:1, specs:["2× 16 GB","DDR4-3600","CL16"] },
+      { id:"64-3200", maker:"Kingston", name:"Fury Beast 64 GB DDR4", price:119, type:"DDR4", modules:2, capacity:64, speed:3200, generation:2, specs:["2× 32 GB","DDR4-3200","CL16"] }
     ],
     psu: [
       { id:"rm650e", maker:"Corsair", name:"RM650e", price:99, form:"ATX", watts:650, atx3:true, specs:["650 W","ATX 3.1","80 Plus Gold"] },
       { id:"pp750", maker:"be quiet!", name:"Pure Power 12 M 750W", price:119, form:"ATX", watts:750, atx3:true, specs:["750 W","ATX 3.1","80 Plus Gold"], recommended:true },
       { id:"rm850x", maker:"Corsair", name:"RM850x", price:159, form:"ATX", watts:850, atx3:true, specs:["850 W","ATX 3.1","vollmodular"] },
       { id:"vertex1000", maker:"Seasonic", name:"Vertex GX-1000", price:209, form:"ATX", watts:1000, atx3:true, specs:["1000 W","ATX 3.0","80 Plus Gold"] },
-      { id:"vsfx750", maker:"Cooler Master", name:"V SFX Gold 750", price:149, form:"SFX", watts:750, atx3:true, specs:["750 W","SFX","80 Plus Gold"] }
+      { id:"vsfx750", maker:"Cooler Master", name:"V SFX Gold 750", price:149, form:"SFX", watts:750, atx3:true, specs:["750 W","SFX","80 Plus Gold"] },
+      { id:"focus750", maker:"Seasonic", name:"Focus GX-750", price:89, form:"ATX", watts:750, atx3:false, generation:1, specs:["750 W","ATX 2.4","2× PCIe 8-Pin"] },
+      { id:"straight850", maker:"be quiet!", name:"Straight Power 11 850W", price:109, form:"ATX", watts:850, atx3:false, generation:2, specs:["850 W","ATX 2.4","80 Plus Gold"] }
     ],
     cooler: [
-      { id:"freezer36", maker:"ARCTIC", name:"Freezer 36", price:35, kind:"air", height:159, capacity:220, sockets:["AM5","LGA1851"], specs:["Tower-Kühler","159 mm","220 W Klasse"], recommended:true },
-      { id:"nhd15", maker:"Noctua", name:"NH-D15 G2", price:149, kind:"air", height:168, capacity:280, sockets:["AM5","LGA1851"], specs:["Dual-Tower","168 mm","High-End"] },
-      { id:"lf240", maker:"ARCTIC", name:"Liquid Freezer III 240", price:79, kind:"aio", radiator:240, capacity:300, sockets:["AM5","LGA1851"], specs:["240-mm-AIO","geschlossen","300 W Klasse"] },
-      { id:"lf360", maker:"ARCTIC", name:"Liquid Freezer III 360", price:99, kind:"aio", radiator:360, capacity:350, sockets:["AM5","LGA1851"], specs:["360-mm-AIO","geschlossen","350 W Klasse"] },
-      { id:"custom360", maker:"Alphacool", name:"Core Custom Loop 360", price:389, kind:"custom", radiator:360, capacity:450, sockets:["AM5","LGA1851"], specs:["360-mm-Radiator","offener Kreislauf","450 W Klasse"] }
+      { id:"freezer36", maker:"ARCTIC", name:"Freezer 36", price:35, kind:"air", height:159, capacity:220, sockets:["AM5","AM4","LGA1851","LGA1700"], specs:["Tower-Kühler","159 mm","220 W Klasse"], recommended:true },
+      { id:"nhd15", maker:"Noctua", name:"NH-D15 G2", price:149, kind:"air", height:168, capacity:280, sockets:["AM5","AM4","LGA1851","LGA1700"], specs:["Dual-Tower","168 mm","High-End"] },
+      { id:"lf240", maker:"ARCTIC", name:"Liquid Freezer III 240", price:79, kind:"aio", radiator:240, capacity:300, sockets:["AM5","AM4","LGA1851","LGA1700"], specs:["240-mm-AIO","geschlossen","300 W Klasse"] },
+      { id:"lf360", maker:"ARCTIC", name:"Liquid Freezer III 360", price:99, kind:"aio", radiator:360, capacity:350, sockets:["AM5","AM4","LGA1851","LGA1700"], specs:["360-mm-AIO","geschlossen","350 W Klasse"] },
+      { id:"custom360", maker:"Alphacool", name:"Core Custom Loop 360", price:389, kind:"custom", radiator:360, capacity:450, sockets:["AM5","AM4","LGA1851","LGA1700"], specs:["360-mm-Radiator","offener Kreislauf","450 W Klasse"] }
     ],
     storage: [
-      { id:"990pro", maker:"Samsung", name:"990 PRO 2 TB", price:169, interface:"NVMe", mount:"M.2", capacity:"2 TB", specs:["M.2 2280","PCIe 4.0 NVMe","2 TB"], recommended:true },
-      { id:"sn850x", maker:"WD_BLACK", name:"SN850X 4 TB", price:299, interface:"NVMe", mount:"M.2", capacity:"4 TB", specs:["M.2 2280","PCIe 4.0 NVMe","4 TB"] },
-      { id:"t705", maker:"Crucial", name:"T705 2 TB", price:279, interface:"NVMe", mount:"M.2", capacity:"2 TB", specs:["M.2 2280","PCIe 5.0 NVMe","2 TB"] },
+      { id:"990pro", maker:"Samsung", name:"990 PRO 2 TB", price:169, interface:"NVMe", mount:"M.2", capacity:"2 TB", pcieGen:4, specs:["M.2 2280","PCIe 4.0 NVMe","2 TB"], recommended:true },
+      { id:"sn850x", maker:"WD_BLACK", name:"SN850X 4 TB", price:299, interface:"NVMe", mount:"M.2", capacity:"4 TB", pcieGen:4, specs:["M.2 2280","PCIe 4.0 NVMe","4 TB"] },
+      { id:"t705", maker:"Crucial", name:"T705 2 TB", price:279, interface:"NVMe", mount:"M.2", capacity:"2 TB", pcieGen:5, specs:["M.2 2280","PCIe 5.0 NVMe","2 TB"] },
       { id:"mx500", maker:"Crucial", name:"MX500 2 TB", price:139, interface:"SATA", mount:"2.5", capacity:"2 TB", specs:["2,5 Zoll","SATA 6 Gb/s","2 TB"] },
-      { id:"ironwolf", maker:"Seagate", name:"IronWolf 8 TB", price:189, interface:"SATA", mount:"3.5", capacity:"8 TB", specs:["3,5 Zoll HDD","SATA 6 Gb/s","8 TB"] }
+      { id:"ironwolf", maker:"Seagate", name:"IronWolf 8 TB", price:189, interface:"SATA", mount:"3.5", capacity:"8 TB", specs:["3,5 Zoll HDD","SATA 6 Gb/s","8 TB"] },
+      { id:"980pro", maker:"Samsung", name:"980 PRO 1 TB", price:79, interface:"NVMe", mount:"M.2", capacity:"1 TB", pcieGen:4, generation:1, specs:["M.2 2280","PCIe 4.0 NVMe","1 TB"] },
+      { id:"970evo", maker:"Samsung", name:"970 EVO Plus 1 TB", price:59, interface:"NVMe", mount:"M.2", capacity:"1 TB", pcieGen:3, generation:2, specs:["M.2 2280","PCIe 3.0 NVMe","1 TB"] }
     ],
     standoffs: [
       { id:"case-set", maker:"Gehäusezubehör", name:"Vorinstalliertes Set", price:0, count:9, forms:["ATX","mATX","ITX"], thread:"6-32", specs:["9 Stück","6-32","im Gehäuse"], recommended:true },
@@ -248,16 +266,17 @@
     refs.description.textContent = category.description;
     const available = items.filter(item => compatibility(category.id, item).length === 0).length;
     refs.count.textContent = `${available} von ${items.length} wählbar`;
-    const context = contextMessage(category.id);
+    const generationHint = items.some(item => item.generation) ? "Vorgängermodelle sind als Lern- und Budgetoptionen markiert; Verfügbarkeit, Effizienz, Garantie und Firmware-Support gesondert bewerten." : "";
+    const context = [contextMessage(category.id), generationHint].filter(Boolean).join(" ");
     refs.note.hidden = !context;
     refs.note.textContent = context || "";
 
     refs.grid.innerHTML = items.map(item => {
       const reasons = compatibility(category.id, item);
       const isSelected = state.selections[category.id] === item.id;
-      return `<button class="component-card ${isSelected ? "selected" : ""} ${reasons.length ? "blocked" : ""}"
+      return `<button class="component-card ${isSelected ? "selected" : ""} ${reasons.length ? "blocked" : ""} ${item.generation ? "legacy-card" : ""}"
           data-id="${item.id}" type="button" ${reasons.length ? "disabled" : ""} aria-pressed="${isSelected}">
-        <span class="card-top"><span class="maker">${item.maker}</span><span class="price">${money(item.price)}</span></span>
+        <span class="card-top"><span><span class="maker">${item.maker}</span>${item.generation ? `<span class="generation-badge generation-${item.generation}">${item.generation === 1 ? "1 Gen. zurück" : "2 Gen. zurück"}</span>` : ""}</span><span class="price">${money(item.price)}</span></span>
         <h3>${item.name}</h3>
         <ul class="specs">${item.specs.map(spec => `<li>${spec}</li>`).join("")}</ul>
         ${reasons.length ? `<span class="block-reason">${reasons.join(" · ")}</span>` :
@@ -281,7 +300,7 @@
     const power = requiredPower(state.selections);
     const messages = {
       motherboard: c ? `Das Gehäuse unterstützt ${c.form.join(", ")}.` : "",
-      cpu: board ? `Benötigter Sockel: ${board.socket}.` : "Ohne Mainboard sind beide aktuellen Sockel wählbar.",
+      cpu: board ? `Benötigter Sockel: ${board.socket}.` : "Ohne Mainboard bleiben AM5, AM4, LGA1851 und LGA1700 wählbar.",
       gpu: c ? `Maximale Grafikkartenlänge: ${c.maxGpu} mm.` : "",
       psu: power.recommended ? `Für diese CPU/GPU-Kombination werden mindestens ${power.recommended} W empfohlen.` : "CPU und GPU auswählen, um die Reserve zu berechnen.",
       cooler: [cpu ? `CPU-Spitze: ${cpu.power} W.` : "", c ? `Maximale Kühlerhöhe: ${c.maxCooler} mm.` : ""].filter(Boolean).join(" "),
@@ -295,11 +314,23 @@
     const missing = categories.filter(c => !state.selections[c.id]);
     const c = selected("case"), board = selected("motherboard"), cpu = selected("cpu");
     const gpu = selected("gpu"), psu = selected("psu"), cooler = selected("cooler");
-    const storage = selected("storage"), cables = selected("cables");
+    const storage = selected("storage"), cables = selected("cables"), ram = selected("ram");
     const power = requiredPower(state.selections);
 
     if (!missing.length) list.push({ type:"success", title:"Stückliste vollständig", text:"Alle zwölf Gruppen sind gewählt und die modellierten Regeln sind erfüllt." });
     else list.push({ type:"info", title:`${missing.length} Auswahl${missing.length === 1 ? "" : "en"} offen`, text:missing.slice(0,4).map(x => x.label).join(", ") + (missing.length > 4 ? " …" : "") });
+
+    const legacyParts = [[board,"Mainboard"],[cpu,"CPU"],[gpu,"GPU"],[ram,"RAM"],[psu,"Netzteil"],[storage,"SSD"]].filter(([item]) => item?.generation);
+    if (legacyParts.length) {
+      const oldest = Math.max(...legacyParts.map(([item]) => item.generation));
+      list.push({ type:"info", title:`Vorgängerplattform: bis zu ${oldest} Generation${oldest === 1 ? "" : "en"} zurück`, text:legacyParts.map(([item,label]) => `${label}: ${item.name}`).join(" · ") + ". Preis, Restgarantie, Effizienz und Supportzeitraum vergleichen." });
+    }
+    if (board && storage?.pcieGen > board.m2Gen) {
+      list.push({ type:"warning", title:"NVMe wird ausgebremst", text:`Die PCIe-${storage.pcieGen}.0-SSD arbeitet im M.2-Steckplatz dieses Boards höchstens mit PCIe ${board.m2Gen}.0. PCIe bleibt abwärtskompatibel.` });
+    }
+    if (psu && psu.atx3 === false && gpu?.connector === "12V-2x6") {
+      list.push({ type:"warning", title:"GPU-Stromadapter nötig", text:"Das ältere ATX-2.4-Netzteil besitzt keinen nativen 12V-2x6-Anschluss. Nur den vorgesehenen Adapter mit getrennten PCIe-Leitungen verwenden." });
+    }
 
     if (c && board) list.push({ type:"success", title:"Formfaktor passt", text:`${board.form}-Mainboard kann im ${c.name} montiert werden.` });
     if (board && cpu) list.push({ type:"success", title:"Sockel stimmt überein", text:`${cpu.name} und ${board.name} verwenden ${cpu.socket}.` });

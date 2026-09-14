@@ -12,6 +12,8 @@ Die Anwendung bewertet unter anderem Sockel, Formfaktor, Arbeitsspeicherstandard
 - Auswahl integrierter oder zusätzlicher Ethernet- und WLAN-Schnittstellen
 - Hinweise zu PCIe-Steckplätzen, Bluetooth-USB-Headern, Antennen, Kabelkategorien und Netzwerk-Infrastruktur
 - Automatische Berücksichtigung der Netzwerk-Erweiterungen im Gesamtpreis
+- Klar markierte Komponenten aus ein bis zwei Vorgängergenerationen für Plattformvergleich, Budgetplanung und Gebrauchtmarkt-Szenarien
+- Gemischte AM5-, AM4-, LGA1851- und LGA1700-Plattformen mit DDR5-/DDR4-Prüfung sowie PCIe-Abwärtskompatibilität
 
 ## Start
 
