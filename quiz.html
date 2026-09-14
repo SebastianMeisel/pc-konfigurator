@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Wissenstest mit 20 zufälligen Fragen aus einem Pool von 100 Fragen zu PC-Hardware, Montage, Sicherheit und Netzwerken.">
+  <meta name="theme-color" content="#07101d">
+  <title>Wissenstest · BuildBench</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="quiz.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Direkt zum Hauptinhalt</a>
+  <header class="topbar quiz-topbar">
+    <a class="brand" href="index.html" aria-label="Zum PC-Konfigurator">
+      <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+      <span><strong>BuildBench</strong><small>Wissenstest · 20 aus 100</small></span>
+    </a>
+    <nav class="quiz-nav" aria-label="Seitennavigation">
+      <a class="btn btn-ghost" href="index.html">Konfigurator</a>
+      <a class="btn btn-ghost" href="evaluation.html">Auswertung</a>
+      <a class="btn btn-primary" href="quiz.html" aria-current="page">Wissenstest</a>
+    </nav>
+  </header>
+
+  <main class="quiz-page" id="main-content" tabindex="-1">
+    <section class="quiz-hero" aria-labelledby="quiz-title">
+      <div>
+        <p class="eyebrow">Lernkontrolle · Fachinformatik</p>
+        <h1 id="quiz-title">PC-Hardware verstehen, nicht nur zusammenstecken.</h1>
+        <p>Jeder Durchlauf enthält 20 zufällig ausgewählte Fragen aus einem Pool von 100. Pro Frage ist genau eine Antwort richtig. Hinweise helfen beim Nachdenken, ohne die Lösung vorwegzunehmen.</p>
+      </div>
+      <div class="pool-badge" aria-label="20 zufällige Fragen aus 100">
+        <strong>20</strong><span>aus 100 Fragen</span>
+      </div>
+    </section>
+
+    <noscript><p class="noscript-warning">Für den interaktiven Wissenstest muss JavaScript aktiviert sein.</p></noscript>
+
+    <section class="quiz-shell" id="quiz-panel" aria-labelledby="question-heading">
+      <div class="quiz-progress">
+        <div><span id="progress-text">Frage 1 von 20</span><span id="score-text">0 richtig</span></div>
+        <div class="progress-track" id="progress-track" role="progressbar" aria-label="Fortschritt im Wissenstest" aria-valuemin="0" aria-valuemax="20" aria-valuenow="0" aria-valuetext="0 von 20 Fragen beantwortet">
+          <span id="progress-fill"></span>
+        </div>
+      </div>
+
+      <form id="quiz-form">
+        <div class="question-meta"><span class="question-number" id="question-number">01</span><span class="category-badge" id="question-category">Kategorie</span></div>
+        <fieldset id="question-fieldset">
+          <legend id="question-heading" tabindex="-1">Frage wird geladen</legend>
+          <details class="question-hint" id="question-hint">
+            <summary>Hinweis anzeigen</summary>
+            <p id="hint-text"></p>
+          </details>
+          <div class="answer-list" id="answer-list"></div>
+        </fieldset>
+        <div class="feedback" id="feedback" role="status" aria-live="polite" hidden></div>
+        <div class="quiz-actions">
+          <button class="btn btn-primary" id="submit-answer" type="submit" disabled>Antwort prüfen</button>
+          <button class="btn btn-primary" id="next-question" type="button" hidden>Nächste Frage</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="result-panel" id="result-panel" aria-labelledby="result-title" hidden>
+      <div class="result-hero">
+        <div><p class="eyebrow">Auswertung</p><h2 id="result-title" tabindex="-1">Dein Ergebnis</h2><p id="result-summary"></p></div>
+        <div class="result-ring" id="result-ring" role="img" aria-label="0 von 20 Fragen richtig" style="--result-percent:0">
+          <strong id="result-score">0</strong><span>von 20</span>
+        </div>
+      </div>
+      <div class="result-grid">
+        <section aria-labelledby="category-title"><h3 id="category-title">Ergebnis nach Themen</h3><div class="category-results" id="category-results"></div></section>
+        <section aria-labelledby="recommendation-title"><h3 id="recommendation-title">Lernempfehlung</h3><div class="recommendation" id="recommendation"></div></section>
+      </div>
+      <section class="review-section" aria-labelledby="review-title">
+        <h3 id="review-title">Alle Antworten nachbesprechen</h3>
+        <p>Jeder Eintrag nennt deine Antwort, die richtige Lösung und die fachliche Begründung.</p>
+        <div class="review-list" id="review-list"></div>
+      </section>
+      <div class="result-actions">
+        <button class="btn btn-primary" id="restart-quiz" type="button">Neuen Zufallstest starten</button>
+        <a class="btn btn-outline" href="index.html">Zurück zum Konfigurator</a>
+      </div>
+    </section>
+
+    <section class="quiz-info" aria-labelledby="coverage-title">
+      <div><p class="eyebrow">Fragenpool</p><h2 id="coverage-title">Zehn Themenbereiche</h2></div>
+      <ul class="coverage-list">
+        <li>Arbeitsschutz &amp; Montage</li><li>Mainboard &amp; CPU</li><li>Arbeitsspeicher</li><li>Grafik &amp; PCIe</li><li>Massenspeicher</li>
+        <li>Strom &amp; Kühlung</li><li>Gehäuse &amp; Verkabelung</li><li>Peripherieanschlüsse</li><li>Ethernet &amp; WLAN</li><li>Fehlersuche &amp; Kompatibilität</li>
+      </ul>
+    </section>
+  </main>
+  <script src="quiz.js"></script>
+</body>
+</html>

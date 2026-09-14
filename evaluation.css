@@ -1,5 +1,5 @@
 .evaluation-topbar { grid-template-columns: minmax(230px,1fr) auto; }
-.evaluation-nav { display:flex; align-items:center; justify-content:flex-end; gap:8px; }
+.evaluation-nav { display:flex; flex-wrap:wrap; align-items:center; justify-content:flex-end; gap:8px; }
 .evaluation-page {
   display:grid;
   gap:22px;
@@ -178,7 +178,7 @@
 @media (max-width:720px) {
   .evaluation-topbar { position:static; grid-template-columns:1fr; }
   .evaluation-nav { justify-content:stretch; }
-  .evaluation-nav .btn { flex:1; text-align:center; }
+  .evaluation-nav .btn { flex:1 1 140px; text-align:center; }
   .evaluation-page { padding:16px 12px 40px; }
   .evaluation-hero { align-items:flex-start; padding:20px 18px; }
   .method-badge { width:88px; height:88px; }
