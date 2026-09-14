@@ -1,0 +1,2908 @@
+{
+  "$schema": "./quiz-questions.schema.json",
+  "schemaVersion": 1,
+  "title": "BuildBench Wissenstest",
+  "testSize": 20,
+  "questions": [
+    {
+      "id": "q001",
+      "category": "Arbeitsschutz & Montage",
+      "question": "Welche Funktion gehört zu „ESD-Armband“?",
+      "hint": "Potentialausgleich statt Isolation",
+      "options": [
+        {
+          "id": "A",
+          "text": "gleicht elektrische Potenziale kontrolliert aus und schützt empfindliche Bauteile vor elektrostatischer Entladung",
+          "feedback": "ESD-Armband: gleicht elektrische Potenziale kontrolliert aus und schützt empfindliche Bauteile vor elektrostatischer Entladung."
+        },
+        {
+          "id": "B",
+          "text": "erfordert Herunterfahren, Ausschalten des Netzteils und Ziehen des Netzkabels vor internen Arbeiten",
+          "feedback": "Diese Funktion gehört zu „Spannungsfreiheit“. „ESD-Armband“ bedeutet: gleicht elektrische Potenziale kontrolliert aus und schützt empfindliche Bauteile vor elektrostatischer Entladung."
+        },
+        {
+          "id": "C",
+          "text": "vermeidet direkten Kontakt mit Kontakten, Leiterbahnen und empfindlichen Bauteilen",
+          "feedback": "Diese Funktion gehört zu „Anfassen an Platinenkanten“. „ESD-Armband“ bedeutet: gleicht elektrische Potenziale kontrolliert aus und schützt empfindliche Bauteile vor elektrostatischer Entladung."
+        },
+        {
+          "id": "D",
+          "text": "halten die Platine vom Gehäuseblech fern und dürfen nur unter vorgesehenen Schraublöchern sitzen",
+          "feedback": "Diese Funktion gehört zu „Mainboard-Abstandhalter“. „ESD-Armband“ bedeutet: gleicht elektrische Potenziale kontrolliert aus und schützt empfindliche Bauteile vor elektrostatischer Entladung."
+        }
+      ],
+      "correctAnswer": "A"
+    },
+    {
+      "id": "q002",
+      "category": "Arbeitsschutz & Montage",
+      "question": "Welche Definition passt zu „Spannungsfreiheit“?",
+      "hint": "Verbindung zum Stromnetz beachten",
+      "options": [
+        {
+          "id": "A",
+          "text": "vermeidet direkten Kontakt mit Kontakten, Leiterbahnen und empfindlichen Bauteilen",
+          "feedback": "Diese Funktion gehört zu „Anfassen an Platinenkanten“. „Spannungsfreiheit“ bedeutet: erfordert Herunterfahren, Ausschalten des Netzteils und Ziehen des Netzkabels vor internen Arbeiten."
+        },
+        {
+          "id": "B",
+          "text": "erfordert Herunterfahren, Ausschalten des Netzteils und Ziehen des Netzkabels vor internen Arbeiten",
+          "feedback": "Spannungsfreiheit: erfordert Herunterfahren, Ausschalten des Netzteils und Ziehen des Netzkabels vor internen Arbeiten."
+        },
+        {
+          "id": "C",
+          "text": "halten die Platine vom Gehäuseblech fern und dürfen nur unter vorgesehenen Schraublöchern sitzen",
+          "feedback": "Diese Funktion gehört zu „Mainboard-Abstandhalter“. „Spannungsfreiheit“ bedeutet: erfordert Herunterfahren, Ausschalten des Netzteils und Ziehen des Netzkabels vor internen Arbeiten."
+        },
+        {
+          "id": "D",
+          "text": "verhindert durch Kerben und Formen falsches Einsetzen; ein Stecker darf nicht mit Gewalt montiert werden",
+          "feedback": "Diese Funktion gehört zu „Steckercodierung“. „Spannungsfreiheit“ bedeutet: erfordert Herunterfahren, Ausschalten des Netzteils und Ziehen des Netzkabels vor internen Arbeiten."
+        }
+      ],
+      "correctAnswer": "B"
+    },
+    {
+      "id": "q003",
+      "category": "Arbeitsschutz & Montage",
+      "question": "Welche Aussage beschreibt „Anfassen an Platinenkanten“ korrekt?",
+      "hint": "leitende Flächen nicht berühren",
+      "options": [
+        {
+          "id": "A",
+          "text": "halten die Platine vom Gehäuseblech fern und dürfen nur unter vorgesehenen Schraublöchern sitzen",
+          "feedback": "Diese Funktion gehört zu „Mainboard-Abstandhalter“. „Anfassen an Platinenkanten“ bedeutet: vermeidet direkten Kontakt mit Kontakten, Leiterbahnen und empfindlichen Bauteilen."
+        },
+        {
+          "id": "B",
+          "text": "verhindert durch Kerben und Formen falsches Einsetzen; ein Stecker darf nicht mit Gewalt montiert werden",
+          "feedback": "Diese Funktion gehört zu „Steckercodierung“. „Anfassen an Platinenkanten“ bedeutet: vermeidet direkten Kontakt mit Kontakten, Leiterbahnen und empfindlichen Bauteilen."
+        },
+        {
+          "id": "C",
+          "text": "vermeidet direkten Kontakt mit Kontakten, Leiterbahnen und empfindlichen Bauteilen",
+          "feedback": "Anfassen an Platinenkanten: vermeidet direkten Kontakt mit Kontakten, Leiterbahnen und empfindlichen Bauteilen."
+        },
+        {
+          "id": "D",
+          "text": "muss vor der Montage entfernt werden, damit Wärme zuverlässig an den Kühler übertragen wird",
+          "feedback": "Diese Funktion gehört zu „Kühler-Schutzfolie“. „Anfassen an Platinenkanten“ bedeutet: vermeidet direkten Kontakt mit Kontakten, Leiterbahnen und empfindlichen Bauteilen."
+        }
+      ],
+      "correctAnswer": "C"
+    },
+    {
+      "id": "q004",
+      "category": "Arbeitsschutz & Montage",
+      "question": "Welche Funktion gehört zu „Mainboard-Abstandhalter“?",
+      "hint": "Metall unter einer Platine",
+      "options": [
+        {
+          "id": "A",
+          "text": "verhindert durch Kerben und Formen falsches Einsetzen; ein Stecker darf nicht mit Gewalt montiert werden",
+          "feedback": "Diese Funktion gehört zu „Steckercodierung“. „Mainboard-Abstandhalter“ bedeutet: halten die Platine vom Gehäuseblech fern und dürfen nur unter vorgesehenen Schraublöchern sitzen."
+        },
+        {
+          "id": "B",
+          "text": "muss vor der Montage entfernt werden, damit Wärme zuverlässig an den Kühler übertragen wird",
+          "feedback": "Diese Funktion gehört zu „Kühler-Schutzfolie“. „Mainboard-Abstandhalter“ bedeutet: halten die Platine vom Gehäuseblech fern und dürfen nur unter vorgesehenen Schraublöchern sitzen."
+        },
+        {
+          "id": "C",
+          "text": "soll stabil, sauber, gut beleuchtet und möglichst nicht statisch aufladend sein",
+          "feedback": "Diese Funktion gehört zu „Montagearbeitsplatz“. „Mainboard-Abstandhalter“ bedeutet: halten die Platine vom Gehäuseblech fern und dürfen nur unter vorgesehenen Schraublöchern sitzen."
+        },
+        {
+          "id": "D",
+          "text": "halten die Platine vom Gehäuseblech fern und dürfen nur unter vorgesehenen Schraublöchern sitzen",
+          "feedback": "Mainboard-Abstandhalter: halten die Platine vom Gehäuseblech fern und dürfen nur unter vorgesehenen Schraublöchern sitzen."
+        }
+      ],
+      "correctAnswer": "D"
+    },
+    {
+      "id": "q005",
+      "category": "Arbeitsschutz & Montage",
+      "question": "Welche Definition passt zu „Steckercodierung“?",
+      "hint": "Form und Ausrichtung prüfen",
+      "options": [
+        {
+          "id": "A",
+          "text": "verhindert durch Kerben und Formen falsches Einsetzen; ein Stecker darf nicht mit Gewalt montiert werden",
+          "feedback": "Steckercodierung: verhindert durch Kerben und Formen falsches Einsetzen; ein Stecker darf nicht mit Gewalt montiert werden."
+        },
+        {
+          "id": "B",
+          "text": "muss vor der Montage entfernt werden, damit Wärme zuverlässig an den Kühler übertragen wird",
+          "feedback": "Diese Funktion gehört zu „Kühler-Schutzfolie“. „Steckercodierung“ bedeutet: verhindert durch Kerben und Formen falsches Einsetzen; ein Stecker darf nicht mit Gewalt montiert werden."
+        },
+        {
+          "id": "C",
+          "text": "soll stabil, sauber, gut beleuchtet und möglichst nicht statisch aufladend sein",
+          "feedback": "Diese Funktion gehört zu „Montagearbeitsplatz“. „Steckercodierung“ bedeutet: verhindert durch Kerben und Formen falsches Einsetzen; ein Stecker darf nicht mit Gewalt montiert werden."
+        },
+        {
+          "id": "D",
+          "text": "darf nicht weiterverwendet, geöffnet oder gequetscht werden und gehört in eine geeignete Rücknahme",
+          "feedback": "Diese Funktion gehört zu „Beschädigte Lithium-Batterie“. „Steckercodierung“ bedeutet: verhindert durch Kerben und Formen falsches Einsetzen; ein Stecker darf nicht mit Gewalt montiert werden."
+        }
+      ],
+      "correctAnswer": "A"
+    },
+    {
+      "id": "q006",
+      "category": "Arbeitsschutz & Montage",
+      "question": "Welche Aussage beschreibt „Kühler-Schutzfolie“ korrekt?",
+      "hint": "keine Transportschicht im Wärmeweg",
+      "options": [
+        {
+          "id": "A",
+          "text": "soll stabil, sauber, gut beleuchtet und möglichst nicht statisch aufladend sein",
+          "feedback": "Diese Funktion gehört zu „Montagearbeitsplatz“. „Kühler-Schutzfolie“ bedeutet: muss vor der Montage entfernt werden, damit Wärme zuverlässig an den Kühler übertragen wird."
+        },
+        {
+          "id": "B",
+          "text": "muss vor der Montage entfernt werden, damit Wärme zuverlässig an den Kühler übertragen wird",
+          "feedback": "Kühler-Schutzfolie: muss vor der Montage entfernt werden, damit Wärme zuverlässig an den Kühler übertragen wird."
+        },
+        {
+          "id": "C",
+          "text": "darf nicht weiterverwendet, geöffnet oder gequetscht werden und gehört in eine geeignete Rücknahme",
+          "feedback": "Diese Funktion gehört zu „Beschädigte Lithium-Batterie“. „Kühler-Schutzfolie“ bedeutet: muss vor der Montage entfernt werden, damit Wärme zuverlässig an den Kühler übertragen wird."
+        },
+        {
+          "id": "D",
+          "text": "findet lose Stecker, Werkzeuge und Kabel in Lüftern vor dem ersten Einschalten",
+          "feedback": "Diese Funktion gehört zu „Abschließende Sichtprüfung“. „Kühler-Schutzfolie“ bedeutet: muss vor der Montage entfernt werden, damit Wärme zuverlässig an den Kühler übertragen wird."
+        }
+      ],
+      "correctAnswer": "B"
+    },
+    {
+      "id": "q007",
+      "category": "Arbeitsschutz & Montage",
+      "question": "Welche Funktion gehört zu „Montagearbeitsplatz“?",
+      "hint": "mechanische und elektrische Sicherheit",
+      "options": [
+        {
+          "id": "A",
+          "text": "darf nicht weiterverwendet, geöffnet oder gequetscht werden und gehört in eine geeignete Rücknahme",
+          "feedback": "Diese Funktion gehört zu „Beschädigte Lithium-Batterie“. „Montagearbeitsplatz“ bedeutet: soll stabil, sauber, gut beleuchtet und möglichst nicht statisch aufladend sein."
+        },
+        {
+          "id": "B",
+          "text": "findet lose Stecker, Werkzeuge und Kabel in Lüftern vor dem ersten Einschalten",
+          "feedback": "Diese Funktion gehört zu „Abschließende Sichtprüfung“. „Montagearbeitsplatz“ bedeutet: soll stabil, sauber, gut beleuchtet und möglichst nicht statisch aufladend sein."
+        },
+        {
+          "id": "C",
+          "text": "soll stabil, sauber, gut beleuchtet und möglichst nicht statisch aufladend sein",
+          "feedback": "Montagearbeitsplatz: soll stabil, sauber, gut beleuchtet und möglichst nicht statisch aufladend sein."
+        },
+        {
+          "id": "D",
+          "text": "liefert verbindliche Angaben zu Anschlüssen, Bestückungsreihenfolge, Schrauben und Montageverfahren",
+          "feedback": "Diese Funktion gehört zu „Herstellerhandbuch“. „Montagearbeitsplatz“ bedeutet: soll stabil, sauber, gut beleuchtet und möglichst nicht statisch aufladend sein."
+        }
+      ],
+      "correctAnswer": "C"
+    },
+    {
+      "id": "q008",
+      "category": "Arbeitsschutz & Montage",
+      "question": "Welche Definition passt zu „Beschädigte Lithium-Batterie“?",
+      "hint": "Verformung ist ein Sicherheitsproblem",
+      "options": [
+        {
+          "id": "A",
+          "text": "findet lose Stecker, Werkzeuge und Kabel in Lüftern vor dem ersten Einschalten",
+          "feedback": "Diese Funktion gehört zu „Abschließende Sichtprüfung“. „Beschädigte Lithium-Batterie“ bedeutet: darf nicht weiterverwendet, geöffnet oder gequetscht werden und gehört in eine geeignete Rücknahme."
+        },
+        {
+          "id": "B",
+          "text": "liefert verbindliche Angaben zu Anschlüssen, Bestückungsreihenfolge, Schrauben und Montageverfahren",
+          "feedback": "Diese Funktion gehört zu „Herstellerhandbuch“. „Beschädigte Lithium-Batterie“ bedeutet: darf nicht weiterverwendet, geöffnet oder gequetscht werden und gehört in eine geeignete Rücknahme."
+        },
+        {
+          "id": "C",
+          "text": "gleicht elektrische Potenziale kontrolliert aus und schützt empfindliche Bauteile vor elektrostatischer Entladung",
+          "feedback": "Diese Funktion gehört zu „ESD-Armband“. „Beschädigte Lithium-Batterie“ bedeutet: darf nicht weiterverwendet, geöffnet oder gequetscht werden und gehört in eine geeignete Rücknahme."
+        },
+        {
+          "id": "D",
+          "text": "darf nicht weiterverwendet, geöffnet oder gequetscht werden und gehört in eine geeignete Rücknahme",
+          "feedback": "Beschädigte Lithium-Batterie: darf nicht weiterverwendet, geöffnet oder gequetscht werden und gehört in eine geeignete Rücknahme."
+        }
+      ],
+      "correctAnswer": "D"
+    },
+    {
+      "id": "q009",
+      "category": "Arbeitsschutz & Montage",
+      "question": "Welche Aussage beschreibt „Abschließende Sichtprüfung“ korrekt?",
+      "hint": "alles Bewegliche und Angeschlossene kontrollieren",
+      "options": [
+        {
+          "id": "A",
+          "text": "findet lose Stecker, Werkzeuge und Kabel in Lüftern vor dem ersten Einschalten",
+          "feedback": "Abschließende Sichtprüfung: findet lose Stecker, Werkzeuge und Kabel in Lüftern vor dem ersten Einschalten."
+        },
+        {
+          "id": "B",
+          "text": "liefert verbindliche Angaben zu Anschlüssen, Bestückungsreihenfolge, Schrauben und Montageverfahren",
+          "feedback": "Diese Funktion gehört zu „Herstellerhandbuch“. „Abschließende Sichtprüfung“ bedeutet: findet lose Stecker, Werkzeuge und Kabel in Lüftern vor dem ersten Einschalten."
+        },
+        {
+          "id": "C",
+          "text": "gleicht elektrische Potenziale kontrolliert aus und schützt empfindliche Bauteile vor elektrostatischer Entladung",
+          "feedback": "Diese Funktion gehört zu „ESD-Armband“. „Abschließende Sichtprüfung“ bedeutet: findet lose Stecker, Werkzeuge und Kabel in Lüftern vor dem ersten Einschalten."
+        },
+        {
+          "id": "D",
+          "text": "erfordert Herunterfahren, Ausschalten des Netzteils und Ziehen des Netzkabels vor internen Arbeiten",
+          "feedback": "Diese Funktion gehört zu „Spannungsfreiheit“. „Abschließende Sichtprüfung“ bedeutet: findet lose Stecker, Werkzeuge und Kabel in Lüftern vor dem ersten Einschalten."
+        }
+      ],
+      "correctAnswer": "A"
+    },
+    {
+      "id": "q010",
+      "category": "Arbeitsschutz & Montage",
+      "question": "Welche Funktion gehört zu „Herstellerhandbuch“?",
+      "hint": "modellspezifische Vorgaben statt Vermutungen",
+      "options": [
+        {
+          "id": "A",
+          "text": "gleicht elektrische Potenziale kontrolliert aus und schützt empfindliche Bauteile vor elektrostatischer Entladung",
+          "feedback": "Diese Funktion gehört zu „ESD-Armband“. „Herstellerhandbuch“ bedeutet: liefert verbindliche Angaben zu Anschlüssen, Bestückungsreihenfolge, Schrauben und Montageverfahren."
+        },
+        {
+          "id": "B",
+          "text": "liefert verbindliche Angaben zu Anschlüssen, Bestückungsreihenfolge, Schrauben und Montageverfahren",
+          "feedback": "Herstellerhandbuch: liefert verbindliche Angaben zu Anschlüssen, Bestückungsreihenfolge, Schrauben und Montageverfahren."
+        },
+        {
+          "id": "C",
+          "text": "erfordert Herunterfahren, Ausschalten des Netzteils und Ziehen des Netzkabels vor internen Arbeiten",
+          "feedback": "Diese Funktion gehört zu „Spannungsfreiheit“. „Herstellerhandbuch“ bedeutet: liefert verbindliche Angaben zu Anschlüssen, Bestückungsreihenfolge, Schrauben und Montageverfahren."
+        },
+        {
+          "id": "D",
+          "text": "vermeidet direkten Kontakt mit Kontakten, Leiterbahnen und empfindlichen Bauteilen",
+          "feedback": "Diese Funktion gehört zu „Anfassen an Platinenkanten“. „Herstellerhandbuch“ bedeutet: liefert verbindliche Angaben zu Anschlüssen, Bestückungsreihenfolge, Schrauben und Montageverfahren."
+        }
+      ],
+      "correctAnswer": "B"
+    },
+    {
+      "id": "q011",
+      "category": "Mainboard & CPU",
+      "question": "Welche Definition passt zu „CPU-Sockel“?",
+      "hint": "Prozessor und Platine verbinden",
+      "options": [
+        {
+          "id": "A",
+          "text": "ergänzt die CPU um Ein-/Ausgabe- und Erweiterungsfunktionen wie USB, SATA oder zusätzliche PCIe-Lanes",
+          "feedback": "Diese Funktion gehört zu „Chipsatz“. „CPU-Sockel“ bedeutet: stellt die mechanische und elektrische Verbindung zwischen Prozessor und Mainboard her."
+        },
+        {
+          "id": "B",
+          "text": "initialisiert die Hardware, stellt Firmware-Einstellungen bereit und startet den Bootloader",
+          "feedback": "Diese Funktion gehört zu „UEFI“. „CPU-Sockel“ bedeutet: stellt die mechanische und elektrische Verbindung zwischen Prozessor und Mainboard her."
+        },
+        {
+          "id": "C",
+          "text": "stellt die mechanische und elektrische Verbindung zwischen Prozessor und Mainboard her",
+          "feedback": "CPU-Sockel: stellt die mechanische und elektrische Verbindung zwischen Prozessor und Mainboard her."
+        },
+        {
+          "id": "D",
+          "text": "wandelt die Netzteilspannung in niedrige, stabile Betriebsspannungen für CPU und weitere Baugruppen",
+          "feedback": "Diese Funktion gehört zu „VRM“. „CPU-Sockel“ bedeutet: stellt die mechanische und elektrische Verbindung zwischen Prozessor und Mainboard her."
+        }
+      ],
+      "correctAnswer": "C"
+    },
+    {
+      "id": "q012",
+      "category": "Mainboard & CPU",
+      "question": "Welche Aussage beschreibt „Chipsatz“ korrekt?",
+      "hint": "Anschlüsse außerhalb der CPU",
+      "options": [
+        {
+          "id": "A",
+          "text": "initialisiert die Hardware, stellt Firmware-Einstellungen bereit und startet den Bootloader",
+          "feedback": "Diese Funktion gehört zu „UEFI“. „Chipsatz“ bedeutet: ergänzt die CPU um Ein-/Ausgabe- und Erweiterungsfunktionen wie USB, SATA oder zusätzliche PCIe-Lanes."
+        },
+        {
+          "id": "B",
+          "text": "wandelt die Netzteilspannung in niedrige, stabile Betriebsspannungen für CPU und weitere Baugruppen",
+          "feedback": "Diese Funktion gehört zu „VRM“. „Chipsatz“ bedeutet: ergänzt die CPU um Ein-/Ausgabe- und Erweiterungsfunktionen wie USB, SATA oder zusätzliche PCIe-Lanes."
+        },
+        {
+          "id": "C",
+          "text": "legt Abmessungen, Befestigungspunkte und grundlegende Slotanordnung der Platine fest",
+          "feedback": "Diese Funktion gehört zu „Mainboard-Formfaktor“. „Chipsatz“ bedeutet: ergänzt die CPU um Ein-/Ausgabe- und Erweiterungsfunktionen wie USB, SATA oder zusätzliche PCIe-Lanes."
+        },
+        {
+          "id": "D",
+          "text": "ergänzt die CPU um Ein-/Ausgabe- und Erweiterungsfunktionen wie USB, SATA oder zusätzliche PCIe-Lanes",
+          "feedback": "Chipsatz: ergänzt die CPU um Ein-/Ausgabe- und Erweiterungsfunktionen wie USB, SATA oder zusätzliche PCIe-Lanes."
+        }
+      ],
+      "correctAnswer": "D"
+    },
+    {
+      "id": "q013",
+      "category": "Mainboard & CPU",
+      "question": "Welche Funktion gehört zu „UEFI“?",
+      "hint": "arbeitet vor dem Betriebssystem",
+      "options": [
+        {
+          "id": "A",
+          "text": "initialisiert die Hardware, stellt Firmware-Einstellungen bereit und startet den Bootloader",
+          "feedback": "UEFI: initialisiert die Hardware, stellt Firmware-Einstellungen bereit und startet den Bootloader."
+        },
+        {
+          "id": "B",
+          "text": "wandelt die Netzteilspannung in niedrige, stabile Betriebsspannungen für CPU und weitere Baugruppen",
+          "feedback": "Diese Funktion gehört zu „VRM“. „UEFI“ bedeutet: initialisiert die Hardware, stellt Firmware-Einstellungen bereit und startet den Bootloader."
+        },
+        {
+          "id": "C",
+          "text": "legt Abmessungen, Befestigungspunkte und grundlegende Slotanordnung der Platine fest",
+          "feedback": "Diese Funktion gehört zu „Mainboard-Formfaktor“. „UEFI“ bedeutet: initialisiert die Hardware, stellt Firmware-Einstellungen bereit und startet den Bootloader."
+        },
+        {
+          "id": "D",
+          "text": "erzeugt ohne dedizierte Grafikkarte ein Bildsignal für die Mainboard-Bildausgänge",
+          "feedback": "Diese Funktion gehört zu „Integrierte Grafikeinheit“. „UEFI“ bedeutet: initialisiert die Hardware, stellt Firmware-Einstellungen bereit und startet den Bootloader."
+        }
+      ],
+      "correctAnswer": "A"
+    },
+    {
+      "id": "q014",
+      "category": "Mainboard & CPU",
+      "question": "Welche Definition passt zu „VRM“?",
+      "hint": "Spannungswandlung nahe der CPU",
+      "options": [
+        {
+          "id": "A",
+          "text": "legt Abmessungen, Befestigungspunkte und grundlegende Slotanordnung der Platine fest",
+          "feedback": "Diese Funktion gehört zu „Mainboard-Formfaktor“. „VRM“ bedeutet: wandelt die Netzteilspannung in niedrige, stabile Betriebsspannungen für CPU und weitere Baugruppen."
+        },
+        {
+          "id": "B",
+          "text": "wandelt die Netzteilspannung in niedrige, stabile Betriebsspannungen für CPU und weitere Baugruppen",
+          "feedback": "VRM: wandelt die Netzteilspannung in niedrige, stabile Betriebsspannungen für CPU und weitere Baugruppen."
+        },
+        {
+          "id": "C",
+          "text": "erzeugt ohne dedizierte Grafikkarte ein Bildsignal für die Mainboard-Bildausgänge",
+          "feedback": "Diese Funktion gehört zu „Integrierte Grafikeinheit“. „VRM“ bedeutet: wandelt die Netzteilspannung in niedrige, stabile Betriebsspannungen für CPU und weitere Baugruppen."
+        },
+        {
+          "id": "D",
+          "text": "kann bei unterstützten Mainboards die Firmware über einen festgelegten USB-Port aktualisieren, teilweise ohne installierte CPU",
+          "feedback": "Diese Funktion gehört zu „BIOS Flashback“. „VRM“ bedeutet: wandelt die Netzteilspannung in niedrige, stabile Betriebsspannungen für CPU und weitere Baugruppen."
+        }
+      ],
+      "correctAnswer": "B"
+    },
+    {
+      "id": "q015",
+      "category": "Mainboard & CPU",
+      "question": "Welche Aussage beschreibt „Mainboard-Formfaktor“ korrekt?",
+      "hint": "ATX, microATX und Mini-ITX",
+      "options": [
+        {
+          "id": "A",
+          "text": "erzeugt ohne dedizierte Grafikkarte ein Bildsignal für die Mainboard-Bildausgänge",
+          "feedback": "Diese Funktion gehört zu „Integrierte Grafikeinheit“. „Mainboard-Formfaktor“ bedeutet: legt Abmessungen, Befestigungspunkte und grundlegende Slotanordnung der Platine fest."
+        },
+        {
+          "id": "B",
+          "text": "kann bei unterstützten Mainboards die Firmware über einen festgelegten USB-Port aktualisieren, teilweise ohne installierte CPU",
+          "feedback": "Diese Funktion gehört zu „BIOS Flashback“. „Mainboard-Formfaktor“ bedeutet: legt Abmessungen, Befestigungspunkte und grundlegende Slotanordnung der Platine fest."
+        },
+        {
+          "id": "C",
+          "text": "legt Abmessungen, Befestigungspunkte und grundlegende Slotanordnung der Platine fest",
+          "feedback": "Mainboard-Formfaktor: legt Abmessungen, Befestigungspunkte und grundlegende Slotanordnung der Platine fest."
+        },
+        {
+          "id": "D",
+          "text": "nennt unterstützte Prozessormodelle und häufig die dafür mindestens nötige Firmware-Version",
+          "feedback": "Diese Funktion gehört zu „CPU-Supportliste“. „Mainboard-Formfaktor“ bedeutet: legt Abmessungen, Befestigungspunkte und grundlegende Slotanordnung der Platine fest."
+        }
+      ],
+      "correctAnswer": "C"
+    },
+    {
+      "id": "q016",
+      "category": "Mainboard & CPU",
+      "question": "Welche Funktion gehört zu „Integrierte Grafikeinheit“?",
+      "hint": "Bildausgang braucht einen Grafikerzeuger",
+      "options": [
+        {
+          "id": "A",
+          "text": "kann bei unterstützten Mainboards die Firmware über einen festgelegten USB-Port aktualisieren, teilweise ohne installierte CPU",
+          "feedback": "Diese Funktion gehört zu „BIOS Flashback“. „Integrierte Grafikeinheit“ bedeutet: erzeugt ohne dedizierte Grafikkarte ein Bildsignal für die Mainboard-Bildausgänge."
+        },
+        {
+          "id": "B",
+          "text": "nennt unterstützte Prozessormodelle und häufig die dafür mindestens nötige Firmware-Version",
+          "feedback": "Diese Funktion gehört zu „CPU-Supportliste“. „Integrierte Grafikeinheit“ bedeutet: erzeugt ohne dedizierte Grafikkarte ein Bildsignal für die Mainboard-Bildausgänge."
+        },
+        {
+          "id": "C",
+          "text": "zeigt mit Dreieck oder Kerbe die korrekte Ausrichtung der CPU beim kraftlosen Einsetzen",
+          "feedback": "Diese Funktion gehört zu „Sockelmarkierung“. „Integrierte Grafikeinheit“ bedeutet: erzeugt ohne dedizierte Grafikkarte ein Bildsignal für die Mainboard-Bildausgänge."
+        },
+        {
+          "id": "D",
+          "text": "erzeugt ohne dedizierte Grafikkarte ein Bildsignal für die Mainboard-Bildausgänge",
+          "feedback": "Integrierte Grafikeinheit: erzeugt ohne dedizierte Grafikkarte ein Bildsignal für die Mainboard-Bildausgänge."
+        }
+      ],
+      "correctAnswer": "D"
+    },
+    {
+      "id": "q017",
+      "category": "Mainboard & CPU",
+      "question": "Welche Definition passt zu „BIOS Flashback“?",
+      "hint": "Firmwareaktualisierung mit Spezialport",
+      "options": [
+        {
+          "id": "A",
+          "text": "kann bei unterstützten Mainboards die Firmware über einen festgelegten USB-Port aktualisieren, teilweise ohne installierte CPU",
+          "feedback": "BIOS Flashback: kann bei unterstützten Mainboards die Firmware über einen festgelegten USB-Port aktualisieren, teilweise ohne installierte CPU."
+        },
+        {
+          "id": "B",
+          "text": "nennt unterstützte Prozessormodelle und häufig die dafür mindestens nötige Firmware-Version",
+          "feedback": "Diese Funktion gehört zu „CPU-Supportliste“. „BIOS Flashback“ bedeutet: kann bei unterstützten Mainboards die Firmware über einen festgelegten USB-Port aktualisieren, teilweise ohne installierte CPU."
+        },
+        {
+          "id": "C",
+          "text": "zeigt mit Dreieck oder Kerbe die korrekte Ausrichtung der CPU beim kraftlosen Einsetzen",
+          "feedback": "Diese Funktion gehört zu „Sockelmarkierung“. „BIOS Flashback“ bedeutet: kann bei unterstützten Mainboards die Firmware über einen festgelegten USB-Port aktualisieren, teilweise ohne installierte CPU."
+        },
+        {
+          "id": "D",
+          "text": "schließt den Bereich um die rückseitigen Mainboardanschlüsse am Gehäuse ab",
+          "feedback": "Diese Funktion gehört zu „I/O-Blende“. „BIOS Flashback“ bedeutet: kann bei unterstützten Mainboards die Firmware über einen festgelegten USB-Port aktualisieren, teilweise ohne installierte CPU."
+        }
+      ],
+      "correctAnswer": "A"
+    },
+    {
+      "id": "q018",
+      "category": "Mainboard & CPU",
+      "question": "Welche Aussage beschreibt „CPU-Supportliste“ korrekt?",
+      "hint": "Sockelgleichheit allein genügt nicht",
+      "options": [
+        {
+          "id": "A",
+          "text": "zeigt mit Dreieck oder Kerbe die korrekte Ausrichtung der CPU beim kraftlosen Einsetzen",
+          "feedback": "Diese Funktion gehört zu „Sockelmarkierung“. „CPU-Supportliste“ bedeutet: nennt unterstützte Prozessormodelle und häufig die dafür mindestens nötige Firmware-Version."
+        },
+        {
+          "id": "B",
+          "text": "nennt unterstützte Prozessormodelle und häufig die dafür mindestens nötige Firmware-Version",
+          "feedback": "CPU-Supportliste: nennt unterstützte Prozessormodelle und häufig die dafür mindestens nötige Firmware-Version."
+        },
+        {
+          "id": "C",
+          "text": "schließt den Bereich um die rückseitigen Mainboardanschlüsse am Gehäuse ab",
+          "feedback": "Diese Funktion gehört zu „I/O-Blende“. „CPU-Supportliste“ bedeutet: nennt unterstützte Prozessormodelle und häufig die dafür mindestens nötige Firmware-Version."
+        },
+        {
+          "id": "D",
+          "text": "stellt die mechanische und elektrische Verbindung zwischen Prozessor und Mainboard her",
+          "feedback": "Diese Funktion gehört zu „CPU-Sockel“. „CPU-Supportliste“ bedeutet: nennt unterstützte Prozessormodelle und häufig die dafür mindestens nötige Firmware-Version."
+        }
+      ],
+      "correctAnswer": "B"
+    },
+    {
+      "id": "q019",
+      "category": "Mainboard & CPU",
+      "question": "Welche Funktion gehört zu „Sockelmarkierung“?",
+      "hint": "optische Einbauorientierung",
+      "options": [
+        {
+          "id": "A",
+          "text": "schließt den Bereich um die rückseitigen Mainboardanschlüsse am Gehäuse ab",
+          "feedback": "Diese Funktion gehört zu „I/O-Blende“. „Sockelmarkierung“ bedeutet: zeigt mit Dreieck oder Kerbe die korrekte Ausrichtung der CPU beim kraftlosen Einsetzen."
+        },
+        {
+          "id": "B",
+          "text": "stellt die mechanische und elektrische Verbindung zwischen Prozessor und Mainboard her",
+          "feedback": "Diese Funktion gehört zu „CPU-Sockel“. „Sockelmarkierung“ bedeutet: zeigt mit Dreieck oder Kerbe die korrekte Ausrichtung der CPU beim kraftlosen Einsetzen."
+        },
+        {
+          "id": "C",
+          "text": "zeigt mit Dreieck oder Kerbe die korrekte Ausrichtung der CPU beim kraftlosen Einsetzen",
+          "feedback": "Sockelmarkierung: zeigt mit Dreieck oder Kerbe die korrekte Ausrichtung der CPU beim kraftlosen Einsetzen."
+        },
+        {
+          "id": "D",
+          "text": "ergänzt die CPU um Ein-/Ausgabe- und Erweiterungsfunktionen wie USB, SATA oder zusätzliche PCIe-Lanes",
+          "feedback": "Diese Funktion gehört zu „Chipsatz“. „Sockelmarkierung“ bedeutet: zeigt mit Dreieck oder Kerbe die korrekte Ausrichtung der CPU beim kraftlosen Einsetzen."
+        }
+      ],
+      "correctAnswer": "C"
+    },
+    {
+      "id": "q020",
+      "category": "Mainboard & CPU",
+      "question": "Welche Definition passt zu „I/O-Blende“?",
+      "hint": "Rahmen der rückseitigen Buchsen",
+      "options": [
+        {
+          "id": "A",
+          "text": "stellt die mechanische und elektrische Verbindung zwischen Prozessor und Mainboard her",
+          "feedback": "Diese Funktion gehört zu „CPU-Sockel“. „I/O-Blende“ bedeutet: schließt den Bereich um die rückseitigen Mainboardanschlüsse am Gehäuse ab."
+        },
+        {
+          "id": "B",
+          "text": "ergänzt die CPU um Ein-/Ausgabe- und Erweiterungsfunktionen wie USB, SATA oder zusätzliche PCIe-Lanes",
+          "feedback": "Diese Funktion gehört zu „Chipsatz“. „I/O-Blende“ bedeutet: schließt den Bereich um die rückseitigen Mainboardanschlüsse am Gehäuse ab."
+        },
+        {
+          "id": "C",
+          "text": "initialisiert die Hardware, stellt Firmware-Einstellungen bereit und startet den Bootloader",
+          "feedback": "Diese Funktion gehört zu „UEFI“. „I/O-Blende“ bedeutet: schließt den Bereich um die rückseitigen Mainboardanschlüsse am Gehäuse ab."
+        },
+        {
+          "id": "D",
+          "text": "schließt den Bereich um die rückseitigen Mainboardanschlüsse am Gehäuse ab",
+          "feedback": "I/O-Blende: schließt den Bereich um die rückseitigen Mainboardanschlüsse am Gehäuse ab."
+        }
+      ],
+      "correctAnswer": "D"
+    },
+    {
+      "id": "q021",
+      "category": "Arbeitsspeicher",
+      "question": "Welche Aussage beschreibt „DIMM“ korrekt?",
+      "hint": "langes Speichermodul im Desktop",
+      "options": [
+        {
+          "id": "A",
+          "text": "ist die übliche Bauform für austauschbaren Arbeitsspeicher in Desktop-PCs",
+          "feedback": "DIMM: ist die übliche Bauform für austauschbaren Arbeitsspeicher in Desktop-PCs."
+        },
+        {
+          "id": "B",
+          "text": "ist eine kompakte Arbeitsspeicherbauform für Notebooks und viele Mini-PCs",
+          "feedback": "Diese Funktion gehört zu „SO-DIMM“. „DIMM“ bedeutet: ist die übliche Bauform für austauschbaren Arbeitsspeicher in Desktop-PCs."
+        },
+        {
+          "id": "C",
+          "text": "nutzt zwei Speicherkanäle parallel und erhöht dadurch die verfügbare Speicherbandbreite",
+          "feedback": "Diese Funktion gehört zu „Dual Channel“. „DIMM“ bedeutet: ist die übliche Bauform für austauschbaren Arbeitsspeicher in Desktop-PCs."
+        },
+        {
+          "id": "D",
+          "text": "bestimmt elektrische und mechanische Eigenschaften; DDR4 und DDR5 sind nicht steckkompatibel",
+          "feedback": "Diese Funktion gehört zu „DDR-Generation“. „DIMM“ bedeutet: ist die übliche Bauform für austauschbaren Arbeitsspeicher in Desktop-PCs."
+        }
+      ],
+      "correctAnswer": "A"
+    },
+    {
+      "id": "q022",
+      "category": "Arbeitsspeicher",
+      "question": "Welche Funktion gehört zu „SO-DIMM“?",
+      "hint": "kurzes Speichermodul",
+      "options": [
+        {
+          "id": "A",
+          "text": "nutzt zwei Speicherkanäle parallel und erhöht dadurch die verfügbare Speicherbandbreite",
+          "feedback": "Diese Funktion gehört zu „Dual Channel“. „SO-DIMM“ bedeutet: ist eine kompakte Arbeitsspeicherbauform für Notebooks und viele Mini-PCs."
+        },
+        {
+          "id": "B",
+          "text": "ist eine kompakte Arbeitsspeicherbauform für Notebooks und viele Mini-PCs",
+          "feedback": "SO-DIMM: ist eine kompakte Arbeitsspeicherbauform für Notebooks und viele Mini-PCs."
+        },
+        {
+          "id": "C",
+          "text": "bestimmt elektrische und mechanische Eigenschaften; DDR4 und DDR5 sind nicht steckkompatibel",
+          "feedback": "Diese Funktion gehört zu „DDR-Generation“. „SO-DIMM“ bedeutet: ist eine kompakte Arbeitsspeicherbauform für Notebooks und viele Mini-PCs."
+        },
+        {
+          "id": "D",
+          "text": "lädt hinterlegte Speicherprofile mit Takt, Spannung und Timings, wenn Plattform und Module sie unterstützen",
+          "feedback": "Diese Funktion gehört zu „XMP oder EXPO“. „SO-DIMM“ bedeutet: ist eine kompakte Arbeitsspeicherbauform für Notebooks und viele Mini-PCs."
+        }
+      ],
+      "correctAnswer": "B"
+    },
+    {
+      "id": "q023",
+      "category": "Arbeitsspeicher",
+      "question": "Welche Definition passt zu „Dual Channel“?",
+      "hint": "parallele Datenwege zum RAM",
+      "options": [
+        {
+          "id": "A",
+          "text": "bestimmt elektrische und mechanische Eigenschaften; DDR4 und DDR5 sind nicht steckkompatibel",
+          "feedback": "Diese Funktion gehört zu „DDR-Generation“. „Dual Channel“ bedeutet: nutzt zwei Speicherkanäle parallel und erhöht dadurch die verfügbare Speicherbandbreite."
+        },
+        {
+          "id": "B",
+          "text": "lädt hinterlegte Speicherprofile mit Takt, Spannung und Timings, wenn Plattform und Module sie unterstützen",
+          "feedback": "Diese Funktion gehört zu „XMP oder EXPO“. „Dual Channel“ bedeutet: nutzt zwei Speicherkanäle parallel und erhöht dadurch die verfügbare Speicherbandbreite."
+        },
+        {
+          "id": "C",
+          "text": "nutzt zwei Speicherkanäle parallel und erhöht dadurch die verfügbare Speicherbandbreite",
+          "feedback": "Dual Channel: nutzt zwei Speicherkanäle parallel und erhöht dadurch die verfügbare Speicherbandbreite."
+        },
+        {
+          "id": "D",
+          "text": "kann bestimmte Bitfehler erkennen und Ein-Bit-Fehler korrigieren, sofern die Plattform ECC unterstützt",
+          "feedback": "Diese Funktion gehört zu „ECC-Speicher“. „Dual Channel“ bedeutet: nutzt zwei Speicherkanäle parallel und erhöht dadurch die verfügbare Speicherbandbreite."
+        }
+      ],
+      "correctAnswer": "C"
+    },
+    {
+      "id": "q024",
+      "category": "Arbeitsspeicher",
+      "question": "Welche Aussage beschreibt „DDR-Generation“ korrekt?",
+      "hint": "Kerbe und Spannung unterscheiden sich",
+      "options": [
+        {
+          "id": "A",
+          "text": "lädt hinterlegte Speicherprofile mit Takt, Spannung und Timings, wenn Plattform und Module sie unterstützen",
+          "feedback": "Diese Funktion gehört zu „XMP oder EXPO“. „DDR-Generation“ bedeutet: bestimmt elektrische und mechanische Eigenschaften; DDR4 und DDR5 sind nicht steckkompatibel."
+        },
+        {
+          "id": "B",
+          "text": "kann bestimmte Bitfehler erkennen und Ein-Bit-Fehler korrigieren, sofern die Plattform ECC unterstützt",
+          "feedback": "Diese Funktion gehört zu „ECC-Speicher“. „DDR-Generation“ bedeutet: bestimmt elektrische und mechanische Eigenschaften; DDR4 und DDR5 sind nicht steckkompatibel."
+        },
+        {
+          "id": "C",
+          "text": "beschreiben Wartezyklen verschiedener Speicheroperationen und wirken zusammen mit dem Speichertakt",
+          "feedback": "Diese Funktion gehört zu „RAM-Timings“. „DDR-Generation“ bedeutet: bestimmt elektrische und mechanische Eigenschaften; DDR4 und DDR5 sind nicht steckkompatibel."
+        },
+        {
+          "id": "D",
+          "text": "bestimmt elektrische und mechanische Eigenschaften; DDR4 und DDR5 sind nicht steckkompatibel",
+          "feedback": "DDR-Generation: bestimmt elektrische und mechanische Eigenschaften; DDR4 und DDR5 sind nicht steckkompatibel."
+        }
+      ],
+      "correctAnswer": "D"
+    },
+    {
+      "id": "q025",
+      "category": "Arbeitsspeicher",
+      "question": "Welche Funktion gehört zu „XMP oder EXPO“?",
+      "hint": "Leistungsprofil im UEFI",
+      "options": [
+        {
+          "id": "A",
+          "text": "lädt hinterlegte Speicherprofile mit Takt, Spannung und Timings, wenn Plattform und Module sie unterstützen",
+          "feedback": "XMP oder EXPO: lädt hinterlegte Speicherprofile mit Takt, Spannung und Timings, wenn Plattform und Module sie unterstützen."
+        },
+        {
+          "id": "B",
+          "text": "kann bestimmte Bitfehler erkennen und Ein-Bit-Fehler korrigieren, sofern die Plattform ECC unterstützt",
+          "feedback": "Diese Funktion gehört zu „ECC-Speicher“. „XMP oder EXPO“ bedeutet: lädt hinterlegte Speicherprofile mit Takt, Spannung und Timings, wenn Plattform und Module sie unterstützen."
+        },
+        {
+          "id": "C",
+          "text": "beschreiben Wartezyklen verschiedener Speicheroperationen und wirken zusammen mit dem Speichertakt",
+          "feedback": "Diese Funktion gehört zu „RAM-Timings“. „XMP oder EXPO“ bedeutet: lädt hinterlegte Speicherprofile mit Takt, Spannung und Timings, wenn Plattform und Module sie unterstützen."
+        },
+        {
+          "id": "D",
+          "text": "ermittelt beim Start stabile Signal- und Timingparameter und kann den ersten Start verlängern",
+          "feedback": "Diese Funktion gehört zu „Memory Training“. „XMP oder EXPO“ bedeutet: lädt hinterlegte Speicherprofile mit Takt, Spannung und Timings, wenn Plattform und Module sie unterstützen."
+        }
+      ],
+      "correctAnswer": "A"
+    },
+    {
+      "id": "q026",
+      "category": "Arbeitsspeicher",
+      "question": "Welche Definition passt zu „ECC-Speicher“?",
+      "hint": "Fehlerkorrektur im RAM",
+      "options": [
+        {
+          "id": "A",
+          "text": "beschreiben Wartezyklen verschiedener Speicheroperationen und wirken zusammen mit dem Speichertakt",
+          "feedback": "Diese Funktion gehört zu „RAM-Timings“. „ECC-Speicher“ bedeutet: kann bestimmte Bitfehler erkennen und Ein-Bit-Fehler korrigieren, sofern die Plattform ECC unterstützt."
+        },
+        {
+          "id": "B",
+          "text": "kann bestimmte Bitfehler erkennen und Ein-Bit-Fehler korrigieren, sofern die Plattform ECC unterstützt",
+          "feedback": "ECC-Speicher: kann bestimmte Bitfehler erkennen und Ein-Bit-Fehler korrigieren, sofern die Plattform ECC unterstützt."
+        },
+        {
+          "id": "C",
+          "text": "ermittelt beim Start stabile Signal- und Timingparameter und kann den ersten Start verlängern",
+          "feedback": "Diese Funktion gehört zu „Memory Training“. „ECC-Speicher“ bedeutet: kann bestimmte Bitfehler erkennen und Ein-Bit-Fehler korrigieren, sofern die Plattform ECC unterstützt."
+        },
+        {
+          "id": "D",
+          "text": "bestimmt, wie viele aktive Daten ohne langsames Auslagern auf ein Laufwerk gehalten werden können",
+          "feedback": "Diese Funktion gehört zu „RAM-Kapazität“. „ECC-Speicher“ bedeutet: kann bestimmte Bitfehler erkennen und Ein-Bit-Fehler korrigieren, sofern die Plattform ECC unterstützt."
+        }
+      ],
+      "correctAnswer": "B"
+    },
+    {
+      "id": "q027",
+      "category": "Arbeitsspeicher",
+      "question": "Welche Aussage beschreibt „RAM-Timings“ korrekt?",
+      "hint": "Latenzen in Taktzyklen",
+      "options": [
+        {
+          "id": "A",
+          "text": "ermittelt beim Start stabile Signal- und Timingparameter und kann den ersten Start verlängern",
+          "feedback": "Diese Funktion gehört zu „Memory Training“. „RAM-Timings“ bedeutet: beschreiben Wartezyklen verschiedener Speicheroperationen und wirken zusammen mit dem Speichertakt."
+        },
+        {
+          "id": "B",
+          "text": "bestimmt, wie viele aktive Daten ohne langsames Auslagern auf ein Laufwerk gehalten werden können",
+          "feedback": "Diese Funktion gehört zu „RAM-Kapazität“. „RAM-Timings“ bedeutet: beschreiben Wartezyklen verschiedener Speicheroperationen und wirken zusammen mit dem Speichertakt."
+        },
+        {
+          "id": "C",
+          "text": "beschreiben Wartezyklen verschiedener Speicheroperationen und wirken zusammen mit dem Speichertakt",
+          "feedback": "RAM-Timings: beschreiben Wartezyklen verschiedener Speicheroperationen und wirken zusammen mit dem Speichertakt."
+        },
+        {
+          "id": "D",
+          "text": "werden im Mainboard-Handbuch genannt; bei zwei Modulen sind häufig A2 und B2 vorgesehen",
+          "feedback": "Diese Funktion gehört zu „Bevorzugte DIMM-Slots“. „RAM-Timings“ bedeutet: beschreiben Wartezyklen verschiedener Speicheroperationen und wirken zusammen mit dem Speichertakt."
+        }
+      ],
+      "correctAnswer": "C"
+    },
+    {
+      "id": "q028",
+      "category": "Arbeitsspeicher",
+      "question": "Welche Funktion gehört zu „Memory Training“?",
+      "hint": "Firmware testet Speicherparameter",
+      "options": [
+        {
+          "id": "A",
+          "text": "bestimmt, wie viele aktive Daten ohne langsames Auslagern auf ein Laufwerk gehalten werden können",
+          "feedback": "Diese Funktion gehört zu „RAM-Kapazität“. „Memory Training“ bedeutet: ermittelt beim Start stabile Signal- und Timingparameter und kann den ersten Start verlängern."
+        },
+        {
+          "id": "B",
+          "text": "werden im Mainboard-Handbuch genannt; bei zwei Modulen sind häufig A2 und B2 vorgesehen",
+          "feedback": "Diese Funktion gehört zu „Bevorzugte DIMM-Slots“. „Memory Training“ bedeutet: ermittelt beim Start stabile Signal- und Timingparameter und kann den ersten Start verlängern."
+        },
+        {
+          "id": "C",
+          "text": "ist die übliche Bauform für austauschbaren Arbeitsspeicher in Desktop-PCs",
+          "feedback": "Diese Funktion gehört zu „DIMM“. „Memory Training“ bedeutet: ermittelt beim Start stabile Signal- und Timingparameter und kann den ersten Start verlängern."
+        },
+        {
+          "id": "D",
+          "text": "ermittelt beim Start stabile Signal- und Timingparameter und kann den ersten Start verlängern",
+          "feedback": "Memory Training: ermittelt beim Start stabile Signal- und Timingparameter und kann den ersten Start verlängern."
+        }
+      ],
+      "correctAnswer": "D"
+    },
+    {
+      "id": "q029",
+      "category": "Arbeitsspeicher",
+      "question": "Welche Definition passt zu „RAM-Kapazität“?",
+      "hint": "Platz für laufende Programme",
+      "options": [
+        {
+          "id": "A",
+          "text": "bestimmt, wie viele aktive Daten ohne langsames Auslagern auf ein Laufwerk gehalten werden können",
+          "feedback": "RAM-Kapazität: bestimmt, wie viele aktive Daten ohne langsames Auslagern auf ein Laufwerk gehalten werden können."
+        },
+        {
+          "id": "B",
+          "text": "werden im Mainboard-Handbuch genannt; bei zwei Modulen sind häufig A2 und B2 vorgesehen",
+          "feedback": "Diese Funktion gehört zu „Bevorzugte DIMM-Slots“. „RAM-Kapazität“ bedeutet: bestimmt, wie viele aktive Daten ohne langsames Auslagern auf ein Laufwerk gehalten werden können."
+        },
+        {
+          "id": "C",
+          "text": "ist die übliche Bauform für austauschbaren Arbeitsspeicher in Desktop-PCs",
+          "feedback": "Diese Funktion gehört zu „DIMM“. „RAM-Kapazität“ bedeutet: bestimmt, wie viele aktive Daten ohne langsames Auslagern auf ein Laufwerk gehalten werden können."
+        },
+        {
+          "id": "D",
+          "text": "ist eine kompakte Arbeitsspeicherbauform für Notebooks und viele Mini-PCs",
+          "feedback": "Diese Funktion gehört zu „SO-DIMM“. „RAM-Kapazität“ bedeutet: bestimmt, wie viele aktive Daten ohne langsames Auslagern auf ein Laufwerk gehalten werden können."
+        }
+      ],
+      "correctAnswer": "A"
+    },
+    {
+      "id": "q030",
+      "category": "Arbeitsspeicher",
+      "question": "Welche Aussage beschreibt „Bevorzugte DIMM-Slots“ korrekt?",
+      "hint": "Bestückungsreihenfolge nach Handbuch",
+      "options": [
+        {
+          "id": "A",
+          "text": "ist die übliche Bauform für austauschbaren Arbeitsspeicher in Desktop-PCs",
+          "feedback": "Diese Funktion gehört zu „DIMM“. „Bevorzugte DIMM-Slots“ bedeutet: werden im Mainboard-Handbuch genannt; bei zwei Modulen sind häufig A2 und B2 vorgesehen."
+        },
+        {
+          "id": "B",
+          "text": "werden im Mainboard-Handbuch genannt; bei zwei Modulen sind häufig A2 und B2 vorgesehen",
+          "feedback": "Bevorzugte DIMM-Slots: werden im Mainboard-Handbuch genannt; bei zwei Modulen sind häufig A2 und B2 vorgesehen."
+        },
+        {
+          "id": "C",
+          "text": "ist eine kompakte Arbeitsspeicherbauform für Notebooks und viele Mini-PCs",
+          "feedback": "Diese Funktion gehört zu „SO-DIMM“. „Bevorzugte DIMM-Slots“ bedeutet: werden im Mainboard-Handbuch genannt; bei zwei Modulen sind häufig A2 und B2 vorgesehen."
+        },
+        {
+          "id": "D",
+          "text": "nutzt zwei Speicherkanäle parallel und erhöht dadurch die verfügbare Speicherbandbreite",
+          "feedback": "Diese Funktion gehört zu „Dual Channel“. „Bevorzugte DIMM-Slots“ bedeutet: werden im Mainboard-Handbuch genannt; bei zwei Modulen sind häufig A2 und B2 vorgesehen."
+        }
+      ],
+      "correctAnswer": "B"
+    },
+    {
+      "id": "q031",
+      "category": "Grafik & PCIe",
+      "question": "Welche Funktion gehört zu „PCIe-x16-Steckplatz“?",
+      "hint": "langer Erweiterungssteckplatz",
+      "options": [
+        {
+          "id": "A",
+          "text": "sind serielle Datenwege; mehr Lanes ermöglichen bei gleicher Generation mehr theoretische Bandbreite",
+          "feedback": "Diese Funktion gehört zu „PCIe-Lanes“. „PCIe-x16-Steckplatz“ bedeutet: nimmt typischerweise eine dedizierte Grafikkarte auf und bietet mechanisch Platz für x16-Karten."
+        },
+        {
+          "id": "B",
+          "text": "hält Texturen, Bilddaten, CAD-Szenen und lokale KI-Modelldaten nahe an der GPU",
+          "feedback": "Diese Funktion gehört zu „Grafikspeicher VRAM“. „PCIe-x16-Steckplatz“ bedeutet: nimmt typischerweise eine dedizierte Grafikkarte auf und bietet mechanisch Platz für x16-Karten."
+        },
+        {
+          "id": "C",
+          "text": "nimmt typischerweise eine dedizierte Grafikkarte auf und bietet mechanisch Platz für x16-Karten",
+          "feedback": "PCIe-x16-Steckplatz: nimmt typischerweise eine dedizierte Grafikkarte auf und bietet mechanisch Platz für x16-Karten."
+        },
+        {
+          "id": "D",
+          "text": "liefert einer leistungsstarken Grafikkarte zusätzliche Energie über passende PCIe- oder 12V-2x6-Kabel",
+          "feedback": "Diese Funktion gehört zu „GPU-Stromanschluss“. „PCIe-x16-Steckplatz“ bedeutet: nimmt typischerweise eine dedizierte Grafikkarte auf und bietet mechanisch Platz für x16-Karten."
+        }
+      ],
+      "correctAnswer": "C"
+    },
+    {
+      "id": "q032",
+      "category": "Grafik & PCIe",
+      "question": "Welche Definition passt zu „PCIe-Lanes“?",
+      "hint": "x4, x8 und x16",
+      "options": [
+        {
+          "id": "A",
+          "text": "hält Texturen, Bilddaten, CAD-Szenen und lokale KI-Modelldaten nahe an der GPU",
+          "feedback": "Diese Funktion gehört zu „Grafikspeicher VRAM“. „PCIe-Lanes“ bedeutet: sind serielle Datenwege; mehr Lanes ermöglichen bei gleicher Generation mehr theoretische Bandbreite."
+        },
+        {
+          "id": "B",
+          "text": "liefert einer leistungsstarken Grafikkarte zusätzliche Energie über passende PCIe- oder 12V-2x6-Kabel",
+          "feedback": "Diese Funktion gehört zu „GPU-Stromanschluss“. „PCIe-Lanes“ bedeutet: sind serielle Datenwege; mehr Lanes ermöglichen bei gleicher Generation mehr theoretische Bandbreite."
+        },
+        {
+          "id": "C",
+          "text": "muss mit dem freien Innenraum einschließlich Frontlüftern und Radiator verglichen werden",
+          "feedback": "Diese Funktion gehört zu „Grafikkartenlänge“. „PCIe-Lanes“ bedeutet: sind serielle Datenwege; mehr Lanes ermöglichen bei gleicher Generation mehr theoretische Bandbreite."
+        },
+        {
+          "id": "D",
+          "text": "sind serielle Datenwege; mehr Lanes ermöglichen bei gleicher Generation mehr theoretische Bandbreite",
+          "feedback": "PCIe-Lanes: sind serielle Datenwege; mehr Lanes ermöglichen bei gleicher Generation mehr theoretische Bandbreite."
+        }
+      ],
+      "correctAnswer": "D"
+    },
+    {
+      "id": "q033",
+      "category": "Grafik & PCIe",
+      "question": "Welche Aussage beschreibt „Grafikspeicher VRAM“ korrekt?",
+      "hint": "schneller lokaler Speicher der GPU",
+      "options": [
+        {
+          "id": "A",
+          "text": "hält Texturen, Bilddaten, CAD-Szenen und lokale KI-Modelldaten nahe an der GPU",
+          "feedback": "Grafikspeicher VRAM: hält Texturen, Bilddaten, CAD-Szenen und lokale KI-Modelldaten nahe an der GPU."
+        },
+        {
+          "id": "B",
+          "text": "liefert einer leistungsstarken Grafikkarte zusätzliche Energie über passende PCIe- oder 12V-2x6-Kabel",
+          "feedback": "Diese Funktion gehört zu „GPU-Stromanschluss“. „Grafikspeicher VRAM“ bedeutet: hält Texturen, Bilddaten, CAD-Szenen und lokale KI-Modelldaten nahe an der GPU."
+        },
+        {
+          "id": "C",
+          "text": "muss mit dem freien Innenraum einschließlich Frontlüftern und Radiator verglichen werden",
+          "feedback": "Diese Funktion gehört zu „Grafikkartenlänge“. „Grafikspeicher VRAM“ bedeutet: hält Texturen, Bilddaten, CAD-Szenen und lokale KI-Modelldaten nahe an der GPU."
+        },
+        {
+          "id": "D",
+          "text": "beschreibt, wie viele rückseitige Erweiterungsplätze Kühler und Karte belegen",
+          "feedback": "Diese Funktion gehört zu „Grafikkarten-Slotbreite“. „Grafikspeicher VRAM“ bedeutet: hält Texturen, Bilddaten, CAD-Szenen und lokale KI-Modelldaten nahe an der GPU."
+        }
+      ],
+      "correctAnswer": "A"
+    },
+    {
+      "id": "q034",
+      "category": "Grafik & PCIe",
+      "question": "Welche Funktion gehört zu „GPU-Stromanschluss“?",
+      "hint": "zusätzliche Versorgung neben dem Slot",
+      "options": [
+        {
+          "id": "A",
+          "text": "muss mit dem freien Innenraum einschließlich Frontlüftern und Radiator verglichen werden",
+          "feedback": "Diese Funktion gehört zu „Grafikkartenlänge“. „GPU-Stromanschluss“ bedeutet: liefert einer leistungsstarken Grafikkarte zusätzliche Energie über passende PCIe- oder 12V-2x6-Kabel."
+        },
+        {
+          "id": "B",
+          "text": "liefert einer leistungsstarken Grafikkarte zusätzliche Energie über passende PCIe- oder 12V-2x6-Kabel",
+          "feedback": "GPU-Stromanschluss: liefert einer leistungsstarken Grafikkarte zusätzliche Energie über passende PCIe- oder 12V-2x6-Kabel."
+        },
+        {
+          "id": "C",
+          "text": "beschreibt, wie viele rückseitige Erweiterungsplätze Kühler und Karte belegen",
+          "feedback": "Diese Funktion gehört zu „Grafikkarten-Slotbreite“. „GPU-Stromanschluss“ bedeutet: liefert einer leistungsstarken Grafikkarte zusätzliche Energie über passende PCIe- oder 12V-2x6-Kabel."
+        },
+        {
+          "id": "D",
+          "text": "ist bei dedizierter Grafik der normale Anschlussort für den Monitor",
+          "feedback": "Diese Funktion gehört zu „Grafikkarten-Bildausgang“. „GPU-Stromanschluss“ bedeutet: liefert einer leistungsstarken Grafikkarte zusätzliche Energie über passende PCIe- oder 12V-2x6-Kabel."
+        }
+      ],
+      "correctAnswer": "B"
+    },
+    {
+      "id": "q035",
+      "category": "Grafik & PCIe",
+      "question": "Welche Definition passt zu „Grafikkartenlänge“?",
+      "hint": "Platz in Längsrichtung",
+      "options": [
+        {
+          "id": "A",
+          "text": "beschreibt, wie viele rückseitige Erweiterungsplätze Kühler und Karte belegen",
+          "feedback": "Diese Funktion gehört zu „Grafikkarten-Slotbreite“. „Grafikkartenlänge“ bedeutet: muss mit dem freien Innenraum einschließlich Frontlüftern und Radiator verglichen werden."
+        },
+        {
+          "id": "B",
+          "text": "ist bei dedizierter Grafik der normale Anschlussort für den Monitor",
+          "feedback": "Diese Funktion gehört zu „Grafikkarten-Bildausgang“. „Grafikkartenlänge“ bedeutet: muss mit dem freien Innenraum einschließlich Frontlüftern und Radiator verglichen werden."
+        },
+        {
+          "id": "C",
+          "text": "muss mit dem freien Innenraum einschließlich Frontlüftern und Radiator verglichen werden",
+          "feedback": "Grafikkartenlänge: muss mit dem freien Innenraum einschließlich Frontlüftern und Radiator verglichen werden."
+        },
+        {
+          "id": "D",
+          "text": "reduziert bei schweren Grafikkarten Durchhängen und mechanische Belastung des Steckplatzes",
+          "feedback": "Diese Funktion gehört zu „GPU-Stütze“. „Grafikkartenlänge“ bedeutet: muss mit dem freien Innenraum einschließlich Frontlüftern und Radiator verglichen werden."
+        }
+      ],
+      "correctAnswer": "C"
+    },
+    {
+      "id": "q036",
+      "category": "Grafik & PCIe",
+      "question": "Welche Aussage beschreibt „Grafikkarten-Slotbreite“ korrekt?",
+      "hint": "Dicke der Erweiterungskarte",
+      "options": [
+        {
+          "id": "A",
+          "text": "ist bei dedizierter Grafik der normale Anschlussort für den Monitor",
+          "feedback": "Diese Funktion gehört zu „Grafikkarten-Bildausgang“. „Grafikkarten-Slotbreite“ bedeutet: beschreibt, wie viele rückseitige Erweiterungsplätze Kühler und Karte belegen."
+        },
+        {
+          "id": "B",
+          "text": "reduziert bei schweren Grafikkarten Durchhängen und mechanische Belastung des Steckplatzes",
+          "feedback": "Diese Funktion gehört zu „GPU-Stütze“. „Grafikkarten-Slotbreite“ bedeutet: beschreibt, wie viele rückseitige Erweiterungsplätze Kühler und Karte belegen."
+        },
+        {
+          "id": "C",
+          "text": "ermöglicht der CPU, auf größere Bereiche des Grafikspeichers zusammenhängend zuzugreifen",
+          "feedback": "Diese Funktion gehört zu „Resizable BAR“. „Grafikkarten-Slotbreite“ bedeutet: beschreibt, wie viele rückseitige Erweiterungsplätze Kühler und Karte belegen."
+        },
+        {
+          "id": "D",
+          "text": "beschreibt, wie viele rückseitige Erweiterungsplätze Kühler und Karte belegen",
+          "feedback": "Grafikkarten-Slotbreite: beschreibt, wie viele rückseitige Erweiterungsplätze Kühler und Karte belegen."
+        }
+      ],
+      "correctAnswer": "D"
+    },
+    {
+      "id": "q037",
+      "category": "Grafik & PCIe",
+      "question": "Welche Funktion gehört zu „Grafikkarten-Bildausgang“?",
+      "hint": "Bild dort abgreifen, wo es berechnet wird",
+      "options": [
+        {
+          "id": "A",
+          "text": "ist bei dedizierter Grafik der normale Anschlussort für den Monitor",
+          "feedback": "Grafikkarten-Bildausgang: ist bei dedizierter Grafik der normale Anschlussort für den Monitor."
+        },
+        {
+          "id": "B",
+          "text": "reduziert bei schweren Grafikkarten Durchhängen und mechanische Belastung des Steckplatzes",
+          "feedback": "Diese Funktion gehört zu „GPU-Stütze“. „Grafikkarten-Bildausgang“ bedeutet: ist bei dedizierter Grafik der normale Anschlussort für den Monitor."
+        },
+        {
+          "id": "C",
+          "text": "ermöglicht der CPU, auf größere Bereiche des Grafikspeichers zusammenhängend zuzugreifen",
+          "feedback": "Diese Funktion gehört zu „Resizable BAR“. „Grafikkarten-Bildausgang“ bedeutet: ist bei dedizierter Grafik der normale Anschlussort für den Monitor."
+        },
+        {
+          "id": "D",
+          "text": "lässt Geräte verschiedener PCIe-Generationen meist mit der höchsten gemeinsam unterstützten Geschwindigkeit arbeiten",
+          "feedback": "Diese Funktion gehört zu „PCIe-Aushandlung“. „Grafikkarten-Bildausgang“ bedeutet: ist bei dedizierter Grafik der normale Anschlussort für den Monitor."
+        }
+      ],
+      "correctAnswer": "A"
+    },
+    {
+      "id": "q038",
+      "category": "Grafik & PCIe",
+      "question": "Welche Definition passt zu „GPU-Stütze“?",
+      "hint": "Gewicht einer langen Karte abfangen",
+      "options": [
+        {
+          "id": "A",
+          "text": "ermöglicht der CPU, auf größere Bereiche des Grafikspeichers zusammenhängend zuzugreifen",
+          "feedback": "Diese Funktion gehört zu „Resizable BAR“. „GPU-Stütze“ bedeutet: reduziert bei schweren Grafikkarten Durchhängen und mechanische Belastung des Steckplatzes."
+        },
+        {
+          "id": "B",
+          "text": "reduziert bei schweren Grafikkarten Durchhängen und mechanische Belastung des Steckplatzes",
+          "feedback": "GPU-Stütze: reduziert bei schweren Grafikkarten Durchhängen und mechanische Belastung des Steckplatzes."
+        },
+        {
+          "id": "C",
+          "text": "lässt Geräte verschiedener PCIe-Generationen meist mit der höchsten gemeinsam unterstützten Geschwindigkeit arbeiten",
+          "feedback": "Diese Funktion gehört zu „PCIe-Aushandlung“. „GPU-Stütze“ bedeutet: reduziert bei schweren Grafikkarten Durchhängen und mechanische Belastung des Steckplatzes."
+        },
+        {
+          "id": "D",
+          "text": "nimmt typischerweise eine dedizierte Grafikkarte auf und bietet mechanisch Platz für x16-Karten",
+          "feedback": "Diese Funktion gehört zu „PCIe-x16-Steckplatz“. „GPU-Stütze“ bedeutet: reduziert bei schweren Grafikkarten Durchhängen und mechanische Belastung des Steckplatzes."
+        }
+      ],
+      "correctAnswer": "B"
+    },
+    {
+      "id": "q039",
+      "category": "Grafik & PCIe",
+      "question": "Welche Aussage beschreibt „Resizable BAR“ korrekt?",
+      "hint": "Zugriffsfenster auf VRAM",
+      "options": [
+        {
+          "id": "A",
+          "text": "lässt Geräte verschiedener PCIe-Generationen meist mit der höchsten gemeinsam unterstützten Geschwindigkeit arbeiten",
+          "feedback": "Diese Funktion gehört zu „PCIe-Aushandlung“. „Resizable BAR“ bedeutet: ermöglicht der CPU, auf größere Bereiche des Grafikspeichers zusammenhängend zuzugreifen."
+        },
+        {
+          "id": "B",
+          "text": "nimmt typischerweise eine dedizierte Grafikkarte auf und bietet mechanisch Platz für x16-Karten",
+          "feedback": "Diese Funktion gehört zu „PCIe-x16-Steckplatz“. „Resizable BAR“ bedeutet: ermöglicht der CPU, auf größere Bereiche des Grafikspeichers zusammenhängend zuzugreifen."
+        },
+        {
+          "id": "C",
+          "text": "ermöglicht der CPU, auf größere Bereiche des Grafikspeichers zusammenhängend zuzugreifen",
+          "feedback": "Resizable BAR: ermöglicht der CPU, auf größere Bereiche des Grafikspeichers zusammenhängend zuzugreifen."
+        },
+        {
+          "id": "D",
+          "text": "sind serielle Datenwege; mehr Lanes ermöglichen bei gleicher Generation mehr theoretische Bandbreite",
+          "feedback": "Diese Funktion gehört zu „PCIe-Lanes“. „Resizable BAR“ bedeutet: ermöglicht der CPU, auf größere Bereiche des Grafikspeichers zusammenhängend zuzugreifen."
+        }
+      ],
+      "correctAnswer": "C"
+    },
+    {
+      "id": "q040",
+      "category": "Grafik & PCIe",
+      "question": "Welche Funktion gehört zu „PCIe-Aushandlung“?",
+      "hint": "Abwärtskompatibilität mit Grenzen",
+      "options": [
+        {
+          "id": "A",
+          "text": "nimmt typischerweise eine dedizierte Grafikkarte auf und bietet mechanisch Platz für x16-Karten",
+          "feedback": "Diese Funktion gehört zu „PCIe-x16-Steckplatz“. „PCIe-Aushandlung“ bedeutet: lässt Geräte verschiedener PCIe-Generationen meist mit der höchsten gemeinsam unterstützten Geschwindigkeit arbeiten."
+        },
+        {
+          "id": "B",
+          "text": "sind serielle Datenwege; mehr Lanes ermöglichen bei gleicher Generation mehr theoretische Bandbreite",
+          "feedback": "Diese Funktion gehört zu „PCIe-Lanes“. „PCIe-Aushandlung“ bedeutet: lässt Geräte verschiedener PCIe-Generationen meist mit der höchsten gemeinsam unterstützten Geschwindigkeit arbeiten."
+        },
+        {
+          "id": "C",
+          "text": "hält Texturen, Bilddaten, CAD-Szenen und lokale KI-Modelldaten nahe an der GPU",
+          "feedback": "Diese Funktion gehört zu „Grafikspeicher VRAM“. „PCIe-Aushandlung“ bedeutet: lässt Geräte verschiedener PCIe-Generationen meist mit der höchsten gemeinsam unterstützten Geschwindigkeit arbeiten."
+        },
+        {
+          "id": "D",
+          "text": "lässt Geräte verschiedener PCIe-Generationen meist mit der höchsten gemeinsam unterstützten Geschwindigkeit arbeiten",
+          "feedback": "PCIe-Aushandlung: lässt Geräte verschiedener PCIe-Generationen meist mit der höchsten gemeinsam unterstützten Geschwindigkeit arbeiten."
+        }
+      ],
+      "correctAnswer": "D"
+    },
+    {
+      "id": "q041",
+      "category": "Massenspeicher",
+      "question": "Welche Definition passt zu „NVMe“?",
+      "hint": "Protokoll statt Bauform",
+      "options": [
+        {
+          "id": "A",
+          "text": "ist ein für nichtflüchtigen Speicher entwickeltes Protokoll, das meistens PCIe nutzt",
+          "feedback": "NVMe: ist ein für nichtflüchtigen Speicher entwickeltes Protokoll, das meistens PCIe nutzt."
+        },
+        {
+          "id": "B",
+          "text": "bezeichnet eine kompakte Modulbauform, die je nach Steckplatz SATA oder PCIe/NVMe verwenden kann",
+          "feedback": "Diese Funktion gehört zu „M.2“. „NVMe“ bedeutet: ist ein für nichtflüchtigen Speicher entwickeltes Protokoll, das meistens PCIe nutzt."
+        },
+        {
+          "id": "C",
+          "text": "verbindet ein klassisches SATA-Laufwerk zur Datenübertragung mit dem Mainboard",
+          "feedback": "Diese Funktion gehört zu „SATA-Datenkabel“. „NVMe“ bedeutet: ist ein für nichtflüchtigen Speicher entwickeltes Protokoll, das meistens PCIe nutzt."
+        },
+        {
+          "id": "D",
+          "text": "versorgt SATA-Laufwerke über ein Kabel des Netzteils mit elektrischer Energie",
+          "feedback": "Diese Funktion gehört zu „SATA-Stromstecker“. „NVMe“ bedeutet: ist ein für nichtflüchtigen Speicher entwickeltes Protokoll, das meistens PCIe nutzt."
+        }
+      ],
+      "correctAnswer": "A"
+    },
+    {
+      "id": "q042",
+      "category": "Massenspeicher",
+      "question": "Welche Aussage beschreibt „M.2“ korrekt?",
+      "hint": "Formfaktor mit mehreren Protokollen",
+      "options": [
+        {
+          "id": "A",
+          "text": "verbindet ein klassisches SATA-Laufwerk zur Datenübertragung mit dem Mainboard",
+          "feedback": "Diese Funktion gehört zu „SATA-Datenkabel“. „M.2“ bedeutet: bezeichnet eine kompakte Modulbauform, die je nach Steckplatz SATA oder PCIe/NVMe verwenden kann."
+        },
+        {
+          "id": "B",
+          "text": "bezeichnet eine kompakte Modulbauform, die je nach Steckplatz SATA oder PCIe/NVMe verwenden kann",
+          "feedback": "M.2: bezeichnet eine kompakte Modulbauform, die je nach Steckplatz SATA oder PCIe/NVMe verwenden kann."
+        },
+        {
+          "id": "C",
+          "text": "versorgt SATA-Laufwerke über ein Kabel des Netzteils mit elektrischer Energie",
+          "feedback": "Diese Funktion gehört zu „SATA-Stromstecker“. „M.2“ bedeutet: bezeichnet eine kompakte Modulbauform, die je nach Steckplatz SATA oder PCIe/NVMe verwenden kann."
+        },
+        {
+          "id": "D",
+          "text": "ist ein stoßunempfindlicher SATA-Massenspeicher ohne bewegliche Schreib-/Leseköpfe",
+          "feedback": "Diese Funktion gehört zu „2,5-Zoll-SSD“. „M.2“ bedeutet: bezeichnet eine kompakte Modulbauform, die je nach Steckplatz SATA oder PCIe/NVMe verwenden kann."
+        }
+      ],
+      "correctAnswer": "B"
+    },
+    {
+      "id": "q043",
+      "category": "Massenspeicher",
+      "question": "Welche Funktion gehört zu „SATA-Datenkabel“?",
+      "hint": "schmale Signalverbindung",
+      "options": [
+        {
+          "id": "A",
+          "text": "versorgt SATA-Laufwerke über ein Kabel des Netzteils mit elektrischer Energie",
+          "feedback": "Diese Funktion gehört zu „SATA-Stromstecker“. „SATA-Datenkabel“ bedeutet: verbindet ein klassisches SATA-Laufwerk zur Datenübertragung mit dem Mainboard."
+        },
+        {
+          "id": "B",
+          "text": "ist ein stoßunempfindlicher SATA-Massenspeicher ohne bewegliche Schreib-/Leseköpfe",
+          "feedback": "Diese Funktion gehört zu „2,5-Zoll-SSD“. „SATA-Datenkabel“ bedeutet: verbindet ein klassisches SATA-Laufwerk zur Datenübertragung mit dem Mainboard."
+        },
+        {
+          "id": "C",
+          "text": "verbindet ein klassisches SATA-Laufwerk zur Datenübertragung mit dem Mainboard",
+          "feedback": "SATA-Datenkabel: verbindet ein klassisches SATA-Laufwerk zur Datenübertragung mit dem Mainboard."
+        },
+        {
+          "id": "D",
+          "text": "speichert Daten magnetisch auf rotierenden Scheiben und ist im Betrieb stoßempfindlich",
+          "feedback": "Diese Funktion gehört zu „Festplatte HDD“. „SATA-Datenkabel“ bedeutet: verbindet ein klassisches SATA-Laufwerk zur Datenübertragung mit dem Mainboard."
+        }
+      ],
+      "correctAnswer": "C"
+    },
+    {
+      "id": "q044",
+      "category": "Massenspeicher",
+      "question": "Welche Definition passt zu „SATA-Stromstecker“?",
+      "hint": "breitere Energieverbindung",
+      "options": [
+        {
+          "id": "A",
+          "text": "ist ein stoßunempfindlicher SATA-Massenspeicher ohne bewegliche Schreib-/Leseköpfe",
+          "feedback": "Diese Funktion gehört zu „2,5-Zoll-SSD“. „SATA-Stromstecker“ bedeutet: versorgt SATA-Laufwerke über ein Kabel des Netzteils mit elektrischer Energie."
+        },
+        {
+          "id": "B",
+          "text": "speichert Daten magnetisch auf rotierenden Scheiben und ist im Betrieb stoßempfindlich",
+          "feedback": "Diese Funktion gehört zu „Festplatte HDD“. „SATA-Stromstecker“ bedeutet: versorgt SATA-Laufwerke über ein Kabel des Netzteils mit elektrischer Energie."
+        },
+        {
+          "id": "C",
+          "text": "ist eine moderne Partitionstabelle für UEFI-Systeme, große Datenträger und zahlreiche Partitionen",
+          "feedback": "Diese Funktion gehört zu „GPT“. „SATA-Stromstecker“ bedeutet: versorgt SATA-Laufwerke über ein Kabel des Netzteils mit elektrischer Energie."
+        },
+        {
+          "id": "D",
+          "text": "versorgt SATA-Laufwerke über ein Kabel des Netzteils mit elektrischer Energie",
+          "feedback": "SATA-Stromstecker: versorgt SATA-Laufwerke über ein Kabel des Netzteils mit elektrischer Energie."
+        }
+      ],
+      "correctAnswer": "D"
+    },
+    {
+      "id": "q045",
+      "category": "Massenspeicher",
+      "question": "Welche Aussage beschreibt „2,5-Zoll-SSD“ korrekt?",
+      "hint": "kompaktes SATA-Laufwerk ohne Mechanik",
+      "options": [
+        {
+          "id": "A",
+          "text": "ist ein stoßunempfindlicher SATA-Massenspeicher ohne bewegliche Schreib-/Leseköpfe",
+          "feedback": "2,5-Zoll-SSD: ist ein stoßunempfindlicher SATA-Massenspeicher ohne bewegliche Schreib-/Leseköpfe."
+        },
+        {
+          "id": "B",
+          "text": "speichert Daten magnetisch auf rotierenden Scheiben und ist im Betrieb stoßempfindlich",
+          "feedback": "Diese Funktion gehört zu „Festplatte HDD“. „2,5-Zoll-SSD“ bedeutet: ist ein stoßunempfindlicher SATA-Massenspeicher ohne bewegliche Schreib-/Leseköpfe."
+        },
+        {
+          "id": "C",
+          "text": "ist eine moderne Partitionstabelle für UEFI-Systeme, große Datenträger und zahlreiche Partitionen",
+          "feedback": "Diese Funktion gehört zu „GPT“. „2,5-Zoll-SSD“ bedeutet: ist ein stoßunempfindlicher SATA-Massenspeicher ohne bewegliche Schreib-/Leseköpfe."
+        },
+        {
+          "id": "D",
+          "text": "stellt vom Laufwerk gemeldete Zustands-, Temperatur- und Fehlerindikatoren bereit",
+          "feedback": "Diese Funktion gehört zu „SMART“. „2,5-Zoll-SSD“ bedeutet: ist ein stoßunempfindlicher SATA-Massenspeicher ohne bewegliche Schreib-/Leseköpfe."
+        }
+      ],
+      "correctAnswer": "A"
+    },
+    {
+      "id": "q046",
+      "category": "Massenspeicher",
+      "question": "Welche Funktion gehört zu „Festplatte HDD“?",
+      "hint": "mechanischer Massenspeicher",
+      "options": [
+        {
+          "id": "A",
+          "text": "ist eine moderne Partitionstabelle für UEFI-Systeme, große Datenträger und zahlreiche Partitionen",
+          "feedback": "Diese Funktion gehört zu „GPT“. „Festplatte HDD“ bedeutet: speichert Daten magnetisch auf rotierenden Scheiben und ist im Betrieb stoßempfindlich."
+        },
+        {
+          "id": "B",
+          "text": "speichert Daten magnetisch auf rotierenden Scheiben und ist im Betrieb stoßempfindlich",
+          "feedback": "Festplatte HDD: speichert Daten magnetisch auf rotierenden Scheiben und ist im Betrieb stoßempfindlich."
+        },
+        {
+          "id": "C",
+          "text": "stellt vom Laufwerk gemeldete Zustands-, Temperatur- und Fehlerindikatoren bereit",
+          "feedback": "Diese Funktion gehört zu „SMART“. „Festplatte HDD“ bedeutet: speichert Daten magnetisch auf rotierenden Scheiben und ist im Betrieb stoßempfindlich."
+        },
+        {
+          "id": "D",
+          "text": "kann je nach Level Verfügbarkeit oder Leistung erhöhen, ersetzt aber kein getrenntes Backup",
+          "feedback": "Diese Funktion gehört zu „RAID“. „Festplatte HDD“ bedeutet: speichert Daten magnetisch auf rotierenden Scheiben und ist im Betrieb stoßempfindlich."
+        }
+      ],
+      "correctAnswer": "B"
+    },
+    {
+      "id": "q047",
+      "category": "Massenspeicher",
+      "question": "Welche Definition passt zu „GPT“?",
+      "hint": "Partitionierung statt Dateisystem",
+      "options": [
+        {
+          "id": "A",
+          "text": "stellt vom Laufwerk gemeldete Zustands-, Temperatur- und Fehlerindikatoren bereit",
+          "feedback": "Diese Funktion gehört zu „SMART“. „GPT“ bedeutet: ist eine moderne Partitionstabelle für UEFI-Systeme, große Datenträger und zahlreiche Partitionen."
+        },
+        {
+          "id": "B",
+          "text": "kann je nach Level Verfügbarkeit oder Leistung erhöhen, ersetzt aber kein getrenntes Backup",
+          "feedback": "Diese Funktion gehört zu „RAID“. „GPT“ bedeutet: ist eine moderne Partitionstabelle für UEFI-Systeme, große Datenträger und zahlreiche Partitionen."
+        },
+        {
+          "id": "C",
+          "text": "ist eine moderne Partitionstabelle für UEFI-Systeme, große Datenträger und zahlreiche Partitionen",
+          "feedback": "GPT: ist eine moderne Partitionstabelle für UEFI-Systeme, große Datenträger und zahlreiche Partitionen."
+        },
+        {
+          "id": "D",
+          "text": "kann bei schneller NVMe-Dauerlast thermische Drosselung des Controllers verringern",
+          "feedback": "Diese Funktion gehört zu „M.2-Kühlkörper“. „GPT“ bedeutet: ist eine moderne Partitionstabelle für UEFI-Systeme, große Datenträger und zahlreiche Partitionen."
+        }
+      ],
+      "correctAnswer": "C"
+    },
+    {
+      "id": "q048",
+      "category": "Massenspeicher",
+      "question": "Welche Aussage beschreibt „SMART“ korrekt?",
+      "hint": "Selbstüberwachungswerte des Laufwerks",
+      "options": [
+        {
+          "id": "A",
+          "text": "kann je nach Level Verfügbarkeit oder Leistung erhöhen, ersetzt aber kein getrenntes Backup",
+          "feedback": "Diese Funktion gehört zu „RAID“. „SMART“ bedeutet: stellt vom Laufwerk gemeldete Zustands-, Temperatur- und Fehlerindikatoren bereit."
+        },
+        {
+          "id": "B",
+          "text": "kann bei schneller NVMe-Dauerlast thermische Drosselung des Controllers verringern",
+          "feedback": "Diese Funktion gehört zu „M.2-Kühlkörper“. „SMART“ bedeutet: stellt vom Laufwerk gemeldete Zustands-, Temperatur- und Fehlerindikatoren bereit."
+        },
+        {
+          "id": "C",
+          "text": "ist ein für nichtflüchtigen Speicher entwickeltes Protokoll, das meistens PCIe nutzt",
+          "feedback": "Diese Funktion gehört zu „NVMe“. „SMART“ bedeutet: stellt vom Laufwerk gemeldete Zustands-, Temperatur- und Fehlerindikatoren bereit."
+        },
+        {
+          "id": "D",
+          "text": "stellt vom Laufwerk gemeldete Zustands-, Temperatur- und Fehlerindikatoren bereit",
+          "feedback": "SMART: stellt vom Laufwerk gemeldete Zustands-, Temperatur- und Fehlerindikatoren bereit."
+        }
+      ],
+      "correctAnswer": "D"
+    },
+    {
+      "id": "q049",
+      "category": "Massenspeicher",
+      "question": "Welche Funktion gehört zu „RAID“?",
+      "hint": "Redundanz ist keine Sicherungskopie",
+      "options": [
+        {
+          "id": "A",
+          "text": "kann je nach Level Verfügbarkeit oder Leistung erhöhen, ersetzt aber kein getrenntes Backup",
+          "feedback": "RAID: kann je nach Level Verfügbarkeit oder Leistung erhöhen, ersetzt aber kein getrenntes Backup."
+        },
+        {
+          "id": "B",
+          "text": "kann bei schneller NVMe-Dauerlast thermische Drosselung des Controllers verringern",
+          "feedback": "Diese Funktion gehört zu „M.2-Kühlkörper“. „RAID“ bedeutet: kann je nach Level Verfügbarkeit oder Leistung erhöhen, ersetzt aber kein getrenntes Backup."
+        },
+        {
+          "id": "C",
+          "text": "ist ein für nichtflüchtigen Speicher entwickeltes Protokoll, das meistens PCIe nutzt",
+          "feedback": "Diese Funktion gehört zu „NVMe“. „RAID“ bedeutet: kann je nach Level Verfügbarkeit oder Leistung erhöhen, ersetzt aber kein getrenntes Backup."
+        },
+        {
+          "id": "D",
+          "text": "bezeichnet eine kompakte Modulbauform, die je nach Steckplatz SATA oder PCIe/NVMe verwenden kann",
+          "feedback": "Diese Funktion gehört zu „M.2“. „RAID“ bedeutet: kann je nach Level Verfügbarkeit oder Leistung erhöhen, ersetzt aber kein getrenntes Backup."
+        }
+      ],
+      "correctAnswer": "A"
+    },
+    {
+      "id": "q050",
+      "category": "Massenspeicher",
+      "question": "Welche Definition passt zu „M.2-Kühlkörper“?",
+      "hint": "Wärme bei anhaltender Laufwerkslast",
+      "options": [
+        {
+          "id": "A",
+          "text": "ist ein für nichtflüchtigen Speicher entwickeltes Protokoll, das meistens PCIe nutzt",
+          "feedback": "Diese Funktion gehört zu „NVMe“. „M.2-Kühlkörper“ bedeutet: kann bei schneller NVMe-Dauerlast thermische Drosselung des Controllers verringern."
+        },
+        {
+          "id": "B",
+          "text": "kann bei schneller NVMe-Dauerlast thermische Drosselung des Controllers verringern",
+          "feedback": "M.2-Kühlkörper: kann bei schneller NVMe-Dauerlast thermische Drosselung des Controllers verringern."
+        },
+        {
+          "id": "C",
+          "text": "bezeichnet eine kompakte Modulbauform, die je nach Steckplatz SATA oder PCIe/NVMe verwenden kann",
+          "feedback": "Diese Funktion gehört zu „M.2“. „M.2-Kühlkörper“ bedeutet: kann bei schneller NVMe-Dauerlast thermische Drosselung des Controllers verringern."
+        },
+        {
+          "id": "D",
+          "text": "verbindet ein klassisches SATA-Laufwerk zur Datenübertragung mit dem Mainboard",
+          "feedback": "Diese Funktion gehört zu „SATA-Datenkabel“. „M.2-Kühlkörper“ bedeutet: kann bei schneller NVMe-Dauerlast thermische Drosselung des Controllers verringern."
+        }
+      ],
+      "correctAnswer": "B"
+    },
+    {
+      "id": "q051",
+      "category": "Strom & Kühlung",
+      "question": "Welche Aussage beschreibt „Netzteilreserve“ korrekt?",
+      "hint": "nicht dauerhaft an der Leistungsgrenze",
+      "options": [
+        {
+          "id": "A",
+          "text": "bewertet hauptsächlich den Wirkungsgrad eines Netzteils bei definierten Lastpunkten",
+          "feedback": "Diese Funktion gehört zu „80-PLUS-Zertifizierung“. „Netzteilreserve“ bedeutet: schafft Spielraum für Lastspitzen, effizienten Betrieb und sinnvolle spätere Erweiterungen."
+        },
+        {
+          "id": "B",
+          "text": "stellt die Hauptstromversorgung des Mainboards bereit",
+          "feedback": "Diese Funktion gehört zu „24-poliger ATX-Stecker“. „Netzteilreserve“ bedeutet: schafft Spielraum für Lastspitzen, effizienten Betrieb und sinnvolle spätere Erweiterungen."
+        },
+        {
+          "id": "C",
+          "text": "schafft Spielraum für Lastspitzen, effizienten Betrieb und sinnvolle spätere Erweiterungen",
+          "feedback": "Netzteilreserve: schafft Spielraum für Lastspitzen, effizienten Betrieb und sinnvolle spätere Erweiterungen."
+        },
+        {
+          "id": "D",
+          "text": "versorgt die Spannungswandler der CPU und sitzt meist nahe am Prozessorsockel",
+          "feedback": "Diese Funktion gehört zu „EPS12V-Stecker“. „Netzteilreserve“ bedeutet: schafft Spielraum für Lastspitzen, effizienten Betrieb und sinnvolle spätere Erweiterungen."
+        }
+      ],
+      "correctAnswer": "C"
+    },
+    {
+      "id": "q052",
+      "category": "Strom & Kühlung",
+      "question": "Welche Funktion gehört zu „80-PLUS-Zertifizierung“?",
+      "hint": "Effizienz, nicht Gesamtqualität",
+      "options": [
+        {
+          "id": "A",
+          "text": "stellt die Hauptstromversorgung des Mainboards bereit",
+          "feedback": "Diese Funktion gehört zu „24-poliger ATX-Stecker“. „80-PLUS-Zertifizierung“ bedeutet: bewertet hauptsächlich den Wirkungsgrad eines Netzteils bei definierten Lastpunkten."
+        },
+        {
+          "id": "B",
+          "text": "versorgt die Spannungswandler der CPU und sitzt meist nahe am Prozessorsockel",
+          "feedback": "Diese Funktion gehört zu „EPS12V-Stecker“. „80-PLUS-Zertifizierung“ bedeutet: bewertet hauptsächlich den Wirkungsgrad eines Netzteils bei definierten Lastpunkten."
+        },
+        {
+          "id": "C",
+          "text": "versorgt und überwacht den Lüfter des Prozessorkühlers",
+          "feedback": "Diese Funktion gehört zu „CPU_FAN-Header“. „80-PLUS-Zertifizierung“ bedeutet: bewertet hauptsächlich den Wirkungsgrad eines Netzteils bei definierten Lastpunkten."
+        },
+        {
+          "id": "D",
+          "text": "bewertet hauptsächlich den Wirkungsgrad eines Netzteils bei definierten Lastpunkten",
+          "feedback": "80-PLUS-Zertifizierung: bewertet hauptsächlich den Wirkungsgrad eines Netzteils bei definierten Lastpunkten."
+        }
+      ],
+      "correctAnswer": "D"
+    },
+    {
+      "id": "q053",
+      "category": "Strom & Kühlung",
+      "question": "Welche Definition passt zu „24-poliger ATX-Stecker“?",
+      "hint": "großer Mainboard-Stromstecker",
+      "options": [
+        {
+          "id": "A",
+          "text": "stellt die Hauptstromversorgung des Mainboards bereit",
+          "feedback": "24-poliger ATX-Stecker: stellt die Hauptstromversorgung des Mainboards bereit."
+        },
+        {
+          "id": "B",
+          "text": "versorgt die Spannungswandler der CPU und sitzt meist nahe am Prozessorsockel",
+          "feedback": "Diese Funktion gehört zu „EPS12V-Stecker“. „24-poliger ATX-Stecker“ bedeutet: stellt die Hauptstromversorgung des Mainboards bereit."
+        },
+        {
+          "id": "C",
+          "text": "versorgt und überwacht den Lüfter des Prozessorkühlers",
+          "feedback": "Diese Funktion gehört zu „CPU_FAN-Header“. „24-poliger ATX-Stecker“ bedeutet: stellt die Hauptstromversorgung des Mainboards bereit."
+        },
+        {
+          "id": "D",
+          "text": "bewegt das Kühlmittel durch Kühler, Schläuche und Radiator einer geschlossenen Wasserkühlung",
+          "feedback": "Diese Funktion gehört zu „AIO-Pumpe“. „24-poliger ATX-Stecker“ bedeutet: stellt die Hauptstromversorgung des Mainboards bereit."
+        }
+      ],
+      "correctAnswer": "A"
+    },
+    {
+      "id": "q054",
+      "category": "Strom & Kühlung",
+      "question": "Welche Aussage beschreibt „EPS12V-Stecker“ korrekt?",
+      "hint": "CPU-Strom statt GPU-Strom",
+      "options": [
+        {
+          "id": "A",
+          "text": "versorgt und überwacht den Lüfter des Prozessorkühlers",
+          "feedback": "Diese Funktion gehört zu „CPU_FAN-Header“. „EPS12V-Stecker“ bedeutet: versorgt die Spannungswandler der CPU und sitzt meist nahe am Prozessorsockel."
+        },
+        {
+          "id": "B",
+          "text": "versorgt die Spannungswandler der CPU und sitzt meist nahe am Prozessorsockel",
+          "feedback": "EPS12V-Stecker: versorgt die Spannungswandler der CPU und sitzt meist nahe am Prozessorsockel."
+        },
+        {
+          "id": "C",
+          "text": "bewegt das Kühlmittel durch Kühler, Schläuche und Radiator einer geschlossenen Wasserkühlung",
+          "feedback": "Diese Funktion gehört zu „AIO-Pumpe“. „EPS12V-Stecker“ bedeutet: versorgt die Spannungswandler der CPU und sitzt meist nahe am Prozessorsockel."
+        },
+        {
+          "id": "D",
+          "text": "überträgt Wärme aus dem Kühlmittel an die durchströmende Luft",
+          "feedback": "Diese Funktion gehört zu „Radiator“. „EPS12V-Stecker“ bedeutet: versorgt die Spannungswandler der CPU und sitzt meist nahe am Prozessorsockel."
+        }
+      ],
+      "correctAnswer": "B"
+    },
+    {
+      "id": "q055",
+      "category": "Strom & Kühlung",
+      "question": "Welche Funktion gehört zu „CPU_FAN-Header“?",
+      "hint": "Firmware erwartet ein Drehzahlsignal",
+      "options": [
+        {
+          "id": "A",
+          "text": "bewegt das Kühlmittel durch Kühler, Schläuche und Radiator einer geschlossenen Wasserkühlung",
+          "feedback": "Diese Funktion gehört zu „AIO-Pumpe“. „CPU_FAN-Header“ bedeutet: versorgt und überwacht den Lüfter des Prozessorkühlers."
+        },
+        {
+          "id": "B",
+          "text": "überträgt Wärme aus dem Kühlmittel an die durchströmende Luft",
+          "feedback": "Diese Funktion gehört zu „Radiator“. „CPU_FAN-Header“ bedeutet: versorgt und überwacht den Lüfter des Prozessorkühlers."
+        },
+        {
+          "id": "C",
+          "text": "versorgt und überwacht den Lüfter des Prozessorkühlers",
+          "feedback": "CPU_FAN-Header: versorgt und überwacht den Lüfter des Prozessorkühlers."
+        },
+        {
+          "id": "D",
+          "text": "führt typischerweise vorne oder unten kühle Luft zu und hinten oder oben warme Luft ab",
+          "feedback": "Diese Funktion gehört zu „Gerichteter Luftstrom“. „CPU_FAN-Header“ bedeutet: versorgt und überwacht den Lüfter des Prozessorkühlers."
+        }
+      ],
+      "correctAnswer": "C"
+    },
+    {
+      "id": "q056",
+      "category": "Strom & Kühlung",
+      "question": "Welche Definition passt zu „AIO-Pumpe“?",
+      "hint": "bewegliches Teil im Kühlkreislauf",
+      "options": [
+        {
+          "id": "A",
+          "text": "überträgt Wärme aus dem Kühlmittel an die durchströmende Luft",
+          "feedback": "Diese Funktion gehört zu „Radiator“. „AIO-Pumpe“ bedeutet: bewegt das Kühlmittel durch Kühler, Schläuche und Radiator einer geschlossenen Wasserkühlung."
+        },
+        {
+          "id": "B",
+          "text": "führt typischerweise vorne oder unten kühle Luft zu und hinten oder oben warme Luft ab",
+          "feedback": "Diese Funktion gehört zu „Gerichteter Luftstrom“. „AIO-Pumpe“ bedeutet: bewegt das Kühlmittel durch Kühler, Schläuche und Radiator einer geschlossenen Wasserkühlung."
+        },
+        {
+          "id": "C",
+          "text": "ist eine herstellerspezifische thermische Auslegungsgröße und nicht zwingend die maximale elektrische Leistungsaufnahme",
+          "feedback": "Diese Funktion gehört zu „TDP“. „AIO-Pumpe“ bedeutet: bewegt das Kühlmittel durch Kühler, Schläuche und Radiator einer geschlossenen Wasserkühlung."
+        },
+        {
+          "id": "D",
+          "text": "bewegt das Kühlmittel durch Kühler, Schläuche und Radiator einer geschlossenen Wasserkühlung",
+          "feedback": "AIO-Pumpe: bewegt das Kühlmittel durch Kühler, Schläuche und Radiator einer geschlossenen Wasserkühlung."
+        }
+      ],
+      "correctAnswer": "D"
+    },
+    {
+      "id": "q057",
+      "category": "Strom & Kühlung",
+      "question": "Welche Aussage beschreibt „Radiator“ korrekt?",
+      "hint": "Wärmetauscher mit Lüftern",
+      "options": [
+        {
+          "id": "A",
+          "text": "überträgt Wärme aus dem Kühlmittel an die durchströmende Luft",
+          "feedback": "Radiator: überträgt Wärme aus dem Kühlmittel an die durchströmende Luft."
+        },
+        {
+          "id": "B",
+          "text": "führt typischerweise vorne oder unten kühle Luft zu und hinten oder oben warme Luft ab",
+          "feedback": "Diese Funktion gehört zu „Gerichteter Luftstrom“. „Radiator“ bedeutet: überträgt Wärme aus dem Kühlmittel an die durchströmende Luft."
+        },
+        {
+          "id": "C",
+          "text": "ist eine herstellerspezifische thermische Auslegungsgröße und nicht zwingend die maximale elektrische Leistungsaufnahme",
+          "feedback": "Diese Funktion gehört zu „TDP“. „Radiator“ bedeutet: überträgt Wärme aus dem Kühlmittel an die durchströmende Luft."
+        },
+        {
+          "id": "D",
+          "text": "füllt mikroskopische Unebenheiten zwischen Chipoberfläche und Kühler, ohne eine dicke Schicht zu bilden",
+          "feedback": "Diese Funktion gehört zu „Wärmeleitpaste“. „Radiator“ bedeutet: überträgt Wärme aus dem Kühlmittel an die durchströmende Luft."
+        }
+      ],
+      "correctAnswer": "A"
+    },
+    {
+      "id": "q058",
+      "category": "Strom & Kühlung",
+      "question": "Welche Funktion gehört zu „Gerichteter Luftstrom“?",
+      "hint": "Einlass und Auslass planen",
+      "options": [
+        {
+          "id": "A",
+          "text": "ist eine herstellerspezifische thermische Auslegungsgröße und nicht zwingend die maximale elektrische Leistungsaufnahme",
+          "feedback": "Diese Funktion gehört zu „TDP“. „Gerichteter Luftstrom“ bedeutet: führt typischerweise vorne oder unten kühle Luft zu und hinten oder oben warme Luft ab."
+        },
+        {
+          "id": "B",
+          "text": "führt typischerweise vorne oder unten kühle Luft zu und hinten oder oben warme Luft ab",
+          "feedback": "Gerichteter Luftstrom: führt typischerweise vorne oder unten kühle Luft zu und hinten oder oben warme Luft ab."
+        },
+        {
+          "id": "C",
+          "text": "füllt mikroskopische Unebenheiten zwischen Chipoberfläche und Kühler, ohne eine dicke Schicht zu bilden",
+          "feedback": "Diese Funktion gehört zu „Wärmeleitpaste“. „Gerichteter Luftstrom“ bedeutet: führt typischerweise vorne oder unten kühle Luft zu und hinten oder oben warme Luft ab."
+        },
+        {
+          "id": "D",
+          "text": "schafft Spielraum für Lastspitzen, effizienten Betrieb und sinnvolle spätere Erweiterungen",
+          "feedback": "Diese Funktion gehört zu „Netzteilreserve“. „Gerichteter Luftstrom“ bedeutet: führt typischerweise vorne oder unten kühle Luft zu und hinten oder oben warme Luft ab."
+        }
+      ],
+      "correctAnswer": "B"
+    },
+    {
+      "id": "q059",
+      "category": "Strom & Kühlung",
+      "question": "Welche Definition passt zu „TDP“?",
+      "hint": "Kühlerauslegung statt exakter Verbrauch",
+      "options": [
+        {
+          "id": "A",
+          "text": "füllt mikroskopische Unebenheiten zwischen Chipoberfläche und Kühler, ohne eine dicke Schicht zu bilden",
+          "feedback": "Diese Funktion gehört zu „Wärmeleitpaste“. „TDP“ bedeutet: ist eine herstellerspezifische thermische Auslegungsgröße und nicht zwingend die maximale elektrische Leistungsaufnahme."
+        },
+        {
+          "id": "B",
+          "text": "schafft Spielraum für Lastspitzen, effizienten Betrieb und sinnvolle spätere Erweiterungen",
+          "feedback": "Diese Funktion gehört zu „Netzteilreserve“. „TDP“ bedeutet: ist eine herstellerspezifische thermische Auslegungsgröße und nicht zwingend die maximale elektrische Leistungsaufnahme."
+        },
+        {
+          "id": "C",
+          "text": "ist eine herstellerspezifische thermische Auslegungsgröße und nicht zwingend die maximale elektrische Leistungsaufnahme",
+          "feedback": "TDP: ist eine herstellerspezifische thermische Auslegungsgröße und nicht zwingend die maximale elektrische Leistungsaufnahme."
+        },
+        {
+          "id": "D",
+          "text": "bewertet hauptsächlich den Wirkungsgrad eines Netzteils bei definierten Lastpunkten",
+          "feedback": "Diese Funktion gehört zu „80-PLUS-Zertifizierung“. „TDP“ bedeutet: ist eine herstellerspezifische thermische Auslegungsgröße und nicht zwingend die maximale elektrische Leistungsaufnahme."
+        }
+      ],
+      "correctAnswer": "C"
+    },
+    {
+      "id": "q060",
+      "category": "Strom & Kühlung",
+      "question": "Welche Aussage beschreibt „Wärmeleitpaste“ korrekt?",
+      "hint": "Luftspalten im Kontakt verringern",
+      "options": [
+        {
+          "id": "A",
+          "text": "schafft Spielraum für Lastspitzen, effizienten Betrieb und sinnvolle spätere Erweiterungen",
+          "feedback": "Diese Funktion gehört zu „Netzteilreserve“. „Wärmeleitpaste“ bedeutet: füllt mikroskopische Unebenheiten zwischen Chipoberfläche und Kühler, ohne eine dicke Schicht zu bilden."
+        },
+        {
+          "id": "B",
+          "text": "bewertet hauptsächlich den Wirkungsgrad eines Netzteils bei definierten Lastpunkten",
+          "feedback": "Diese Funktion gehört zu „80-PLUS-Zertifizierung“. „Wärmeleitpaste“ bedeutet: füllt mikroskopische Unebenheiten zwischen Chipoberfläche und Kühler, ohne eine dicke Schicht zu bilden."
+        },
+        {
+          "id": "C",
+          "text": "stellt die Hauptstromversorgung des Mainboards bereit",
+          "feedback": "Diese Funktion gehört zu „24-poliger ATX-Stecker“. „Wärmeleitpaste“ bedeutet: füllt mikroskopische Unebenheiten zwischen Chipoberfläche und Kühler, ohne eine dicke Schicht zu bilden."
+        },
+        {
+          "id": "D",
+          "text": "füllt mikroskopische Unebenheiten zwischen Chipoberfläche und Kühler, ohne eine dicke Schicht zu bilden",
+          "feedback": "Wärmeleitpaste: füllt mikroskopische Unebenheiten zwischen Chipoberfläche und Kühler, ohne eine dicke Schicht zu bilden."
+        }
+      ],
+      "correctAnswer": "D"
+    },
+    {
+      "id": "q061",
+      "category": "Gehäuse & Verkabelung",
+      "question": "Welche Funktion gehört zu „PWR_SW-Stecker“?",
+      "hint": "Taster an der Gehäusefront",
+      "options": [
+        {
+          "id": "A",
+          "text": "verbindet den Einschaltknopf des Gehäuses mit den vorgesehenen Front-Panel-Pins des Mainboards",
+          "feedback": "PWR_SW-Stecker: verbindet den Einschaltknopf des Gehäuses mit den vorgesehenen Front-Panel-Pins des Mainboards."
+        },
+        {
+          "id": "B",
+          "text": "muss wegen der Leuchtdioden-Polung korrekt mit Plus und Minus verbunden werden",
+          "feedback": "Diese Funktion gehört zu „Front-Panel-LED“. „PWR_SW-Stecker“ bedeutet: verbindet den Einschaltknopf des Gehäuses mit den vorgesehenen Front-Panel-Pins des Mainboards."
+        },
+        {
+          "id": "C",
+          "text": "bindet Front-USB-Buchsen oder interne USB-Geräte an das Mainboard an",
+          "feedback": "Diese Funktion gehört zu „Interner USB-Header“. „PWR_SW-Stecker“ bedeutet: verbindet den Einschaltknopf des Gehäuses mit den vorgesehenen Front-Panel-Pins des Mainboards."
+        },
+        {
+          "id": "D",
+          "text": "verbindet Kopfhörer- und Mikrofonbuchsen an der Gehäusefront mit dem Mainboard-Audio",
+          "feedback": "Diese Funktion gehört zu „HD_AUDIO-Header“. „PWR_SW-Stecker“ bedeutet: verbindet den Einschaltknopf des Gehäuses mit den vorgesehenen Front-Panel-Pins des Mainboards."
+        }
+      ],
+      "correctAnswer": "A"
+    },
+    {
+      "id": "q062",
+      "category": "Gehäuse & Verkabelung",
+      "question": "Welche Definition passt zu „Front-Panel-LED“?",
+      "hint": "leuchtet bei vertauschter Richtung nicht",
+      "options": [
+        {
+          "id": "A",
+          "text": "bindet Front-USB-Buchsen oder interne USB-Geräte an das Mainboard an",
+          "feedback": "Diese Funktion gehört zu „Interner USB-Header“. „Front-Panel-LED“ bedeutet: muss wegen der Leuchtdioden-Polung korrekt mit Plus und Minus verbunden werden."
+        },
+        {
+          "id": "B",
+          "text": "muss wegen der Leuchtdioden-Polung korrekt mit Plus und Minus verbunden werden",
+          "feedback": "Front-Panel-LED: muss wegen der Leuchtdioden-Polung korrekt mit Plus und Minus verbunden werden."
+        },
+        {
+          "id": "C",
+          "text": "verbindet Kopfhörer- und Mikrofonbuchsen an der Gehäusefront mit dem Mainboard-Audio",
+          "feedback": "Diese Funktion gehört zu „HD_AUDIO-Header“. „Front-Panel-LED“ bedeutet: muss wegen der Leuchtdioden-Polung korrekt mit Plus und Minus verbunden werden."
+        },
+        {
+          "id": "D",
+          "text": "hält Leitungen aus Lüftern und Luftwegen fern und erleichtert Wartung sowie Fehlersuche",
+          "feedback": "Diese Funktion gehört zu „Kabelmanagement“. „Front-Panel-LED“ bedeutet: muss wegen der Leuchtdioden-Polung korrekt mit Plus und Minus verbunden werden."
+        }
+      ],
+      "correctAnswer": "B"
+    },
+    {
+      "id": "q063",
+      "category": "Gehäuse & Verkabelung",
+      "question": "Welche Aussage beschreibt „Interner USB-Header“ korrekt?",
+      "hint": "USB-Verbindung innerhalb des Gehäuses",
+      "options": [
+        {
+          "id": "A",
+          "text": "verbindet Kopfhörer- und Mikrofonbuchsen an der Gehäusefront mit dem Mainboard-Audio",
+          "feedback": "Diese Funktion gehört zu „HD_AUDIO-Header“. „Interner USB-Header“ bedeutet: bindet Front-USB-Buchsen oder interne USB-Geräte an das Mainboard an."
+        },
+        {
+          "id": "B",
+          "text": "hält Leitungen aus Lüftern und Luftwegen fern und erleichtert Wartung sowie Fehlersuche",
+          "feedback": "Diese Funktion gehört zu „Kabelmanagement“. „Interner USB-Header“ bedeutet: bindet Front-USB-Buchsen oder interne USB-Geräte an das Mainboard an."
+        },
+        {
+          "id": "C",
+          "text": "bindet Front-USB-Buchsen oder interne USB-Geräte an das Mainboard an",
+          "feedback": "Interner USB-Header: bindet Front-USB-Buchsen oder interne USB-Geräte an das Mainboard an."
+        },
+        {
+          "id": "D",
+          "text": "verringert Staubeintrag an Ansaugöffnungen, erhöht aber etwas den Strömungswiderstand",
+          "feedback": "Diese Funktion gehört zu „Staubfilter“. „Interner USB-Header“ bedeutet: bindet Front-USB-Buchsen oder interne USB-Geräte an das Mainboard an."
+        }
+      ],
+      "correctAnswer": "C"
+    },
+    {
+      "id": "q064",
+      "category": "Gehäuse & Verkabelung",
+      "question": "Welche Funktion gehört zu „HD_AUDIO-Header“?",
+      "hint": "Audio an der Front",
+      "options": [
+        {
+          "id": "A",
+          "text": "hält Leitungen aus Lüftern und Luftwegen fern und erleichtert Wartung sowie Fehlersuche",
+          "feedback": "Diese Funktion gehört zu „Kabelmanagement“. „HD_AUDIO-Header“ bedeutet: verbindet Kopfhörer- und Mikrofonbuchsen an der Gehäusefront mit dem Mainboard-Audio."
+        },
+        {
+          "id": "B",
+          "text": "verringert Staubeintrag an Ansaugöffnungen, erhöht aber etwas den Strömungswiderstand",
+          "feedback": "Diese Funktion gehört zu „Staubfilter“. „HD_AUDIO-Header“ bedeutet: verbindet Kopfhörer- und Mikrofonbuchsen an der Gehäusefront mit dem Mainboard-Audio."
+        },
+        {
+          "id": "C",
+          "text": "entsteht bei etwas mehr gefilterter Zuluft als Abluft und kann Staubeintrag durch Spalten mindern",
+          "feedback": "Diese Funktion gehört zu „Positiver Gehäusedruck“. „HD_AUDIO-Header“ bedeutet: verbindet Kopfhörer- und Mikrofonbuchsen an der Gehäusefront mit dem Mainboard-Audio."
+        },
+        {
+          "id": "D",
+          "text": "verbindet Kopfhörer- und Mikrofonbuchsen an der Gehäusefront mit dem Mainboard-Audio",
+          "feedback": "HD_AUDIO-Header: verbindet Kopfhörer- und Mikrofonbuchsen an der Gehäusefront mit dem Mainboard-Audio."
+        }
+      ],
+      "correctAnswer": "D"
+    },
+    {
+      "id": "q065",
+      "category": "Gehäuse & Verkabelung",
+      "question": "Welche Definition passt zu „Kabelmanagement“?",
+      "hint": "Ordnung mit technischem Nutzen",
+      "options": [
+        {
+          "id": "A",
+          "text": "hält Leitungen aus Lüftern und Luftwegen fern und erleichtert Wartung sowie Fehlersuche",
+          "feedback": "Kabelmanagement: hält Leitungen aus Lüftern und Luftwegen fern und erleichtert Wartung sowie Fehlersuche."
+        },
+        {
+          "id": "B",
+          "text": "verringert Staubeintrag an Ansaugöffnungen, erhöht aber etwas den Strömungswiderstand",
+          "feedback": "Diese Funktion gehört zu „Staubfilter“. „Kabelmanagement“ bedeutet: hält Leitungen aus Lüftern und Luftwegen fern und erleichtert Wartung sowie Fehlersuche."
+        },
+        {
+          "id": "C",
+          "text": "entsteht bei etwas mehr gefilterter Zuluft als Abluft und kann Staubeintrag durch Spalten mindern",
+          "feedback": "Diese Funktion gehört zu „Positiver Gehäusedruck“. „Kabelmanagement“ bedeutet: hält Leitungen aus Lüftern und Luftwegen fern und erleichtert Wartung sowie Fehlersuche."
+        },
+        {
+          "id": "D",
+          "text": "muss zu Gewinde und Abstandhalter passen; falsche oder zu lange Schrauben können Schäden verursachen",
+          "feedback": "Diese Funktion gehört zu „Mainboard-Schraube“. „Kabelmanagement“ bedeutet: hält Leitungen aus Lüftern und Luftwegen fern und erleichtert Wartung sowie Fehlersuche."
+        }
+      ],
+      "correctAnswer": "A"
+    },
+    {
+      "id": "q066",
+      "category": "Gehäuse & Verkabelung",
+      "question": "Welche Aussage beschreibt „Staubfilter“ korrekt?",
+      "hint": "Filter vor einströmender Luft",
+      "options": [
+        {
+          "id": "A",
+          "text": "entsteht bei etwas mehr gefilterter Zuluft als Abluft und kann Staubeintrag durch Spalten mindern",
+          "feedback": "Diese Funktion gehört zu „Positiver Gehäusedruck“. „Staubfilter“ bedeutet: verringert Staubeintrag an Ansaugöffnungen, erhöht aber etwas den Strömungswiderstand."
+        },
+        {
+          "id": "B",
+          "text": "verringert Staubeintrag an Ansaugöffnungen, erhöht aber etwas den Strömungswiderstand",
+          "feedback": "Staubfilter: verringert Staubeintrag an Ansaugöffnungen, erhöht aber etwas den Strömungswiderstand."
+        },
+        {
+          "id": "C",
+          "text": "muss zu Gewinde und Abstandhalter passen; falsche oder zu lange Schrauben können Schäden verursachen",
+          "feedback": "Diese Funktion gehört zu „Mainboard-Schraube“. „Staubfilter“ bedeutet: verringert Staubeintrag an Ansaugöffnungen, erhöht aber etwas den Strömungswiderstand."
+        },
+        {
+          "id": "D",
+          "text": "ermöglicht Leitungswege hinter dem Mainboardtray und hält den Innenraum frei",
+          "feedback": "Diese Funktion gehört zu „Kabeldurchführung“. „Staubfilter“ bedeutet: verringert Staubeintrag an Ansaugöffnungen, erhöht aber etwas den Strömungswiderstand."
+        }
+      ],
+      "correctAnswer": "B"
+    },
+    {
+      "id": "q067",
+      "category": "Gehäuse & Verkabelung",
+      "question": "Welche Funktion gehört zu „Positiver Gehäusedruck“?",
+      "hint": "Zuluft geringfügig größer",
+      "options": [
+        {
+          "id": "A",
+          "text": "muss zu Gewinde und Abstandhalter passen; falsche oder zu lange Schrauben können Schäden verursachen",
+          "feedback": "Diese Funktion gehört zu „Mainboard-Schraube“. „Positiver Gehäusedruck“ bedeutet: entsteht bei etwas mehr gefilterter Zuluft als Abluft und kann Staubeintrag durch Spalten mindern."
+        },
+        {
+          "id": "B",
+          "text": "ermöglicht Leitungswege hinter dem Mainboardtray und hält den Innenraum frei",
+          "feedback": "Diese Funktion gehört zu „Kabeldurchführung“. „Positiver Gehäusedruck“ bedeutet: entsteht bei etwas mehr gefilterter Zuluft als Abluft und kann Staubeintrag durch Spalten mindern."
+        },
+        {
+          "id": "C",
+          "text": "entsteht bei etwas mehr gefilterter Zuluft als Abluft und kann Staubeintrag durch Spalten mindern",
+          "feedback": "Positiver Gehäusedruck: entsteht bei etwas mehr gefilterter Zuluft als Abluft und kann Staubeintrag durch Spalten mindern."
+        },
+        {
+          "id": "D",
+          "text": "nimmt 2,5- oder 3,5-Zoll-Laufwerke auf, kann aber den Platz für lange Grafikkarten begrenzen",
+          "feedback": "Diese Funktion gehört zu „Laufwerkskäfig“. „Positiver Gehäusedruck“ bedeutet: entsteht bei etwas mehr gefilterter Zuluft als Abluft und kann Staubeintrag durch Spalten mindern."
+        }
+      ],
+      "correctAnswer": "C"
+    },
+    {
+      "id": "q068",
+      "category": "Gehäuse & Verkabelung",
+      "question": "Welche Definition passt zu „Mainboard-Schraube“?",
+      "hint": "Gewinde und Länge beachten",
+      "options": [
+        {
+          "id": "A",
+          "text": "ermöglicht Leitungswege hinter dem Mainboardtray und hält den Innenraum frei",
+          "feedback": "Diese Funktion gehört zu „Kabeldurchführung“. „Mainboard-Schraube“ bedeutet: muss zu Gewinde und Abstandhalter passen; falsche oder zu lange Schrauben können Schäden verursachen."
+        },
+        {
+          "id": "B",
+          "text": "nimmt 2,5- oder 3,5-Zoll-Laufwerke auf, kann aber den Platz für lange Grafikkarten begrenzen",
+          "feedback": "Diese Funktion gehört zu „Laufwerkskäfig“. „Mainboard-Schraube“ bedeutet: muss zu Gewinde und Abstandhalter passen; falsche oder zu lange Schrauben können Schäden verursachen."
+        },
+        {
+          "id": "C",
+          "text": "verbindet den Einschaltknopf des Gehäuses mit den vorgesehenen Front-Panel-Pins des Mainboards",
+          "feedback": "Diese Funktion gehört zu „PWR_SW-Stecker“. „Mainboard-Schraube“ bedeutet: muss zu Gewinde und Abstandhalter passen; falsche oder zu lange Schrauben können Schäden verursachen."
+        },
+        {
+          "id": "D",
+          "text": "muss zu Gewinde und Abstandhalter passen; falsche oder zu lange Schrauben können Schäden verursachen",
+          "feedback": "Mainboard-Schraube: muss zu Gewinde und Abstandhalter passen; falsche oder zu lange Schrauben können Schäden verursachen."
+        }
+      ],
+      "correctAnswer": "D"
+    },
+    {
+      "id": "q069",
+      "category": "Gehäuse & Verkabelung",
+      "question": "Welche Aussage beschreibt „Kabeldurchführung“ korrekt?",
+      "hint": "Kabel hinter der Montageplatte",
+      "options": [
+        {
+          "id": "A",
+          "text": "ermöglicht Leitungswege hinter dem Mainboardtray und hält den Innenraum frei",
+          "feedback": "Kabeldurchführung: ermöglicht Leitungswege hinter dem Mainboardtray und hält den Innenraum frei."
+        },
+        {
+          "id": "B",
+          "text": "nimmt 2,5- oder 3,5-Zoll-Laufwerke auf, kann aber den Platz für lange Grafikkarten begrenzen",
+          "feedback": "Diese Funktion gehört zu „Laufwerkskäfig“. „Kabeldurchführung“ bedeutet: ermöglicht Leitungswege hinter dem Mainboardtray und hält den Innenraum frei."
+        },
+        {
+          "id": "C",
+          "text": "verbindet den Einschaltknopf des Gehäuses mit den vorgesehenen Front-Panel-Pins des Mainboards",
+          "feedback": "Diese Funktion gehört zu „PWR_SW-Stecker“. „Kabeldurchführung“ bedeutet: ermöglicht Leitungswege hinter dem Mainboardtray und hält den Innenraum frei."
+        },
+        {
+          "id": "D",
+          "text": "muss wegen der Leuchtdioden-Polung korrekt mit Plus und Minus verbunden werden",
+          "feedback": "Diese Funktion gehört zu „Front-Panel-LED“. „Kabeldurchführung“ bedeutet: ermöglicht Leitungswege hinter dem Mainboardtray und hält den Innenraum frei."
+        }
+      ],
+      "correctAnswer": "A"
+    },
+    {
+      "id": "q070",
+      "category": "Gehäuse & Verkabelung",
+      "question": "Welche Funktion gehört zu „Laufwerkskäfig“?",
+      "hint": "Speicherhalterung braucht Innenraum",
+      "options": [
+        {
+          "id": "A",
+          "text": "verbindet den Einschaltknopf des Gehäuses mit den vorgesehenen Front-Panel-Pins des Mainboards",
+          "feedback": "Diese Funktion gehört zu „PWR_SW-Stecker“. „Laufwerkskäfig“ bedeutet: nimmt 2,5- oder 3,5-Zoll-Laufwerke auf, kann aber den Platz für lange Grafikkarten begrenzen."
+        },
+        {
+          "id": "B",
+          "text": "nimmt 2,5- oder 3,5-Zoll-Laufwerke auf, kann aber den Platz für lange Grafikkarten begrenzen",
+          "feedback": "Laufwerkskäfig: nimmt 2,5- oder 3,5-Zoll-Laufwerke auf, kann aber den Platz für lange Grafikkarten begrenzen."
+        },
+        {
+          "id": "C",
+          "text": "muss wegen der Leuchtdioden-Polung korrekt mit Plus und Minus verbunden werden",
+          "feedback": "Diese Funktion gehört zu „Front-Panel-LED“. „Laufwerkskäfig“ bedeutet: nimmt 2,5- oder 3,5-Zoll-Laufwerke auf, kann aber den Platz für lange Grafikkarten begrenzen."
+        },
+        {
+          "id": "D",
+          "text": "bindet Front-USB-Buchsen oder interne USB-Geräte an das Mainboard an",
+          "feedback": "Diese Funktion gehört zu „Interner USB-Header“. „Laufwerkskäfig“ bedeutet: nimmt 2,5- oder 3,5-Zoll-Laufwerke auf, kann aber den Platz für lange Grafikkarten begrenzen."
+        }
+      ],
+      "correctAnswer": "B"
+    },
+    {
+      "id": "q071",
+      "category": "Peripherieanschlüsse",
+      "question": "Welche Definition passt zu „USB-A“?",
+      "hint": "Form ist nicht gleich Datenrate",
+      "options": [
+        {
+          "id": "A",
+          "text": "bezeichnet eine symmetrische Steckerform; Datenrate, Laden und Bildausgabe hängen von der Implementierung ab",
+          "feedback": "Diese Funktion gehört zu „USB-C“. „USB-A“ bedeutet: bezeichnet eine rechteckige Steckerform, aus der allein die unterstützte USB-Geschwindigkeit nicht sicher hervorgeht."
+        },
+        {
+          "id": "B",
+          "text": "überträgt digitale Bild- und Audiodaten und wird häufig für Monitore und Fernseher verwendet",
+          "feedback": "Diese Funktion gehört zu „HDMI“. „USB-A“ bedeutet: bezeichnet eine rechteckige Steckerform, aus der allein die unterstützte USB-Geschwindigkeit nicht sicher hervorgeht."
+        },
+        {
+          "id": "C",
+          "text": "bezeichnet eine rechteckige Steckerform, aus der allein die unterstützte USB-Geschwindigkeit nicht sicher hervorgeht",
+          "feedback": "USB-A: bezeichnet eine rechteckige Steckerform, aus der allein die unterstützte USB-Geschwindigkeit nicht sicher hervorgeht."
+        },
+        {
+          "id": "D",
+          "text": "ist eine digitale Displayschnittstelle, die häufig hohe Auflösungen, Bildraten und Verkettung unterstützt",
+          "feedback": "Diese Funktion gehört zu „DisplayPort“. „USB-A“ bedeutet: bezeichnet eine rechteckige Steckerform, aus der allein die unterstützte USB-Geschwindigkeit nicht sicher hervorgeht."
+        }
+      ],
+      "correctAnswer": "C"
+    },
+    {
+      "id": "q072",
+      "category": "Peripherieanschlüsse",
+      "question": "Welche Aussage beschreibt „USB-C“ korrekt?",
+      "hint": "gleiche Buchse, verschiedene Funktionen",
+      "options": [
+        {
+          "id": "A",
+          "text": "überträgt digitale Bild- und Audiodaten und wird häufig für Monitore und Fernseher verwendet",
+          "feedback": "Diese Funktion gehört zu „HDMI“. „USB-C“ bedeutet: bezeichnet eine symmetrische Steckerform; Datenrate, Laden und Bildausgabe hängen von der Implementierung ab."
+        },
+        {
+          "id": "B",
+          "text": "ist eine digitale Displayschnittstelle, die häufig hohe Auflösungen, Bildraten und Verkettung unterstützt",
+          "feedback": "Diese Funktion gehört zu „DisplayPort“. „USB-C“ bedeutet: bezeichnet eine symmetrische Steckerform; Datenrate, Laden und Bildausgabe hängen von der Implementierung ab."
+        },
+        {
+          "id": "C",
+          "text": "kennzeichnet bei klassischer Farbcodierung häufig Line-out beziehungsweise Frontlautsprecher",
+          "feedback": "Diese Funktion gehört zu „Grüne Audiobuchse“. „USB-C“ bedeutet: bezeichnet eine symmetrische Steckerform; Datenrate, Laden und Bildausgabe hängen von der Implementierung ab."
+        },
+        {
+          "id": "D",
+          "text": "bezeichnet eine symmetrische Steckerform; Datenrate, Laden und Bildausgabe hängen von der Implementierung ab",
+          "feedback": "USB-C: bezeichnet eine symmetrische Steckerform; Datenrate, Laden und Bildausgabe hängen von der Implementierung ab."
+        }
+      ],
+      "correctAnswer": "D"
+    },
+    {
+      "id": "q073",
+      "category": "Peripherieanschlüsse",
+      "question": "Welche Funktion gehört zu „HDMI“?",
+      "hint": "Bild und Ton zum Display",
+      "options": [
+        {
+          "id": "A",
+          "text": "überträgt digitale Bild- und Audiodaten und wird häufig für Monitore und Fernseher verwendet",
+          "feedback": "HDMI: überträgt digitale Bild- und Audiodaten und wird häufig für Monitore und Fernseher verwendet."
+        },
+        {
+          "id": "B",
+          "text": "ist eine digitale Displayschnittstelle, die häufig hohe Auflösungen, Bildraten und Verkettung unterstützt",
+          "feedback": "Diese Funktion gehört zu „DisplayPort“. „HDMI“ bedeutet: überträgt digitale Bild- und Audiodaten und wird häufig für Monitore und Fernseher verwendet."
+        },
+        {
+          "id": "C",
+          "text": "kennzeichnet bei klassischer Farbcodierung häufig Line-out beziehungsweise Frontlautsprecher",
+          "feedback": "Diese Funktion gehört zu „Grüne Audiobuchse“. „HDMI“ bedeutet: überträgt digitale Bild- und Audiodaten und wird häufig für Monitore und Fernseher verwendet."
+        },
+        {
+          "id": "D",
+          "text": "ist der übliche Anschluss für Twisted-Pair-Ethernet am PC",
+          "feedback": "Diese Funktion gehört zu „RJ45-Buchse“. „HDMI“ bedeutet: überträgt digitale Bild- und Audiodaten und wird häufig für Monitore und Fernseher verwendet."
+        }
+      ],
+      "correctAnswer": "A"
+    },
+    {
+      "id": "q074",
+      "category": "Peripherieanschlüsse",
+      "question": "Welche Definition passt zu „DisplayPort“?",
+      "hint": "PC-orientierter digitaler Bildanschluss",
+      "options": [
+        {
+          "id": "A",
+          "text": "kennzeichnet bei klassischer Farbcodierung häufig Line-out beziehungsweise Frontlautsprecher",
+          "feedback": "Diese Funktion gehört zu „Grüne Audiobuchse“. „DisplayPort“ bedeutet: ist eine digitale Displayschnittstelle, die häufig hohe Auflösungen, Bildraten und Verkettung unterstützt."
+        },
+        {
+          "id": "B",
+          "text": "ist eine digitale Displayschnittstelle, die häufig hohe Auflösungen, Bildraten und Verkettung unterstützt",
+          "feedback": "DisplayPort: ist eine digitale Displayschnittstelle, die häufig hohe Auflösungen, Bildraten und Verkettung unterstützt."
+        },
+        {
+          "id": "C",
+          "text": "ist der übliche Anschluss für Twisted-Pair-Ethernet am PC",
+          "feedback": "Diese Funktion gehört zu „RJ45-Buchse“. „DisplayPort“ bedeutet: ist eine digitale Displayschnittstelle, die häufig hohe Auflösungen, Bildraten und Verkettung unterstützt."
+        },
+        {
+          "id": "D",
+          "text": "ist eine ältere, früh von der Firmware unterstützte Schnittstelle für Tastatur oder Maus",
+          "feedback": "Diese Funktion gehört zu „PS/2“. „DisplayPort“ bedeutet: ist eine digitale Displayschnittstelle, die häufig hohe Auflösungen, Bildraten und Verkettung unterstützt."
+        }
+      ],
+      "correctAnswer": "B"
+    },
+    {
+      "id": "q075",
+      "category": "Peripherieanschlüsse",
+      "question": "Welche Aussage beschreibt „Grüne Audiobuchse“ korrekt?",
+      "hint": "analoger Ton aus dem PC",
+      "options": [
+        {
+          "id": "A",
+          "text": "ist der übliche Anschluss für Twisted-Pair-Ethernet am PC",
+          "feedback": "Diese Funktion gehört zu „RJ45-Buchse“. „Grüne Audiobuchse“ bedeutet: kennzeichnet bei klassischer Farbcodierung häufig Line-out beziehungsweise Frontlautsprecher."
+        },
+        {
+          "id": "B",
+          "text": "ist eine ältere, früh von der Firmware unterstützte Schnittstelle für Tastatur oder Maus",
+          "feedback": "Diese Funktion gehört zu „PS/2“. „Grüne Audiobuchse“ bedeutet: kennzeichnet bei klassischer Farbcodierung häufig Line-out beziehungsweise Frontlautsprecher."
+        },
+        {
+          "id": "C",
+          "text": "kennzeichnet bei klassischer Farbcodierung häufig Line-out beziehungsweise Frontlautsprecher",
+          "feedback": "Grüne Audiobuchse: kennzeichnet bei klassischer Farbcodierung häufig Line-out beziehungsweise Frontlautsprecher."
+        },
+        {
+          "id": "D",
+          "text": "kombiniert je nach Version hohe Datenrate mit DisplayPort und PCIe-Tunnelung, häufig über USB-C",
+          "feedback": "Diese Funktion gehört zu „Thunderbolt“. „Grüne Audiobuchse“ bedeutet: kennzeichnet bei klassischer Farbcodierung häufig Line-out beziehungsweise Frontlautsprecher."
+        }
+      ],
+      "correctAnswer": "C"
+    },
+    {
+      "id": "q076",
+      "category": "Peripherieanschlüsse",
+      "question": "Welche Funktion gehört zu „RJ45-Buchse“?",
+      "hint": "modularer Netzwerkanschluss",
+      "options": [
+        {
+          "id": "A",
+          "text": "ist eine ältere, früh von der Firmware unterstützte Schnittstelle für Tastatur oder Maus",
+          "feedback": "Diese Funktion gehört zu „PS/2“. „RJ45-Buchse“ bedeutet: ist der übliche Anschluss für Twisted-Pair-Ethernet am PC."
+        },
+        {
+          "id": "B",
+          "text": "kombiniert je nach Version hohe Datenrate mit DisplayPort und PCIe-Tunnelung, häufig über USB-C",
+          "feedback": "Diese Funktion gehört zu „Thunderbolt“. „RJ45-Buchse“ bedeutet: ist der übliche Anschluss für Twisted-Pair-Ethernet am PC."
+        },
+        {
+          "id": "C",
+          "text": "koppelt externe Antennen an das Funkmodul und verbessert Reichweite sowie Signalqualität",
+          "feedback": "Diese Funktion gehört zu „WLAN-Antennenanschluss“. „RJ45-Buchse“ bedeutet: ist der übliche Anschluss für Twisted-Pair-Ethernet am PC."
+        },
+        {
+          "id": "D",
+          "text": "ist der übliche Anschluss für Twisted-Pair-Ethernet am PC",
+          "feedback": "RJ45-Buchse: ist der übliche Anschluss für Twisted-Pair-Ethernet am PC."
+        }
+      ],
+      "correctAnswer": "D"
+    },
+    {
+      "id": "q077",
+      "category": "Peripherieanschlüsse",
+      "question": "Welche Definition passt zu „PS/2“?",
+      "hint": "runder Anschluss vor USB",
+      "options": [
+        {
+          "id": "A",
+          "text": "ist eine ältere, früh von der Firmware unterstützte Schnittstelle für Tastatur oder Maus",
+          "feedback": "PS/2: ist eine ältere, früh von der Firmware unterstützte Schnittstelle für Tastatur oder Maus."
+        },
+        {
+          "id": "B",
+          "text": "kombiniert je nach Version hohe Datenrate mit DisplayPort und PCIe-Tunnelung, häufig über USB-C",
+          "feedback": "Diese Funktion gehört zu „Thunderbolt“. „PS/2“ bedeutet: ist eine ältere, früh von der Firmware unterstützte Schnittstelle für Tastatur oder Maus."
+        },
+        {
+          "id": "C",
+          "text": "koppelt externe Antennen an das Funkmodul und verbessert Reichweite sowie Signalqualität",
+          "feedback": "Diese Funktion gehört zu „WLAN-Antennenanschluss“. „PS/2“ bedeutet: ist eine ältere, früh von der Firmware unterstützte Schnittstelle für Tastatur oder Maus."
+        },
+        {
+          "id": "D",
+          "text": "handelt über geeignete USB-C-Verbindungen erhöhte Ladeleistungen und Spannungen zwischen Geräten aus",
+          "feedback": "Diese Funktion gehört zu „USB Power Delivery“. „PS/2“ bedeutet: ist eine ältere, früh von der Firmware unterstützte Schnittstelle für Tastatur oder Maus."
+        }
+      ],
+      "correctAnswer": "A"
+    },
+    {
+      "id": "q078",
+      "category": "Peripherieanschlüsse",
+      "question": "Welche Aussage beschreibt „Thunderbolt“ korrekt?",
+      "hint": "mehr als die USB-C-Steckerform",
+      "options": [
+        {
+          "id": "A",
+          "text": "koppelt externe Antennen an das Funkmodul und verbessert Reichweite sowie Signalqualität",
+          "feedback": "Diese Funktion gehört zu „WLAN-Antennenanschluss“. „Thunderbolt“ bedeutet: kombiniert je nach Version hohe Datenrate mit DisplayPort und PCIe-Tunnelung, häufig über USB-C."
+        },
+        {
+          "id": "B",
+          "text": "kombiniert je nach Version hohe Datenrate mit DisplayPort und PCIe-Tunnelung, häufig über USB-C",
+          "feedback": "Thunderbolt: kombiniert je nach Version hohe Datenrate mit DisplayPort und PCIe-Tunnelung, häufig über USB-C."
+        },
+        {
+          "id": "C",
+          "text": "handelt über geeignete USB-C-Verbindungen erhöhte Ladeleistungen und Spannungen zwischen Geräten aus",
+          "feedback": "Diese Funktion gehört zu „USB Power Delivery“. „Thunderbolt“ bedeutet: kombiniert je nach Version hohe Datenrate mit DisplayPort und PCIe-Tunnelung, häufig über USB-C."
+        },
+        {
+          "id": "D",
+          "text": "bezeichnet eine rechteckige Steckerform, aus der allein die unterstützte USB-Geschwindigkeit nicht sicher hervorgeht",
+          "feedback": "Diese Funktion gehört zu „USB-A“. „Thunderbolt“ bedeutet: kombiniert je nach Version hohe Datenrate mit DisplayPort und PCIe-Tunnelung, häufig über USB-C."
+        }
+      ],
+      "correctAnswer": "B"
+    },
+    {
+      "id": "q079",
+      "category": "Peripherieanschlüsse",
+      "question": "Welche Funktion gehört zu „WLAN-Antennenanschluss“?",
+      "hint": "Funk braucht eine geeignete Antenne",
+      "options": [
+        {
+          "id": "A",
+          "text": "handelt über geeignete USB-C-Verbindungen erhöhte Ladeleistungen und Spannungen zwischen Geräten aus",
+          "feedback": "Diese Funktion gehört zu „USB Power Delivery“. „WLAN-Antennenanschluss“ bedeutet: koppelt externe Antennen an das Funkmodul und verbessert Reichweite sowie Signalqualität."
+        },
+        {
+          "id": "B",
+          "text": "bezeichnet eine rechteckige Steckerform, aus der allein die unterstützte USB-Geschwindigkeit nicht sicher hervorgeht",
+          "feedback": "Diese Funktion gehört zu „USB-A“. „WLAN-Antennenanschluss“ bedeutet: koppelt externe Antennen an das Funkmodul und verbessert Reichweite sowie Signalqualität."
+        },
+        {
+          "id": "C",
+          "text": "koppelt externe Antennen an das Funkmodul und verbessert Reichweite sowie Signalqualität",
+          "feedback": "WLAN-Antennenanschluss: koppelt externe Antennen an das Funkmodul und verbessert Reichweite sowie Signalqualität."
+        },
+        {
+          "id": "D",
+          "text": "bezeichnet eine symmetrische Steckerform; Datenrate, Laden und Bildausgabe hängen von der Implementierung ab",
+          "feedback": "Diese Funktion gehört zu „USB-C“. „WLAN-Antennenanschluss“ bedeutet: koppelt externe Antennen an das Funkmodul und verbessert Reichweite sowie Signalqualität."
+        }
+      ],
+      "correctAnswer": "C"
+    },
+    {
+      "id": "q080",
+      "category": "Peripherieanschlüsse",
+      "question": "Welche Definition passt zu „USB Power Delivery“?",
+      "hint": "Stromprofil wird ausgehandelt",
+      "options": [
+        {
+          "id": "A",
+          "text": "bezeichnet eine rechteckige Steckerform, aus der allein die unterstützte USB-Geschwindigkeit nicht sicher hervorgeht",
+          "feedback": "Diese Funktion gehört zu „USB-A“. „USB Power Delivery“ bedeutet: handelt über geeignete USB-C-Verbindungen erhöhte Ladeleistungen und Spannungen zwischen Geräten aus."
+        },
+        {
+          "id": "B",
+          "text": "bezeichnet eine symmetrische Steckerform; Datenrate, Laden und Bildausgabe hängen von der Implementierung ab",
+          "feedback": "Diese Funktion gehört zu „USB-C“. „USB Power Delivery“ bedeutet: handelt über geeignete USB-C-Verbindungen erhöhte Ladeleistungen und Spannungen zwischen Geräten aus."
+        },
+        {
+          "id": "C",
+          "text": "überträgt digitale Bild- und Audiodaten und wird häufig für Monitore und Fernseher verwendet",
+          "feedback": "Diese Funktion gehört zu „HDMI“. „USB Power Delivery“ bedeutet: handelt über geeignete USB-C-Verbindungen erhöhte Ladeleistungen und Spannungen zwischen Geräten aus."
+        },
+        {
+          "id": "D",
+          "text": "handelt über geeignete USB-C-Verbindungen erhöhte Ladeleistungen und Spannungen zwischen Geräten aus",
+          "feedback": "USB Power Delivery: handelt über geeignete USB-C-Verbindungen erhöhte Ladeleistungen und Spannungen zwischen Geräten aus."
+        }
+      ],
+      "correctAnswer": "D"
+    },
+    {
+      "id": "q081",
+      "category": "Ethernet & WLAN",
+      "question": "Welche Aussage beschreibt „Autonegotiation“ korrekt?",
+      "hint": "höchste gemeinsame Betriebsart",
+      "options": [
+        {
+          "id": "A",
+          "text": "handelt zwischen Ethernet-Linkpartnern gemeinsame Geschwindigkeit und Duplexmodus aus",
+          "feedback": "Autonegotiation: handelt zwischen Ethernet-Linkpartnern gemeinsame Geschwindigkeit und Duplexmodus aus."
+        },
+        {
+          "id": "B",
+          "text": "benötigt passende Netzwerkkarten und Switch-Ports sowie eine geeignete Verkabelung",
+          "feedback": "Diese Funktion gehört zu „2,5-Gigabit-Ethernet“. „Autonegotiation“ bedeutet: handelt zwischen Ethernet-Linkpartnern gemeinsame Geschwindigkeit und Duplexmodus aus."
+        },
+        {
+          "id": "C",
+          "text": "ist für Gigabit-Ethernet bis 100 Meter spezifiziert, sofern Installation und Komponenten normgerecht sind",
+          "feedback": "Diese Funktion gehört zu „Cat-5e-Kabel“. „Autonegotiation“ bedeutet: handelt zwischen Ethernet-Linkpartnern gemeinsame Geschwindigkeit und Duplexmodus aus."
+        },
+        {
+          "id": "D",
+          "text": "basiert auf IEEE 802.11ax und verbessert unter anderem Effizienz bei vielen Funkteilnehmern",
+          "feedback": "Diese Funktion gehört zu „Wi-Fi 6“. „Autonegotiation“ bedeutet: handelt zwischen Ethernet-Linkpartnern gemeinsame Geschwindigkeit und Duplexmodus aus."
+        }
+      ],
+      "correctAnswer": "A"
+    },
+    {
+      "id": "q082",
+      "category": "Ethernet & WLAN",
+      "question": "Welche Funktion gehört zu „2,5-Gigabit-Ethernet“?",
+      "hint": "beide Endpunkte begrenzen den Link",
+      "options": [
+        {
+          "id": "A",
+          "text": "ist für Gigabit-Ethernet bis 100 Meter spezifiziert, sofern Installation und Komponenten normgerecht sind",
+          "feedback": "Diese Funktion gehört zu „Cat-5e-Kabel“. „2,5-Gigabit-Ethernet“ bedeutet: benötigt passende Netzwerkkarten und Switch-Ports sowie eine geeignete Verkabelung."
+        },
+        {
+          "id": "B",
+          "text": "benötigt passende Netzwerkkarten und Switch-Ports sowie eine geeignete Verkabelung",
+          "feedback": "2,5-Gigabit-Ethernet: benötigt passende Netzwerkkarten und Switch-Ports sowie eine geeignete Verkabelung."
+        },
+        {
+          "id": "C",
+          "text": "basiert auf IEEE 802.11ax und verbessert unter anderem Effizienz bei vielen Funkteilnehmern",
+          "feedback": "Diese Funktion gehört zu „Wi-Fi 6“. „2,5-Gigabit-Ethernet“ bedeutet: benötigt passende Netzwerkkarten und Switch-Ports sowie eine geeignete Verkabelung."
+        },
+        {
+          "id": "D",
+          "text": "erweitert Wi-Fi 6 um die Nutzung des 6-GHz-Bandes bei geeigneten Geräten und regionaler Freigabe",
+          "feedback": "Diese Funktion gehört zu „Wi-Fi 6E“. „2,5-Gigabit-Ethernet“ bedeutet: benötigt passende Netzwerkkarten und Switch-Ports sowie eine geeignete Verkabelung."
+        }
+      ],
+      "correctAnswer": "B"
+    },
+    {
+      "id": "q083",
+      "category": "Ethernet & WLAN",
+      "question": "Welche Definition passt zu „Cat-5e-Kabel“?",
+      "hint": "klassische Büro-Gigabitverkabelung",
+      "options": [
+        {
+          "id": "A",
+          "text": "basiert auf IEEE 802.11ax und verbessert unter anderem Effizienz bei vielen Funkteilnehmern",
+          "feedback": "Diese Funktion gehört zu „Wi-Fi 6“. „Cat-5e-Kabel“ bedeutet: ist für Gigabit-Ethernet bis 100 Meter spezifiziert, sofern Installation und Komponenten normgerecht sind."
+        },
+        {
+          "id": "B",
+          "text": "erweitert Wi-Fi 6 um die Nutzung des 6-GHz-Bandes bei geeigneten Geräten und regionaler Freigabe",
+          "feedback": "Diese Funktion gehört zu „Wi-Fi 6E“. „Cat-5e-Kabel“ bedeutet: ist für Gigabit-Ethernet bis 100 Meter spezifiziert, sofern Installation und Komponenten normgerecht sind."
+        },
+        {
+          "id": "C",
+          "text": "ist für Gigabit-Ethernet bis 100 Meter spezifiziert, sofern Installation und Komponenten normgerecht sind",
+          "feedback": "Cat-5e-Kabel: ist für Gigabit-Ethernet bis 100 Meter spezifiziert, sofern Installation und Komponenten normgerecht sind."
+        },
+        {
+          "id": "D",
+          "text": "ist eine häufige mechanische Codierung für interne WLAN-/Bluetooth-Module",
+          "feedback": "Diese Funktion gehört zu „M.2 Key E“. „Cat-5e-Kabel“ bedeutet: ist für Gigabit-Ethernet bis 100 Meter spezifiziert, sofern Installation und Komponenten normgerecht sind."
+        }
+      ],
+      "correctAnswer": "C"
+    },
+    {
+      "id": "q084",
+      "category": "Ethernet & WLAN",
+      "question": "Welche Aussage beschreibt „Wi-Fi 6“ korrekt?",
+      "hint": "ax-Generation im 2,4- und 5-GHz-Band",
+      "options": [
+        {
+          "id": "A",
+          "text": "erweitert Wi-Fi 6 um die Nutzung des 6-GHz-Bandes bei geeigneten Geräten und regionaler Freigabe",
+          "feedback": "Diese Funktion gehört zu „Wi-Fi 6E“. „Wi-Fi 6“ bedeutet: basiert auf IEEE 802.11ax und verbessert unter anderem Effizienz bei vielen Funkteilnehmern."
+        },
+        {
+          "id": "B",
+          "text": "ist eine häufige mechanische Codierung für interne WLAN-/Bluetooth-Module",
+          "feedback": "Diese Funktion gehört zu „M.2 Key E“. „Wi-Fi 6“ bedeutet: basiert auf IEEE 802.11ax und verbessert unter anderem Effizienz bei vielen Funkteilnehmern."
+        },
+        {
+          "id": "C",
+          "text": "bindet bei vielen PCIe-WLAN-Kombikarten den Bluetooth-Teil intern über USB an",
+          "feedback": "Diese Funktion gehört zu „Bluetooth-USB-Header“. „Wi-Fi 6“ bedeutet: basiert auf IEEE 802.11ax und verbessert unter anderem Effizienz bei vielen Funkteilnehmern."
+        },
+        {
+          "id": "D",
+          "text": "basiert auf IEEE 802.11ax und verbessert unter anderem Effizienz bei vielen Funkteilnehmern",
+          "feedback": "Wi-Fi 6: basiert auf IEEE 802.11ax und verbessert unter anderem Effizienz bei vielen Funkteilnehmern."
+        }
+      ],
+      "correctAnswer": "D"
+    },
+    {
+      "id": "q085",
+      "category": "Ethernet & WLAN",
+      "question": "Welche Funktion gehört zu „Wi-Fi 6E“?",
+      "hint": "zusätzliches Funkband",
+      "options": [
+        {
+          "id": "A",
+          "text": "erweitert Wi-Fi 6 um die Nutzung des 6-GHz-Bandes bei geeigneten Geräten und regionaler Freigabe",
+          "feedback": "Wi-Fi 6E: erweitert Wi-Fi 6 um die Nutzung des 6-GHz-Bandes bei geeigneten Geräten und regionaler Freigabe."
+        },
+        {
+          "id": "B",
+          "text": "ist eine häufige mechanische Codierung für interne WLAN-/Bluetooth-Module",
+          "feedback": "Diese Funktion gehört zu „M.2 Key E“. „Wi-Fi 6E“ bedeutet: erweitert Wi-Fi 6 um die Nutzung des 6-GHz-Bandes bei geeigneten Geräten und regionaler Freigabe."
+        },
+        {
+          "id": "C",
+          "text": "bindet bei vielen PCIe-WLAN-Kombikarten den Bluetooth-Teil intern über USB an",
+          "feedback": "Diese Funktion gehört zu „Bluetooth-USB-Header“. „Wi-Fi 6E“ bedeutet: erweitert Wi-Fi 6 um die Nutzung des 6-GHz-Bandes bei geeigneten Geräten und regionaler Freigabe."
+        },
+        {
+          "id": "D",
+          "text": "identifiziert eine Netzwerkschnittstelle auf der Sicherungsschicht innerhalb lokaler Netze",
+          "feedback": "Diese Funktion gehört zu „MAC-Adresse“. „Wi-Fi 6E“ bedeutet: erweitert Wi-Fi 6 um die Nutzung des 6-GHz-Bandes bei geeigneten Geräten und regionaler Freigabe."
+        }
+      ],
+      "correctAnswer": "A"
+    },
+    {
+      "id": "q086",
+      "category": "Ethernet & WLAN",
+      "question": "Welche Definition passt zu „M.2 Key E“?",
+      "hint": "Kerbe für Funkmodule",
+      "options": [
+        {
+          "id": "A",
+          "text": "bindet bei vielen PCIe-WLAN-Kombikarten den Bluetooth-Teil intern über USB an",
+          "feedback": "Diese Funktion gehört zu „Bluetooth-USB-Header“. „M.2 Key E“ bedeutet: ist eine häufige mechanische Codierung für interne WLAN-/Bluetooth-Module."
+        },
+        {
+          "id": "B",
+          "text": "ist eine häufige mechanische Codierung für interne WLAN-/Bluetooth-Module",
+          "feedback": "M.2 Key E: ist eine häufige mechanische Codierung für interne WLAN-/Bluetooth-Module."
+        },
+        {
+          "id": "C",
+          "text": "identifiziert eine Netzwerkschnittstelle auf der Sicherungsschicht innerhalb lokaler Netze",
+          "feedback": "Diese Funktion gehört zu „MAC-Adresse“. „M.2 Key E“ bedeutet: ist eine häufige mechanische Codierung für interne WLAN-/Bluetooth-Module."
+        },
+        {
+          "id": "D",
+          "text": "ist ein aktuelles Verfahren für WLAN-Authentisierung und -Verschlüsselung",
+          "feedback": "Diese Funktion gehört zu „WPA3“. „M.2 Key E“ bedeutet: ist eine häufige mechanische Codierung für interne WLAN-/Bluetooth-Module."
+        }
+      ],
+      "correctAnswer": "B"
+    },
+    {
+      "id": "q087",
+      "category": "Ethernet & WLAN",
+      "question": "Welche Aussage beschreibt „Bluetooth-USB-Header“ korrekt?",
+      "hint": "zweiter Bus einer Funkkombikarte",
+      "options": [
+        {
+          "id": "A",
+          "text": "identifiziert eine Netzwerkschnittstelle auf der Sicherungsschicht innerhalb lokaler Netze",
+          "feedback": "Diese Funktion gehört zu „MAC-Adresse“. „Bluetooth-USB-Header“ bedeutet: bindet bei vielen PCIe-WLAN-Kombikarten den Bluetooth-Teil intern über USB an."
+        },
+        {
+          "id": "B",
+          "text": "ist ein aktuelles Verfahren für WLAN-Authentisierung und -Verschlüsselung",
+          "feedback": "Diese Funktion gehört zu „WPA3“. „Bluetooth-USB-Header“ bedeutet: bindet bei vielen PCIe-WLAN-Kombikarten den Bluetooth-Teil intern über USB an."
+        },
+        {
+          "id": "C",
+          "text": "bindet bei vielen PCIe-WLAN-Kombikarten den Bluetooth-Teil intern über USB an",
+          "feedback": "Bluetooth-USB-Header: bindet bei vielen PCIe-WLAN-Kombikarten den Bluetooth-Teil intern über USB an."
+        },
+        {
+          "id": "D",
+          "text": "verbindet WLAN-Teilnehmer mit einem kabelgebundenen Netzwerk und koordiniert das Funknetz",
+          "feedback": "Diese Funktion gehört zu „Access Point“. „Bluetooth-USB-Header“ bedeutet: bindet bei vielen PCIe-WLAN-Kombikarten den Bluetooth-Teil intern über USB an."
+        }
+      ],
+      "correctAnswer": "C"
+    },
+    {
+      "id": "q088",
+      "category": "Ethernet & WLAN",
+      "question": "Welche Funktion gehört zu „MAC-Adresse“?",
+      "hint": "Kennung in Ethernet-Frames",
+      "options": [
+        {
+          "id": "A",
+          "text": "ist ein aktuelles Verfahren für WLAN-Authentisierung und -Verschlüsselung",
+          "feedback": "Diese Funktion gehört zu „WPA3“. „MAC-Adresse“ bedeutet: identifiziert eine Netzwerkschnittstelle auf der Sicherungsschicht innerhalb lokaler Netze."
+        },
+        {
+          "id": "B",
+          "text": "verbindet WLAN-Teilnehmer mit einem kabelgebundenen Netzwerk und koordiniert das Funknetz",
+          "feedback": "Diese Funktion gehört zu „Access Point“. „MAC-Adresse“ bedeutet: identifiziert eine Netzwerkschnittstelle auf der Sicherungsschicht innerhalb lokaler Netze."
+        },
+        {
+          "id": "C",
+          "text": "handelt zwischen Ethernet-Linkpartnern gemeinsame Geschwindigkeit und Duplexmodus aus",
+          "feedback": "Diese Funktion gehört zu „Autonegotiation“. „MAC-Adresse“ bedeutet: identifiziert eine Netzwerkschnittstelle auf der Sicherungsschicht innerhalb lokaler Netze."
+        },
+        {
+          "id": "D",
+          "text": "identifiziert eine Netzwerkschnittstelle auf der Sicherungsschicht innerhalb lokaler Netze",
+          "feedback": "MAC-Adresse: identifiziert eine Netzwerkschnittstelle auf der Sicherungsschicht innerhalb lokaler Netze."
+        }
+      ],
+      "correctAnswer": "D"
+    },
+    {
+      "id": "q089",
+      "category": "Ethernet & WLAN",
+      "question": "Welche Definition passt zu „WPA3“?",
+      "hint": "Nachfolger unsicherer Altverfahren",
+      "options": [
+        {
+          "id": "A",
+          "text": "ist ein aktuelles Verfahren für WLAN-Authentisierung und -Verschlüsselung",
+          "feedback": "WPA3: ist ein aktuelles Verfahren für WLAN-Authentisierung und -Verschlüsselung."
+        },
+        {
+          "id": "B",
+          "text": "verbindet WLAN-Teilnehmer mit einem kabelgebundenen Netzwerk und koordiniert das Funknetz",
+          "feedback": "Diese Funktion gehört zu „Access Point“. „WPA3“ bedeutet: ist ein aktuelles Verfahren für WLAN-Authentisierung und -Verschlüsselung."
+        },
+        {
+          "id": "C",
+          "text": "handelt zwischen Ethernet-Linkpartnern gemeinsame Geschwindigkeit und Duplexmodus aus",
+          "feedback": "Diese Funktion gehört zu „Autonegotiation“. „WPA3“ bedeutet: ist ein aktuelles Verfahren für WLAN-Authentisierung und -Verschlüsselung."
+        },
+        {
+          "id": "D",
+          "text": "benötigt passende Netzwerkkarten und Switch-Ports sowie eine geeignete Verkabelung",
+          "feedback": "Diese Funktion gehört zu „2,5-Gigabit-Ethernet“. „WPA3“ bedeutet: ist ein aktuelles Verfahren für WLAN-Authentisierung und -Verschlüsselung."
+        }
+      ],
+      "correctAnswer": "A"
+    },
+    {
+      "id": "q090",
+      "category": "Ethernet & WLAN",
+      "question": "Welche Aussage beschreibt „Access Point“ korrekt?",
+      "hint": "Brücke zwischen Funk und LAN",
+      "options": [
+        {
+          "id": "A",
+          "text": "handelt zwischen Ethernet-Linkpartnern gemeinsame Geschwindigkeit und Duplexmodus aus",
+          "feedback": "Diese Funktion gehört zu „Autonegotiation“. „Access Point“ bedeutet: verbindet WLAN-Teilnehmer mit einem kabelgebundenen Netzwerk und koordiniert das Funknetz."
+        },
+        {
+          "id": "B",
+          "text": "verbindet WLAN-Teilnehmer mit einem kabelgebundenen Netzwerk und koordiniert das Funknetz",
+          "feedback": "Access Point: verbindet WLAN-Teilnehmer mit einem kabelgebundenen Netzwerk und koordiniert das Funknetz."
+        },
+        {
+          "id": "C",
+          "text": "benötigt passende Netzwerkkarten und Switch-Ports sowie eine geeignete Verkabelung",
+          "feedback": "Diese Funktion gehört zu „2,5-Gigabit-Ethernet“. „Access Point“ bedeutet: verbindet WLAN-Teilnehmer mit einem kabelgebundenen Netzwerk und koordiniert das Funknetz."
+        },
+        {
+          "id": "D",
+          "text": "ist für Gigabit-Ethernet bis 100 Meter spezifiziert, sofern Installation und Komponenten normgerecht sind",
+          "feedback": "Diese Funktion gehört zu „Cat-5e-Kabel“. „Access Point“ bedeutet: verbindet WLAN-Teilnehmer mit einem kabelgebundenen Netzwerk und koordiniert das Funknetz."
+        }
+      ],
+      "correctAnswer": "B"
+    },
+    {
+      "id": "q091",
+      "category": "Fehlersuche & Kompatibilität",
+      "question": "Welche Funktion gehört zu „POST“?",
+      "hint": "Power-On Self-Test",
+      "options": [
+        {
+          "id": "A",
+          "text": "grenzt nach herstellerspezifischer Dokumentation Fehlerbereiche wie CPU, RAM oder Grafik ein",
+          "feedback": "Diese Funktion gehört zu „Debug-LED oder Beep-Code“. „POST“ bedeutet: initialisiert und prüft beim Einschalten grundlegende Hardware, bevor das Betriebssystem startet."
+        },
+        {
+          "id": "B",
+          "text": "weist auf ein Problem bei Erkennung oder Initialisierung des Arbeitsspeichers hin",
+          "feedback": "Diese Funktion gehört zu „Dauerhafte DRAM-LED“. „POST“ bedeutet: initialisiert und prüft beim Einschalten grundlegende Hardware, bevor das Betriebssystem startet."
+        },
+        {
+          "id": "C",
+          "text": "initialisiert und prüft beim Einschalten grundlegende Hardware, bevor das Betriebssystem startet",
+          "feedback": "POST: initialisiert und prüft beim Einschalten grundlegende Hardware, bevor das Betriebssystem startet."
+        },
+        {
+          "id": "D",
+          "text": "kann bei dedizierter GPU zu einem schwarzen Bild führen, wenn der Monitor am inaktiven Mainboard-Ausgang steckt",
+          "feedback": "Diese Funktion gehört zu „Falscher Monitoranschluss“. „POST“ bedeutet: initialisiert und prüft beim Einschalten grundlegende Hardware, bevor das Betriebssystem startet."
+        }
+      ],
+      "correctAnswer": "C"
+    },
+    {
+      "id": "q092",
+      "category": "Fehlersuche & Kompatibilität",
+      "question": "Welche Definition passt zu „Debug-LED oder Beep-Code“?",
+      "hint": "Mainboard meldet Baugruppenfehler",
+      "options": [
+        {
+          "id": "A",
+          "text": "weist auf ein Problem bei Erkennung oder Initialisierung des Arbeitsspeichers hin",
+          "feedback": "Diese Funktion gehört zu „Dauerhafte DRAM-LED“. „Debug-LED oder Beep-Code“ bedeutet: grenzt nach herstellerspezifischer Dokumentation Fehlerbereiche wie CPU, RAM oder Grafik ein."
+        },
+        {
+          "id": "B",
+          "text": "kann bei dedizierter GPU zu einem schwarzen Bild führen, wenn der Monitor am inaktiven Mainboard-Ausgang steckt",
+          "feedback": "Diese Funktion gehört zu „Falscher Monitoranschluss“. „Debug-LED oder Beep-Code“ bedeutet: grenzt nach herstellerspezifischer Dokumentation Fehlerbereiche wie CPU, RAM oder Grafik ein."
+        },
+        {
+          "id": "C",
+          "text": "muss zusammen mit Netzkabel und Stromanschlüssen geprüft werden, wenn der PC überhaupt nicht reagiert",
+          "feedback": "Diese Funktion gehört zu „Netzteilschalter“. „Debug-LED oder Beep-Code“ bedeutet: grenzt nach herstellerspezifischer Dokumentation Fehlerbereiche wie CPU, RAM oder Grafik ein."
+        },
+        {
+          "id": "D",
+          "text": "grenzt nach herstellerspezifischer Dokumentation Fehlerbereiche wie CPU, RAM oder Grafik ein",
+          "feedback": "Debug-LED oder Beep-Code: grenzt nach herstellerspezifischer Dokumentation Fehlerbereiche wie CPU, RAM oder Grafik ein."
+        }
+      ],
+      "correctAnswer": "D"
+    },
+    {
+      "id": "q093",
+      "category": "Fehlersuche & Kompatibilität",
+      "question": "Welche Aussage beschreibt „Dauerhafte DRAM-LED“ korrekt?",
+      "hint": "Fehleranzeige nennt die Speichergruppe",
+      "options": [
+        {
+          "id": "A",
+          "text": "weist auf ein Problem bei Erkennung oder Initialisierung des Arbeitsspeichers hin",
+          "feedback": "Dauerhafte DRAM-LED: weist auf ein Problem bei Erkennung oder Initialisierung des Arbeitsspeichers hin."
+        },
+        {
+          "id": "B",
+          "text": "kann bei dedizierter GPU zu einem schwarzen Bild führen, wenn der Monitor am inaktiven Mainboard-Ausgang steckt",
+          "feedback": "Diese Funktion gehört zu „Falscher Monitoranschluss“. „Dauerhafte DRAM-LED“ bedeutet: weist auf ein Problem bei Erkennung oder Initialisierung des Arbeitsspeichers hin."
+        },
+        {
+          "id": "C",
+          "text": "muss zusammen mit Netzkabel und Stromanschlüssen geprüft werden, wenn der PC überhaupt nicht reagiert",
+          "feedback": "Diese Funktion gehört zu „Netzteilschalter“. „Dauerhafte DRAM-LED“ bedeutet: weist auf ein Problem bei Erkennung oder Initialisierung des Arbeitsspeichers hin."
+        },
+        {
+          "id": "D",
+          "text": "behebt mögliche Kontaktprobleme, wenn ein Modul nicht vollständig und gleichmäßig eingerastet ist",
+          "feedback": "Diese Funktion gehört zu „RAM neu einsetzen“. „Dauerhafte DRAM-LED“ bedeutet: weist auf ein Problem bei Erkennung oder Initialisierung des Arbeitsspeichers hin."
+        }
+      ],
+      "correctAnswer": "A"
+    },
+    {
+      "id": "q094",
+      "category": "Fehlersuche & Kompatibilität",
+      "question": "Welche Funktion gehört zu „Falscher Monitoranschluss“?",
+      "hint": "Signalweg zur aktiven Grafik prüfen",
+      "options": [
+        {
+          "id": "A",
+          "text": "muss zusammen mit Netzkabel und Stromanschlüssen geprüft werden, wenn der PC überhaupt nicht reagiert",
+          "feedback": "Diese Funktion gehört zu „Netzteilschalter“. „Falscher Monitoranschluss“ bedeutet: kann bei dedizierter GPU zu einem schwarzen Bild führen, wenn der Monitor am inaktiven Mainboard-Ausgang steckt."
+        },
+        {
+          "id": "B",
+          "text": "kann bei dedizierter GPU zu einem schwarzen Bild führen, wenn der Monitor am inaktiven Mainboard-Ausgang steckt",
+          "feedback": "Falscher Monitoranschluss: kann bei dedizierter GPU zu einem schwarzen Bild führen, wenn der Monitor am inaktiven Mainboard-Ausgang steckt."
+        },
+        {
+          "id": "C",
+          "text": "behebt mögliche Kontaktprobleme, wenn ein Modul nicht vollständig und gleichmäßig eingerastet ist",
+          "feedback": "Diese Funktion gehört zu „RAM neu einsetzen“. „Falscher Monitoranschluss“ bedeutet: kann bei dedizierter GPU zu einem schwarzen Bild führen, wenn der Monitor am inaktiven Mainboard-Ausgang steckt."
+        },
+        {
+          "id": "D",
+          "text": "reduziert das System auf notwendige Komponenten und grenzt Fehler durch schrittweises Ergänzen ein",
+          "feedback": "Diese Funktion gehört zu „Minimalaufbau“. „Falscher Monitoranschluss“ bedeutet: kann bei dedizierter GPU zu einem schwarzen Bild führen, wenn der Monitor am inaktiven Mainboard-Ausgang steckt."
+        }
+      ],
+      "correctAnswer": "B"
+    },
+    {
+      "id": "q095",
+      "category": "Fehlersuche & Kompatibilität",
+      "question": "Welche Definition passt zu „Netzteilschalter“?",
+      "hint": "Stromkette vom Netz bis zum Mainboard",
+      "options": [
+        {
+          "id": "A",
+          "text": "behebt mögliche Kontaktprobleme, wenn ein Modul nicht vollständig und gleichmäßig eingerastet ist",
+          "feedback": "Diese Funktion gehört zu „RAM neu einsetzen“. „Netzteilschalter“ bedeutet: muss zusammen mit Netzkabel und Stromanschlüssen geprüft werden, wenn der PC überhaupt nicht reagiert."
+        },
+        {
+          "id": "B",
+          "text": "reduziert das System auf notwendige Komponenten und grenzt Fehler durch schrittweises Ergänzen ein",
+          "feedback": "Diese Funktion gehört zu „Minimalaufbau“. „Netzteilschalter“ bedeutet: muss zusammen mit Netzkabel und Stromanschlüssen geprüft werden, wenn der PC überhaupt nicht reagiert."
+        },
+        {
+          "id": "C",
+          "text": "muss zusammen mit Netzkabel und Stromanschlüssen geprüft werden, wenn der PC überhaupt nicht reagiert",
+          "feedback": "Netzteilschalter: muss zusammen mit Netzkabel und Stromanschlüssen geprüft werden, wenn der PC überhaupt nicht reagiert."
+        },
+        {
+          "id": "D",
+          "text": "muss mit exakt passender Firmware und ohne Stromunterbrechung nach Herstelleranleitung erfolgen",
+          "feedback": "Diese Funktion gehört zu „UEFI-Update“. „Netzteilschalter“ bedeutet: muss zusammen mit Netzkabel und Stromanschlüssen geprüft werden, wenn der PC überhaupt nicht reagiert."
+        }
+      ],
+      "correctAnswer": "C"
+    },
+    {
+      "id": "q096",
+      "category": "Fehlersuche & Kompatibilität",
+      "question": "Welche Aussage beschreibt „RAM neu einsetzen“ korrekt?",
+      "hint": "mechanischer Sitz trotz fast richtiger Position",
+      "options": [
+        {
+          "id": "A",
+          "text": "reduziert das System auf notwendige Komponenten und grenzt Fehler durch schrittweises Ergänzen ein",
+          "feedback": "Diese Funktion gehört zu „Minimalaufbau“. „RAM neu einsetzen“ bedeutet: behebt mögliche Kontaktprobleme, wenn ein Modul nicht vollständig und gleichmäßig eingerastet ist."
+        },
+        {
+          "id": "B",
+          "text": "muss mit exakt passender Firmware und ohne Stromunterbrechung nach Herstelleranleitung erfolgen",
+          "feedback": "Diese Funktion gehört zu „UEFI-Update“. „RAM neu einsetzen“ bedeutet: behebt mögliche Kontaktprobleme, wenn ein Modul nicht vollständig und gleichmäßig eingerastet ist."
+        },
+        {
+          "id": "C",
+          "text": "senkt automatisch den Takt, wenn eine Komponente ihre Temperaturgrenze erreicht",
+          "feedback": "Diese Funktion gehört zu „Thermal Throttling“. „RAM neu einsetzen“ bedeutet: behebt mögliche Kontaktprobleme, wenn ein Modul nicht vollständig und gleichmäßig eingerastet ist."
+        },
+        {
+          "id": "D",
+          "text": "behebt mögliche Kontaktprobleme, wenn ein Modul nicht vollständig und gleichmäßig eingerastet ist",
+          "feedback": "RAM neu einsetzen: behebt mögliche Kontaktprobleme, wenn ein Modul nicht vollständig und gleichmäßig eingerastet ist."
+        }
+      ],
+      "correctAnswer": "D"
+    },
+    {
+      "id": "q097",
+      "category": "Fehlersuche & Kompatibilität",
+      "question": "Welche Funktion gehört zu „Minimalaufbau“?",
+      "hint": "Komplexität für die Diagnose verringern",
+      "options": [
+        {
+          "id": "A",
+          "text": "reduziert das System auf notwendige Komponenten und grenzt Fehler durch schrittweises Ergänzen ein",
+          "feedback": "Minimalaufbau: reduziert das System auf notwendige Komponenten und grenzt Fehler durch schrittweises Ergänzen ein."
+        },
+        {
+          "id": "B",
+          "text": "muss mit exakt passender Firmware und ohne Stromunterbrechung nach Herstelleranleitung erfolgen",
+          "feedback": "Diese Funktion gehört zu „UEFI-Update“. „Minimalaufbau“ bedeutet: reduziert das System auf notwendige Komponenten und grenzt Fehler durch schrittweises Ergänzen ein."
+        },
+        {
+          "id": "C",
+          "text": "senkt automatisch den Takt, wenn eine Komponente ihre Temperaturgrenze erreicht",
+          "feedback": "Diese Funktion gehört zu „Thermal Throttling“. „Minimalaufbau“ bedeutet: reduziert das System auf notwendige Komponenten und grenzt Fehler durch schrittweises Ergänzen ein."
+        },
+        {
+          "id": "D",
+          "text": "verändert pro Diagnoseschritt nur einen Faktor, damit Ursache und Wirkung nachvollziehbar bleiben",
+          "feedback": "Diese Funktion gehört zu „Ein-Änderungs-Prinzip“. „Minimalaufbau“ bedeutet: reduziert das System auf notwendige Komponenten und grenzt Fehler durch schrittweises Ergänzen ein."
+        }
+      ],
+      "correctAnswer": "A"
+    },
+    {
+      "id": "q098",
+      "category": "Fehlersuche & Kompatibilität",
+      "question": "Welche Definition passt zu „UEFI-Update“?",
+      "hint": "Modell, Revision und sicherer Ablauf",
+      "options": [
+        {
+          "id": "A",
+          "text": "senkt automatisch den Takt, wenn eine Komponente ihre Temperaturgrenze erreicht",
+          "feedback": "Diese Funktion gehört zu „Thermal Throttling“. „UEFI-Update“ bedeutet: muss mit exakt passender Firmware und ohne Stromunterbrechung nach Herstelleranleitung erfolgen."
+        },
+        {
+          "id": "B",
+          "text": "muss mit exakt passender Firmware und ohne Stromunterbrechung nach Herstelleranleitung erfolgen",
+          "feedback": "UEFI-Update: muss mit exakt passender Firmware und ohne Stromunterbrechung nach Herstelleranleitung erfolgen."
+        },
+        {
+          "id": "C",
+          "text": "verändert pro Diagnoseschritt nur einen Faktor, damit Ursache und Wirkung nachvollziehbar bleiben",
+          "feedback": "Diese Funktion gehört zu „Ein-Änderungs-Prinzip“. „UEFI-Update“ bedeutet: muss mit exakt passender Firmware und ohne Stromunterbrechung nach Herstelleranleitung erfolgen."
+        },
+        {
+          "id": "D",
+          "text": "initialisiert und prüft beim Einschalten grundlegende Hardware, bevor das Betriebssystem startet",
+          "feedback": "Diese Funktion gehört zu „POST“. „UEFI-Update“ bedeutet: muss mit exakt passender Firmware und ohne Stromunterbrechung nach Herstelleranleitung erfolgen."
+        }
+      ],
+      "correctAnswer": "B"
+    },
+    {
+      "id": "q099",
+      "category": "Fehlersuche & Kompatibilität",
+      "question": "Welche Aussage beschreibt „Thermal Throttling“ korrekt?",
+      "hint": "Schutz durch Leistungsreduzierung",
+      "options": [
+        {
+          "id": "A",
+          "text": "verändert pro Diagnoseschritt nur einen Faktor, damit Ursache und Wirkung nachvollziehbar bleiben",
+          "feedback": "Diese Funktion gehört zu „Ein-Änderungs-Prinzip“. „Thermal Throttling“ bedeutet: senkt automatisch den Takt, wenn eine Komponente ihre Temperaturgrenze erreicht."
+        },
+        {
+          "id": "B",
+          "text": "initialisiert und prüft beim Einschalten grundlegende Hardware, bevor das Betriebssystem startet",
+          "feedback": "Diese Funktion gehört zu „POST“. „Thermal Throttling“ bedeutet: senkt automatisch den Takt, wenn eine Komponente ihre Temperaturgrenze erreicht."
+        },
+        {
+          "id": "C",
+          "text": "senkt automatisch den Takt, wenn eine Komponente ihre Temperaturgrenze erreicht",
+          "feedback": "Thermal Throttling: senkt automatisch den Takt, wenn eine Komponente ihre Temperaturgrenze erreicht."
+        },
+        {
+          "id": "D",
+          "text": "grenzt nach herstellerspezifischer Dokumentation Fehlerbereiche wie CPU, RAM oder Grafik ein",
+          "feedback": "Diese Funktion gehört zu „Debug-LED oder Beep-Code“. „Thermal Throttling“ bedeutet: senkt automatisch den Takt, wenn eine Komponente ihre Temperaturgrenze erreicht."
+        }
+      ],
+      "correctAnswer": "C"
+    },
+    {
+      "id": "q100",
+      "category": "Fehlersuche & Kompatibilität",
+      "question": "Welche Funktion gehört zu „Ein-Änderungs-Prinzip“?",
+      "hint": "kontrollierter und dokumentierter Test",
+      "options": [
+        {
+          "id": "A",
+          "text": "initialisiert und prüft beim Einschalten grundlegende Hardware, bevor das Betriebssystem startet",
+          "feedback": "Diese Funktion gehört zu „POST“. „Ein-Änderungs-Prinzip“ bedeutet: verändert pro Diagnoseschritt nur einen Faktor, damit Ursache und Wirkung nachvollziehbar bleiben."
+        },
+        {
+          "id": "B",
+          "text": "grenzt nach herstellerspezifischer Dokumentation Fehlerbereiche wie CPU, RAM oder Grafik ein",
+          "feedback": "Diese Funktion gehört zu „Debug-LED oder Beep-Code“. „Ein-Änderungs-Prinzip“ bedeutet: verändert pro Diagnoseschritt nur einen Faktor, damit Ursache und Wirkung nachvollziehbar bleiben."
+        },
+        {
+          "id": "C",
+          "text": "weist auf ein Problem bei Erkennung oder Initialisierung des Arbeitsspeichers hin",
+          "feedback": "Diese Funktion gehört zu „Dauerhafte DRAM-LED“. „Ein-Änderungs-Prinzip“ bedeutet: verändert pro Diagnoseschritt nur einen Faktor, damit Ursache und Wirkung nachvollziehbar bleiben."
+        },
+        {
+          "id": "D",
+          "text": "verändert pro Diagnoseschritt nur einen Faktor, damit Ursache und Wirkung nachvollziehbar bleiben",
+          "feedback": "Ein-Änderungs-Prinzip: verändert pro Diagnoseschritt nur einen Faktor, damit Ursache und Wirkung nachvollziehbar bleiben."
+        }
+      ],
+      "correctAnswer": "D"
+    }
+  ]
+}

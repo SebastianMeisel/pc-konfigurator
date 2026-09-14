@@ -3,7 +3,7 @@
 const { readFileSync } = require("node:fs");
 
 const files = Object.fromEntries(
-  ["index.html", "evaluation.html", "quiz.html", "styles.css", "education.css", "evaluation.css", "quiz.css", "app.js", "education.js", "evaluation.js", "quiz.js"]
+  ["index.html", "evaluation.html", "quiz.html", "styles.css", "education.css", "evaluation.css", "quiz.css", "app.js", "education.js", "evaluation.js", "quiz.js", "quiz-questions.json", "quiz-questions.schema.json", "tools/quiz_xlsx.py"]
     .map((name) => [name, readFileSync(name, "utf8")])
 );
 
@@ -62,9 +62,19 @@ assert(/dialogTrigger[^\n]+dialogTrigger\.focus/.test(files["education.js"]), "e
 assert(/dataset\.portDescription/.test(files["education.js"]), "education.js: dynamische Anschlussbeschreibung fehlt");
 assert(/\$\("#score-ring"\)\.setAttribute\("aria-label"/.test(files["evaluation.js"]), "evaluation.js: Ergebnisgrafik wird nicht aktualisiert");
 assert(/prefers-reduced-motion/.test(files["evaluation.js"]), "evaluation.js: Scrollbewegung respektiert Systemeinstellung nicht");
-assert((files["quiz.js"].match(/"id": "q\d{3}"/g) || []).length === 100, "quiz.js: Fragenpool enthält nicht genau 100 Fragen");
-assert((files["quiz.js"].match(/"hint":/g) || []).length === 100, "quiz.js: Nicht jede Frage enthält einen Hinweis");
-assert(/const TEST_SIZE=20/.test(files["quiz.js"]), "quiz.js: Testgröße ist nicht auf 20 Fragen gesetzt");
+const quizData = JSON.parse(files["quiz-questions.json"]);
+const quizSchema = JSON.parse(files["quiz-questions.schema.json"]);
+const quizIds = quizData.questions.map((question) => question.id);
+assert(quizData.schemaVersion === 1, "quiz-questions.json: falsche Schema-Version");
+assert(quizData.testSize === 20, "quiz-questions.json: Testgröße ist nicht 20");
+assert(quizData.questions.length >= 100, "quiz-questions.json: Fragenpool enthält weniger als 100 Fragen");
+assert(new Set(quizIds).size === quizIds.length, "quiz-questions.json: doppelte Fragen-IDs");
+assert(quizData.questions.every((question) => question.hint && question.options?.length === 4), "quiz-questions.json: Hinweis oder vier Antworten fehlen");
+assert(quizData.questions.every((question) => question.options.every((option) => option.text && option.feedback)), "quiz-questions.json: Antwort oder Feedback ist leer");
+assert(quizData.questions.every((question) => question.options.some((option) => option.id === question.correctAnswer)), "quiz-questions.json: richtige Antwort fehlt");
+assert(quizSchema.properties?.questions?.items?.properties?.correctAnswer, "quiz-questions.schema.json: Schema für richtige Antwort fehlt");
+assert(/fetch\("quiz-questions\.json"/.test(files["quiz.js"]), "quiz.js: JSON-Fragenpool wird nicht geladen");
+assert(/def export_xlsx/.test(files["tools/quiz_xlsx.py"]) && /def import_xlsx/.test(files["tools/quiz_xlsx.py"]), "tools/quiz_xlsx.py: Import oder Export fehlt");
 assert(/question-heading[^\n]+focus/.test(files["quiz.js"]), "quiz.js: Fokusführung zwischen Fragen fehlt");
 assert(/@media\(prefers-reduced-motion:reduce\)/.test(files["quiz.css"]), "quiz.css: reduzierte Bewegung fehlt");
 try {

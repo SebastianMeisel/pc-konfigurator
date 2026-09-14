@@ -40,16 +40,16 @@
       <div>
         <p class="eyebrow">Lernkontrolle · Fachinformatik</p>
         <h1 id="quiz-title">PC-Hardware verstehen, nicht nur zusammenstecken.</h1>
-        <p>Jeder Durchlauf enthält 20 zufällig ausgewählte Fragen aus einem Pool von 100. Pro Frage ist genau eine Antwort richtig. Hinweise helfen beim Nachdenken, ohne die Lösung vorwegzunehmen.</p>
+        <p>Jeder Durchlauf enthält <strong id="hero-test-size">20</strong> zufällig ausgewählte Fragen aus einem Pool von <strong id="hero-pool-size">100</strong>. Pro Frage ist genau eine Antwort richtig. Hinweise helfen beim Nachdenken, ohne die Lösung vorwegzunehmen.</p>
       </div>
       <div class="pool-badge" aria-label="20 zufällige Fragen aus 100">
-        <strong>20</strong><span>aus 100 Fragen</span>
+        <strong id="pool-test-size">20</strong><span id="pool-size">aus 100 Fragen</span>
       </div>
     </section>
 
     <noscript><p class="noscript-warning">Für den interaktiven Wissenstest muss JavaScript aktiviert sein.</p></noscript>
 
-    <section class="quiz-shell" id="quiz-panel" aria-labelledby="question-heading">
+    <section class="quiz-shell" id="quiz-panel" aria-labelledby="question-heading" aria-busy="true">
       <div class="quiz-progress">
         <div><span id="progress-text">Frage 1 von 20</span><span id="score-text">0 richtig</span></div>
         <div class="progress-track" id="progress-track" role="progressbar" aria-label="Fortschritt im Wissenstest" aria-valuemin="0" aria-valuemax="20" aria-valuenow="0" aria-valuetext="0 von 20 Fragen beantwortet">
@@ -79,7 +79,7 @@
       <div class="result-hero">
         <div><p class="eyebrow">Auswertung</p><h2 id="result-title" tabindex="-1">Dein Ergebnis</h2><p id="result-summary"></p></div>
         <div class="result-ring" id="result-ring" role="img" aria-label="0 von 20 Fragen richtig" style="--result-percent:0">
-          <strong id="result-score">0</strong><span>von 20</span>
+          <strong id="result-score">0</strong><span id="result-total">von 20</span>
         </div>
       </div>
       <div class="result-grid">
