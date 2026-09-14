@@ -17,6 +17,12 @@ Die Anwendung bewertet unter anderem Sockel, Formfaktor, Arbeitsspeicherstandard
 - Zweite Seite „Auswertung“ mit gewichteter Nutzwertanalyse für Office, Entwicklung, CAD, Videoschnitt und lokale KI
 - Transparente Teilwertungen, gewichtete Beiträge, Begründungen, Stärken, Verbesserungsbedarf und Druckansicht
 
+## Barrierefreiheit
+
+Die Bedienoberfläche ist auf WCAG 2.2 ausgerichtet. Dazu gehören Sprunglinks, eine durchgängige Tastaturbedienung, sichtbare Fokusmarkierungen, semantische Statusmeldungen, zugängliche Dialoge sowie Textalternativen für die dynamischen PC- und Anschlussgrafiken. Hohe Kontraste, vergrößerte Bedienelemente, erzwungene Systemfarben und reduzierte Bewegung werden berücksichtigt.
+
+Der automatisierte Test `a11y-check.js` schützt zentrale HTML-, CSS- und JavaScript-Merkmale vor Regressionen. Er ersetzt keine vollständige manuelle Prüfung mit Screenreader, Tastatur, Browser-Zoom und unterschiedlichen Betriebssystem-Kontrastmodi.
+
 ## Start
 
 `index.html` direkt öffnen oder einen lokalen Webserver starten:
@@ -29,7 +35,7 @@ Danach `http://localhost:8080` aufrufen.
 
 ## Bereitstellung
 
-Der Workflow unter `.github/workflows/pages.yml` prüft die JavaScript-Dateien und veröffentlicht den Stand des `main`-Branches über GitHub Pages.
+Der Workflow unter `.github/workflows/pages.yml` prüft die JavaScript-Dateien sowie zentrale Barrierefreiheitsmerkmale und veröffentlicht den Stand des `main`-Branches über GitHub Pages.
 
 ## Hinweise
 

@@ -12,6 +12,7 @@
   <script src="evaluation.js" defer></script>
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Direkt zum Hauptinhalt</a>
   <header class="topbar evaluation-topbar">
     <a class="brand" href="index.html" aria-label="Zurück zum PC-Konfigurator">
       <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
@@ -23,7 +24,7 @@
     </nav>
   </header>
 
-  <main class="evaluation-page">
+  <main class="evaluation-page" id="main-content" tabindex="-1">
     <section class="evaluation-hero">
       <div>
         <p class="eyebrow">Unterrichtsmaterial · Nutzwertanalyse</p>
@@ -42,7 +43,7 @@
         <span class="snapshot-state" id="snapshot-state">wird geladen</span>
       </div>
       <div class="snapshot-chips" id="snapshot-chips"></div>
-      <div class="snapshot-warning" id="snapshot-warning" hidden></div>
+      <div class="snapshot-warning" id="snapshot-warning" role="status" hidden></div>
     </section>
 
     <section aria-labelledby="scenario-title">
@@ -53,29 +54,30 @@
         </div>
         <p>Karte wählen, um die vollständige Begründung anzuzeigen.</p>
       </div>
-      <div class="scenario-grid" id="scenario-grid"></div>
+      <div class="scenario-grid" id="scenario-grid" aria-label="Bewertung der Anwendungsszenarien"></div>
     </section>
 
     <section class="detail-panel" id="detail-panel" aria-labelledby="detail-title">
       <div class="detail-heading">
         <div>
           <p class="eyebrow" id="detail-kicker">Detailauswertung</p>
-          <h2 id="detail-title">Office-Arbeitsplatz</h2>
+          <h2 id="detail-title" tabindex="-1">Office-Arbeitsplatz</h2>
           <p id="detail-description"></p>
         </div>
-        <div class="score-ring" id="score-ring" style="--score-percent:0%">
+        <div class="score-ring" id="score-ring" role="img" aria-label="Gesamtwertung: 0 von 100 Punkten" style="--score-percent:0%">
           <strong id="detail-score">0</strong>
           <span>Punkte</span>
         </div>
       </div>
 
-      <div class="verdict" id="verdict"></div>
+      <div class="verdict" id="verdict" role="status" aria-live="polite"></div>
 
       <div class="detail-layout">
         <div class="criteria-panel">
           <h3>Gewichtete Kriterien</h3>
-          <div class="criteria-table-wrap">
+          <div class="criteria-table-wrap" tabindex="0" role="region" aria-label="Tabelle der gewichteten Kriterien; horizontal verschiebbar">
             <table class="criteria-table">
+              <caption class="visually-hidden">Gewichtete Teilbewertungen und technische Begründungen</caption>
               <thead>
                 <tr><th>Kriterium</th><th>Gewicht</th><th>Wertung</th><th>Beitrag</th><th>Begründung</th></tr>
               </thead>

@@ -2,6 +2,7 @@
   "use strict";
 
   const $ = selector => document.querySelector(selector);
+  const scrollBehavior = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
   const clamp = value => Math.max(0, Math.min(100, Math.round(value)));
   const escapeHtml = value => String(value ?? "").replace(/[&<>"']/g, char => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char]));
   const euro = value => new Intl.NumberFormat("de-DE",{style:"currency",currency:"EUR",maximumFractionDigits:0}).format(value || 0);
@@ -300,8 +301,9 @@
       return `<button class="scenario-card ${item.id===activeScenario ? "active" : ""} ${item.score===best ? "best" : ""}" type="button" data-scenario="${item.id}" aria-pressed="${item.id===activeScenario}">
         <h3>${item.title}</h3>
         <div class="scenario-score"><strong style="color:${result.color}">${item.score}</strong><span>/ 100</span></div>
-        <div class="mini-track" style="--value:${item.score}%;--score-color:${result.color}"><i></i></div>
+        <div class="mini-track" aria-hidden="true" style="--value:${item.score}%;--score-color:${result.color}"><i></i></div>
         <p>${result.label}</p>
+        ${item.score===best ? '<span class="visually-hidden">Beste Eignung im Vergleich.</span>' : ""}
       </button>`;
     }).join("");
     document.querySelectorAll(".scenario-card").forEach(button=>button.addEventListener("click",()=>{
@@ -309,7 +311,8 @@
       history.replaceState(null,"",`#${activeScenario}`);
       renderScenarios();
       renderDetail();
-      $("#detail-panel").scrollIntoView({behavior:"smooth",block:"start"});
+      $("#detail-title").focus({preventScroll:true});
+      $("#detail-panel").scrollIntoView({behavior:scrollBehavior,block:"start"});
     }));
   }
 
@@ -325,6 +328,7 @@
     $("#detail-score").textContent = result.score;
     $("#score-ring").style.setProperty("--score-percent",`${result.score}%`);
     $("#score-ring").style.setProperty("--ring-color",resultGrade.color);
+    $("#score-ring").setAttribute("aria-label",`Gesamtwertung für ${result.title}: ${result.score} von 100 Punkten, ${resultGrade.label}.`);
     $("#verdict").innerHTML = `<strong>${resultGrade.label}.</strong> Die Gesamtwertung beträgt ${result.score} von 100 Punkten. Hohe Einzelwerte gleichen schwache Kriterien nur entsprechend ihrer ausgewiesenen Gewichtung aus.`;
 
     $("#criteria-body").innerHTML = result.breakdown.map(item=>{

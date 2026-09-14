@@ -121,6 +121,7 @@
   };
 
   const $ = selector => document.querySelector(selector);
+  const scrollBehavior = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
   const refs = {
     nav: $("#category-nav"), grid: $("#component-grid"), kicker: $("#category-kicker"),
     title: $("#category-title"), description: $("#category-description"), count: $("#selection-count"),
@@ -254,7 +255,10 @@
       </button>`;
     }).join("");
     refs.nav.querySelectorAll("button").forEach(button => button.addEventListener("click", () => {
-      state.active = Number(button.dataset.index); render();
+      const targetIndex = Number(button.dataset.index);
+      state.active = targetIndex;
+      render();
+      refs.nav.querySelector(`[data-index="${targetIndex}"]`)?.focus();
     }));
   }
 
@@ -275,7 +279,7 @@
       const reasons = compatibility(category.id, item);
       const isSelected = state.selections[category.id] === item.id;
       return `<button class="component-card ${isSelected ? "selected" : ""} ${reasons.length ? "blocked" : ""} ${item.generation ? "legacy-card" : ""}"
-          data-id="${item.id}" type="button" ${reasons.length ? "disabled" : ""} aria-pressed="${isSelected}">
+          data-id="${item.id}" type="button" ${reasons.length ? 'aria-disabled="true"' : ""} aria-pressed="${isSelected}">
         <span class="card-top"><span><span class="maker">${item.maker}</span>${item.generation ? `<span class="generation-badge generation-${item.generation}">${item.generation === 1 ? "1 Gen. zurück" : "2 Gen. zurück"}</span>` : ""}</span><span class="price">${money(item.price)}</span></span>
         <h3>${item.name}</h3>
         <ul class="specs">${item.specs.map(spec => `<li>${spec}</li>`).join("")}</ul>
@@ -285,11 +289,17 @@
     }).join("");
 
     refs.grid.querySelectorAll(".component-card:not(.blocked)").forEach(button => button.addEventListener("click", () => {
-      const wasSelected = state.selections[category.id] === button.dataset.id;
-      state.selections[category.id] = wasSelected ? null : button.dataset.id;
+      const targetId = button.dataset.id;
+      const wasSelected = state.selections[category.id] === targetId;
+      state.selections[category.id] = wasSelected ? null : targetId;
       if (!wasSelected) reconcile(category.id);
       save();
       render();
+      refs.grid.querySelector(`[data-id="${targetId}"]`)?.focus();
+    }));
+    refs.grid.querySelectorAll(".component-card.blocked").forEach(button => button.addEventListener("click", () => {
+      const reason = button.querySelector(".block-reason")?.textContent || "Diese Komponente ist mit der aktuellen Auswahl nicht kompatibel.";
+      showToast(`Nicht wählbar: ${reason}`, 5200);
     }));
     refs.previous.disabled = state.active === 0;
     refs.next.textContent = state.active === categories.length - 1 ? "Zur Übersicht" : "Weiter";
@@ -368,7 +378,7 @@
     refs.power.textContent = power.recommended ? `${power.load} W · ${power.recommended} W empf.` : "–";
     refs.build.innerHTML = categories.map(category => {
       const item = selected(category.id);
-      return `<div class="build-row ${item ? "" : "empty"}"><span class="build-category">${category.label}</span><span class="build-item">${item ? item.name : "noch offen"}</span><span class="build-price">${item ? money(item.price) : "–"}</span></div>`;
+      return `<div class="build-row ${item ? "" : "empty"}" role="listitem"><span class="build-category">${category.label}</span><span class="build-item">${item ? item.name : "noch offen"}</span><span class="build-price">${item ? money(item.price) : "–"}</span></div>`;
     }).join("");
 
     try {
@@ -514,7 +524,22 @@
     refs.buildName.textContent = cpu && gpu ? `${cpu.label} / ${gpu.label}` : c?.name || "Dein System";
     refs.viewLegend.innerHTML = [
       [accent,"Mainboard / Auswahl"],[gold,"Stromversorgung"],[blue,"Speicher / Kühlung"],[red,"Grafik / Last"]
-    ].map(([color,label])=>`<span><i style="background:${color}"></i>${label}</span>`).join("");
+    ].map(([color,label])=>`<span><i style="background:${color}" aria-hidden="true"></i>${label}</span>`).join("");
+    const visualText = document.querySelector("#visual-text");
+    if (visualText) {
+      const installed = [
+        c ? `Gehäuse ${c.name}` : "kein Gehäuse",
+        board ? `Mainboard ${board.name}` : "kein Mainboard",
+        cpu ? `CPU ${cpu.name}` : "keine CPU",
+        gpu ? `Grafikkarte ${gpu.name}` : "keine Grafikkarte",
+        ram ? `${ram.capacity} GB Arbeitsspeicher` : "kein Arbeitsspeicher",
+        storage ? `Speicher ${storage.name}` : "kein Massenspeicher",
+        psu ? `Netzteil ${psu.name}` : "kein Netzteil",
+        cooler ? `Kühler ${cooler.name}` : "kein CPU-Kühler"
+      ];
+      visualText.dataset.insideDescription = `Innenansicht des PCs: ${installed.join(", ")}.`;
+      if (!refs.svg.hasAttribute("hidden")) visualText.textContent = visualText.dataset.insideDescription;
+    }
   }
 
   function showToast(message, duration=3000) {
@@ -528,10 +553,10 @@
     renderNav(); renderPicker(); renderSummary(); renderDiagnostics(); renderSvg();
   }
 
-  refs.previous.addEventListener("click", () => { if (state.active > 0) { state.active--; render(); window.scrollTo({top:0,behavior:"smooth"}); } });
+  refs.previous.addEventListener("click", () => { if (state.active > 0) { state.active--; render(); window.scrollTo({top:0,behavior:scrollBehavior}); } });
   refs.next.addEventListener("click", () => {
     if (state.active < categories.length - 1) state.active++;
-    else document.querySelector(".diagnostics-panel").scrollIntoView({behavior:"smooth",block:"start"});
+    else document.querySelector(".diagnostics-panel").scrollIntoView({behavior:scrollBehavior,block:"start"});
     render();
   });
   refs.reset.addEventListener("click", () => {

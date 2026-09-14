@@ -7,6 +7,7 @@
 .title-with-help h1 { margin-bottom: 6px; }
 .lesson-trigger {
   flex: 0 0 auto;
+  min-height: 40px;
   margin-bottom: 6px;
   padding: 5px 9px;
   border: 1px solid rgba(86, 200, 255, .45);
@@ -26,6 +27,8 @@
   background: rgba(7,16,29,.55);
 }
 .view-button {
+  min-width: 44px;
+  min-height: 36px;
   padding: 4px 8px;
   border: 0;
   border-radius: 6px;
@@ -99,9 +102,10 @@
   border-color: var(--accent);
   background: rgba(101,230,196,.075);
 }
-.network-card.blocked { opacity: .58; border-color: rgba(255,107,122,.35); }
+.network-card.blocked { opacity: .84; border-color: rgba(255,107,122,.5); }
 .network-select {
   display: block;
+  min-height: 44px;
   width: 100%;
   padding: 0 25px 0 0;
   border: 0;
@@ -126,8 +130,8 @@
   right: 7px;
   display: grid;
   place-items: center;
-  width: 22px;
-  height: 22px;
+  width: 32px;
+  height: 32px;
   padding: 0;
   border: 1px solid var(--line-bright);
   border-radius: 50%;
@@ -180,8 +184,8 @@
 .dialog-close {
   display: grid;
   place-items: center;
-  min-width: 36px;
-  min-height: 36px;
+  min-width: 44px;
+  min-height: 44px;
   border: 1px solid var(--line);
   border-radius: 8px;
   color: var(--muted);

@@ -28,11 +28,14 @@ jobs:
           node --check app.js
           node --check education.js
           node --check evaluation.js
+          node --check a11y-check.js
+          node a11y-check.js
           test -s index.html
           test -s evaluation.html
           test -s styles.css
           test -s education.css
           test -s evaluation.css
+          test -s a11y-check.js
           test -s favicon.svg
           grep -q 'id="pc-view"' index.html
           grep -q 'id="port-view"' index.html

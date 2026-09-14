@@ -210,6 +210,7 @@
 
   const networkState = {ethernet:"onboard", wifi:"onboard"};
   let activeView = "inside";
+  let dialogTrigger = null;
   let basePrice = 0;
   let renderedPrice = null;
 
@@ -280,7 +281,13 @@
         ])}</section>
       </div>`;
     const dialog = $("#lesson-dialog");
+    dialogTrigger = document.activeElement;
     if (!dialog.open) dialog.showModal();
+  }
+
+  function closeLesson() {
+    const dialog = $("#lesson-dialog");
+    if (dialog?.open) dialog.close();
   }
 
   function currentLessonKey() {
@@ -298,7 +305,7 @@
           const reason = blockReason(type,item);
           const selected = networkState[type] === item.id;
           return `<article class="network-card ${selected ? "selected" : ""} ${reason ? "blocked" : ""}">
-            <button class="network-select" type="button" data-network-type="${type}" data-network-id="${item.id}" ${reason ? "aria-disabled=\"true\"" : ""}>
+            <button class="network-select" type="button" data-network-type="${type}" data-network-id="${item.id}" aria-pressed="${selected}" ${reason ? "aria-disabled=\"true\"" : ""}>
               <strong>${escapeHtml(item.name)}</strong>
               ${item.generation ? `<span class="generation-badge generation-${item.generation}">${item.generation === 1 ? "1 Gen. zurück" : "2 Gen. zurück"}</span>` : ""}
               <small>${escapeHtml(item.speed)} · <span class="network-price">${euro(item.price)}</span></small>
@@ -317,10 +324,13 @@
         return;
       }
       networkState[button.dataset.networkType] = button.dataset.networkId;
+      const selectedType = button.dataset.networkType;
+      const selectedId = button.dataset.networkId;
       saveNetwork();
       renderNetwork();
       renderPorts();
       applyPrice(false);
+      root.querySelector(`[data-network-type="${selectedType}"][data-network-id="${selectedId}"]`)?.focus();
     }));
     root.querySelectorAll(".network-info").forEach(button => button.addEventListener("click", () => {
       const type = button.dataset.networkInfo;
@@ -421,6 +431,13 @@
     }
     out += svgText(340,704,"Farben kennzeichnen Funktionen, nicht verbindliche Port-Normen.",9,"#71879d","middle");
     svg.innerHTML = out;
+    const visualText = $("#visual-text");
+    if (visualText) {
+      const boardText = board ? board.name : "kein Mainboard ausgewählt";
+      const gpuText = hasGpu ? "Grafikausgänge der gewählten Grafikkarte" : "keine Grafikkarte und daher keine dedizierten Grafikausgänge";
+      visualText.dataset.portDescription = `Rückansicht: ${boardText}; USB-A, USB-C, Audio und Mainboard-Bildausgänge; ${gpuText}; Ethernet über ${ethernet.name}; WLAN über ${wifi.name}.`;
+      if (!svg.hasAttribute("hidden")) visualText.textContent = visualText.dataset.portDescription;
+    }
   }
 
   function setView(view) {
@@ -444,8 +461,14 @@
     });
 
     $("#view-legend").innerHTML = activeView === "ports"
-      ? '<span><i style="background:#56c8ff"></i>USB</span><span><i style="background:#65e6c4"></i>Ethernet</span><span><i style="background:#ffc857"></i>WLAN</span><span><i style="background:#b69ae9"></i>Bildausgabe</span>'
-      : '<span><i style="background:#65e6c4"></i>Mainboard / Auswahl</span><span><i style="background:#ffc857"></i>Stromversorgung</span><span><i style="background:#56c8ff"></i>Speicher / Kühlung</span><span><i style="background:#ff6b7a"></i>Grafik / Last</span>';
+      ? '<span><i style="background:#56c8ff" aria-hidden="true"></i>USB</span><span><i style="background:#65e6c4" aria-hidden="true"></i>Ethernet</span><span><i style="background:#ffc857" aria-hidden="true"></i>WLAN</span><span><i style="background:#b69ae9" aria-hidden="true"></i>Bildausgabe</span>'
+      : '<span><i style="background:#65e6c4" aria-hidden="true"></i>Mainboard / Auswahl</span><span><i style="background:#ffc857" aria-hidden="true"></i>Stromversorgung</span><span><i style="background:#56c8ff" aria-hidden="true"></i>Speicher / Kühlung</span><span><i style="background:#ff6b7a" aria-hidden="true"></i>Grafik / Last</span>';
+    const visualText = $("#visual-text");
+    if (visualText) {
+      visualText.textContent = activeView === "ports"
+        ? visualText.dataset.portDescription || "Rückansicht der Peripherieanschlüsse."
+        : visualText.dataset.insideDescription || "Innenansicht der ausgewählten PC-Komponenten.";
+    }
   }
 
   function refreshAfterConfiguratorRender() {
@@ -500,9 +523,13 @@
   $("#example-button")?.addEventListener("click", () => setTimeout(resetNetworkDefaults, 0));
   $("#safety-button")?.addEventListener("click", () => openLesson("Grundregeln"));
   $("#lesson-button")?.addEventListener("click", () => openLesson(currentLessonKey()));
-  document.querySelectorAll(".dialog-close").forEach(button => button.addEventListener("click", () => $("#lesson-dialog").close()));
+  document.querySelectorAll(".dialog-close").forEach(button => button.addEventListener("click", closeLesson));
   $("#lesson-dialog")?.addEventListener("click", event => {
-    if (event.target === $("#lesson-dialog")) $("#lesson-dialog").close();
+    if (event.target === $("#lesson-dialog")) closeLesson();
+  });
+  $("#lesson-dialog")?.addEventListener("close", () => {
+    if (dialogTrigger && typeof dialogTrigger.focus === "function") dialogTrigger.focus();
+    dialogTrigger = null;
   });
   document.querySelectorAll(".view-button").forEach(button => button.addEventListener("click", () => setView(button.dataset.view)));
 

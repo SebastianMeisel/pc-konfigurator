@@ -211,3 +211,16 @@
   .scenario-grid { display:block; }
   .reason-cell,.evaluation-hero p,.detail-heading p,.recommendation-panel ul,.snapshot-chip { color:#333; }
 }
+
+.criteria-table-wrap:focus-visible {
+  outline: 3px solid rgba(86,200,255,.8);
+  outline-offset: 3px;
+}
+#detail-title:focus-visible {
+  outline: 3px solid rgba(86,200,255,.8);
+  outline-offset: 5px;
+  border-radius: 4px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .scenario-card:hover { transform: none; }
+}
