@@ -424,18 +424,28 @@
   }
 
   function setView(view) {
-    activeView = view;
-    $("#pc-view").hidden = view !== "inside";
-    $("#port-view").hidden = view !== "ports";
+    activeView = view === "ports" ? "ports" : "inside";
+    const insideView = $("#pc-view");
+    const portView = $("#port-view");
+
+    if (activeView === "inside") {
+      insideView.removeAttribute("hidden");
+      portView.setAttribute("hidden","");
+    } else {
+      renderPorts();
+      insideView.setAttribute("hidden","");
+      portView.removeAttribute("hidden");
+    }
+
     document.querySelectorAll(".view-button").forEach(button => {
-      const active = button.dataset.view === view;
+      const active = button.dataset.view === activeView;
       button.classList.toggle("active",active);
       button.setAttribute("aria-pressed",String(active));
     });
-    if (view === "ports") {
-      renderPorts();
-      $("#view-legend").innerHTML = '<span><i style="background:#56c8ff"></i>USB</span><span><i style="background:#65e6c4"></i>Ethernet</span><span><i style="background:#ffc857"></i>WLAN</span><span><i style="background:#b69ae9"></i>Bildausgabe</span>';
-    }
+
+    $("#view-legend").innerHTML = activeView === "ports"
+      ? '<span><i style="background:#56c8ff"></i>USB</span><span><i style="background:#65e6c4"></i>Ethernet</span><span><i style="background:#ffc857"></i>WLAN</span><span><i style="background:#b69ae9"></i>Bildausgabe</span>'
+      : '<span><i style="background:#65e6c4"></i>Mainboard / Auswahl</span><span><i style="background:#ffc857"></i>Stromversorgung</span><span><i style="background:#56c8ff"></i>Speicher / Kühlung</span><span><i style="background:#ff6b7a"></i>Grafik / Last</span>';
   }
 
   function refreshAfterConfiguratorRender() {
