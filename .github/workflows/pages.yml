@@ -26,11 +26,17 @@ jobs:
       - name: Anwendung prüfen
         run: |
           node --check app.js
+          node --check education.js
           test -s index.html
           test -s styles.css
+          test -s education.css
           test -s favicon.svg
           grep -q 'id="pc-view"' index.html
+          grep -q 'id="port-view"' index.html
+          grep -q 'id="lesson-dialog"' index.html
+          grep -q 'id="network-options"' index.html
           grep -q 'const categories' app.js
+          grep -q 'const lessons' education.js
       - name: Pages konfigurieren
         uses: actions/configure-pages@v5
         with:

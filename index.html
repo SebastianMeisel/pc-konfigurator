@@ -3,18 +3,20 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Interaktiver PC-Konfigurator mit nachvollziehbarer Kompatibilitätsprüfung und dynamischer SVG-Montageansicht.">
+  <meta name="description" content="Interaktives Unterrichtsmaterial zur PC-Montage mit Kompatibilitätsprüfung, Lernhinweisen und dynamischen SVG-Ansichten.">
   <meta name="theme-color" content="#09111f">
   <title>BuildBench – PC-Konfigurator</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="education.css">
   <script src="app.js" defer></script>
+  <script src="education.js" defer></script>
 </head>
 <body>
   <header class="topbar">
     <a class="brand" href="#" aria-label="BuildBench – zum Anfang">
       <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
-      <span><strong>BuildBench</strong><small>PC-Konfigurator</small></span>
+      <span><strong>BuildBench</strong><small>PC-Konfigurator · Lernlabor</small></span>
     </a>
     <div class="top-stats" aria-live="polite">
       <div><span>Fortschritt</span><strong id="progress-label">0 / 12</strong></div>
@@ -22,6 +24,7 @@
       <div><span>Gesamt</span><strong id="price-label">0 €</strong></div>
     </div>
     <div class="header-actions">
+      <button class="btn btn-ghost" id="safety-button" type="button">Grundregeln</button>
       <button class="btn btn-ghost" id="example-button" type="button">Beispiel-Build</button>
       <button class="btn btn-outline" id="reset-button" type="button">Zurücksetzen</button>
     </div>
@@ -45,7 +48,10 @@
       <div class="selection-header">
         <div>
           <p class="eyebrow" id="category-kicker">Schritt 1 von 12</p>
-          <h1 id="category-title">Gehäuse auswählen</h1>
+          <div class="title-with-help">
+            <h1 id="category-title">Gehäuse auswählen</h1>
+            <button class="lesson-trigger" id="lesson-button" type="button" aria-haspopup="dialog">? Lerninfo</button>
+          </div>
           <p id="category-description" class="category-description"></p>
         </div>
         <div class="selection-count" id="selection-count"></div>
@@ -64,16 +70,36 @@
           <p class="eyebrow">2D-Montageansicht</p>
           <h2 id="build-name">Dein System</h2>
         </div>
-        <span class="view-chip">Seitenansicht</span>
+        <div class="view-switch" role="group" aria-label="Darstellung wählen">
+          <button class="view-button active" data-view="inside" type="button" aria-pressed="true">Innen</button>
+          <button class="view-button" data-view="ports" type="button" aria-pressed="false">Anschlüsse</button>
+        </div>
       </div>
       <div class="svg-frame">
         <svg id="pc-view" viewBox="0 0 680 720" role="img" aria-labelledby="svg-title svg-description">
           <title id="svg-title">Schnittansicht des zusammengestellten PCs</title>
           <desc id="svg-description">Die gewählten Komponenten werden maßstäblich angenähert im Gehäuse dargestellt.</desc>
         </svg>
+        <svg id="port-view" viewBox="0 0 680 720" role="img" aria-labelledby="port-title port-description" hidden>
+          <title id="port-title">Rückansicht mit Peripherieanschlüssen</title>
+          <desc id="port-description">Mainboard-Anschlüsse und Erweiterungskarten des gewählten Systems.</desc>
+        </svg>
       </div>
       <div class="view-legend" id="view-legend"></div>
     </aside>
+
+    <section class="network-panel" aria-labelledby="network-title">
+      <div class="network-heading">
+        <div>
+          <p class="eyebrow">Optionale Erweiterung</p>
+          <h2 id="network-title">Ethernet &amp; WLAN</h2>
+        </div>
+        <span class="network-total" id="network-total">0 € zusätzlich</span>
+      </div>
+      <p class="network-intro">Wähle integrierte Schnittstellen oder PCIe-Erweiterungskarten. Freie Steckplätze, Antennen und die Infrastruktur bestimmen den praktischen Nutzen.</p>
+      <div id="network-options" class="network-options"></div>
+      <div id="network-diagnostics" class="network-diagnostics" aria-live="polite"></div>
+    </section>
 
     <section class="diagnostics-panel" aria-labelledby="diagnostics-title">
       <div class="diagnostics-heading">
@@ -97,6 +123,22 @@
       <div id="build-list" class="build-list"></div>
     </section>
   </main>
+
+  <dialog class="lesson-dialog" id="lesson-dialog" aria-labelledby="lesson-dialog-title">
+    <div class="dialog-shell">
+      <div class="dialog-heading">
+        <div>
+          <p class="eyebrow">Lernkarte</p>
+          <h2 id="lesson-dialog-title">Komponente</h2>
+        </div>
+        <button class="dialog-close" type="button" aria-label="Dialog schließen">×</button>
+      </div>
+      <div id="lesson-dialog-content" class="lesson-content"></div>
+      <div class="dialog-actions">
+        <button class="btn btn-primary dialog-close" type="button">Verstanden</button>
+      </div>
+    </div>
+  </dialog>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <noscript>Für den interaktiven Konfigurator muss JavaScript aktiviert sein.</noscript>
