@@ -183,7 +183,7 @@
 
   const catalog = {
     ethernet: [
-      {id:"onboard", name:"Onboard-LAN verwenden", price:0, slot:0, speed:"2,5 Gbit/s", specs:"integriert · RJ45"},
+      {id:"onboard", name:"Onboard-LAN verwenden", price:0, slot:0, speed:"boardabhängig", specs:"integriert · RJ45"},
       {id:"i210", name:"Intel I210-T1", price:25, slot:1, speed:"1 Gbit/s", specs:"PCIe x1 · RJ45"},
       {id:"i225", name:"Intel I225-T1", price:39, slot:1, speed:"2,5 Gbit/s", specs:"PCIe x1 · RJ45"},
       {id:"xg100", name:"ASUS XG-C100C", price:99, slot:4, speed:"10 Gbit/s", specs:"PCIe x4 · Cat 6A"}
@@ -197,7 +197,7 @@
   };
 
   const boards = {
-    x870:{name:"MSI MAG X870 Tomahawk WiFi", form:"ATX", lan:"2,5 Gbit/s", wifi:"Wi-Fi 7"},
+    x870:{name:"MSI MAG X870 Tomahawk WiFi", form:"ATX", lan:"5 Gbit/s", wifi:"Wi-Fi 7"},
     b850m:{name:"ASRock B850M Pro RS WiFi", form:"mATX", lan:"2,5 Gbit/s", wifi:"Wi-Fi 6E"},
     z890:{name:"Gigabyte Z890 AORUS Elite WiFi7", form:"ATX", lan:"2,5 Gbit/s", wifi:"Wi-Fi 7"},
     b860i:{name:"ASUS ROG Strix B860-I Gaming WiFi", form:"ITX", lan:"2,5 Gbit/s", wifi:"Wi-Fi 7"}
@@ -441,11 +441,47 @@
     if (activeView === "ports") setView("ports");
   }
 
+  async function copyExtended(event) {
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    const lines = ["BuildBench PC-Konfiguration", ""];
+    document.querySelectorAll(".build-row").forEach(row => {
+      const category = row.querySelector(".build-category")?.textContent.trim();
+      const item = row.querySelector(".build-item")?.textContent.trim();
+      const price = row.querySelector(".build-price")?.textContent.trim();
+      if (category) lines.push(`${category}: ${item || "offen"}${price && price !== "–" ? " – " + price : ""}`);
+    });
+    lines.push(`Ethernet: ${chosen("ethernet").name} – ${euro(chosen("ethernet").price)}`);
+    lines.push(`WLAN: ${chosen("wifi").name} – ${euro(chosen("wifi").price)}`);
+    lines.push("", `Gesamt: ${$("#price-label")?.textContent || "–"}`, `Leistung: ${$("#power-label")?.textContent || "–"}`);
+    try {
+      await navigator.clipboard.writeText(lines.join("\n"));
+      showToast("Stückliste einschließlich Netzwerk kopiert.");
+    } catch (_) {
+      showToast("Kopieren wurde vom Browser blockiert.");
+    }
+  }
+
+  function resetNetworkDefaults() {
+    networkState.ethernet = "onboard";
+    networkState.wifi = "onboard";
+    saveNetwork();
+    renderNetwork();
+    renderPorts();
+    applyPrice(false);
+  }
+
   loadNetwork();
   renderNetwork();
   renderPorts();
   applyPrice(true);
 
+  $("#copy-button")?.addEventListener("click", copyExtended, true);
+  $("#reset-button")?.addEventListener("click", () => setTimeout(() => {
+    const values = Object.values(baseSelections());
+    if (!values.some(Boolean)) resetNetworkDefaults();
+  }, 0));
+  $("#example-button")?.addEventListener("click", () => setTimeout(resetNetworkDefaults, 0));
   $("#safety-button")?.addEventListener("click", () => openLesson("Grundregeln"));
   $("#lesson-button")?.addEventListener("click", () => openLesson(currentLessonKey()));
   document.querySelectorAll(".dialog-close").forEach(button => button.addEventListener("click", () => $("#lesson-dialog").close()));
