@@ -24,6 +24,12 @@ Die Bedienoberfläche ist auf WCAG 2.2 ausgerichtet. Dazu gehören Sprunglinks, 
 
 Der automatisierte Test `a11y-check.js` schützt zentrale HTML-, CSS- und JavaScript-Merkmale vor Regressionen. Er ersetzt keine vollständige manuelle Prüfung mit Screenreader, Tastatur, Browser-Zoom und unterschiedlichen Betriebssystem-Kontrastmodi.
 
+## KI-Transparenz
+
+Die Anwendung selbst ist kein KI-System: Konfiguration, Kompatibilitätsprüfung, Zufallsauswahl und Quiz-Auswertung laufen vollständig lokal anhand fest programmierter Regeln. Es werden keine Eingaben an einen KI-Dienst übermittelt.
+
+Inhalte und Quellcode wurden mit Unterstützung generativer KI erstellt. Ein auf allen Seiten sichtbarer Transparenzhinweis macht dies kenntlich und empfiehlt vor dem Unterrichtseinsatz eine fachliche Prüfung anhand aktueller Herstellerunterlagen. Die Kennzeichnung erfolgt vorsorglich im Hinblick auf Artikel 50 der EU-KI-Verordnung und soll nicht den Eindruck erwecken, dass die Anwendung selbst KI einsetzt.
+
 ## Start
 
 `index.html` direkt öffnen oder einen lokalen Webserver starten:

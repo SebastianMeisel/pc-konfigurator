@@ -31,6 +31,12 @@ checkHtml("index.html");
 checkHtml("evaluation.html");
 checkHtml("quiz.html");
 
+for (const name of ["index.html", "evaluation.html", "quiz.html"]) {
+  assert(/<aside class="ai-disclosure" data-ai-disclosure aria-labelledby="ai-disclosure-title">/.test(files[name]), `${name}: KI-Transparenzhinweis fehlt`);
+  assert(/id="ai-disclosure-title">Transparenzhinweis zur KI-Unterstützung/.test(files[name]), `${name}: KI-Transparenzhinweis ist nicht eindeutig bezeichnet`);
+  assert(/Die Anwendung selbst verwendet kein KI-Modell/.test(files[name]), `${name}: Abgrenzung zur Laufzeit-KI fehlt`);
+}
+
 assert(/id="pc-view"[^>]+aria-labelledby="svg-title"[^>]+aria-describedby="svg-description visual-text"/.test(files["index.html"]), "index.html: Textalternative der Innenansicht fehlt");
 assert(/id="port-view"[^>]+aria-labelledby="port-title"[^>]+aria-describedby="port-description visual-text"/.test(files["index.html"]), "index.html: Textalternative der Anschlussansicht fehlt");
 assert(/<dialog[^>]+id="lesson-dialog"[^>]+aria-labelledby="lesson-dialog-title"/.test(files["index.html"]), "index.html: Dialogbezeichnung fehlt");
@@ -48,6 +54,7 @@ assert(/@media\s*\(prefers-reduced-motion:\s*reduce\)/.test(css), "styles.css: r
 assert(/@media\s*\(prefers-contrast:\s*more\)/.test(css), "styles.css: hoher Kontrast fehlt");
 assert(/@media\s*\(forced-colors:\s*active\)/.test(css), "styles.css: erzwungene Farben fehlen");
 assert(/\.visually-hidden\s*\{/.test(css), "styles.css: Hilfsklasse für Screenreader fehlt");
+assert(/\.ai-disclosure\s*\{/.test(css), "styles.css: Gestaltung des KI-Transparenzhinweises fehlt");
 
 assert(/reasons\.length[^\n]+aria-disabled="true"/.test(files["app.js"]), "app.js: inkompatible Optionen sind nicht zugänglich markiert");
 assert(!/reasons\.length\s*\?\s*"disabled"/.test(files["app.js"]), "app.js: inkompatible Optionen werden aus der Tastaturfolge entfernt");
