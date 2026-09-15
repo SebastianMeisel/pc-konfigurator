@@ -351,6 +351,13 @@ h2 { margin-bottom: 0; font-size: 1.08rem; letter-spacing: -.02em; }
     radial-gradient(circle at 50% 50%, rgba(35,68,96,.34), rgba(5,13,24,.9));
   background-size: 24px 24px, 24px 24px, auto;
 }
+.svg-host {
+  display: grid;
+  min-height: 440px;
+  place-items: center;
+  color: var(--muted);
+}
+.svg-host[hidden] { display: none; }
 #pc-view { display: block; width: 100%; min-height: 440px; max-height: 590px; }
 #pc-view .part { transition: opacity .25s ease, transform .25s ease, filter .25s ease; transform-box: fill-box; transform-origin: center; }
 #pc-view .part:hover { filter: brightness(1.25); }

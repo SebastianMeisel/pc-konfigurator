@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="port-view"
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 680 720"
+  role="img"
+  aria-labelledby="port-title"
+  aria-describedby="port-description visual-text">
+  <title id="port-title">Rückansicht mit Peripherieanschlüssen</title>
+  <desc id="port-description">Mainboard-Anschlüsse und Erweiterungskarten des gewählten Systems.</desc>
+
+  <defs>
+    <linearGradient id="rearMetal" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#273b50"/>
+      <stop offset="1" stop-color="#101c2a"/>
+    </linearGradient>
+    <pattern id="rearMesh" width="12" height="12" patternUnits="userSpaceOnUse">
+      <circle cx="3" cy="3" r="1.5" fill="#536b80"/>
+    </pattern>
+  </defs>
+
+  <!-- Editierbare Grundform der PC-Rückseite. -->
+  <g id="ports-base" data-editable-layer="chassis">
+    <rect x="62" y="35" width="556" height="645" rx="20" fill="url(#rearMetal)" stroke="#657d94" stroke-width="4"/>
+    <rect x="82" y="55" width="516" height="605" rx="12" fill="#07111d" stroke="#263d56" stroke-width="2"/>
+    <text x="340" y="87" font-size="14" fill="#65e6c4" text-anchor="middle">PC-RÜCKSEITE · PERIPHERIE</text>
+    <text x="340" y="704" font-size="9" fill="#71879d" text-anchor="middle">Farben kennzeichnen Funktionen, nicht verbindliche Port-Normen.</text>
+  </g>
+
+  <!-- Diese Ebene wird von education.js mit den gewählten Anschlüssen befüllt. -->
+  <g id="ports-content" data-editable-layer="dynamic-ports"/>
+</svg>

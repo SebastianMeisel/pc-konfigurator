@@ -3,7 +3,7 @@
 const { readFileSync } = require("node:fs");
 
 const files = Object.fromEntries(
-  ["index.html", "evaluation.html", "quiz.html", "styles.css", "education.css", "evaluation.css", "quiz.css", "app.js", "education.js", "evaluation.js", "quiz.js", "scorm.js", "imsmanifest.xml", "quiz-questions.json", "quiz-questions.schema.json", "tools/quiz_xlsx.py", "tools/package_scorm.py"]
+  ["index.html", "evaluation.html", "quiz.html", "styles.css", "education.css", "evaluation.css", "quiz.css", "app.js", "education.js", "evaluation.js", "quiz.js", "scorm.js", "svg-loader.js", "assets/svg/inside-view.svg", "assets/svg/ports-view.svg", "imsmanifest.xml", "quiz-questions.json", "quiz-questions.schema.json", "tools/quiz_xlsx.py", "tools/package_scorm.py"]
     .map((name) => [name, readFileSync(name, "utf8")])
 );
 
@@ -39,8 +39,13 @@ for (const name of ["index.html", "evaluation.html", "quiz.html"]) {
   assert(/<script src="scorm\.js"/.test(files[name]), `${name}: SCORM-Anbindung fehlt`);
 }
 
-assert(/id="pc-view"[^>]+aria-labelledby="svg-title"[^>]+aria-describedby="svg-description visual-text"/.test(files["index.html"]), "index.html: Textalternative der Innenansicht fehlt");
-assert(/id="port-view"[^>]+aria-labelledby="port-title"[^>]+aria-describedby="port-description visual-text"/.test(files["index.html"]), "index.html: Textalternative der Anschlussansicht fehlt");
+assert(/id="pc-view-host"[^>]+role="status"/.test(files["index.html"]), "index.html: Ladeplatzhalter der Innenansicht fehlt");
+assert(/id="port-view-host"[^>]+role="status"/.test(files["index.html"]), "index.html: Ladeplatzhalter der Anschlussansicht fehlt");
+assert(/id="pc-view"[^>]+aria-labelledby="svg-title"[^>]+aria-describedby="svg-description visual-text"/.test(files["assets/svg/inside-view.svg"]), "inside-view.svg: Textalternative der Innenansicht fehlt");
+assert(/id="port-view"[^>]+aria-labelledby="port-title"[^>]+aria-describedby="port-description visual-text"/.test(files["assets/svg/ports-view.svg"]), "ports-view.svg: Textalternative der Anschlussansicht fehlt");
+assert(/id="inside-content"[^>]+data-editable-layer="dynamic-components"/.test(files["assets/svg/inside-view.svg"]), "inside-view.svg: dynamische Ebene fehlt");
+assert(/id="ports-content"[^>]+data-editable-layer="dynamic-ports"/.test(files["assets/svg/ports-view.svg"]), "ports-view.svg: dynamische Ebene fehlt");
+assert(/script, foreignObject/.test(files["svg-loader.js"]) && /name\.startsWith\("on"\)/.test(files["svg-loader.js"]), "svg-loader.js: SVG-Bereinigung fehlt");
 assert(/<dialog[^>]+id="lesson-dialog"[^>]+aria-labelledby="lesson-dialog-title"/.test(files["index.html"]), "index.html: Dialogbezeichnung fehlt");
 assert(/<caption class="visually-hidden">/.test(files["evaluation.html"]), "evaluation.html: Tabellenbeschriftung fehlt");
 assert(/class="criteria-table-wrap"[^>]+role="region"[^>]+aria-label="Tabelle der gewichteten Kriterien; horizontal verschiebbar"/.test(files["evaluation.html"]), "evaluation.html: zugänglicher Tabellenbereich fehlt");
@@ -59,9 +64,11 @@ assert(/\.visually-hidden\s*\{/.test(css), "styles.css: Hilfsklasse für Screenr
 assert(/\.ai-disclosure\s*\{/.test(css), "styles.css: Gestaltung des KI-Transparenzhinweises fehlt");
 
 assert(/reasons\.length[^\n]+aria-disabled="true"/.test(files["app.js"]), "app.js: inkompatible Optionen sind nicht zugänglich markiert");
+assert(/querySelector\("#inside-content"\)/.test(files["app.js"]), "app.js: externe Innenansicht wird nicht befüllt");
 assert(!/reasons\.length\s*\?\s*"disabled"/.test(files["app.js"]), "app.js: inkompatible Optionen werden aus der Tastaturfolge entfernt");
 assert(/dialogTrigger[^\n]+dialogTrigger\.focus/.test(files["education.js"]), "education.js: Dialogfokus wird nicht zurückgegeben");
 assert(/dataset\.portDescription/.test(files["education.js"]), "education.js: dynamische Anschlussbeschreibung fehlt");
+assert(/querySelector\("#ports-content"\)/.test(files["education.js"]), "education.js: externe Anschlussansicht wird nicht befüllt");
 assert(/\$\("#score-ring"\)\.setAttribute\("aria-label"/.test(files["evaluation.js"]), "evaluation.js: Ergebnisgrafik wird nicht aktualisiert");
 assert(/prefers-reduced-motion/.test(files["evaluation.js"]), "evaluation.js: Scrollbewegung respektiert Systemeinstellung nicht");
 const quizData = JSON.parse(files["quiz-questions.json"]);

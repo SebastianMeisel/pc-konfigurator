@@ -37,6 +37,15 @@ python3 tools/quiz_xlsx.py import --force
 
 Standardmäßig verwendet das Skript `quiz-questions.json` und `quiz-questions.xlsx` im Projektverzeichnis. Abweichende Pfade können mit `--json` und `--xlsx` angegeben werden. Ohne `--force` werden vorhandene Dateien nicht überschrieben. Der Import prüft IDs, Pflichtfelder, vier eindeutige Antworten, die richtige Lösung und lehnt Tabellenformeln ab.
 
+## SVG-Grafiken bearbeiten
+
+Die beiden Darstellungen liegen als eigenständige, mit Inkscape oder einem Texteditor bearbeitbare Dateien vor:
+
+- `assets/svg/inside-view.svg` – Innenansicht, Farbdefinitionen und dynamische Komponentenebene
+- `assets/svg/ports-view.svg` – Rückansicht, Gehäusegrundform und dynamische Anschlussebene
+
+`svg-loader.js` lädt und prüft beide Vorlagen beim Start. Die variablen Bauteile werden anschließend von `app.js` beziehungsweise `education.js` in die klar benannten Gruppen `#inside-content` und `#ports-content` eingesetzt. IDs dieser Gruppen sowie die zugänglichen `title`- und `desc`-Elemente müssen beim Bearbeiten erhalten bleiben.
+
 ## Barrierefreiheit
 
 Die Bedienoberfläche ist auf WCAG 2.2 ausgerichtet. Dazu gehören Sprunglinks, eine durchgängige Tastaturbedienung, sichtbare Fokusmarkierungen, semantische Statusmeldungen, zugängliche Dialoge sowie Textalternativen für die dynamischen PC- und Anschlussgrafiken. Hohe Kontraste, vergrößerte Bedienelemente, erzwungene Systemfarben und reduzierte Bewegung werden berücksichtigt.

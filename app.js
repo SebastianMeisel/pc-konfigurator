@@ -1,5 +1,7 @@
-(() => {
+(async () => {
   "use strict";
+
+  await window.BuildBenchSVG?.ready;
 
   const categories = [
     { id: "case", label: "Gehäuse", title: "Gehäuse auswählen", description: "Das Gehäuse setzt die Grenzen für Mainboard, Grafikkarte, Kühler, Radiator und Netzteil." },
@@ -416,14 +418,7 @@
     const accent = "#65e6c4", blue="#56c8ff", gold="#ffc857", red="#ff6b7a";
     const coolantColor = coolant?.fluid ? coolant.color : blue;
 
-    let svg = `<defs>
-      <linearGradient id="caseMetal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#172b42"/><stop offset="1" stop-color="#091523"/></linearGradient>
-      <linearGradient id="pcb" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#183e42"/><stop offset="1" stop-color="#10272f"/></linearGradient>
-      <filter id="glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-      <pattern id="mesh" width="12" height="12" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="1.4" fill="#496078"/></pattern>
-    </defs>
-    <rect x="0" y="0" width="680" height="720" fill="transparent"/>
-    <g class="part active-part">
+    let svg = `<g class="part active-part">
       <rect x="${x}" y="${y}" width="${caseW}" height="${h}" rx="18" fill="url(#caseMetal)" stroke="#58708a" stroke-width="4"/>
       <rect x="${x+16}" y="${y+16}" width="${caseW-32}" height="${h-32}" rx="11" fill="#07111d" fill-opacity=".62" stroke="#263d56" stroke-width="2"/>
       <rect x="${x+22}" y="${y+4}" width="${caseW-44}" height="18" rx="6" fill="url(#mesh)"/>
@@ -525,7 +520,9 @@
     }
 
     svg += `<g opacity=".75"><path d="M${x} 690 H${x+caseW}" stroke="#5a7189" stroke-width="1"/><path d="M${x} 683 V697 M${x+caseW} 683 V697" stroke="#5a7189"/>${svgText(x+caseW/2,706,c?.size||"PC-GEHÄUSE",10,"#71879d","middle")}</g>`;
-    refs.svg.innerHTML = svg;
+    const layer = refs.svg.querySelector("#inside-content");
+    if (!layer) return;
+    layer.innerHTML = svg;
     refs.buildName.textContent = cpu && gpu ? `${cpu.label} / ${gpu.label}` : c?.name || "Dein System";
     refs.viewLegend.innerHTML = [
       [accent,"Mainboard / Auswahl"],[gold,"Stromversorgung"],[blue,"Speicher / Kühlung"],[red,"Grafik / Last"]

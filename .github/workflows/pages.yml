@@ -31,6 +31,7 @@ jobs:
           node --check quiz.js
           node --check quiz-check.js
           node --check scorm.js
+          node --check svg-loader.js
           node --check scorm-check.js
           node --check a11y-check.js
           node scorm-check.js
@@ -46,10 +47,14 @@ jobs:
           test -s evaluation.css
           test -s a11y-check.js
           test -s imsmanifest.xml
+          test -s assets/svg/inside-view.svg
+          test -s assets/svg/ports-view.svg
           test -s dist/buildbench-scorm-1.2.zip
           test -s favicon.svg
-          grep -q 'id="pc-view"' index.html
-          grep -q 'id="port-view"' index.html
+          grep -q 'id="pc-view-host"' index.html
+          grep -q 'id="port-view-host"' index.html
+          grep -q 'id="pc-view"' assets/svg/inside-view.svg
+          grep -q 'id="port-view"' assets/svg/ports-view.svg
           grep -q 'id="lesson-dialog"' index.html
           grep -q 'id="network-options"' index.html
           grep -q 'const categories' app.js

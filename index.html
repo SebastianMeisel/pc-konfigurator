@@ -9,6 +9,7 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="education.css">
+  <script src="svg-loader.js" defer></script>
   <script src="scorm.js" defer></script>
   <script src="app.js" defer></script>
   <script src="education.js" defer></script>
@@ -89,14 +90,8 @@
         </div>
       </div>
       <div class="svg-frame">
-        <svg id="pc-view" viewBox="0 0 680 720" role="img" aria-labelledby="svg-title" aria-describedby="svg-description visual-text">
-          <title id="svg-title">Schnittansicht des zusammengestellten PCs</title>
-          <desc id="svg-description">Die gewählten Komponenten werden maßstäblich angenähert im Gehäuse dargestellt.</desc>
-        </svg>
-        <svg id="port-view" viewBox="0 0 680 720" role="img" aria-labelledby="port-title" aria-describedby="port-description visual-text" hidden>
-          <title id="port-title">Rückansicht mit Peripherieanschlüssen</title>
-          <desc id="port-description">Mainboard-Anschlüsse und Erweiterungskarten des gewählten Systems.</desc>
-        </svg>
+        <div id="pc-view-host" class="svg-host" role="status">Innenansicht wird geladen.</div>
+        <div id="port-view-host" class="svg-host" role="status" hidden>Anschlussansicht wird geladen.</div>
       </div>
       <div class="view-legend" id="view-legend"></div>
       <p class="visually-hidden" id="visual-text"></p>

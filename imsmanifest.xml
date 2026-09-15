@@ -33,6 +33,9 @@
       <file href="evaluation.js"/>
       <file href="quiz.js"/>
       <file href="scorm.js"/>
+      <file href="svg-loader.js"/>
+      <file href="assets/svg/inside-view.svg"/>
+      <file href="assets/svg/ports-view.svg"/>
       <file href="quiz-questions.json"/>
       <file href="quiz-questions.schema.json"/>
       <file href="favicon.svg"/>

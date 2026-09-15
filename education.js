@@ -1,5 +1,7 @@
-(() => {
+(async () => {
   "use strict";
+
+  await window.BuildBenchSVG?.ready;
 
   const lessons = {
     "Grundregeln": {
@@ -396,11 +398,7 @@
     const wifi = chosen("wifi");
     const hasGpu = Boolean(base.gpu);
     const onboardWifi = wifi.id === "onboard";
-    let out = `<defs><linearGradient id="rearMetal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#273b50"/><stop offset="1" stop-color="#101c2a"/></linearGradient><pattern id="rearMesh" width="12" height="12" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="1.5" fill="#536b80"/></pattern></defs>
-      <rect x="62" y="35" width="556" height="645" rx="20" fill="url(#rearMetal)" stroke="#657d94" stroke-width="4"/>
-      <rect x="82" y="55" width="516" height="605" rx="12" fill="#07111d" stroke="#263d56" stroke-width="2"/>
-      ${svgText(340,87,"PC-RÜCKSEITE · PERIPHERIE",14,"#65e6c4","middle")}
-      <g class="port-group"><rect x="112" y="112" width="290" height="276" rx="9" fill="#132437" stroke="#67819a" stroke-width="2"/>
+    let out = `<g class="port-group"><rect x="112" y="112" width="290" height="276" rx="9" fill="#132437" stroke="#67819a" stroke-width="2"/>
       ${svgText(257,137,board ? board.name : "MAINBOARD-I/O (BEISPIEL)",10,"#cfe0ef","middle")}
       ${usbPair(134,162)}${usbPair(134,199,"#4d7fa1")}${usbPair(134,236,"#4d7fa1")}
       <rect x="218" y="162" width="42" height="27" rx="8" fill="#101d2b" stroke="#56c8ff"/><rect x="228" y="170" width="22" height="11" rx="5" fill="#56c8ff"/>
@@ -429,8 +427,9 @@
     if (wifi.slot) {
       out += `<g class="port-group"><rect x="112" y="${expansionY}" width="450" height="44" rx="6" fill="#112334" stroke="#ffc857"/><circle cx="501" cy="${expansionY+22}" r="7" fill="#d7bf65"/><circle cx="535" cy="${expansionY+22}" r="7" fill="#d7bf65"/>${svgText(130,expansionY+27,wifi.name+" · Antennen",10,"#ffe2a1")}</g>`;
     }
-    out += svgText(340,704,"Farben kennzeichnen Funktionen, nicht verbindliche Port-Normen.",9,"#71879d","middle");
-    svg.innerHTML = out;
+    const layer = svg.querySelector("#ports-content");
+    if (!layer) return;
+    layer.innerHTML = out;
     const visualText = $("#visual-text");
     if (visualText) {
       const boardText = board ? board.name : "kein Mainboard ausgewählt";
