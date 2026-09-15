@@ -10,7 +10,7 @@ const portSvgNames = readdirSync("assets/svg/ports")
   .map(name => `assets/svg/ports/${name}`);
 
 const files = Object.fromEntries(
-  ["index.html", "evaluation.html", "quiz.html", "styles.css", "education.css", "evaluation.css", "quiz.css", "app.js", "education.js", "evaluation.js", "quiz.js", "scorm.js", "svg-loader.js", "assets/svg/inside-view.svg", "assets/svg/ports-view.svg", ...componentSvgNames, ...portSvgNames, "imsmanifest.xml", "quiz-questions.json", "quiz-questions.schema.json", "tools/quiz_xlsx.py", "tools/package_scorm.py"]
+  ["index.html", "evaluation.html", "quiz.html", "styles.css", "education.css", "evaluation.css", "quiz.css", "app.js", "education.js", "evaluation.js", "quiz.js", "scorm.js", "svg-loader.js", "content-loader.js", "assets/svg/inside-view.svg", "assets/svg/ports-view.svg", ...componentSvgNames, ...portSvgNames, "imsmanifest.xml", "content/components.json", "content/components.schema.json", "content/lessons.json", "content/lessons.schema.json", "content/network.json", "content/network.schema.json", "quiz-questions.json", "quiz-questions.schema.json", "tools/quiz_xlsx.py", "tools/content_xlsx.py", "tools/package_scorm.py"]
     .map((name) => [name, readFileSync(name, "utf8")])
 );
 
@@ -79,6 +79,9 @@ assert(/\.visually-hidden\s*\{/.test(css), "styles.css: Hilfsklasse für Screenr
 assert(/\.ai-disclosure\s*\{/.test(css), "styles.css: Gestaltung des KI-Transparenzhinweises fehlt");
 
 assert(/reasons\.length[^\n]+aria-disabled="true"/.test(files["app.js"]), "app.js: inkompatible Optionen sind nicht zugänglich markiert");
+assert(/BuildBenchContent\?\.ready/.test(files["app.js"]) && /BuildBenchContent\?\.ready/.test(files["education.js"]), "App: externe Inhaltsdaten werden nicht gemeinsam geladen");
+assert(/fetch\(url,\s*\{\s*cache:\s*"no-store"\s*\}\)/.test(files["content-loader.js"]), "content-loader.js: JSON-Daten werden nicht geladen");
+assert(/const escapeHtml/.test(files["app.js"]) && /escapeHtml\(item\.name\)/.test(files["app.js"]), "app.js: bearbeitbare Inhalte werden nicht maskiert");
 assert(/querySelector\("#inside-content"\)/.test(files["app.js"]), "app.js: externe Innenansicht wird nicht befüllt");
 for (const name of componentSvgNames) {
   const basename = name.split("/").pop();
@@ -86,6 +89,8 @@ for (const name of componentSvgNames) {
 }
 assert(!/reasons\.length\s*\?\s*"disabled"/.test(files["app.js"]), "app.js: inkompatible Optionen werden aus der Tastaturfolge entfernt");
 assert(/dialogTrigger[^\n]+dialogTrigger\.focus/.test(files["education.js"]), "education.js: Dialogfokus wird nicht zurückgegeben");
+assert(/data-lesson-id=/.test(files["app.js"]) && /dataset\.lessonId/.test(files["education.js"]), "Lernkarten: stabile Zuordnung über lessonId fehlt");
+assert(/networkGroups\[type\]\.lessonId/.test(files["education.js"]), "Netzwerkoptionen: Lernkartenverweis aus JSON wird nicht verwendet");
 assert(/dataset\.portDescription/.test(files["education.js"]), "education.js: dynamische Anschlussbeschreibung fehlt");
 assert(/querySelector\("#ports-content"\)/.test(files["education.js"]), "education.js: externe Anschlussansicht wird nicht befüllt");
 for (const name of portSvgNames) {
@@ -107,6 +112,12 @@ assert(quizData.questions.every((question) => question.options.some((option) => 
 assert(quizSchema.properties?.questions?.items?.properties?.correctAnswer, "quiz-questions.schema.json: Schema für richtige Antwort fehlt");
 assert(/fetch\("quiz-questions\.json"/.test(files["quiz.js"]), "quiz.js: JSON-Fragenpool wird nicht geladen");
 assert(/def export_xlsx/.test(files["tools/quiz_xlsx.py"]) && /def import_xlsx/.test(files["tools/quiz_xlsx.py"]), "tools/quiz_xlsx.py: Import oder Export fehlt");
+assert(/def export_xlsx/.test(files["tools/content_xlsx.py"]) && /def import_xlsx/.test(files["tools/content_xlsx.py"]), "tools/content_xlsx.py: Import oder Export fehlt");
+for (const name of ["components", "lessons", "network"]) {
+  assert(JSON.parse(files["content/" + name + ".json"]).schemaVersion === 1, "content/" + name + ".json: falsche Schema-Version");
+  assert(JSON.parse(files["content/" + name + ".schema.json"]).type === "object", "content/" + name + ".schema.json: Schema fehlt");
+  assert(files["imsmanifest.xml"].includes('<file href="content/' + name + '.json"/>'), "imsmanifest.xml: content/" + name + ".json fehlt");
+}
 assert(/recordConfigurator/.test(files["scorm.js"]) && /recordQuizResult/.test(files["scorm.js"]), "scorm.js: Lernfortschrittsfunktionen fehlen");
 assert(/cmi\.suspend_data/.test(files["scorm.js"]) && /cmi\.core\.score\.raw/.test(files["scorm.js"]), "scorm.js: SCORM-Fortschrittsfelder fehlen");
 assert(/adlcp:scormtype="sco"/.test(files["imsmanifest.xml"]) && /<schemaversion>1\.2<\/schemaversion>/.test(files["imsmanifest.xml"]), "imsmanifest.xml: SCORM-1.2-SCO fehlt");

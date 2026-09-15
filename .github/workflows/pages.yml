@@ -32,12 +32,21 @@ jobs:
           node --check quiz-check.js
           node --check scorm.js
           node --check svg-loader.js
+          node --check content-loader.js
+          node --check content-check.js
+          node --check content-runtime-check.js
           node --check scorm-check.js
           node --check a11y-check.js
           node scorm-check.js
           node quiz-check.js
+          node content-check.js
+          node content-runtime-check.js
           node a11y-check.js
-          python3 -m py_compile tools/quiz_xlsx.py tools/package_scorm.py
+          python3 -m py_compile tools/quiz_xlsx.py tools/content_xlsx.py tools/package_scorm.py
+          content_roundtrip_dir=$(mktemp -d)
+          python3 tools/content_xlsx.py export --xlsx "$content_roundtrip_dir/buildbench-content.xlsx"
+          python3 tools/content_xlsx.py import --xlsx "$content_roundtrip_dir/buildbench-content.xlsx" --content-dir "$content_roundtrip_dir/content" --force
+          node content-check.js "$content_roundtrip_dir/content"
           python3 tools/package_scorm.py --force
           unzip -t dist/buildbench-scorm-1.2.zip
           test -s index.html
@@ -46,6 +55,11 @@ jobs:
           test -s education.css
           test -s evaluation.css
           test -s a11y-check.js
+          test -s content-loader.js
+          test -s content/components.json
+          test -s content/lessons.json
+          test -s content/network.json
+          test -s buildbench-content.xlsx
           test -s imsmanifest.xml
           test -s assets/svg/inside-view.svg
           test -s assets/svg/ports-view.svg
@@ -57,11 +71,11 @@ jobs:
           grep -q 'id="port-view"' assets/svg/ports-view.svg
           grep -q 'id="lesson-dialog"' index.html
           grep -q 'id="network-options"' index.html
-          grep -q 'const categories' app.js
-          grep -q 'const lessons' education.js
+          grep -q 'BuildBenchContent?.ready' app.js
+          grep -q 'BuildBenchContent?.ready' education.js
           grep -q 'generation-badge' app.js
-          grep -q 'id:"b550m"' app.js
-          grep -q 'id:"3080"' app.js
+          grep -q '"id": "b550m"' content/components.json
+          grep -q '"id": "3080"' content/components.json
           grep -q 'buildbench-evaluation-v1' app.js
           grep -q 'id="scenario-grid"' evaluation.html
           grep -q 'const scenarios' evaluation.js

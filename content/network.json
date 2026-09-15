@@ -1,0 +1,147 @@
+{
+  "$schema": "network.schema.json",
+  "schemaVersion": 1,
+  "groups": [
+    {
+      "id": "ethernet",
+      "label": "Ethernet",
+      "lessonId": "Ethernet",
+      "options": [
+        {
+          "id": "onboard",
+          "name": "Onboard-LAN verwenden",
+          "price": 0,
+          "slot": 0,
+          "speed": "boardabhängig",
+          "specs": "integriert · RJ45"
+        },
+        {
+          "id": "i210",
+          "name": "Intel I210-T1",
+          "price": 25,
+          "slot": 1,
+          "speed": "1 Gbit/s",
+          "specs": "PCIe x1 · RJ45"
+        },
+        {
+          "id": "i225",
+          "name": "Intel I225-T1",
+          "price": 39,
+          "slot": 1,
+          "speed": "2,5 Gbit/s",
+          "specs": "PCIe x1 · RJ45"
+        },
+        {
+          "id": "xg100",
+          "name": "ASUS XG-C100C",
+          "price": 99,
+          "slot": 4,
+          "speed": "10 Gbit/s",
+          "specs": "PCIe x4 · Cat 6A"
+        },
+        {
+          "id": "x550",
+          "name": "Intel X550-T2 Refurbished",
+          "price": 89,
+          "slot": 4,
+          "speed": "2× 10 Gbit/s",
+          "generation": 2,
+          "specs": "PCIe x4 · ältere Server-NIC"
+        }
+      ]
+    },
+    {
+      "id": "wifi",
+      "label": "WLAN",
+      "lessonId": "WLAN",
+      "options": [
+        {
+          "id": "onboard",
+          "name": "Onboard-WLAN verwenden",
+          "price": 0,
+          "slot": 0,
+          "speed": "Wi-Fi 6E/7",
+          "specs": "integriert · Bluetooth"
+        },
+        {
+          "id": "ax210",
+          "name": "Intel AX210 Kit",
+          "price": 35,
+          "slot": 1,
+          "speed": "Wi-Fi 6E",
+          "specs": "PCIe x1 · Bluetooth 5.3"
+        },
+        {
+          "id": "ax200",
+          "name": "Intel AX200 Kit",
+          "price": 25,
+          "slot": 1,
+          "speed": "Wi-Fi 6",
+          "generation": 1,
+          "specs": "PCIe x1 · Bluetooth 5.2"
+        },
+        {
+          "id": "txe75e",
+          "name": "TP-Link Archer TXE75E",
+          "price": 49,
+          "slot": 1,
+          "speed": "Wi-Fi 6E",
+          "specs": "PCIe x1 · externe Antenne"
+        },
+        {
+          "id": "be92",
+          "name": "ASUS PCE-BE92BT",
+          "price": 89,
+          "slot": 1,
+          "speed": "Wi-Fi 7",
+          "specs": "PCIe x1 · Bluetooth 5.4"
+        }
+      ]
+    }
+  ],
+  "boards": {
+    "x870": {
+      "name": "MSI MAG X870 Tomahawk WiFi",
+      "form": "ATX",
+      "lan": "5 Gbit/s",
+      "wifi": "Wi-Fi 7"
+    },
+    "b850m": {
+      "name": "ASRock B850M Pro RS WiFi",
+      "form": "mATX",
+      "lan": "2,5 Gbit/s",
+      "wifi": "Wi-Fi 6E"
+    },
+    "z890": {
+      "name": "Gigabyte Z890 AORUS Elite WiFi7",
+      "form": "ATX",
+      "lan": "2,5 Gbit/s",
+      "wifi": "Wi-Fi 7"
+    },
+    "b860i": {
+      "name": "ASUS ROG Strix B860-I Gaming WiFi",
+      "form": "ITX",
+      "lan": "2,5 Gbit/s",
+      "wifi": "Wi-Fi 7"
+    },
+    "b650": {
+      "name": "MSI B650 Gaming Plus WiFi",
+      "form": "ATX",
+      "lan": "2,5 Gbit/s",
+      "wifi": "Wi-Fi 6E"
+    },
+    "z790d4": {
+      "name": "MSI PRO Z790-P WiFi DDR4",
+      "form": "ATX",
+      "lan": "2,5 Gbit/s",
+      "wifi": "Wi-Fi 6E"
+    },
+    "b550m": {
+      "name": "MSI B550M PRO-VDH WiFi",
+      "form": "mATX",
+      "lan": "1 Gbit/s",
+      "wifi": "Wi-Fi 5"
+    }
+  }
+}
+

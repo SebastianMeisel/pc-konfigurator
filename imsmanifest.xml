@@ -34,6 +34,7 @@
       <file href="quiz.js"/>
       <file href="scorm.js"/>
       <file href="svg-loader.js"/>
+      <file href="content-loader.js"/>
       <file href="assets/svg/inside-view.svg"/>
       <file href="assets/svg/ports-view.svg"/>
       <file href="assets/svg/components/case.svg"/>
@@ -57,6 +58,12 @@
       <file href="assets/svg/ports/displayport.svg"/>
       <file href="assets/svg/ports/audio-jack.svg"/>
       <file href="assets/svg/ports/wifi-antenna.svg"/>
+      <file href="content/components.json"/>
+      <file href="content/components.schema.json"/>
+      <file href="content/lessons.json"/>
+      <file href="content/lessons.schema.json"/>
+      <file href="content/network.json"/>
+      <file href="content/network.schema.json"/>
       <file href="quiz-questions.json"/>
       <file href="quiz-questions.schema.json"/>
       <file href="favicon.svg"/>

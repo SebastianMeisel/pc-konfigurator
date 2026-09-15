@@ -19,6 +19,32 @@ Die Anwendung bewertet unter anderem Sockel, Formfaktor, Arbeitsspeicherstandard
 - Barrierearmer Multiple-Choice-Test mit 20 zufälligen Fragen aus einem Pool von 100, Hinweisen, Sofortfeedback, Themenauswertung und Nachbesprechung
 - SCORM-1.2-Anbindung für ILIAS mit Lernstatus, Punktzahl, Bearbeitungsposition, Sitzungszeit und Wiederaufnahme eines begonnenen Quiz
 
+## Komponenten und Erklärtexte bearbeiten
+
+Die Dateien `content/components.json`, `content/lessons.json` und `content/network.json` sind die verbindlichen Datenquellen. Die gleichnamigen Schema-Dateien unterstützen JSON-Editoren bei der Eingabeprüfung. Kompatibilitätsregeln und Bewertungslogik bleiben bewusst in JavaScript, weil sie ausführbare Regeln und keine redaktionellen Inhalte sind.
+
+Für die Bearbeitung in Excel oder LibreOffice steht die erzeugte Arbeitsmappe [`buildbench-content.xlsx`](buildbench-content.xlsx) bereit. Sie enthält:
+
+- Kategorien und je ein Tabellenblatt `K_<Kategorie-ID>` für die Komponenten
+- Lernkarten mit Titel und Aufgabenbeschreibung sowie ein normalisiertes Blatt für Installations-, Sicherheits- und Prüfanweisungen
+- Ethernet-/WLAN-Optionen und die zugehörigen Mainboard-Netzdaten
+
+Eine aktuelle Arbeitsmappe wird aus den JSON-Dateien erzeugt mit:
+
+```bash
+python3 tools/content_xlsx.py export --force
+```
+
+Nach der Bearbeitung werden alle drei JSON-Dateien gemeinsam aktualisiert mit:
+
+```bash
+python3 tools/content_xlsx.py import --force
+```
+
+Listenwerte wie Spezifikationen, Sockel oder unterstützte Formfaktoren stehen innerhalb einer Zelle jeweils in einer eigenen Zeile. Beim Import werden Formeln abgewiesen sowie Pflichtfelder, Datentypen, eindeutige IDs und Querverweise geprüft. Ohne `--force` überschreibt das Skript keine vorhandenen Dateien. Abweichende Pfade lassen sich mit `--content-dir` und `--xlsx` angeben.
+
+Neue Modelle können ohne Programmänderung in einer vorhandenen Kategorie ergänzt werden, sofern alle von den bestehenden Einträgen verwendeten technischen Felder ausgefüllt sind. Neue Kategorien oder neue technische Eigenschaften benötigen zusätzlich passende Anzeige-, Kompatibilitäts- oder Bewertungslogik.
+
 ## Quizfragen bearbeiten
 
 Die Datei `quiz-questions.json` ist die verbindliche Datenquelle des Wissenstests. `quiz-questions.schema.json` beschreibt das Format für Editoren mit JSON-Schema-Unterstützung. Jede Frage enthält vier Antworten, individuelles Feedback und den Buchstaben der richtigen Antwort.
@@ -69,7 +95,7 @@ Inhalte und Quellcode wurden mit Unterstützung generativer KI erstellt. Ein auf
 
 ## Start
 
-Für den Quiz-Datenabruf muss die Anwendung über einen lokalen Webserver gestartet werden:
+Für den Abruf der Inhalts- und Quizdaten muss die Anwendung über einen lokalen Webserver gestartet werden:
 
 ```bash
 python3 -m http.server 8080

@@ -1,0 +1,320 @@
+{
+  "$schema": "lessons.schema.json",
+  "schemaVersion": 1,
+  "lessons": [
+    {
+      "id": "Grundregeln",
+      "title": "Sicher arbeiten am PC",
+      "role": "Professionelle Montage beginnt mit einem sicheren, dokumentierten Arbeitsplatz. Die folgenden Regeln gelten bei jedem Arbeitsschritt.",
+      "install": [
+        "Arbeitsplatz freiräumen, gut beleuchten und Schrauben sortiert ablegen.",
+        "PC vollständig herunterfahren, Netzschalter ausschalten und Netzkabel abziehen.",
+        "Vor dem Berühren von Bauteilen Restladung durch kurzes Drücken des Einschalters abbauen.",
+        "Herstellerhandbücher und Anschlusspläne bereitlegen; Arbeitsschritte dokumentieren."
+      ],
+      "safety": [
+        "ESD-Schutz verwenden: Potentialausgleich herstellen oder regelmäßig geerdetes Metall berühren. Bauteile nur an den Kanten halten.",
+        "Nie im Netzteil arbeiten: Auch getrennte Netzteile können gefährliche Spannungen speichern.",
+        "Keine Gewalt anwenden. Sockel, Stecker und Speichermodule sind kodiert und passen nur in der vorgesehenen Orientierung.",
+        "Bei Flüssigkeitskühlung zuerst eine Dichtheitsprüfung ohne bestromte PC-Komponenten durchführen."
+      ],
+      "check": [
+        "Vor dem Einschalten Werkzeug, lose Schrauben und Schutzfolien entfernen.",
+        "24-Pin-ATX, CPU-EPS, GPU-Strom, Lüfter und Frontpanel-Anschlüsse kontrollieren.",
+        "Erststart mit geöffnetem Gehäuse beobachten; bei Geruch, Rauch oder ungewöhnlichen Geräuschen sofort spannungsfrei schalten.",
+        "UEFI prüfen, Temperaturen beobachten und anschließend Speicher-, CPU- und GPU-Tests durchführen."
+      ]
+    },
+    {
+      "id": "Gehäuse",
+      "title": "Gehäuse",
+      "role": "Das Gehäuse schützt die Hardware, führt den Luftstrom und legt Platz, Formfaktoren, Laufwerksschächte sowie Frontanschlüsse fest.",
+      "install": [
+        "Seitenwände entfernen und Zubehör, Staubfilter sowie vorinstallierte Abstandhalter prüfen.",
+        "Luftstrom planen: vorn/unten ansaugen, hinten/oben ausblasen; Pfeile auf Lüfterrahmen beachten.",
+        "Scharfe Kanten, Kabelwege und Freiraum für GPU, Kühler und Radiator vor der Montage prüfen."
+      ],
+      "safety": [
+        "Gehäuse standsicher ablegen und Glasflächen nicht auf harte Kanten stellen.",
+        "Nur die zum Mainboard passenden Abstandhalter montieren; zusätzliche Abstandhalter können Kurzschlüsse verursachen."
+      ],
+      "check": [
+        "Front-I/O-Kabel zuordnen.",
+        "Staubfilter frei halten.",
+        "Nach Montage kontrollieren, dass kein Kabel in einen Lüfter ragt."
+      ]
+    },
+    {
+      "id": "Mainboard",
+      "title": "Mainboard",
+      "role": "Das Mainboard verbindet CPU, RAM, Massenspeicher, Erweiterungskarten und externe Schnittstellen. Chipsatz, Sockel und Formfaktor bestimmen die Erweiterbarkeit.",
+      "install": [
+        "I/O-Blende einsetzen, falls sie nicht integriert ist.",
+        "CPU, M.2-SSD und RAM möglichst außerhalb des Gehäuses montieren.",
+        "Board auf korrekt gesetzte Abstandhalter legen und Schrauben über Kreuz handfest anziehen.",
+        "24-Pin-ATX, CPU-EPS, Frontpanel, USB, Audio und Lüfter nach Handbuch verbinden."
+      ],
+      "safety": [
+        "Leiterbahnen und Kontakte nicht berühren; Board nur an den Kanten halten.",
+        "Kein Abstandhalter darf unter einer Stelle ohne Montagebohrung sitzen."
+      ],
+      "check": [
+        "UEFI-Version zur CPU-Kompatibilität prüfen.",
+        "Debug-LEDs oder POST-Code auswerten.",
+        "Alle Geräte im UEFI inventarisieren."
+      ]
+    },
+    {
+      "id": "CPU",
+      "title": "Prozessor (CPU)",
+      "role": "Die CPU führt Maschinenbefehle aus und koordiniert Rechen-, Speicher- und Ein-/Ausgabeoperationen. Sockel und Firmware müssen zum Mainboard passen.",
+      "install": [
+        "Sockelhebel öffnen und Markierungsdreieck von CPU und Sockel ausrichten.",
+        "CPU ohne Druck einlegen; Verriegelung gemäß Mainboard-Handbuch schließen.",
+        "Eine kleine, passende Menge Wärmeleitpaste verwenden, sofern der Kühler keine aufgetragen hat."
+      ],
+      "safety": [
+        "Kontakte und Sockel-Pins niemals berühren oder mit Werkzeug richten.",
+        "CPU nicht in den Sockel drücken. Widerstand bedeutet meist falsche Ausrichtung."
+      ],
+      "check": [
+        "CPU-Bezeichnung im UEFI prüfen.",
+        "Leerlauf- und Lasttemperaturen kontrollieren.",
+        "Stabilitätstest mit Temperaturgrenzen durchführen."
+      ]
+    },
+    {
+      "id": "Grafikkarte",
+      "title": "Grafikkarte (GPU)",
+      "role": "Die GPU verarbeitet parallel Bild-, Video- und Compute-Daten. Sie benötigt einen passenden PCIe-Steckplatz, mechanischen Freiraum und ausreichende Stromversorgung.",
+      "install": [
+        "Obersten elektrisch angebundenen PCIe-x16-Steckplatz verwenden und Slotverriegelung öffnen.",
+        "Passende Slotblenden entfernen, Karte gerade einsetzen und am Gehäuse befestigen.",
+        "Vorgesehenes GPU-Stromkabel vollständig einstecken; schwere Karten abstützen."
+      ],
+      "safety": [
+        "12V-2x6-Stecker bis zum Anschlag einstecken und das Kabel direkt am Stecker nicht stark knicken.",
+        "Keine laufenden Lüfter berühren; Karte nicht am Kühler oder an Lüftern tragen."
+      ],
+      "check": [
+        "Monitor für Nutzung der dedizierten GPU an deren Ausgänge anschließen.",
+        "Treiber installieren.",
+        "Temperatur, Leistung und Bildfehler unter Last prüfen."
+      ]
+    },
+    {
+      "id": "Arbeitsspeicher",
+      "title": "Arbeitsspeicher (RAM)",
+      "role": "RAM hält aktuell benötigte Daten mit geringer Latenz bereit. Typ, Kapazität, Modulanzahl und Speicherprofil beeinflussen Kompatibilität und Leistung.",
+      "install": [
+        "Empfohlene Steckplätze aus dem Handbuch verwenden, meist A2 und B2 für zwei Module.",
+        "Kerbe ausrichten, Modul senkrecht einsetzen und gleichmäßig drücken, bis die Halter einrasten.",
+        "EXPO oder XMP erst nach einem stabilen Start aktivieren."
+      ],
+      "safety": [
+        "Kontakte nicht berühren.",
+        "DDR-Generationen sind mechanisch unterschiedlich; ein Modul niemals erzwingen."
+      ],
+      "check": [
+        "Gesamtkapazität und Kanalmodus im UEFI prüfen.",
+        "Speichertest durchführen.",
+        "Bei Fehlern Standardtakt laden und Module einzeln testen."
+      ]
+    },
+    {
+      "id": "Netzteil",
+      "title": "Netzteil (PSU)",
+      "role": "Das Netzteil wandelt Netzspannung in geregelte Gleichspannungen. Nennleistung, Schutzschaltungen, Effizienz und Anschlüsse müssen zur Last passen.",
+      "install": [
+        "Lüfter zur vorgesehenen belüfteten Öffnung ausrichten und Netzteil verschrauben.",
+        "Nur benötigte modulare Kabel anschließen und Leitungen spannungsfrei verlegen.",
+        "CPU-EPS- und PCIe/GPU-Stecker unterscheiden; sie sind nicht austauschbar."
+      ],
+      "safety": [
+        "Netzteil niemals öffnen.",
+        "Modulare Kabel verschiedener Netzteilmodelle nicht mischen: Die Pinbelegung auf Netzteilseite ist nicht standardisiert.",
+        "Arbeiten nur bei gezogenem Netzkabel durchführen."
+      ],
+      "check": [
+        "Leistungsreserve und GPU-Spitzenlast berücksichtigen.",
+        "Schutzleiter und Steckdosenumgebung müssen intakt sein.",
+        "Bei Klickgeräuschen oder Abschaltungen Verkabelung und Last prüfen."
+      ]
+    },
+    {
+      "id": "CPU-Kühler",
+      "title": "CPU-Kühler",
+      "role": "Der Kühler transportiert Wärme vom Heatspreader zur Umgebungsluft oder zu einem Flüssigkeitskreislauf. Montagekraft und Wärmeübergang sind entscheidend.",
+      "install": [
+        "Passendes Sockel-Montagekit und Backplate verwenden.",
+        "Wärmeleitflächen reinigen, Paste dosieren und Schrauben abwechselnd anziehen.",
+        "Lüfter an CPU_FAN anschließen; Pumpenanschluss nach Herstellerangabe wählen.",
+        "Radiator so montieren, dass Luft nicht dauerhaft in der Pumpe gesammelt wird."
+      ],
+      "safety": [
+        "Schutzfolie am Kühlboden entfernen.",
+        "Kühler nicht übermäßig festziehen.",
+        "Lüfterkabel aus Rotoren heraushalten."
+      ],
+      "check": [
+        "CPU_FAN- bzw. Pumpendrehzahl im UEFI prüfen.",
+        "Temperaturen sofort nach Erststart beobachten.",
+        "Bei schneller Überhitzung abschalten und Kontaktfläche prüfen."
+      ]
+    },
+    {
+      "id": "Festplatte",
+      "title": "Massenspeicher",
+      "role": "SSD und HDD speichern Betriebssystem, Programme und Nutzdaten dauerhaft. NVMe nutzt PCIe; SATA verwendet getrennte Daten- und Stromverbindungen.",
+      "install": [
+        "M.2-Modul schräg einsetzen, absenken und mit Halter oder Schraube fixieren; Kühlkörperfolie entfernen.",
+        "SATA-Laufwerk vibrationsarm montieren und SATA-Datenkabel sowie SATA-Strom anschließen.",
+        "Ports und Bootreihenfolge dokumentieren."
+      ],
+      "safety": [
+        "M.2-Schraube nicht überdrehen.",
+        "Laufwerke niemals bei Schreibzugriff abziehen.",
+        "Vor Arbeiten wichtige Daten sichern."
+      ],
+      "check": [
+        "Datenträger im UEFI und Betriebssystem erkennen.",
+        "SMART-Werte prüfen.",
+        "Dateisystem und Backup-Wiederherstellung testen."
+      ]
+    },
+    {
+      "id": "Abstandhalter",
+      "title": "Abstandhalter",
+      "role": "Abstandhalter halten das Mainboard auf definierter Höhe und verhindern Kontakt zwischen Lötstellen und leitendem Gehäuse.",
+      "install": [
+        "Positionen mit den Mainboard-Bohrungen vergleichen.",
+        "Nur benötigte Abstandhalter mit passendem Gewinde einsetzen.",
+        "Board ohne Verspannung auflegen."
+      ],
+      "safety": [
+        "Ein überzähliger Abstandhalter kann einen Kurzschluss verursachen.",
+        "Gewinde nur handfest anziehen und nicht verkanten."
+      ],
+      "check": [
+        "Jede Boardbohrung muss über einem passenden Abstandhalter liegen.",
+        "Unter dem Board dürfen keine losen Metallteile liegen."
+      ]
+    },
+    {
+      "id": "Schrauben",
+      "title": "Schrauben",
+      "role": "Schrauben sichern Baugruppen mechanisch. Gewinde, Länge und Kopf müssen zum Bauteil passen.",
+      "install": [
+        "Schrauben nach Typ sortieren.",
+        "Zunächst locker ansetzen, dann über Kreuz handfest anziehen.",
+        "Für M.2, Mainboard, Netzteil und Laufwerke die jeweils vorgesehenen Schrauben verwenden."
+      ],
+      "safety": [
+        "Zu lange Schrauben können Bauteile beschädigen.",
+        "Nicht überdrehen; Metallspäne und heruntergefallene Schrauben vollständig entfernen."
+      ],
+      "check": [
+        "Alle Bauteile sitzen fest, aber spannungsfrei.",
+        "Keine Schraube fehlt oder liegt lose im Gehäuse."
+      ]
+    },
+    {
+      "id": "Kabel",
+      "title": "Kabel und Leitungsführung",
+      "role": "Kabel übertragen Energie, Daten und Steuersignale. Korrekte Stecker, Biegeradien und Zugentlastung verhindern Ausfälle.",
+      "install": [
+        "Leitungswege vor dem Einbau großer Komponenten planen.",
+        "Stecker an Form, Beschriftung und Handbuch zuordnen.",
+        "Kabel bündeln, ohne Stecker unter Zug zu setzen oder Luftwege zu blockieren."
+      ],
+      "safety": [
+        "Stecker nie am Kabel herausziehen.",
+        "Modulare Netzteilkabel nicht zwischen Modellen tauschen.",
+        "Beschädigte oder gequetschte Leitungen ersetzen."
+      ],
+      "check": [
+        "Alle Verriegelungen sind eingerastet.",
+        "12V-2x6 sitzt bündig.",
+        "SATA-Daten- und Stromkabel sind an beiden Enden verbunden."
+      ]
+    },
+    {
+      "id": "Kühlmittel",
+      "title": "Kühlmittel",
+      "role": "Kühlmittel transportiert Wärme in einem offenen Wasserkreislauf und schützt geeignete Werkstoffe vor Korrosion und biologischem Wachstum.",
+      "install": [
+        "Nur kompatibles, gebrauchsfertiges Mittel verwenden.",
+        "Kreislauf langsam befüllen und Pumpe niemals trocken laufen lassen.",
+        "Luft aus dem System entfernen und Füllstand dokumentieren."
+      ],
+      "safety": [
+        "Dichtheitsprüfung mit überbrücktem Netzteil und sonst stromlosen PC-Komponenten durchführen.",
+        "Verschüttetes Mittel vollständig aufnehmen; Herstellerhinweise zu Hautkontakt und Entsorgung beachten.",
+        "Unterschiedliche Kühlmittel nicht mischen."
+      ],
+      "check": [
+        "Alle Anschlüsse mit trockenem Tuch auf Feuchtigkeit prüfen.",
+        "Mehrstündigen Lecktest durchführen.",
+        "Füllstand, Verfärbung und Ablagerungen regelmäßig kontrollieren."
+      ]
+    },
+    {
+      "id": "Ethernet",
+      "title": "Ethernet-Schnittstelle",
+      "role": "Ethernet überträgt Frames leitungsgebunden. Die niedrigste gemeinsame Geschwindigkeit von Karte, Switch und Gegenstelle sowie Kabelqualität bestimmt den Link.",
+      "install": [
+        "PCIe-Karte in einen ausreichend angebundenen freien Steckplatz einsetzen und verschrauben.",
+        "Passendes Twisted-Pair-Kabel verwenden: für 10 Gbit/s sind kurze, hochwertige Cat-6A-Strecken sinnvoll.",
+        "Treiber, Linkmodus, VLANs und gegebenenfalls Wake-on-LAN konfigurieren."
+      ],
+      "safety": [
+        "Nicht an Netzwerkleitungen arbeiten, die unbekannte PoE-Spannung führen.",
+        "RJ45-Stecker an der Lasche lösen und nicht am Kabel ziehen."
+      ],
+      "check": [
+        "Link-LED und ausgehandelte Geschwindigkeit prüfen.",
+        "IP-Konfiguration, Gateway und DNS testen.",
+        "Durchsatz mit iperf3 und Fehlerzähler mit Betriebssystemwerkzeugen prüfen."
+      ]
+    },
+    {
+      "id": "WLAN",
+      "title": "WLAN-Schnittstelle",
+      "role": "WLAN verbindet den PC per Funk. Standard, Frequenzband, Kanalbreite, Antennenposition und Access Point begrenzen die erreichbare Datenrate.",
+      "install": [
+        "PCIe-x1-Karte einsetzen und Antennen außen anschrauben.",
+        "Für Bluetooth das interne USB-2.0-Kabel der Karte mit einem freien Header verbinden.",
+        "Antennen frei und möglichst unterschiedlich ausrichten; aktuelle Treiber installieren."
+      ],
+      "safety": [
+        "Antennenstecker nur handfest anziehen.",
+        "Interne USB-Header korrekt ausrichten; ein versetzter Stecker kann Kurzschlüsse verursachen."
+      ],
+      "check": [
+        "2,4-, 5- und gegebenenfalls 6-GHz-Verbindung testen.",
+        "Signalstärke, ausgehandelten Standard und Kanal prüfen.",
+        "Bluetooth separat koppeln und unter Last testen."
+      ]
+    },
+    {
+      "id": "Anschlüsse",
+      "title": "Peripherieanschlüsse",
+      "role": "Die Rückansicht unterscheidet Mainboard-I/O, Grafikausgänge und Erweiterungskarten. Form und Symbol sind wichtiger als die Farbe eines Anschlusses.",
+      "install": [
+        "Monitor bei dedizierter GPU an die Grafikkarte anschließen.",
+        "Tastatur und Maus an USB; schnelle Datenträger an passend gekennzeichnete schnelle USB-Ports anschließen.",
+        "Netzwerk, Audio und Antennen vor dem Start zugentlastet verbinden."
+      ],
+      "safety": [
+        "Stecker nur in passender Orientierung einsetzen.",
+        "USB-C ist eine Steckerform; Datenrate, DisplayPort-Alt-Mode und Ladeleistung sind optionale Eigenschaften."
+      ],
+      "check": [
+        "Ports im Betriebssystem inventarisieren.",
+        "USB-Datenrate und Displayausgabe mit geeigneten Geräten testen.",
+        "Audio-Ein- und Ausgänge korrekt zuordnen."
+      ]
+    }
+  ]
+}
+
