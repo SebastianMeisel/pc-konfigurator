@@ -3,6 +3,7 @@
 const $ = selector => document.querySelector(selector);
 const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
 let algorithms = [];
+let complexityGuide = null;
 let exercises = { deskTests: [], debugChallenges: [], helpCards: [] };
 let activeTrace = [];
 let activeStep = -1;
@@ -141,11 +142,34 @@ function renderCode(algorithm) {
   algorithm.lines.forEach(line => { const item = document.createElement("li"); item.textContent = line; list.append(item); });
   $("#complexity-badge").textContent = `Ø ${algorithm.complexity.average} · Speicher ${algorithm.complexity.memory}`;
   const details = $("#algorithm-details"); details.replaceChildren();
-  const summary = document.createElement("p"); summary.textContent = `${algorithm.summary} ${algorithm.requirement}`; details.append(summary);
+  const summary = document.createElement("p"); summary.className = "lead-explanation"; summary.textContent = algorithm.plainExplanation; details.append(summary);
+  const requirement = document.createElement("p"); requirement.className = "requirement-note"; const requirementTitle = document.createElement("strong"); requirementTitle.textContent = "Wichtige Voraussetzung: "; requirement.append(requirementTitle, document.createTextNode(algorithm.requirement)); details.append(requirement);
+
+  const stepsTitle = document.createElement("h4"); stepsTitle.textContent = "Ablauf in fünf einfachen Schritten"; details.append(stepsTitle);
+  const steps = document.createElement("ol"); steps.className = "plain-steps"; algorithm.steps.forEach(text => { const item = document.createElement("li"); item.textContent = text; steps.append(item); }); details.append(steps);
+
+  const example = document.createElement("div"); example.className = "worked-example";
+  const exampleTitle = document.createElement("h4"); exampleTitle.textContent = "Kurzes Beispiel";
+  const exampleInput = document.createElement("code"); exampleInput.textContent = algorithm.example.input;
+  const exampleText = document.createElement("p"); exampleText.textContent = algorithm.example.text; example.append(exampleTitle, exampleInput, exampleText); details.append(example);
+
+  const prosAndCons = document.createElement("div"); prosAndCons.className = "pros-cons";
+  [["Stärken", algorithm.strengths], ["Grenzen", algorithm.limits]].forEach(([title, entries]) => { const section = document.createElement("section"), heading = document.createElement("h4"), bullets = document.createElement("ul"); heading.textContent = title; entries.forEach(text => { const item = document.createElement("li"); item.textContent = text; bullets.append(item); }); section.append(heading, bullets); prosAndCons.append(section); }); details.append(prosAndCons);
+
+  const properties = document.createElement("p"); properties.className = "algorithm-properties"; properties.textContent = `Stabil: ${algorithm.properties.stable}. In-place: ${algorithm.properties.inPlace}.`; details.append(properties);
+  const complexityTitle = document.createElement("h4"); complexityTitle.textContent = "Warum diese O-Bewertung gilt"; details.append(complexityTitle);
   const dl = document.createElement("dl"); dl.className = "property-list";
-  [["Bester Fall", algorithm.complexity.best], ["Mittlerer Fall", algorithm.complexity.average], ["Schlechtester Fall", algorithm.complexity.worst], ["Zusatzspeicher", algorithm.complexity.memory]].forEach(([term, value]) => {
-    const wrap = document.createElement("div"), dt = document.createElement("dt"), dd = document.createElement("dd"); dt.textContent = term; dd.textContent = value; wrap.append(dt, dd); dl.append(wrap);
+  [["Bester Fall", "best"], ["Mittlerer Fall", "average"], ["Schlechtester Fall", "worst"], ["Zusatzspeicher", "memory"]].forEach(([term, key]) => {
+    const wrap = document.createElement("div"), dt = document.createElement("dt"), dd = document.createElement("dd"), explanation = document.createElement("p"); dt.textContent = term; dd.textContent = algorithm.complexity[key]; explanation.textContent = algorithm.complexityExplanation[key]; wrap.append(dt, dd, explanation); dl.append(wrap);
   }); details.append(dl);
+}
+
+function renderComplexityGuide() {
+  const introduction = $("#complexity-introduction"); introduction.replaceChildren();
+  [complexityGuide.intro, complexityGuide.nMeaning, complexityGuide.important].forEach((text, index) => { const paragraph = document.createElement("p"); if (index === 2) paragraph.className = "requirement-note"; paragraph.textContent = text; introduction.append(paragraph); });
+  const cases = $("#complexity-cases"); cases.replaceChildren(); complexityGuide.cases.forEach(entry => { const article = document.createElement("article"), heading = document.createElement("h3"), text = document.createElement("p"); heading.textContent = entry.name; text.textContent = entry.text; article.append(heading, text); cases.append(article); });
+  const growth = $("#complexity-growth"); growth.replaceChildren(); complexityGuide.growth.forEach(entry => { const row = document.createElement("tr"); [entry.notation, entry.name, entry.simple, entry.whenDoubles, entry.example].forEach((value, index) => { const cell = document.createElement(index === 0 ? "th" : "td"); if (index === 0) cell.scope = "row"; cell.textContent = value; row.append(cell); }); growth.append(row); });
+  $("#complexity-number-example").textContent = complexityGuide.numberExample;
 }
 
 function renderState(item) {
@@ -261,11 +285,11 @@ function populate() {
   exercises.deskTests.forEach(item => $("#desk-select").add(new Option(`${byId(item.algorithm).name}: ${item.title}`, item.id)));
   exercises.debugChallenges.forEach(item => $("#debug-select").add(new Option(`${byId(item.algorithm).name}: ${item.title}`, item.id)));
   const help = $("#help-grid"); exercises.helpCards.forEach(card => { const article = document.createElement("article"); article.className = "help-card"; const title = document.createElement("h3"), text = document.createElement("p"); title.textContent = card.title; text.textContent = card.text; article.append(title, text); help.append(article); });
-  algorithmChanged(); prepareRun(); startDesk(); renderDebug();
+  renderComplexityGuide(); algorithmChanged(); prepareRun(); startDesk(); renderDebug();
 }
 function validateData(algorithmData, exerciseData) {
-  if (algorithmData?.schemaVersion !== 1 || !Array.isArray(algorithmData.algorithms) || algorithmData.algorithms.length < 2) throw new Error("Die Algorithmusdaten sind ungültig.");
-  const ids = new Set(); algorithmData.algorithms.forEach(item => { if (!item.id || ids.has(item.id) || !Array.isArray(item.lines) || !item.lines.length) throw new Error("Algorithmus-ID oder Pseudocode ungültig."); ids.add(item.id); });
+  if (algorithmData?.schemaVersion !== 2 || !algorithmData.complexityGuide || !Array.isArray(algorithmData.algorithms) || algorithmData.algorithms.length < 2) throw new Error("Die Algorithmusdaten sind ungültig.");
+  const ids = new Set(); algorithmData.algorithms.forEach(item => { if (!item.id || ids.has(item.id) || !Array.isArray(item.lines) || !item.lines.length || !item.plainExplanation || !Array.isArray(item.steps) || !item.complexityExplanation) throw new Error("Algorithmus-ID, Pseudocode oder Erläuterung ungültig."); ids.add(item.id); });
   if (exerciseData?.schemaVersion !== 1 || !Array.isArray(exerciseData.deskTests) || !Array.isArray(exerciseData.debugChallenges)) throw new Error("Die Übungsdaten sind ungültig.");
   [...exerciseData.deskTests, ...exerciseData.debugChallenges].forEach(item => { if (!ids.has(item.algorithm)) throw new Error(`Unbekannter Algorithmus in ${item.id}.`); });
 }
@@ -289,5 +313,5 @@ addEventListener("pagehide", stopAuto);
 Promise.all([
   fetch("content/algorithms.json", { cache: "no-cache" }).then(response => { if (!response.ok) throw new Error(`HTTP ${response.status}`); return response.json(); }),
   fetch("content/exercises.json", { cache: "no-cache" }).then(response => { if (!response.ok) throw new Error(`HTTP ${response.status}`); return response.json(); })
-]).then(([algorithmData, exerciseData]) => { validateData(algorithmData, exerciseData); algorithms = algorithmData.algorithms; exercises = exerciseData; populate(); })
+]).then(([algorithmData, exerciseData]) => { validateData(algorithmData, exerciseData); algorithms = algorithmData.algorithms; complexityGuide = algorithmData.complexityGuide; exercises = exerciseData; populate(); })
   .catch(error => { console.error(error); $("#load-error").textContent = "Die Lerninhalte konnten nicht geladen werden. Starte die Anwendung über einen Webserver und prüfe die JSON-Dateien."; $("#load-error").hidden = false; });

@@ -2,31 +2,84 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "AlgoDesk-Algorithmen",
   "type": "object",
-  "required": ["schemaVersion", "algorithms"],
+  "required": ["schemaVersion", "complexityGuide", "algorithms"],
   "properties": {
-    "schemaVersion": { "const": 1 },
+    "schemaVersion": { "const": 2 },
+    "complexityGuide": {
+      "type": "object",
+      "required": ["title", "intro", "nMeaning", "important", "cases", "growth", "numberExample"],
+      "properties": {
+        "title": { "$ref": "#/$defs/text" },
+        "intro": { "$ref": "#/$defs/text" },
+        "nMeaning": { "$ref": "#/$defs/text" },
+        "important": { "$ref": "#/$defs/text" },
+        "numberExample": { "$ref": "#/$defs/text" },
+        "cases": {
+          "type": "array", "minItems": 4,
+          "items": {
+            "type": "object", "required": ["name", "text"],
+            "properties": { "name": { "$ref": "#/$defs/text" }, "text": { "$ref": "#/$defs/text" } },
+            "additionalProperties": false
+          }
+        },
+        "growth": {
+          "type": "array", "minItems": 4,
+          "items": {
+            "type": "object", "required": ["notation", "name", "simple", "whenDoubles", "example"],
+            "properties": {
+              "notation": { "$ref": "#/$defs/text" }, "name": { "$ref": "#/$defs/text" },
+              "simple": { "$ref": "#/$defs/text" }, "whenDoubles": { "$ref": "#/$defs/text" }, "example": { "$ref": "#/$defs/text" }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
     "algorithms": {
       "type": "array",
       "minItems": 1,
       "items": {
         "type": "object",
-        "required": ["id", "name", "kind", "summary", "requirement", "complexity", "concepts", "lines"],
+        "required": ["id", "name", "kind", "summary", "requirement", "plainExplanation", "steps", "example", "strengths", "limits", "properties", "complexity", "complexityExplanation", "concepts", "lines"],
         "properties": {
           "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
-          "name": { "type": "string", "minLength": 1 },
+          "name": { "$ref": "#/$defs/text" },
           "kind": { "enum": ["search", "sort"] },
-          "summary": { "type": "string", "minLength": 1 },
-          "requirement": { "type": "string", "minLength": 1 },
-          "complexity": {
-            "type": "object",
-            "required": ["best", "average", "worst", "memory"],
-            "additionalProperties": { "type": "string" }
+          "summary": { "$ref": "#/$defs/text" },
+          "requirement": { "$ref": "#/$defs/text" },
+          "plainExplanation": { "$ref": "#/$defs/text" },
+          "steps": { "type": "array", "minItems": 3, "items": { "$ref": "#/$defs/text" } },
+          "example": {
+            "type": "object", "required": ["input", "text"],
+            "properties": { "input": { "$ref": "#/$defs/text" }, "text": { "$ref": "#/$defs/text" } },
+            "additionalProperties": false
           },
-          "concepts": { "type": "array", "items": { "type": "string" } },
-          "lines": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
+          "strengths": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/text" } },
+          "limits": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/text" } },
+          "properties": {
+            "type": "object", "required": ["stable", "inPlace"],
+            "properties": { "stable": { "$ref": "#/$defs/text" }, "inPlace": { "$ref": "#/$defs/text" } },
+            "additionalProperties": false
+          },
+          "complexity": { "$ref": "#/$defs/complexity" },
+          "complexityExplanation": { "$ref": "#/$defs/complexity" },
+          "concepts": { "type": "array", "items": { "$ref": "#/$defs/text" } },
+          "lines": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/text" } }
         },
         "additionalProperties": false
       }
+    }
+  },
+  "$defs": {
+    "text": { "type": "string", "minLength": 1 },
+    "complexity": {
+      "type": "object", "required": ["best", "average", "worst", "memory"],
+      "properties": {
+        "best": { "$ref": "#/$defs/text" }, "average": { "$ref": "#/$defs/text" },
+        "worst": { "$ref": "#/$defs/text" }, "memory": { "$ref": "#/$defs/text" }
+      },
+      "additionalProperties": false
     }
   },
   "additionalProperties": false

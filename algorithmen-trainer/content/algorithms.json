@@ -1,26 +1,53 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
+  "complexityGuide": {
+    "title": "Was bedeutet die O-Notation?",
+    "intro": "Die O-Notation beschreibt nicht die genaue Laufzeit in Sekunden. Sie zeigt, wie stark die benötigte Arbeit wächst, wenn die Eingabe größer wird. Dadurch lassen sich Algorithmen unabhängig vom verwendeten Computer vergleichen.",
+    "nMeaning": "Der Buchstabe n steht hier für die Anzahl der Werte in der Liste. Bei n = 8 enthält die Liste acht Werte; bei n = 1.000 sind es tausend Werte.",
+    "important": "Bei der O-Notation betrachtet man vor allem große Eingaben. Feste Zuschläge und konstante Faktoren werden weggelassen. Aus 3n + 5 wird deshalb O(n). Das bedeutet nicht, dass diese Arbeit tatsächlich verschwindet, sondern nur, dass n das Wachstum bestimmt. Genau genommen beschreibt O eine obere Grenze. Im Einstieg wird O häufig vereinfacht als Bezeichnung der Wachstumsordnung verwendet.",
+    "cases": [
+      { "name": "Bester Fall", "text": "Eine besonders günstige Eingabe. Beispiel: Die binäre Suche trifft sofort in der Mitte." },
+      { "name": "Mittlerer Fall", "text": "Der typische Aufwand über viele mögliche Eingaben. Er eignet sich oft zum Vergleich im Alltag." },
+      { "name": "Schlechtester Fall", "text": "Der größte mögliche Aufwand. Er hilft abzuschätzen, welche Leistung mindestens eingeplant werden muss." },
+      { "name": "Zusatzspeicher", "text": "Speicher, den der Algorithmus zusätzlich zur vorhandenen Eingabeliste benötigt." }
+    ],
+    "growth": [
+      { "notation": "O(1)", "name": "konstant", "simple": "Die Anzahl der Arbeitsschritte hängt nicht von n ab.", "whenDoubles": "Bleibt ungefähr gleich", "example": "Einen Wert an einem bekannten Index lesen" },
+      { "notation": "O(log n)", "name": "logarithmisch", "simple": "Die Datenmenge wird in jedem Schritt stark verkleinert, meist halbiert.", "whenDoubles": "Nur ungefähr ein Schritt mehr", "example": "Binäre Suche in einer sortierten Liste" },
+      { "notation": "O(n)", "name": "linear", "simple": "Jeder Wert wird höchstens einige wenige Male betrachtet.", "whenDoubles": "Ungefähr doppelte Arbeit", "example": "Einmal durch eine Liste laufen" },
+      { "notation": "O(n²)", "name": "quadratisch", "simple": "Viele Werte werden mit vielen anderen Werten verglichen.", "whenDoubles": "Ungefähr vierfache Arbeit", "example": "Zwei ineinander verschachtelte Schleifen über die Liste" }
+    ],
+    "numberExample": "Bei 8 Werten benötigt eine Halbierung höchstens etwa 4 Prüfungen, bei 16 Werten etwa 5. Ein quadratisches Verfahren kann dagegen grob von 64 auf 256 Vergleiche wachsen. Die Zahlen sind eine anschauliche Näherung, keine exakte Laufzeitmessung."
+  },
   "algorithms": [
     {
       "id": "binary-search",
       "name": "Binäre Suche",
       "kind": "search",
       "summary": "Halbiert in jedem Schritt den noch möglichen Suchbereich.",
-      "requirement": "Die Eingabeliste muss aufsteigend sortiert sein.",
+      "requirement": "Die Eingabeliste muss aufsteigend sortiert sein. Ohne diese Vorbedingung kann die Suche vorhandene Werte übersehen.",
+      "plainExplanation": "Stell dir ein alphabetisch sortiertes Telefonbuch vor. Du schlägst es in der Mitte auf. Liegt der gesuchte Name alphabetisch davor, ignorierst du die rechte Hälfte; liegt er danach, ignorierst du die linke Hälfte. Dies wiederholst du, bis der Name gefunden ist oder kein Bereich mehr übrig bleibt.",
+      "steps": [
+        "Setze links auf den ersten und rechts auf den letzten möglichen Index.",
+        "Berechne den mittleren Index des verbleibenden Bereichs.",
+        "Vergleiche den mittleren Wert mit dem gesuchten Wert.",
+        "Bei Gleichheit ist die Suche beendet. Sonst wird die unpassende Hälfte ausgeschlossen.",
+        "Ist links größer als rechts, kommt der Wert nicht vor."
+      ],
+      "example": { "input": "A = [3, 7, 11, 18, 24, 31, 42], gesucht = 24", "text": "Zuerst wird 18 in der Mitte geprüft. Weil 24 größer ist, entfällt die linke Hälfte. Im neuen Bereich ist 31 die Mitte; nun entfällt die rechte Hälfte. Danach wird 24 gefunden." },
+      "strengths": ["Sehr wenige Vergleiche bei großen sortierten Datenmengen", "Benötigt in der iterativen Form nur wenige zusätzliche Variablen"],
+      "limits": ["Funktioniert nur zuverlässig mit sortierten Daten", "Das vorherige Sortieren kann mehr Arbeit kosten als die Suche selbst", "Für häufig veränderte oder verkettete Datenstrukturen nicht immer die beste Wahl"],
+      "properties": { "stable": "nicht anwendbar, da nicht sortiert wird", "inPlace": "ja, die Liste wird nur gelesen" },
       "complexity": { "best": "O(1)", "average": "O(log n)", "worst": "O(log n)", "memory": "O(1)" },
+      "complexityExplanation": {
+        "best": "Der gesuchte Wert liegt sofort an der ersten berechneten Mitte: ein Vergleich genügt.",
+        "average": "Nach jedem erfolglosen Vergleich bleibt nur ungefähr die Hälfte der Kandidaten übrig.",
+        "worst": "Auch bei einem fehlenden Wert wird der Bereich immer wieder halbiert, bis er leer ist.",
+        "memory": "Die iterative Variante speichert nur links, rechts und mitte; die Zahl dieser Variablen bleibt gleich."
+      },
       "concepts": ["Teile und herrsche", "Intervallgrenzen", "Abbruchbedingung"],
       "lines": [
-        "FUNKTION BinäreSuche(A, gesucht)",
-        "  links ← 0",
-        "  rechts ← LÄNGE(A) - 1",
-        "  SOLANGE links ≤ rechts",
-        "    mitte ← GANZZAHL((links + rechts) / 2)",
-        "    WENN A[mitte] = gesucht: GIB mitte ZURÜCK",
-        "    WENN A[mitte] < gesucht",
-        "      links ← mitte + 1",
-        "    SONST",
-        "      rechts ← mitte - 1",
-        "  GIB -1 ZURÜCK"
+        "FUNKTION BinäreSuche(A, gesucht)", "  links ← 0", "  rechts ← LÄNGE(A) - 1", "  SOLANGE links ≤ rechts", "    mitte ← GANZZAHL((links + rechts) / 2)", "    WENN A[mitte] = gesucht: GIB mitte ZURÜCK", "    WENN A[mitte] < gesucht", "      links ← mitte + 1", "    SONST", "      rechts ← mitte - 1", "  GIB -1 ZURÜCK"
       ]
     },
     {
@@ -29,18 +56,28 @@
       "kind": "sort",
       "summary": "Vergleicht benachbarte Werte und schiebt große Werte schrittweise nach rechts.",
       "requirement": "Keine Vorsortierung erforderlich; gleiche Werte sind zulässig.",
+      "plainExplanation": "Bubble Sort läuft wiederholt von links nach rechts durch die Liste. Stehen zwei Nachbarn in der falschen Reihenfolge, werden sie vertauscht. Nach einem vollständigen Durchlauf steht der größte noch unsortierte Wert ganz rechts – ähnlich wie eine Luftblase, die nach oben steigt.",
+      "steps": [
+        "Beginne links und vergleiche immer zwei benachbarte Werte.",
+        "Ist der linke Wert größer, vertausche beide Werte.",
+        "Am Ende des Durchlaufs steht der größte betrachtete Wert an seiner endgültigen Position.",
+        "Wiederhole den Ablauf nur für den noch unsortierten Teil.",
+        "Gab es in einem ganzen Durchlauf keinen Tausch, ist die Liste bereits sortiert."
+      ],
+      "example": { "input": "A = [4, 2, 3]", "text": "4 und 2 werden zu [2, 4, 3] vertauscht, anschließend 4 und 3 zu [2, 3, 4]. Im nächsten Durchlauf gibt es keinen Tausch mehr; der Algorithmus kann abbrechen." },
+      "strengths": ["Sehr einfach zu erklären und als Schreibtischtest auszuführen", "Erkennt mit dem Tausch-Merker bereits sortierte Listen", "Stabil: Gleiche Werte behalten ihre ursprüngliche Reihenfolge"],
+      "limits": ["Bei großen Listen sehr viele Vergleiche und Tausche", "In realen Anwendungen meist langsamer als effizientere Sortierverfahren"],
+      "properties": { "stable": "ja, wenn nur bei > und nicht bei ≥ getauscht wird", "inPlace": "ja, getauscht wird direkt in der Liste" },
       "complexity": { "best": "O(n)", "average": "O(n²)", "worst": "O(n²)", "memory": "O(1)" },
+      "complexityExplanation": {
+        "best": "Ist die Liste bereits sortiert, genügt ein Durchlauf mit ungefähr n Vergleichen und ohne Tausch.",
+        "average": "Meist sind mehrere vollständige Durchläufe nötig. Zwei verschachtelte Schleifen führen ungefähr zu n · n Arbeit.",
+        "worst": "Bei umgekehrter Reihenfolge muss fast jedes Paar verglichen und sehr oft getauscht werden.",
+        "memory": "Es werden nur ein Tausch-Merker, Schleifenzähler und kurzzeitig ein Wert zum Tauschen benötigt."
+      },
       "concepts": ["Nachbarvergleich", "Tausch", "vorzeitiger Abbruch"],
       "lines": [
-        "PROZEDUR BubbleSort(A)",
-        "  FÜR ende ← LÄNGE(A) - 1 BIS 1",
-        "    getauscht ← FALSCH",
-        "    FÜR i ← 0 BIS ende - 1",
-        "      WENN A[i] > A[i + 1]",
-        "        TAUSCHE A[i] MIT A[i + 1]",
-        "        getauscht ← WAHR",
-        "    WENN getauscht = FALSCH: ABBRUCH",
-        "  GIB A ZURÜCK"
+        "PROZEDUR BubbleSort(A)", "  FÜR ende ← LÄNGE(A) - 1 BIS 1", "    getauscht ← FALSCH", "    FÜR i ← 0 BIS ende - 1", "      WENN A[i] > A[i + 1]", "        TAUSCHE A[i] MIT A[i + 1]", "        getauscht ← WAHR", "    WENN getauscht = FALSCH: ABBRUCH", "  GIB A ZURÜCK"
       ]
     },
     {
@@ -48,19 +85,29 @@
       "name": "Insertion Sort",
       "kind": "sort",
       "summary": "Fügt jeden neuen Wert an der passenden Stelle in den bereits sortierten linken Bereich ein.",
-      "requirement": "Besonders anschaulich und effizient bei kleinen oder fast sortierten Listen.",
+      "requirement": "Keine Vorsortierung erforderlich. Besonders geeignet für kleine oder fast sortierte Listen.",
+      "plainExplanation": "Insertion Sort funktioniert ähnlich wie das Sortieren von Spielkarten auf der Hand. Der linke Teil gilt bereits als sortiert. Du nimmst die nächste Karte, schiebst größere Karten nach rechts und steckst die neue Karte in die entstandene Lücke.",
+      "steps": [
+        "Betrachte das erste Element zunächst als sortierten Bereich.",
+        "Sichere den nächsten einzufügenden Wert in einer Hilfsvariable.",
+        "Verschiebe alle größeren Werte des linken Bereichs um eine Position nach rechts.",
+        "Setze den gesicherten Wert in die freie Position.",
+        "Vergrößere den sortierten Bereich um ein Element."
+      ],
+      "example": { "input": "A = [3, 7, 4]", "text": "3 und 7 bilden den sortierten linken Bereich. Der Wert 4 wird gesichert, 7 wird nach rechts verschoben und 4 zwischen 3 und 7 eingesetzt: [3, 4, 7]." },
+      "strengths": ["Schnell bei kleinen und fast sortierten Listen", "Stabil: Gleiche Werte behalten ihre ursprüngliche Reihenfolge", "Kann neue Werte schrittweise in einen sortierten Bestand einfügen"],
+      "limits": ["Bei umgekehrt sortierten großen Listen müssen sehr viele Werte verschoben werden", "Für große ungeordnete Datenmengen meist ungeeignet"],
+      "properties": { "stable": "ja, wenn nur Werte > wert verschoben werden", "inPlace": "ja, es wird nur eine Hilfsvariable benötigt" },
       "complexity": { "best": "O(n)", "average": "O(n²)", "worst": "O(n²)", "memory": "O(1)" },
+      "complexityExplanation": {
+        "best": "Bei bereits sortierter Liste wird jeder neue Wert nur einmal mit seinem linken Nachbarn verglichen.",
+        "average": "Ein Wert muss im Mittel an mehreren Vorgängern vorbeigeschoben werden. Insgesamt entsteht ungefähr quadratisches Wachstum.",
+        "worst": "Bei umgekehrter Reihenfolge wandert jeder neue Wert durch den gesamten bereits bearbeiteten Bereich.",
+        "memory": "Neben der Liste werden nur wert, i und j benötigt; ihre Anzahl wächst nicht mit n."
+      },
       "concepts": ["sortierter Teilbereich", "Verschieben", "Einfügen"],
       "lines": [
-        "PROZEDUR InsertionSort(A)",
-        "  FÜR i ← 1 BIS LÄNGE(A) - 1",
-        "    wert ← A[i]",
-        "    j ← i - 1",
-        "    SOLANGE j ≥ 0 UND A[j] > wert",
-        "      A[j + 1] ← A[j]",
-        "      j ← j - 1",
-        "    A[j + 1] ← wert",
-        "  GIB A ZURÜCK"
+        "PROZEDUR InsertionSort(A)", "  FÜR i ← 1 BIS LÄNGE(A) - 1", "    wert ← A[i]", "    j ← i - 1", "    SOLANGE j ≥ 0 UND A[j] > wert", "      A[j + 1] ← A[j]", "      j ← j - 1", "    A[j + 1] ← wert", "  GIB A ZURÜCK"
       ]
     },
     {
@@ -68,19 +115,29 @@
       "name": "Selection Sort",
       "kind": "sort",
       "summary": "Sucht im unsortierten Rest jeweils das kleinste Element und setzt es nach vorn.",
-      "requirement": "Benötigt unabhängig von der Vorsortierung ungefähr gleich viele Vergleiche.",
+      "requirement": "Keine Vorsortierung erforderlich. Die Anzahl der Vergleiche bleibt auch bei einer bereits sortierten Liste hoch.",
+      "plainExplanation": "Selection Sort teilt die Liste in einen sortierten linken und einen unsortierten rechten Bereich. Im unsortierten Bereich wird das kleinste Element gesucht. Dieses Element wird mit dem ersten unsortierten Element vertauscht. Danach ist der sortierte Bereich um einen Wert größer.",
+      "steps": [
+        "Markiere den Beginn des noch unsortierten Bereichs.",
+        "Merke dieses erste Element als bisher kleinstes Element.",
+        "Vergleiche alle folgenden Werte mit dem gemerkten Minimum.",
+        "Merke bei einem kleineren Wert dessen Index als neues Minimum.",
+        "Tausche das gefundene Minimum an die linke Grenze und wiederhole den Vorgang."
+      ],
+      "example": { "input": "A = [5, 2, 4]", "text": "Im gesamten Feld ist 2 das Minimum; es wird mit 5 vertauscht: [2, 5, 4]. Im Rest [5, 4] ist 4 das Minimum und wird nach vorn getauscht: [2, 4, 5]." },
+      "strengths": ["Einfacher, gut nachvollziehbarer Ablauf", "Führt höchstens einen Tausch pro äußerem Durchlauf aus", "Kann sinnvoll sein, wenn Schreiben teuer, Vergleichen aber billig ist"],
+      "limits": ["Prüft auch bei bereits sortierten Listen fast alle möglichen Vergleiche", "Die übliche Variante ist nicht stabil", "Für große Listen wegen O(n²) ungeeignet"],
+      "properties": { "stable": "normalerweise nein, ein weiter Tausch kann gleiche Werte umordnen", "inPlace": "ja, sortiert direkt in der vorhandenen Liste" },
       "complexity": { "best": "O(n²)", "average": "O(n²)", "worst": "O(n²)", "memory": "O(1)" },
+      "complexityExplanation": {
+        "best": "Auch eine sortierte Liste wird vollständig nach einem Minimum durchsucht. Die Eingabe spart daher kaum Vergleiche.",
+        "average": "Für die erste Position werden fast n Werte geprüft, danach n - 1, dann n - 2 und so weiter. Diese Summe wächst quadratisch.",
+        "worst": "Die Zahl der Vergleiche ist nahezu dieselbe wie im besten Fall; nur die Zahl der Tausche kann sich unterscheiden.",
+        "memory": "Zusätzlich werden nur Indizes wie links, i und min gespeichert."
+      },
       "concepts": ["Minimumsuche", "Teilbereiche", "Tausch"],
       "lines": [
-        "PROZEDUR SelectionSort(A)",
-        "  FÜR links ← 0 BIS LÄNGE(A) - 2",
-        "    min ← links",
-        "    FÜR i ← links + 1 BIS LÄNGE(A) - 1",
-        "      WENN A[i] < A[min]",
-        "        min ← i",
-        "    WENN min ≠ links",
-        "      TAUSCHE A[links] MIT A[min]",
-        "  GIB A ZURÜCK"
+        "PROZEDUR SelectionSort(A)", "  FÜR links ← 0 BIS LÄNGE(A) - 2", "    min ← links", "    FÜR i ← links + 1 BIS LÄNGE(A) - 1", "      WENN A[i] < A[min]", "        min ← i", "    WENN min ≠ links", "      TAUSCHE A[links] MIT A[min]", "  GIB A ZURÜCK"
       ]
     }
   ]

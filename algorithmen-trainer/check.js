@@ -13,20 +13,26 @@ const failures = [];
 let checks = 0;
 function assert(condition, message) { checks += 1; if (!condition) failures.push(message); }
 
-assert(algorithms.schemaVersion === 1, "Algorithmen: falsche Schemaversion");
+assert(algorithms.schemaVersion === 2, "Algorithmen: falsche Schemaversion");
+assert(algorithms.complexityGuide?.growth?.length === 4, "Vier Komplexitätsklassen werden erwartet");
+assert(algorithms.complexityGuide?.cases?.length === 4, "Vier Bewertungsfälle werden erwartet");
 assert(algorithms.algorithms.length === 4, "Vier Algorithmen werden erwartet");
 const algorithmIds = new Set();
 for (const algorithm of algorithms.algorithms) {
   assert(!algorithmIds.has(algorithm.id), `Doppelte Algorithmus-ID: ${algorithm.id}`); algorithmIds.add(algorithm.id);
   assert(algorithm.lines.length >= 8, `${algorithm.id}: Pseudocode zu kurz`);
   assert(["search", "sort"].includes(algorithm.kind), `${algorithm.id}: ungültige Art`);
+  assert(algorithm.plainExplanation.length >= 120, `${algorithm.id}: einfache Erläuterung zu kurz`);
+  assert(algorithm.steps.length >= 5, `${algorithm.id}: Ablauf benötigt mindestens fünf Schritte`);
+  assert(algorithm.strengths.length >= 2 && algorithm.limits.length >= 2, `${algorithm.id}: Stärken oder Grenzen fehlen`);
   for (const field of ["best", "average", "worst", "memory"]) assert(Boolean(algorithm.complexity[field]), `${algorithm.id}: Komplexität ${field} fehlt`);
+  for (const field of ["best", "average", "worst", "memory"]) assert(algorithm.complexityExplanation[field].length >= 60, `${algorithm.id}: Begründung für ${field} zu kurz`);
 }
 assert(exercises.deskTests.length === 6, "Sechs Schreibtischtests werden erwartet");
 assert(exercises.debugChallenges.length === 5, "Fünf Fehlerfälle werden erwartet");
 for (const exercise of [...exercises.deskTests, ...exercises.debugChallenges]) assert(algorithmIds.has(exercise.algorithm), `${exercise.id}: unbekannter Algorithmus`);
 for (const challenge of exercises.debugChallenges) assert(challenge.options.filter(option => option.correct).length === 1, `${challenge.id}: genau eine richtige Antwort erforderlich`);
-for (const id of ["main-content", "erkunden", "schreibtischtest", "fehlersuche", "help-dialog"]) assert(html.includes(`id="${id}"`), `HTML-ID fehlt: ${id}`);
+for (const id of ["main-content", "erkunden", "komplexitaet", "complexity-growth", "schreibtischtest", "fehlersuche", "help-dialog"]) assert(html.includes(`id="${id}"`), `HTML-ID fehlt: ${id}`);
 assert(/<html lang="de">/.test(html), "Dokumentsprache fehlt");
 assert(/class="skip-link"/.test(html), "Sprunglink fehlt");
 assert(/aria-live="polite"/.test(html), "Live-Region fehlt");

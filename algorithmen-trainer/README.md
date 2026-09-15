@@ -1,6 +1,6 @@
 # AlgoDesk
 
-Interaktive Unterrichts-Web-App für Fachinformatik-Berufe. Sie visualisiert Pseudocode zu binärer Suche, Bubble Sort, Insertion Sort und Selection Sort. Lernende können Abläufe schrittweise ausführen, geführte Schreibtischtests bearbeiten und typische Fehler analysieren.
+Interaktive Unterrichts-Web-App für Fachinformatik-Berufe. Sie visualisiert Pseudocode zu binärer Suche, Bubble Sort, Insertion Sort und Selection Sort. Lernende können Abläufe schrittweise ausführen, geführte Schreibtischtests bearbeiten und typische Fehler analysieren. Ausführliche Erklärungen führen in einfacher Sprache in Ablauf, Voraussetzungen, Stärken, Grenzen und O-Komplexität ein.
 
 ## Lokal starten
 

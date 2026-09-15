@@ -19,6 +19,7 @@
     </a>
     <nav aria-label="Lernbereiche">
       <a href="#erkunden">Erkunden</a>
+      <a href="#komplexitaet">O-Notation</a>
       <a href="#schreibtischtest">Schreibtischtest</a>
       <a href="#fehlersuche">Fehlersuche</a>
     </nav>
@@ -81,10 +82,26 @@
         </article>
       </div>
 
-      <details class="explanation" id="algorithm-explanation">
+      <details class="explanation" id="algorithm-explanation" open>
         <summary>Aufgabe und Eigenschaften des Algorithmus</summary>
         <div id="algorithm-details"></div>
       </details>
+    </section>
+
+    <section class="learning-section" id="komplexitaet" aria-labelledby="complexity-title">
+      <div class="section-heading">
+        <div><p class="eyebrow">Grundwissen</p><h2 id="complexity-title">O-Notation in einfacher Sprache</h2></div>
+      </div>
+      <div id="complexity-introduction" class="theory-introduction"></div>
+      <div class="case-grid" id="complexity-cases"></div>
+      <div class="table-wrap complexity-table" tabindex="0" role="region" aria-label="Vergleich wichtiger Komplexitätsklassen">
+        <table>
+          <caption>Wie der Aufwand mit der Eingabe wächst</caption>
+          <thead><tr><th scope="col">Notation</th><th scope="col">Bezeichnung</th><th scope="col">Einfache Bedeutung</th><th scope="col">Wenn n sich verdoppelt</th><th scope="col">Beispiel</th></tr></thead>
+          <tbody id="complexity-growth"></tbody>
+        </table>
+      </div>
+      <p class="number-example" id="complexity-number-example"></p>
     </section>
 
     <section class="learning-section" id="schreibtischtest" aria-labelledby="desk-title">
