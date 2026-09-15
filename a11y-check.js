@@ -57,8 +57,8 @@ assert(componentSvgNames.length === 14, `Komponenten-SVGs: 14 erwartet, ${compon
 assert(portSvgNames.length === 7, `Anschluss-SVGs: 7 erwartet, ${portSvgNames.length} gefunden`);
 for (const name of [...componentSvgNames, ...portSvgNames]) {
   assert(/<svg[^>]+viewBox=/.test(files[name]), `${name}: viewBox fehlt`);
-  assert(/<title>[^<]+<\/title>/.test(files[name]), `${name}: zugänglicher Titel fehlt`);
-  assert(/<desc>[^<]+<\/desc>/.test(files[name]), `${name}: Beschreibung fehlt`);
+  assert(/<title(?:\s+[^>]*)?>\s*[^<]+\s*<\/title>/.test(files[name]), `${name}: zugänglicher Titel fehlt`);
+  assert(/<desc(?:\s+[^>]*)?>\s*[^<]+\s*<\/desc>/.test(files[name]), `${name}: Beschreibung fehlt`);
   assert(files["imsmanifest.xml"].includes(`<file href="${name}"/>`), `${name}: Eintrag im SCORM-Manifest fehlt`);
 }
 assert(/<dialog[^>]+id="lesson-dialog"[^>]+aria-labelledby="lesson-dialog-title"/.test(files["index.html"]), "index.html: Dialogbezeichnung fehlt");
