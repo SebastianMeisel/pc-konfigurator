@@ -1,9 +1,16 @@
 "use strict";
 
-const { readFileSync } = require("node:fs");
+const { readFileSync, readdirSync } = require("node:fs");
+
+const componentSvgNames = readdirSync("assets/svg/components")
+  .filter(name => name.endsWith(".svg"))
+  .map(name => `assets/svg/components/${name}`);
+const portSvgNames = readdirSync("assets/svg/ports")
+  .filter(name => name.endsWith(".svg"))
+  .map(name => `assets/svg/ports/${name}`);
 
 const files = Object.fromEntries(
-  ["index.html", "evaluation.html", "quiz.html", "styles.css", "education.css", "evaluation.css", "quiz.css", "app.js", "education.js", "evaluation.js", "quiz.js", "scorm.js", "svg-loader.js", "assets/svg/inside-view.svg", "assets/svg/ports-view.svg", "imsmanifest.xml", "quiz-questions.json", "quiz-questions.schema.json", "tools/quiz_xlsx.py", "tools/package_scorm.py"]
+  ["index.html", "evaluation.html", "quiz.html", "styles.css", "education.css", "evaluation.css", "quiz.css", "app.js", "education.js", "evaluation.js", "quiz.js", "scorm.js", "svg-loader.js", "assets/svg/inside-view.svg", "assets/svg/ports-view.svg", ...componentSvgNames, ...portSvgNames, "imsmanifest.xml", "quiz-questions.json", "quiz-questions.schema.json", "tools/quiz_xlsx.py", "tools/package_scorm.py"]
     .map((name) => [name, readFileSync(name, "utf8")])
 );
 
@@ -46,6 +53,14 @@ assert(/id="port-view"[^>]+aria-labelledby="port-title"[^>]+aria-describedby="po
 assert(/id="inside-content"[^>]+data-editable-layer="dynamic-components"/.test(files["assets/svg/inside-view.svg"]), "inside-view.svg: dynamische Ebene fehlt");
 assert(/id="ports-content"[^>]+data-editable-layer="dynamic-ports"/.test(files["assets/svg/ports-view.svg"]), "ports-view.svg: dynamische Ebene fehlt");
 assert(/script, foreignObject/.test(files["svg-loader.js"]) && /name\.startsWith\("on"\)/.test(files["svg-loader.js"]), "svg-loader.js: SVG-Bereinigung fehlt");
+assert(componentSvgNames.length === 14, `Komponenten-SVGs: 14 erwartet, ${componentSvgNames.length} gefunden`);
+assert(portSvgNames.length === 7, `Anschluss-SVGs: 7 erwartet, ${portSvgNames.length} gefunden`);
+for (const name of [...componentSvgNames, ...portSvgNames]) {
+  assert(/<svg[^>]+viewBox=/.test(files[name]), `${name}: viewBox fehlt`);
+  assert(/<title>[^<]+<\/title>/.test(files[name]), `${name}: zugänglicher Titel fehlt`);
+  assert(/<desc>[^<]+<\/desc>/.test(files[name]), `${name}: Beschreibung fehlt`);
+  assert(files["imsmanifest.xml"].includes(`<file href="${name}"/>`), `${name}: Eintrag im SCORM-Manifest fehlt`);
+}
 assert(/<dialog[^>]+id="lesson-dialog"[^>]+aria-labelledby="lesson-dialog-title"/.test(files["index.html"]), "index.html: Dialogbezeichnung fehlt");
 assert(/<caption class="visually-hidden">/.test(files["evaluation.html"]), "evaluation.html: Tabellenbeschriftung fehlt");
 assert(/class="criteria-table-wrap"[^>]+role="region"[^>]+aria-label="Tabelle der gewichteten Kriterien; horizontal verschiebbar"/.test(files["evaluation.html"]), "evaluation.html: zugänglicher Tabellenbereich fehlt");
@@ -65,10 +80,18 @@ assert(/\.ai-disclosure\s*\{/.test(css), "styles.css: Gestaltung des KI-Transpar
 
 assert(/reasons\.length[^\n]+aria-disabled="true"/.test(files["app.js"]), "app.js: inkompatible Optionen sind nicht zugänglich markiert");
 assert(/querySelector\("#inside-content"\)/.test(files["app.js"]), "app.js: externe Innenansicht wird nicht befüllt");
+for (const name of componentSvgNames) {
+  const basename = name.split("/").pop();
+  assert(files["app.js"].includes(`"${basename}"`), `app.js: ${basename} wird nicht aus einer Einzeldatei geladen`);
+}
 assert(!/reasons\.length\s*\?\s*"disabled"/.test(files["app.js"]), "app.js: inkompatible Optionen werden aus der Tastaturfolge entfernt");
 assert(/dialogTrigger[^\n]+dialogTrigger\.focus/.test(files["education.js"]), "education.js: Dialogfokus wird nicht zurückgegeben");
 assert(/dataset\.portDescription/.test(files["education.js"]), "education.js: dynamische Anschlussbeschreibung fehlt");
 assert(/querySelector\("#ports-content"\)/.test(files["education.js"]), "education.js: externe Anschlussansicht wird nicht befüllt");
+for (const name of portSvgNames) {
+  const basename = name.split("/").pop().replace(/\.svg$/, "");
+  assert(files["education.js"].includes(`"${basename}"`), `education.js: ${basename}.svg wird nicht aus einer Einzeldatei geladen`);
+}
 assert(/\$\("#score-ring"\)\.setAttribute\("aria-label"/.test(files["evaluation.js"]), "evaluation.js: Ergebnisgrafik wird nicht aktualisiert");
 assert(/prefers-reduced-motion/.test(files["evaluation.js"]), "evaluation.js: Scrollbewegung respektiert Systemeinstellung nicht");
 const quizData = JSON.parse(files["quiz-questions.json"]);

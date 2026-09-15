@@ -46,6 +46,15 @@ Die beiden Darstellungen liegen als eigenständige, mit Inkscape oder einem Text
 
 `svg-loader.js` lädt und prüft beide Vorlagen beim Start. Die variablen Bauteile werden anschließend von `app.js` beziehungsweise `education.js` in die klar benannten Gruppen `#inside-content` und `#ports-content` eingesetzt. IDs dieser Gruppen sowie die zugänglichen `title`- und `desc`-Elemente müssen beim Bearbeiten erhalten bleiben.
 
+Die eigentlichen Symbole sind ebenfalls einzeln ausgelagert:
+
+| Ordner | Enthaltene SVG-Dateien |
+| --- | --- |
+| `assets/svg/components/` | Gehäuse, Mainboard, CPU, GPU, RAM, Netzteil, Luft- und Flüssigkeitskühler, M.2- und SATA-Speicher, Abstandhalter, Schrauben, Kabel und Kühlmittel |
+| `assets/svg/ports/` | USB-A, USB-C, RJ45, HDMI, DisplayPort, 3,5-mm-Audio und WLAN-Antenne |
+
+Die Ansichten referenzieren diese Dateien mit SVG-`image`-Elementen. Geometrie und Farben eines Bauteils oder Anschlusses können daher direkt in seiner Datei geändert werden, ohne die JavaScript-Zeichenlogik umzubauen. `viewBox`, `title` und `desc` sollten erhalten bleiben.
+
 ## Barrierefreiheit
 
 Die Bedienoberfläche ist auf WCAG 2.2 ausgerichtet. Dazu gehören Sprunglinks, eine durchgängige Tastaturbedienung, sichtbare Fokusmarkierungen, semantische Statusmeldungen, zugängliche Dialoge sowie Textalternativen für die dynamischen PC- und Anschlussgrafiken. Hohe Kontraste, vergrößerte Bedienelemente, erzwungene Systemfarben und reduzierte Bewegung werden berücksichtigt.

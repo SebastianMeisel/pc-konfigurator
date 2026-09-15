@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 92">
+  <title>Grafikkarte</title><desc>Lange Erweiterungskarte mit zwei Lüftern, Slotblende und Stromanschluss.</desc>
+  <rect x="15" y="1.5" width="303" height="89" rx="8" fill="#172738" stroke="#65e6c4" stroke-width="3"/>
+  <rect x="1" y="8" width="15" height="76" rx="3" fill="#7b8790"/>
+  <g fill="#0a1522" stroke="#256b61" stroke-width="3"><circle cx="88" cy="46" r="31"/><circle cx="246" cy="46" r="31"/></g>
+  <g fill="#256b61"><path d="M88 17c13 5 17 17 7 26c0-13-8-18-7-26M117 46c-5 13-17 17-26 7c13 0 18-8 26-7M88 75c-13-5-17-17-7-26c0 13 8 18 7 26M59 46c5-13 17-17 26-7c-13 0-18 8-26 7"/><path d="M246 17c13 5 17 17 7 26c0-13-8-18-7-26M275 46c-5 13-17 17-26 7c13 0 18-8 26-7M246 75c-13-5-17-17-7-26c0 13 8 18 7 26M217 46c5-13 17-17 26-7c-13 0-18 8-26 7"/></g>
+  <g fill="#718ca7"><circle cx="88" cy="46" r="6"/><circle cx="246" cy="46" r="6"/></g>
+  <rect x="248" y="0" width="43" height="7" rx="2" fill="#ffc857"/>
+</svg>

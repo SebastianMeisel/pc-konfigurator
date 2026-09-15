@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 42 27">
+  <title>USB-C-Anschluss</title><desc>Ovale USB-C-Buchse.</desc>
+  <rect x=".5" y=".5" width="41" height="26" rx="9" fill="#101d2b" stroke="#56c8ff"/><rect x="10" y="8" width="22" height="11" rx="5" fill="#56c8ff"/><path d="M14 13.5h14" stroke="#d7f2ff"/>
+</svg>

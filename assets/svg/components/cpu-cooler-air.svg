@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 112 112">
+  <title>CPU-Luftkühler</title><desc>Lamellenkühler mit zentralem Lüfter.</desc>
+  <rect x="1.5" y="1.5" width="109" height="109" rx="8" fill="#546b7e" stroke="#adc0cf" stroke-width="3"/>
+  <g stroke="#b5c3cf" opacity=".65"><path d="M9 14h94M9 27h94M9 40h94M9 53h94M9 66h94M9 79h94M9 92h94M9 105h94"/></g>
+  <circle cx="56" cy="56" r="40" fill="#091421" stroke="#2d90a2" stroke-width="3"/><circle cx="56" cy="56" r="31" fill="none" stroke="#2d90a2" stroke-width="2"/>
+  <path d="M56 21c17 5 22 21 10 33c0-16-10-23-10-33M91 56c-5 17-21 22-33 10c16 0 23-10 33-10M56 91c-17-5-22-21-10-33c0 16 10 23 10 33M21 56c5-17 21-22 33-10c-16 0-23 10-33 10" fill="#2d90a2"/><circle cx="56" cy="56" r="8" fill="#718ca7"/>
+</svg>

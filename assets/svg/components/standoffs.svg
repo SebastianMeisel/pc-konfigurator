@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+  <title>Mainboard-Abstandhalter</title><desc>Sechskant-Abstandhalter aus Metall.</desc>
+  <path d="M8 1l6 3.5v7L8 15l-6-3.5v-7z" fill="#b58b2f" stroke="#ffe09b"/>
+  <circle cx="8" cy="8" r="3" fill="#352b1b" stroke="#ffd476"/>
+</svg>

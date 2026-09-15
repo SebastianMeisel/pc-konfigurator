@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 66 28">
+  <title>DisplayPort-Anschluss</title><desc>Rechteckige DisplayPort-Buchse mit abgeschrägter Ecke.</desc>
+  <path d="M2 2h54l8 8v16H2z" fill="#101d2b" stroke="#b69ae9" stroke-width="2"/><path d="M10 8h42l5 5v7H10z" fill="#293c50"/><path d="M14 11h34" stroke="#d9c8ff" stroke-width="2" stroke-dasharray="3 2"/>
+</svg>

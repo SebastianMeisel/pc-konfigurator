@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 76 76">
+  <title>Prozessor</title><desc>Quadratischer Prozessor mit Metallabdeckung.</desc>
+  <rect x="1.5" y="1.5" width="73" height="73" rx="8" fill="#b7bec6" stroke="#e5edf5" stroke-width="3"/>
+  <rect x="10" y="10" width="56" height="56" rx="5" fill="#243a48"/>
+  <path d="M7 18h5M7 38h5M7 58h5M64 18h5M64 38h5M64 58h5" stroke="#d7bf65" stroke-width="2"/>
+</svg>

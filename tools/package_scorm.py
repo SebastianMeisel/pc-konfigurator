@@ -12,6 +12,10 @@ from xml.etree import ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_OUTPUT = ROOT / "dist" / "buildbench-scorm-1.2.zip"
+SVG_ASSETS = tuple(
+    str(path.relative_to(ROOT))
+    for path in sorted((ROOT / "assets" / "svg").rglob("*.svg"))
+)
 PACKAGE_FILES = (
     "imsmanifest.xml",
     "index.html",
@@ -27,8 +31,7 @@ PACKAGE_FILES = (
     "quiz.js",
     "scorm.js",
     "svg-loader.js",
-    "assets/svg/inside-view.svg",
-    "assets/svg/ports-view.svg",
+    *SVG_ASSETS,
     "quiz-questions.json",
     "quiz-questions.schema.json",
     "favicon.svg",

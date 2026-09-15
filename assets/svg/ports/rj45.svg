@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 58">
+  <title>RJ45-Ethernet-Anschluss</title><desc>Netzwerkbuchse mit acht Kontakten.</desc>
+  <rect x="1" y="1" width="78" height="56" rx="5" fill="#101d2b" stroke="#65e6c4" stroke-width="2"/><rect x="13" y="12" width="54" height="37" rx="3" fill="#20384a"/>
+  <path d="M19 14v10m6-10v10m6-10v10m6-10v10m6-10v10m6-10v10m6-10v10m6-10v10" stroke="#d7bf65" stroke-width="2"/>
+  <rect x="25" y="38" width="30" height="8" fill="#122535"/>
+</svg>

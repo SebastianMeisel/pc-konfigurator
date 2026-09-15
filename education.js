@@ -381,12 +381,17 @@
     return `<text x="${x}" y="${y}" font-size="${size}" fill="${fill}" text-anchor="${anchor}">${escapeHtml(text)}</text>`;
   }
 
+  const portAssetPath = "assets/svg/ports/";
+  function portImage(name,x,y,width,height) {
+    return `<image href="${portAssetPath+name}.svg" x="${x}" y="${y}" width="${width}" height="${height}" preserveAspectRatio="none"/>`;
+  }
+
   function usbPair(x,y,color="#56c8ff") {
-    return `<g><rect x="${x}" y="${y}" width="54" height="27" rx="3" fill="#101d2b" stroke="#58718a"/><rect x="${x+7}" y="${y+6}" width="16" height="15" rx="2" fill="${color}"/><rect x="${x+31}" y="${y+6}" width="16" height="15" rx="2" fill="${color}"/></g>`;
+    return `<g>${portImage("usb-a",x,y,26,19)}${portImage("usb-a",x+28,y,26,19)}<path d="M${x+5} ${y+22}h44" stroke="${color}" stroke-width="2"/></g>`;
   }
 
   function rj45(x,y,label) {
-    return `<g class="port-group"><rect x="${x}" y="${y}" width="80" height="58" rx="5" fill="#101d2b" stroke="#65e6c4" stroke-width="2"/><rect x="${x+13}" y="${y+12}" width="54" height="37" rx="3" fill="#20384a"/><path d="M${x+22} ${y+14}v10m9-10v10m9-10v10m9-10v10m9-10v10" stroke="#d7bf65" stroke-width="3"/>${svgText(x+40,y+75,label,9,"#65e6c4","middle")}</g>`;
+    return `<g class="port-group">${portImage("rj45",x,y,80,58)}${svgText(x+40,y+75,label,9,"#65e6c4","middle")}</g>`;
   }
 
   function renderPorts() {
@@ -401,23 +406,23 @@
     let out = `<g class="port-group"><rect x="112" y="112" width="290" height="276" rx="9" fill="#132437" stroke="#67819a" stroke-width="2"/>
       ${svgText(257,137,board ? board.name : "MAINBOARD-I/O (BEISPIEL)",10,"#cfe0ef","middle")}
       ${usbPair(134,162)}${usbPair(134,199,"#4d7fa1")}${usbPair(134,236,"#4d7fa1")}
-      <rect x="218" y="162" width="42" height="27" rx="8" fill="#101d2b" stroke="#56c8ff"/><rect x="228" y="170" width="22" height="11" rx="5" fill="#56c8ff"/>
+      ${portImage("usb-c",218,162,42,27)}
       ${svgText(239,203,"USB-C",9,"#56c8ff","middle")}
-      <rect x="283" y="162" width="76" height="30" rx="4" fill="#101d2b" stroke="#8b69d4"/><path d="M297 169h47v16h-47z" fill="#293c50"/>${svgText(321,207,"HDMI/DP",9,"#b69ae9","middle")}
+      ${portImage("hdmi",278,162,54,24)}${portImage("displayport",339,162,54,24)}${svgText(335,207,"HDMI · DisplayPort",9,"#b69ae9","middle")}
       ${rj45(279,226,board?.lan || ethernet.speed)}
-      ${[0,1,2,3,4].map((i)=>`<circle cx="${148+i*47}" cy="335" r="14" fill="${["#7fcf74","#f4a65d","#72a9e8","#ef7a8d","#999"][i]}" stroke="#dbe8f3" stroke-width="2"/>`).join("")}
+      ${[0,1,2,3,4].map(i=>portImage("audio-jack",133+i*47,320,30,30)).join("")}
       ${svgText(242,371,"Audio 3,5 mm",9,"#a9bdd0","middle")}</g>
       <g class="port-group"><rect x="438" y="112" width="124" height="276" rx="9" fill="url(#rearMesh)" stroke="#516a82"/>
       ${[0,1,2].map(i=>`<circle cx="500" cy="${175+i*68}" r="27" fill="#0a1522" stroke="#607992" stroke-width="3"/><path d="M477 ${175+i*68}h46M500 ${152+i*68}v46" stroke="#334c63" stroke-width="4"/>`).join("")}
       ${svgText(500,367,"Gehäuselüfter",9,"#8299af","middle")}</g>`;
 
     if (onboardWifi || wifi.slot) {
-      out += `<g class="port-group"><circle cx="383" cy="154" r="7" fill="#d7bf65"/><circle cx="383" cy="181" r="7" fill="#d7bf65"/><path d="M383 147q18-42 34-57M383 174q28-33 54-36" fill="none" stroke="#d7bf65" stroke-width="4"/>${svgText(399,216,wifi.speed,9,"#ffc857","middle")}</g>`;
+      out += `<g class="port-group">${portImage("wifi-antenna",370,88,44,90)}${portImage("wifi-antenna",398,115,44,90)}${svgText(399,216,wifi.speed,9,"#ffc857","middle")}</g>`;
     }
 
     out += `<g class="port-group"><rect x="112" y="425" width="450" height="90" rx="7" fill="#101d2b" stroke="${hasGpu ? "#ff6b7a" : "#50677d"}" stroke-width="2"/>
       ${svgText(130,449,hasGpu ? "GRAFIKKARTE" : "FREIE SLOTBLENDEN",10,hasGpu ? "#ff9aa5" : "#71879d")}
-      ${hasGpu ? `<rect x="254" y="458" width="66" height="28" rx="3" fill="#25394a" stroke="#b69ae9"/><rect x="333" y="458" width="66" height="28" rx="3" fill="#25394a" stroke="#b69ae9"/><rect x="412" y="458" width="66" height="28" rx="3" fill="#25394a" stroke="#b69ae9"/>${svgText(365,505,"DisplayPort / HDMI",9,"#b69ae9","middle")}` : svgText(337,477,"keine dedizierte GPU gewählt",10,"#71879d","middle")}</g>`;
+      ${hasGpu ? `${portImage("displayport",254,458,66,28)}${portImage("displayport",333,458,66,28)}${portImage("hdmi",412,458,66,28)}${svgText(365,505,"2× DisplayPort · HDMI",9,"#b69ae9","middle")}` : svgText(337,477,"keine dedizierte GPU gewählt",10,"#71879d","middle")}</g>`;
 
     let expansionY = 548;
     if (ethernet.slot) {
@@ -425,7 +430,7 @@
       expansionY += 58;
     }
     if (wifi.slot) {
-      out += `<g class="port-group"><rect x="112" y="${expansionY}" width="450" height="44" rx="6" fill="#112334" stroke="#ffc857"/><circle cx="501" cy="${expansionY+22}" r="7" fill="#d7bf65"/><circle cx="535" cy="${expansionY+22}" r="7" fill="#d7bf65"/>${svgText(130,expansionY+27,wifi.name+" · Antennen",10,"#ffe2a1")}</g>`;
+      out += `<g class="port-group"><rect x="112" y="${expansionY}" width="450" height="44" rx="6" fill="#112334" stroke="#ffc857"/>${portImage("wifi-antenna",482,expansionY-22,32,66)}${portImage("wifi-antenna",518,expansionY-22,32,66)}${svgText(130,expansionY+27,wifi.name+" · Antennen",10,"#ffe2a1")}</g>`;
     }
     const layer = svg.querySelector("#ports-content");
     if (!layer) return;

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 19">
+  <title>USB-A-Anschluss</title><desc>Rechteckige USB-A-Buchse.</desc>
+  <rect x=".5" y=".5" width="25" height="18" rx="2" fill="#101d2b" stroke="#58718a"/><rect x="5" y="4" width="16" height="11" rx="1.5" fill="#56c8ff"/><path d="M8 7h10" stroke="#d7e8f5" stroke-width="1.5"/>
+</svg>

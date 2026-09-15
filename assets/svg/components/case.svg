@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 620">
+  <title>PC-Gehäuse</title><desc>Geöffnetes PC-Gehäuse mit Netzteilkammer, Lüftern und Standfüßen.</desc>
+  <defs>
+    <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#172b42"/><stop offset="1" stop-color="#091523"/></linearGradient>
+    <pattern id="mesh" width="12" height="12" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="1.4" fill="#496078"/></pattern>
+  </defs>
+  <rect x="1" y="1" width="518" height="594" rx="18" fill="url(#metal)" stroke="#58708a" stroke-width="4"/>
+  <rect x="17" y="17" width="486" height="562" rx="11" fill="#07111d" fill-opacity=".62" stroke="#263d56" stroke-width="2"/>
+  <rect x="23" y="5" width="474" height="18" rx="6" fill="url(#mesh)"/>
+  <rect x="19" y="463" width="482" height="112" rx="8" fill="#0b1827" stroke="#283c52"/>
+  <path d="M21 463h478" stroke="#496078" stroke-width="2"/>
+  <g fill="#101d2b" stroke="#7490ab"><circle cx="29" cy="29" r="5"/><circle cx="491" cy="29" r="5"/><circle cx="29" cy="567" r="5"/><circle cx="491" cy="567" r="5"/></g>
+  <g transform="translate(472 98)"><circle r="34" fill="#091421" stroke="#3c5874" stroke-width="3"/><circle r="26" fill="none" stroke="#34516d" stroke-width="2"/><path d="M0-25C13-22 18-10 9 0C6-13-4-16 0-25ZM25 0C22 13 10 18 0 9C13 6 16-4 25 0ZM0 25C-13 22-18 10-9 0C-6 13 4 16 0 25ZM-25 0C-22-13-10-18 0-9C-13-6-16 4-25 0Z" fill="#34516d"/><circle r="6" fill="#718ca7"/></g>
+  <g transform="translate(472 178)"><circle r="34" fill="#091421" stroke="#3c5874" stroke-width="3"/><circle r="26" fill="none" stroke="#34516d" stroke-width="2"/><path d="M0-25C13-22 18-10 9 0C6-13-4-16 0-25ZM25 0C22 13 10 18 0 9C13 6 16-4 25 0ZM0 25C-13 22-18 10-9 0C-6 13 4 16 0 25ZM-25 0C-22-13-10-18 0-9C-13-6-16 4-25 0Z" fill="#34516d"/><circle r="6" fill="#718ca7"/></g>
+  <rect x="42" y="595" width="70" height="12" rx="4" fill="#263a4d"/><rect x="408" y="595" width="70" height="12" rx="4" fill="#263a4d"/>
+</svg>

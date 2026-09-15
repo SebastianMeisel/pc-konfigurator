@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 150">
+  <title>Kühlmittelbehälter</title><desc>Transparenter Behälter eines offenen Wasserkühlkreislaufs.</desc>
+  <rect x="2" y="2" width="40" height="146" rx="18" fill="#56c8ff" fill-opacity=".42" stroke="#79dff5" stroke-width="4"/>
+  <path d="M7 40h30M7 112h30" stroke="#d9f8ff" opacity=".55"/><circle cx="22" cy="125" r="12" fill="#182c3b" stroke="#79dff5"/>
+</svg>

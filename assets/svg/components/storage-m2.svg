@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 135 23">
+  <title>M.2-SSD</title><desc>Flaches M.2-Speichermodul mit Speicherchips und Goldkontakten.</desc>
+  <rect x=".5" y=".5" width="134" height="22" rx="4" fill="#c49f4d" stroke="#ffe09b"/>
+  <rect x="8" y="5" width="25" height="13" rx="2" fill="#233745"/><rect x="39" y="5" width="25" height="13" rx="2" fill="#233745"/><rect x="70" y="5" width="25" height="13" rx="2" fill="#233745"/>
+  <path d="M119 2v19M124 2v19M129 2v19" stroke="#fff0ae" stroke-width="2"/>
+</svg>

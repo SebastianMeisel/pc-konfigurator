@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 145">
+  <title>RAM-Modul</title><desc>Schmales Arbeitsspeichermodul mit Kontakten.</desc>
+  <rect x="1" y="1" width="10" height="139" rx="3" fill="#65e6c4" stroke="#7aa4a0"/>
+  <g fill="#21484a"><rect x="3" y="12" width="6" height="18"/><rect x="3" y="39" width="6" height="18"/><rect x="3" y="66" width="6" height="18"/><rect x="3" y="93" width="6" height="18"/></g>
+  <path d="M2 140h3v4h2v-4h3" fill="#d7bf65"/>
+</svg>

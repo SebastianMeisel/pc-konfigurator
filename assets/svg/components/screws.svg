@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+  <title>Kreuzschlitzschraube</title><desc>Schraubenkopf mit Kreuzschlitz.</desc>
+  <circle cx="8" cy="8" r="7" fill="#c8d1d8" stroke="#f1f5f8"/>
+  <path d="M4 8h8M8 4v8" stroke="#40505c" stroke-width="2"/>
+</svg>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 92 70">
+  <title>SATA-Laufwerk</title><desc>Rechteckiges SATA-Laufwerk mit Anschlusskante.</desc>
+  <rect x="1" y="1" width="90" height="68" rx="6" fill="#394b59" stroke="#56c8ff" stroke-width="2"/>
+  <circle cx="23" cy="23" r="12" fill="#162734" stroke="#7890a2"/><circle cx="23" cy="23" r="3" fill="#9eb4c5"/>
+  <rect x="56" y="55" width="28" height="7" rx="2" fill="#172430"/><path d="M59 57h21" stroke="#d7bf65" stroke-width="2" stroke-dasharray="2 2"/>
+</svg>

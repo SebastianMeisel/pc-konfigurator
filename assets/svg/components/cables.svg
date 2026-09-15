@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240">
+  <title>PC-Kabelsatz</title><desc>Gebündelte Strom- und Datenkabel mit Steckern.</desc>
+  <g fill="none" stroke-linecap="round"><path d="M12 214C90 130 210 206 297 42" stroke="#d3bc64" stroke-width="8" stroke-dasharray="12 7"/><path d="M22 226C117 157 198 163 291 92" stroke="#b24759" stroke-width="7"/><path d="M5 196C94 182 184 115 304 132" stroke="#56c8ff" stroke-width="6"/></g>
+  <g fill="#263746" stroke="#9dafbd"><rect x="284" y="27" width="31" height="24" rx="3"/><rect x="280" y="78" width="35" height="25" rx="3"/><rect x="290" y="120" width="25" height="22" rx="3"/></g>
+</svg>

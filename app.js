@@ -400,126 +400,97 @@
   }
 
   const svgText = (x,y,text,size=12,fill="#90a6c0",anchor="start") => `<text x="${x}" y="${y}" font-size="${size}" fill="${fill}" text-anchor="${anchor}">${text}</text>`;
-  function fan(cx,cy,r,color="#34516d") {
-    return `<g><circle cx="${cx}" cy="${cy}" r="${r}" fill="#091421" stroke="#3c5874" stroke-width="3"/>
-      <circle cx="${cx}" cy="${cy}" r="${r-8}" fill="none" stroke="${color}" stroke-width="2" opacity=".7"/>
-      ${[0,60,120,180,240,300].map(a => `<ellipse cx="${cx}" cy="${cy-r/2}" rx="${r*.18}" ry="${r*.36}" fill="${color}" opacity=".56" transform="rotate(${a} ${cx} ${cy})"/>`).join("")}
-      <circle cx="${cx}" cy="${cy}" r="${r*.18}" fill="#718ca7"/></g>`;
-  }
+
+  const svgImage = (href,x,y,width,height,extra="") =>
+    `<image href="${href}" x="${x}" y="${y}" width="${width}" height="${height}" preserveAspectRatio="none" ${extra}/>`;
 
   function renderSvg() {
     const c = selected("case"), board = selected("motherboard"), cpu = selected("cpu"), gpu = selected("gpu");
     const ram = selected("ram"), psu = selected("psu"), cooler = selected("cooler"), storage = selected("storage");
     const standoffs = selected("standoffs"), screws = selected("screws"), cables = selected("cables"), coolant = selected("coolant");
     const caseW = c?.size === "Mini-ITX" ? 390 : c?.size === "Micro-Tower" ? 450 : 520;
-    const x = (680-caseW)/2, y = 48, h = 620, boardW = board?.form === "ITX" ? 190 : board?.form === "mATX" ? 290 : 350;
+    const x = (680-caseW)/2, y = 48, h = 620;
+    const boardW = board?.form === "ITX" ? 190 : board?.form === "mATX" ? 290 : 350;
     const boardH = board?.form === "ITX" ? 190 : board?.form === "mATX" ? 300 : 390;
-    const bx = x+48, by = y+88;
+    const bx = x+48, by = y+88, cpuX=bx+82, cpuY=by+66;
     const accent = "#65e6c4", blue="#56c8ff", gold="#ffc857", red="#ff6b7a";
     const coolantColor = coolant?.fluid ? coolant.color : blue;
+    const componentPath = "assets/svg/components/";
 
-    let svg = `<g class="part active-part">
-      <rect x="${x}" y="${y}" width="${caseW}" height="${h}" rx="18" fill="url(#caseMetal)" stroke="#58708a" stroke-width="4"/>
-      <rect x="${x+16}" y="${y+16}" width="${caseW-32}" height="${h-32}" rx="11" fill="#07111d" fill-opacity=".62" stroke="#263d56" stroke-width="2"/>
-      <rect x="${x+22}" y="${y+4}" width="${caseW-44}" height="18" rx="6" fill="url(#mesh)"/>
-      <rect x="${x+18}" y="${y+h-132}" width="${caseW-36}" height="112" rx="8" fill="#0b1827" stroke="#283c52"/>
-      <path d="M ${x+20} ${y+h-132} H ${x+caseW-20}" stroke="#496078" stroke-width="2"/>
-      <rect x="${x+42}" y="${y+h}" width="70" height="12" rx="4" fill="#263a4d"/><rect x="${x+caseW-112}" y="${y+h}" width="70" height="12" rx="4" fill="#263a4d"/>
-      ${[[x+28,y+28],[x+caseW-28,y+28],[x+28,y+h-28],[x+caseW-28,y+h-28]].map(([sx,sy])=>`<circle cx="${sx}" cy="${sy}" r="5" fill="#101d2b" stroke="#7490ab"/>`).join("")}
-      ${fan(x+caseW-48,y+145,34)}
-      ${fan(x+caseW-48,y+225,34)}
-    </g>
-    ${svgText(x+caseW/2,y+37,c?.name || "GEHÄUSE",12,c?accent:"#607590","middle")}`;
+    let svg = `<g class="part active-part">${svgImage(componentPath+"case.svg",x,y,caseW,h)}</g>
+      ${svgText(x+caseW/2,y+37,c?.name || "GEHÄUSE",12,c?accent:"#607590","middle")}`;
 
     if (board) {
       const holes = [[12,12],[boardW-12,12],[12,boardH-12],[boardW-12,boardH-12],[boardW/2,12],[boardW/2,boardH-12]];
       svg += `<g class="part active-part">
-        <rect x="${bx}" y="${by}" width="${boardW}" height="${boardH}" rx="7" fill="url(#pcb)" stroke="${accent}" stroke-width="2"/>
-        ${holes.map(([hx,hy])=>`<circle cx="${bx+hx}" cy="${by+hy}" r="5" fill="#061119" stroke="${standoffs?gold:"#3b566b"}" stroke-width="2"/>`).join("")}
-        <path d="M${bx+30} ${by+55} H${bx+boardW-24} M${bx+35} ${by+90} H${bx+boardW-70} M${bx+25} ${by+boardH-55} H${bx+boardW-35}" stroke="#2c6f69" stroke-width="2" stroke-dasharray="7 6"/>
-        <rect x="${bx+8}" y="${by+24}" width="35" height="92" rx="4" fill="#587086"/><rect x="${bx+52}" y="${by+18}" width="112" height="24" rx="4" fill="#29495a"/>
-        <rect x="${bx+boardW-72}" y="${by+boardH-66}" width="50" height="46" rx="7" fill="#264959" stroke="#52758b"/>
-        <rect x="${bx+38}" y="${by+boardH-44}" width="${Math.max(90,boardW-80)}" height="10" rx="3" fill="#d7bf65" opacity=".75"/>
+        ${svgImage(componentPath+"motherboard.svg",bx,by,boardW,boardH)}
+        ${standoffs ? holes.map(([hx,hy])=>svgImage(componentPath+"standoffs.svg",bx+hx-8,by+hy-8,16,16)).join("") : ""}
         ${svgText(bx+12,by+boardH-15,board.form+" · "+board.socket,10,"#8ed8c9")}
       </g>`;
     } else {
       svg += `<g class="part empty-part"><rect x="${bx}" y="${by}" width="330" height="380" rx="7" fill="none" stroke="#53708c" stroke-width="2" stroke-dasharray="9 8"/>${svgText(bx+165,by+190,"MAINBOARD",14,"#6c829a","middle")}</g>`;
     }
 
-    const cpuX=bx+82, cpuY=by+66;
     if (cpu && board) {
-      svg += `<g class="part active-part"><rect x="${cpuX}" y="${cpuY}" width="76" height="76" rx="8" fill="#b7bec6" stroke="#e5edf5" stroke-width="3"/>
-        <rect x="${cpuX+9}" y="${cpuY+9}" width="58" height="58" rx="5" fill="#243a48"/>${svgText(cpuX+38,cpuY+43,cpu.label,17,"#ffffff","middle")}</g>`;
+      svg += `<g class="part active-part">${svgImage(componentPath+"cpu.svg",cpuX,cpuY,76,76)}${svgText(cpuX+38,cpuY+43,cpu.label,17,"#ffffff","middle")}</g>`;
     }
 
     if (ram && board) {
-      svg += `<g class="part active-part">${[0,1,2,3].map((i)=>`<rect x="${bx+boardW-61+i*12}" y="${by+45}" width="8" height="${Math.min(145,boardH*.42)}" rx="3" fill="${i%2===0?accent:"#254955"}" stroke="#7aa4a0"/>`).join("")}
-        ${svgText(bx+boardW-39,by+205,ram.capacity+" GB",9,accent,"middle")}</g>`;
+      svg += `<g class="part active-part">${[0,1,2,3].map(i=>svgImage(componentPath+"ram.svg",bx+boardW-63+i*12,by+45,10,Math.min(145,boardH*.42))).join("")}${svgText(bx+boardW-39,by+205,ram.capacity+" GB",9,accent,"middle")}</g>`;
     }
 
     if (cooler && cpu && board) {
       if (cooler.kind === "air") {
-        svg += `<g class="part active-part"><rect x="${cpuX-18}" y="${cpuY-18}" width="112" height="112" rx="8" fill="#546b7e" stroke="#adc0cf" stroke-width="3"/>
-          ${Array.from({length:8},(_,i)=>`<line x1="${cpuX-10}" y1="${cpuY-8+i*13}" x2="${cpuX+86}" y2="${cpuY-8+i*13}" stroke="#b5c3cf" opacity=".65"/>`).join("")}
-          ${fan(cpuX+38,cpuY+38,40,"#2d90a2")}</g>`;
+        svg += `<g class="part active-part">${svgImage(componentPath+"cpu-cooler-air.svg",cpuX-18,cpuY-18,112,112)}</g>`;
       } else {
         const radW = Math.min(caseW-90, cooler.radiator === 360 ? 330 : 225);
         const radX=x+48, radY=y+34;
-        svg += `<g class="part active-part"><rect x="${radX}" y="${radY}" width="${radW}" height="52" rx="7" fill="#111e2b" stroke="#668097" stroke-width="3"/>
-          ${Array.from({length:cooler.radiator===360?3:2},(_,i)=>fan(radX+45+i*105,radY+26,21,"#326c80")).join("")}
-          <circle cx="${cpuX+38}" cy="${cpuY+38}" r="38" fill="#142938" stroke="${cooler.kind==="custom"?coolantColor:blue}" stroke-width="5"/>
+        svg += `<g class="part active-part">
+          ${svgImage(componentPath+"cpu-cooler-liquid.svg",radX,radY,radW,190)}
           ${svgText(cpuX+38,cpuY+42,cooler.kind==="custom"?"LOOP":"AIO",11,"#dcebf5","middle")}
-          <path d="M${cpuX+18} ${cpuY+8} C${cpuX-5} ${cpuY-28}, ${radX+40} ${radY+72}, ${radX+60} ${radY+50}" fill="none" stroke="${cooler.kind==="custom"?coolantColor:"#55758a"}" stroke-width="6"/>
-          <path d="M${cpuX+58} ${cpuY+8} C${cpuX+78} ${cpuY-35}, ${radX+radW-60} ${radY+75}, ${radX+radW-45} ${radY+50}" fill="none" stroke="${cooler.kind==="custom"?coolantColor:"#55758a"}" stroke-width="6"/>
-          ${cooler.kind==="custom"?`<rect x="${x+caseW-105}" y="${y+300}" width="44" height="150" rx="18" fill="${coolantColor}" fill-opacity=".45" stroke="${coolantColor}" stroke-width="4"/><circle cx="${x+caseW-83}" cy="${y+425}" r="14" fill="#182c3b" stroke="${coolantColor}"/>`:""}
+          ${cooler.kind==="custom" ? svgImage(componentPath+"coolant.svg",x+caseW-105,y+300,44,150) : ""}
+          ${cooler.kind==="custom" ? `<rect x="${x+caseW-103}" y="${y+302}" width="40" height="146" rx="18" fill="${coolantColor}" fill-opacity=".24" stroke="${coolantColor}" stroke-width="3"/>` : ""}
         </g>`;
       }
     }
 
     if (gpu && board) {
       const gpuW=Math.min(gpu.length*1.08,caseW-92), gx=bx+18, gy=by+Math.min(boardH-105,245);
-      svg += `<g class="part active-part"><rect x="${gx}" y="${gy}" width="${gpuW}" height="92" rx="8" fill="#172738" stroke="${gpu.maker==="AMD"?red:accent}" stroke-width="3"/>
-        <rect x="${gx-14}" y="${gy+7}" width="15" height="78" rx="3" fill="#7b8790"/>
-        ${fan(gx+75,gy+46,31,gpu.maker==="AMD"?"#8e3342":"#256b61")}
-        ${gpuW>250?fan(gx+gpuW-72,gy+46,31,gpu.maker==="AMD"?"#8e3342":"#256b61"):""}
+      svg += `<g class="part active-part">
+        ${svgImage(componentPath+"gpu.svg",gx-14,gy,gpuW+14,92)}
+        <rect x="${gx}" y="${gy+1}" width="${gpuW-2}" height="89" rx="8" fill="none" stroke="${gpu.maker==="AMD"?red:accent}" stroke-width="2"/>
         ${svgText(gx+gpuW/2,gy+51,gpu.label,12,"#eaf6ff","middle")}
-        <rect x="${gx+gpuW-70}" y="${gy-6}" width="43" height="8" rx="2" fill="${gpu.connector==="12V-2x6"?gold:"#7189a0"}"/>
       </g>`;
     } else {
       svg += `<g class="part empty-part"><rect x="${bx+18}" y="${by+245}" width="${Math.min(320,caseW-92)}" height="88" rx="8" fill="none" stroke="#53708c" stroke-width="2" stroke-dasharray="9 8"/>${svgText(bx+165,by+294,"GRAFIKKARTE",12,"#6c829a","middle")}</g>`;
     }
 
     if (psu) {
-      svg += `<g class="part active-part"><rect x="${x+42}" y="${y+h-118}" width="${psu.form==="SFX"?145:190}" height="88" rx="7" fill="#111e2c" stroke="${gold}" stroke-width="2"/>
-        ${fan(x+(psu.form==="SFX"?112:137),y+h-74,31,"#4a5967")}
-        ${svgText(x+54,y+h-100,psu.watts+" W",11,gold)}</g>`;
+      const psuW=psu.form==="SFX"?145:190;
+      svg += `<g class="part active-part">${svgImage(componentPath+"psu.svg",x+42,y+h-118,psuW,88)}${svgText(x+54,y+h-100,psu.watts+" W",11,gold)}</g>`;
     } else {
       svg += `<g class="part empty-part"><rect x="${x+42}" y="${y+h-118}" width="190" height="88" rx="7" fill="none" stroke="#53708c" stroke-width="2" stroke-dasharray="9 8"/>${svgText(x+137,y+h-70,"NETZTEIL",12,"#6c829a","middle")}</g>`;
     }
 
     if (storage && board) {
       if (storage.mount === "M.2") {
-        svg += `<g class="part active-part"><rect x="${bx+70}" y="${by+boardH-74}" width="${Math.min(135,boardW-95)}" height="23" rx="4" fill="#c49f4d" stroke="#ffe09b"/>
-          <rect x="${bx+77}" y="${by+boardH-69}" width="56" height="13" rx="2" fill="#233745"/>${svgText(bx+145,by+boardH-57,"M.2",9,"#fff","middle")}</g>`;
+        const storageW=Math.min(135,boardW-95);
+        svg += `<g class="part active-part">${svgImage(componentPath+"storage-m2.svg",bx+70,by+boardH-74,storageW,23)}${svgText(bx+70+storageW/2,by+boardH-57,"M.2",9,"#fff","middle")}</g>`;
       } else {
-        svg += `<g class="part active-part"><rect x="${x+caseW-150}" y="${y+h-112}" width="92" height="70" rx="6" fill="#394b59" stroke="${blue}" stroke-width="2"/>
-          <circle cx="${x+caseW-128}" cy="${y+h-90}" r="12" fill="#162734" stroke="#7890a2"/>${svgText(x+caseW-104,y+h-63,storage.mount+'"',10,"#dcebf5","middle")}</g>`;
+        svg += `<g class="part active-part">${svgImage(componentPath+"storage-sata.svg",x+caseW-150,y+h-112,92,70)}${svgText(x+caseW-104,y+h-63,storage.mount+'"',10,"#dcebf5","middle")}</g>`;
       }
     }
 
     if (cables && (psu || gpu || storage)) {
-      svg += `<g class="part active-part" fill="none" stroke-linecap="round">
-        <path d="M${x+210} ${y+h-72} C${x+310} ${y+h-165}, ${bx+boardW+30} ${by+boardH}, ${bx+boardW-15} ${by+boardH-20}" stroke="#d3bc64" stroke-width="5" stroke-dasharray="8 5"/>
-        ${gpu?`<path d="M${x+220} ${y+h-85} C${x+340} ${y+h-170}, ${x+caseW-120} ${by+270}, ${x+caseW-150} ${by+250}" stroke="#b24759" stroke-width="5"/>`:""}
-        ${storage?.interface==="SATA"?`<path d="M${x+caseW-105} ${y+h-90} C${x+caseW-210} ${y+h-170}, ${bx+boardW-20} ${by+boardH-30}, ${bx+boardW-45} ${by+boardH-25}" stroke="${blue}" stroke-width="4"/>`:""}
-      </g>`;
+      svg += `<g class="part active-part" opacity=".9">${svgImage(componentPath+"cables.svg",x+175,y+300,Math.max(190,caseW-205),245)}</g>`;
     }
 
     if (screws && board) {
-      svg += `<g class="part active-part" filter="url(#glow)">${[[bx+12,by+12],[bx+boardW-12,by+12],[bx+12,by+boardH-12],[bx+boardW-12,by+boardH-12]].map(([sx,sy])=>`<path d="M${sx-4} ${sy}h8M${sx} ${sy-4}v8" stroke="#f1f5f8" stroke-width="1.7"/>`).join("")}</g>`;
+      const screwPoints = [[bx+12,by+12],[bx+boardW-12,by+12],[bx+12,by+boardH-12],[bx+boardW-12,by+boardH-12]];
+      svg += `<g class="part active-part">${screwPoints.map(([sx,sy])=>svgImage(componentPath+"screws.svg",sx-8,sy-8,16,16)).join("")}</g>`;
     }
 
-    svg += `<g opacity=".75"><path d="M${x} 690 H${x+caseW}" stroke="#5a7189" stroke-width="1"/><path d="M${x} 683 V697 M${x+caseW} 683 V697" stroke="#5a7189"/>${svgText(x+caseW/2,706,c?.size||"PC-GEHÄUSE",10,"#71879d","middle")}</g>`;
+    svg += `<g opacity=".75"><path d="M${x} 690H${x+caseW}" stroke="#5a7189"/><path d="M${x} 683v14M${x+caseW} 683v14" stroke="#5a7189"/>${svgText(x+caseW/2,706,c?.size||"PC-GEHÄUSE",10,"#71879d","middle")}</g>`;
     const layer = refs.svg.querySelector("#inside-content");
     if (!layer) return;
     layer.innerHTML = svg;
