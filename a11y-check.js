@@ -3,7 +3,7 @@
 const { readFileSync } = require("node:fs");
 
 const files = Object.fromEntries(
-  ["index.html", "evaluation.html", "quiz.html", "styles.css", "education.css", "evaluation.css", "quiz.css", "app.js", "education.js", "evaluation.js", "quiz.js", "quiz-questions.json", "quiz-questions.schema.json", "tools/quiz_xlsx.py"]
+  ["index.html", "evaluation.html", "quiz.html", "styles.css", "education.css", "evaluation.css", "quiz.css", "app.js", "education.js", "evaluation.js", "quiz.js", "scorm.js", "imsmanifest.xml", "quiz-questions.json", "quiz-questions.schema.json", "tools/quiz_xlsx.py", "tools/package_scorm.py"]
     .map((name) => [name, readFileSync(name, "utf8")])
 );
 
@@ -35,6 +35,8 @@ for (const name of ["index.html", "evaluation.html", "quiz.html"]) {
   assert(/<aside class="ai-disclosure" data-ai-disclosure aria-labelledby="ai-disclosure-title">/.test(files[name]), `${name}: KI-Transparenzhinweis fehlt`);
   assert(/id="ai-disclosure-title">Transparenzhinweis zur KI-Unterstützung/.test(files[name]), `${name}: KI-Transparenzhinweis ist nicht eindeutig bezeichnet`);
   assert(/Die Anwendung selbst verwendet kein KI-Modell/.test(files[name]), `${name}: Abgrenzung zur Laufzeit-KI fehlt`);
+  assert(/data-lms-status role="status" aria-live="polite"/.test(files[name]), `${name}: zugängliche ILIAS-Statusmeldung fehlt`);
+  assert(/<script src="scorm\.js"/.test(files[name]), `${name}: SCORM-Anbindung fehlt`);
 }
 
 assert(/id="pc-view"[^>]+aria-labelledby="svg-title"[^>]+aria-describedby="svg-description visual-text"/.test(files["index.html"]), "index.html: Textalternative der Innenansicht fehlt");
@@ -75,6 +77,10 @@ assert(quizData.questions.every((question) => question.options.some((option) => 
 assert(quizSchema.properties?.questions?.items?.properties?.correctAnswer, "quiz-questions.schema.json: Schema für richtige Antwort fehlt");
 assert(/fetch\("quiz-questions\.json"/.test(files["quiz.js"]), "quiz.js: JSON-Fragenpool wird nicht geladen");
 assert(/def export_xlsx/.test(files["tools/quiz_xlsx.py"]) && /def import_xlsx/.test(files["tools/quiz_xlsx.py"]), "tools/quiz_xlsx.py: Import oder Export fehlt");
+assert(/recordConfigurator/.test(files["scorm.js"]) && /recordQuizResult/.test(files["scorm.js"]), "scorm.js: Lernfortschrittsfunktionen fehlen");
+assert(/cmi\.suspend_data/.test(files["scorm.js"]) && /cmi\.core\.score\.raw/.test(files["scorm.js"]), "scorm.js: SCORM-Fortschrittsfelder fehlen");
+assert(/adlcp:scormtype="sco"/.test(files["imsmanifest.xml"]) && /<schemaversion>1\.2<\/schemaversion>/.test(files["imsmanifest.xml"]), "imsmanifest.xml: SCORM-1.2-SCO fehlt");
+assert(/PACKAGE_FILES/.test(files["tools/package_scorm.py"]) && /imsmanifest\.xml/.test(files["tools/package_scorm.py"]), "tools/package_scorm.py: Paketdefinition fehlt");
 assert(/question-heading[^\n]+focus/.test(files["quiz.js"]), "quiz.js: Fokusführung zwischen Fragen fehlt");
 assert(/@media\(prefers-reduced-motion:reduce\)/.test(files["quiz.css"]), "quiz.css: reduzierte Bewegung fehlt");
 try {

@@ -390,6 +390,11 @@
         components: Object.fromEntries(categories.map(category => [category.id, selected(category.id)]))
       }));
     } catch (_) {}
+    window.BuildBenchLMS?.recordConfigurator({
+      selected: chosen,
+      total: categories.length,
+      step: state.active + 1
+    });
   }
 
   const svgText = (x,y,text,size=12,fill="#90a6c0",anchor="start") => `<text x="${x}" y="${y}" font-size="${size}" fill="${fill}" text-anchor="${anchor}">${text}</text>`;

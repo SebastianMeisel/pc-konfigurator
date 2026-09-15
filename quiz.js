@@ -29,6 +29,18 @@ function prepareQuestion(question){
   })));
   return {...question,options,correctIndex:options.findIndex(option=>option.isCorrect)};
 }
+function answerFromChoice(question,selectedId){
+  const selectedOption=question.options.find(option=>option.id===selectedId);
+  const correctOption=question.options[question.correctIndex];
+  if(!selectedOption||!correctOption)return null;
+  return{question,selectedId,selectedText:selectedOption.text,correctText:correctOption.text,explanation:correctOption.feedback,isCorrect:selectedOption.isCorrect};
+}
+function quizSession(){
+  return{
+    ids:activeQuestions.map(question=>question.id),
+    choices:answers.map(answer=>answer.selectedId)
+  };
+}
 function updateProgress(){
   const answered=answers.length,position=Math.min(currentIndex+1,TEST_SIZE);
   $("#progress-text").textContent="Frage "+position+" von "+TEST_SIZE;
@@ -62,7 +74,7 @@ function submitAnswer(event){
   if(!selectedInput)return;
   const question=activeQuestions[currentIndex],selectedIndex=Number(selectedInput.value);
   const selectedOption=question.options[selectedIndex],correctOption=question.options[question.correctIndex];
-  answers.push({question,selectedText:selectedOption.text,correctText:correctOption.text,explanation:correctOption.feedback,isCorrect:selectedOption.isCorrect});
+  answers.push({question,selectedId:selectedOption.id,selectedText:selectedOption.text,correctText:correctOption.text,explanation:correctOption.feedback,isCorrect:selectedOption.isCorrect});
   document.querySelectorAll('input[name="answer"]').forEach(input=>{
     input.disabled=true;
     const label=input.closest(".answer-option"),optionIndex=Number(input.value);
@@ -72,7 +84,14 @@ function submitAnswer(event){
   const feedback=$("#feedback");
   feedback.classList.toggle("wrong",!selectedOption.isCorrect);
   feedback.innerHTML="<strong>"+(selectedOption.isCorrect?"Richtig.":"Noch nicht richtig.")+"</strong> "+(!selectedOption.isCorrect?"Die richtige Antwort lautet: "+escapeHtml(correctOption.text)+". ":"")+escapeHtml(selectedOption.feedback);
-  feedback.hidden=false;$("#submit-answer").hidden=true;$("#next-question").hidden=false;updateProgress();$("#next-question").focus();
+  feedback.hidden=false;$("#submit-answer").hidden=true;$("#next-question").hidden=false;updateProgress();
+  window.BuildBenchLMS?.recordQuizProgress({
+    answered:answers.length,
+    total:TEST_SIZE,
+    score:answers.filter(answer=>answer.isCorrect).length,
+    session:quizSession()
+  });
+  $("#next-question").focus();
 }
 function resultGrade(score){
   const ratio=score/TEST_SIZE;
@@ -81,7 +100,7 @@ function resultGrade(score){
   if(ratio>=.5)return{label:"teilweise sicher",color:"var(--warning)",text:"Viele Grundlagen sitzen bereits. Nutze Hinweise und Begründungen, um Lücken gezielt zu schließen."};
   return{label:"noch ausbaufähig",color:"var(--danger)",text:"Arbeite die schwächeren Themen im Konfigurator und in den Lernkarten noch einmal durch."};
 }
-function renderResults(){
+function renderResults(reportToLms=true){
   const score=answers.filter(answer=>answer.isCorrect).length,percent=Math.round(score/TEST_SIZE*100),grade=resultGrade(score),categoryMap=new Map();
   answers.forEach(answer=>{
     const entry=categoryMap.get(answer.question.category)||{total:0,correct:0};
@@ -102,16 +121,47 @@ function renderResults(){
   $("#review-list").innerHTML=answers.map((answer,index)=>
     '<details class="review-item"><summary><span class="review-state'+(answer.isCorrect?"":" wrong")+'">'+(answer.isCorrect?"RICHTIG":"FALSCH")+'</span><span>'+(index+1)+". "+escapeHtml(answer.question.question)+'</span></summary><div class="review-content"><p><strong>Deine Antwort:</strong> '+escapeHtml(answer.selectedText)+'</p>'+(!answer.isCorrect?'<p><strong>Richtige Antwort:</strong> '+escapeHtml(answer.correctText)+'</p>':"")+'<p><strong>Begründung:</strong> '+escapeHtml(answer.explanation)+'</p></div></details>'
   ).join("");
+  if(reportToLms)window.BuildBenchLMS?.recordQuizResult({score,maxScore:TEST_SIZE});
   $("#result-title").focus({preventScroll:true});$("#result-panel").scrollIntoView({behavior:reducedMotion?"auto":"smooth",block:"start"});
 }
-function startQuiz(focusQuestion=true){
-  activeQuestions=shuffle(questionBank).slice(0,TEST_SIZE).map(prepareQuestion);answers=[];currentIndex=0;
-  $("#result-panel").hidden=true;$("#quiz-panel").hidden=false;renderQuestion(focusQuestion);
+function startQuiz(focusQuestion=true,restore=true){
+  const saved=restore?window.BuildBenchLMS?.getQuizSession():null;
+  const savedIds=Array.isArray(saved?.ids)?saved.ids:[];
+  const savedChoices=Array.isArray(saved?.choices)?saved.choices:[];
+  const questionsById=new Map(questionBank.map(question=>[question.id,question]));
+  const canRestore=savedIds.length===TEST_SIZE&&new Set(savedIds).size===TEST_SIZE&&savedIds.every(id=>questionsById.has(id));
+  activeQuestions=(canRestore?savedIds.map(id=>questionsById.get(id)):shuffle(questionBank).slice(0,TEST_SIZE)).map(prepareQuestion);
+  answers=[];
+  if(canRestore){
+    for(let index=0;index<Math.min(savedChoices.length,TEST_SIZE);index+=1){
+      const restored=answerFromChoice(activeQuestions[index],savedChoices[index]);
+      if(!restored)break;
+      answers.push(restored);
+    }
+  }
+  currentIndex=Math.min(answers.length,TEST_SIZE-1);
+  $("#result-panel").hidden=true;$("#quiz-panel").hidden=false;
+  if(answers.length===TEST_SIZE){
+    const alreadyReported=window.BuildBenchLMS?.getState?.()?.location==="quiz.html#ergebnis";
+    renderResults(!alreadyReported);
+  }
+  else{
+    renderQuestion(focusQuestion);
+    window.BuildBenchLMS?.recordQuizProgress({
+      answered:answers.length,
+      total:TEST_SIZE,
+      score:answers.filter(answer=>answer.isCorrect).length,
+      session:quizSession()
+    });
+  }
 }
 $("#answer-list").addEventListener("change",()=>{$("#submit-answer").disabled=false});
 $("#quiz-form").addEventListener("submit",submitAnswer);
 $("#next-question").addEventListener("click",()=>{if(currentIndex===TEST_SIZE-1){renderResults();return}currentIndex+=1;renderQuestion()});
-$("#restart-quiz").addEventListener("click",()=>startQuiz(true));
+$("#restart-quiz").addEventListener("click",()=>{
+  window.BuildBenchLMS?.clearQuizSession();
+  startQuiz(true,false);
+});
 
 function validateQuizData(data){
   if(!data||data.schemaVersion!==1||!Array.isArray(data.questions))throw new Error("Nicht unterstütztes JSON-Format.");

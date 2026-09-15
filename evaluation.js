@@ -350,6 +350,11 @@
     $("#improvement-list").innerHTML = gaps.length
       ? gaps.map(item=>`<li><strong>${item.label} (${item.score}/100):</strong> ${escapeHtml(suggestions[item.key])}</li>`).join("")
       : "<li>Kein kritischer Engpass im Modell. Nun reale Benchmarks, Softwarefreigaben und Gesamtkosten prüfen.</li>";
+    window.BuildBenchLMS?.recordEvaluation({
+      scenario: result.id,
+      score: result.score,
+      hasConfiguration: Boolean(snapshot?.components)
+    });
   }
 
   $("#print-button")?.addEventListener("click",()=>window.print());

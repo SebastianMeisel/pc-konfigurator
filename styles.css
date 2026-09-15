@@ -49,6 +49,18 @@ button:focus-visible, [tabindex]:focus-visible, a:focus-visible, summary:focus-v
 button:disabled { cursor: not-allowed; }
 a { color: inherit; text-decoration: none; }
 
+.lms-status {
+  padding: 7px clamp(18px, 3vw, 48px);
+  border-bottom: 1px solid rgba(101, 230, 196, .35);
+  color: #d9fff5;
+  background: #12372f;
+  font-size: .8rem;
+  font-weight: 700;
+  letter-spacing: .02em;
+  text-align: center;
+}
+.lms-status[hidden] { display: none; }
+
 .topbar {
   position: sticky;
   z-index: 30;

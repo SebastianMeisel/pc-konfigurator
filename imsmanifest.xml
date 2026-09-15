@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest identifier="BUILDbench-PC-Konfigurator-1"
+  version="1.0"
+  xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2"
+  xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.imsproject.org/xsd/imscp_rootv1p1p2 imscp_rootv1p1p2.xsd
+                      http://www.adlnet.org/xsd/adlcp_rootv1p2 adlcp_rootv1p2.xsd">
+  <metadata>
+    <schema>ADL SCORM</schema>
+    <schemaversion>1.2</schemaversion>
+  </metadata>
+  <organizations default="BUILDbench-ORG">
+    <organization identifier="BUILDbench-ORG">
+      <title>BuildBench – PC-Konfigurator</title>
+      <item identifier="BUILDbench-ITEM" identifierref="BUILDbench-SCO" isvisible="true">
+        <title>PC-Konfiguration, Auswertung und Wissenstest</title>
+        <adlcp:masteryscore>70</adlcp:masteryscore>
+      </item>
+    </organization>
+  </organizations>
+  <resources>
+    <resource identifier="BUILDbench-SCO" type="webcontent" adlcp:scormtype="sco" href="index.html">
+      <file href="index.html"/>
+      <file href="evaluation.html"/>
+      <file href="quiz.html"/>
+      <file href="styles.css"/>
+      <file href="education.css"/>
+      <file href="evaluation.css"/>
+      <file href="quiz.css"/>
+      <file href="app.js"/>
+      <file href="education.js"/>
+      <file href="evaluation.js"/>
+      <file href="quiz.js"/>
+      <file href="scorm.js"/>
+      <file href="quiz-questions.json"/>
+      <file href="quiz-questions.schema.json"/>
+      <file href="favicon.svg"/>
+    </resource>
+  </resources>
+</manifest>

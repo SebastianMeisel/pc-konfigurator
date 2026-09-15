@@ -17,6 +17,7 @@ Die Anwendung bewertet unter anderem Sockel, Formfaktor, Arbeitsspeicherstandard
 - Zweite Seite „Auswertung“ mit gewichteter Nutzwertanalyse für Office, Entwicklung, CAD, Videoschnitt und lokale KI
 - Transparente Teilwertungen, gewichtete Beiträge, Begründungen, Stärken, Verbesserungsbedarf und Druckansicht
 - Barrierearmer Multiple-Choice-Test mit 20 zufälligen Fragen aus einem Pool von 100, Hinweisen, Sofortfeedback, Themenauswertung und Nachbesprechung
+- SCORM-1.2-Anbindung für ILIAS mit Lernstatus, Punktzahl, Bearbeitungsposition, Sitzungszeit und Wiederaufnahme eines begonnenen Quiz
 
 ## Quizfragen bearbeiten
 
@@ -58,9 +59,23 @@ python3 -m http.server 8080
 
 Danach `http://localhost:8080` aufrufen.
 
+## In ILIAS verwenden
+
+Das fertige SCORM-Paket kann unter [buildbench-scorm-1.2.zip](https://sebastianmeisel.github.io/pc-konfigurator/dist/buildbench-scorm-1.2.zip) heruntergeladen oder lokal ohne zusätzliche Python-Pakete erzeugt werden:
+
+```bash
+python3 tools/package_scorm.py
+```
+
+Eine vorhandene Datei wird nur mit `--force` ersetzt. Anschließend die ZIP-Datei in ILIAS als „SCORM/AICC-Lernmodul“ importieren. Je nach ILIAS-Konfiguration muss die Lernfortschrittsanzeige zusätzlich für den Kurs beziehungsweise das Objekt aktiviert werden.
+
+Innerhalb von ILIAS verwendet die Anwendung die SCORM-1.2-Laufzeitschnittstelle. Erfasst werden besuchte Bereiche, Anzahl ausgewählter Komponenten, betrachtetes Anwendungsszenario, Quiz-Fortschritt, bestes Quiz-Ergebnis und benötigte Sitzungszeit. Ein begonnenes Quiz wird über `cmi.suspend_data` wiederaufgenommen. Ab 70 Prozent wird der SCORM-Status „bestanden“ gesetzt. Außerhalb eines LMS bleibt die Anwendung vollständig nutzbar und speichert den Arbeitsstand nur lokal im Browser.
+
+Das SCORM-Paket ist vollständig selbstenthalten; externe Webfont-Aufrufe werden beim Paketieren entfernt. Es übermittelt keine Lerndaten an GitHub oder andere externe Dienste. Bei der SCORM-Nutzung werden die Fortschrittsdaten ausschließlich über die von ILIAS bereitgestellte Schnittstelle gespeichert.
+
 ## Bereitstellung
 
-Der Workflow unter `.github/workflows/pages.yml` prüft die JavaScript-Dateien sowie zentrale Barrierefreiheitsmerkmale und veröffentlicht den Stand des `main`-Branches über GitHub Pages.
+Der Workflow unter `.github/workflows/pages.yml` prüft die JavaScript-Dateien, die SCORM-Kommunikation, das Importpaket sowie zentrale Barrierefreiheitsmerkmale. Er veröffentlicht den Stand des `main`-Branches über GitHub Pages und stellt die aktuelle SCORM-ZIP-Datei als Download bereit.
 
 ## Hinweise
 
