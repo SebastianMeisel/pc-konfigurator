@@ -1,5 +1,60 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 19">
-  <title>USB-A-Anschluss</title><desc>Rechteckige USB-A-Buchse.</desc>
-  <rect x=".5" y=".5" width="25" height="18" rx="2" fill="#101d2b" stroke="#58718a"/><rect x="5" y="4" width="16" height="11" rx="1.5" fill="#56c8ff"/><path d="M8 7h10" stroke="#d7e8f5" stroke-width="1.5"/>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 26 19"
+   version="1.1"
+   id="svg2"
+   sodipodi:docname="usb-a.svg"
+   inkscape:version="1.4.4 (dcaf3e7d9e, 2026-05-05)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="namedview2"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showguides="false"
+     inkscape:zoom="31.365409"
+     inkscape:cx="12.880432"
+     inkscape:cy="12.497844"
+     inkscape:window-width="1692"
+     inkscape:window-height="1059"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2" />
+  <title
+     id="title1">USB-A-Anschluss</title>
+  <desc
+     id="desc1">Rechteckige USB-A-Buchse.</desc>
+  <rect
+     x="0.5"
+     y="3.6722846"
+     width="25"
+     height="10.730845"
+     fill="#101d2b"
+     stroke="#58718a"
+     id="rect1"
+     style="stroke-width:0.999999" />
+  <rect
+     x="1.8755388"
+     y="5.3709369"
+     width="21.993864"
+     height="7.5885987"
+     fill="#56c8ff"
+     id="rect2"
+     style="stroke-width:0.999998" />
+  <path
+     d="M 2.3408995,7.14347 H 23.563454"
+     stroke="#d7e8f5"
+     stroke-width="1.49999"
+     id="path2"
+     style="fill:none;stroke:#000000" />
 </svg>
