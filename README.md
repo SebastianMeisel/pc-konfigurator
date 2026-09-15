@@ -121,6 +121,14 @@ Das SCORM-Paket ist vollständig selbstenthalten; externe Webfont-Aufrufe werden
 
 Der Workflow unter `.github/workflows/pages.yml` prüft die JavaScript-Dateien, die SCORM-Kommunikation, das Importpaket sowie zentrale Barrierefreiheitsmerkmale. Er veröffentlicht den Stand des `main`-Branches über GitHub Pages und stellt die aktuelle SCORM-ZIP-Datei als Download bereit.
 
+## Weitere Unterrichtsanwendung: AlgoDesk
+
+Unter `algorithmen-trainer/` befindet sich eine eigenständige Web-App für binäre Suche, Bubble Sort, Insertion Sort und Selection Sort. Sie verbindet zeilenweise Pseudocode-Ausführung mit geführten Schreibtischtests und Aufgaben zur Fehlersuche. Die Lerninhalte liegen in bearbeitbaren JSON-Dateien; Lernfortschritt wird lokal oder über SCORM 1.2 in ILIAS gespeichert.
+
+- [AlgoDesk online öffnen](https://sebastianmeisel.github.io/pc-konfigurator/algorithmen-trainer/)
+- [AlgoDesk-SCORM-Paket herunterladen](https://sebastianmeisel.github.io/pc-konfigurator/algorithmen-trainer/dist/algodesk-scorm-1.2.zip)
+- Technische Hinweise: `algorithmen-trainer/README.md`
+
 ## Hinweise
 
 Die hinterlegten Preise sind unverbindliche Orientierungswerte. Abmessungen und elektrische Anforderungen beziehen sich auf die modellierten Referenzvarianten; konkrete Herstellerkarten und Sondereditionen können abweichen. Die Lernhinweise ersetzen keine Herstellerhandbücher, betrieblichen Sicherheitsvorgaben oder Elektrofachkenntnisse. Vor Kauf und Montage sind die Datenblätter der exakten Artikelnummern zu prüfen.

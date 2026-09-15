@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Interaktiver Pseudocode-Trainer für binäre Suche, Sortieralgorithmen, Schreibtischtests und Fehlersuche.">
+  <meta name="theme-color" content="#07111f">
+  <title>AlgoDesk · Pseudocode-Trainer</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Direkt zum Hauptinhalt</a>
+  <div class="lms-status" data-lms-status role="status" aria-live="polite" hidden></div>
+
+  <header class="topbar">
+    <a class="brand" href="index.html" aria-label="AlgoDesk Startseite">
+      <span class="brand-mark" aria-hidden="true">A▸</span>
+      <span><strong>AlgoDesk</strong><small>Pseudocode · Schreibtischtest · Debugging</small></span>
+    </a>
+    <nav aria-label="Lernbereiche">
+      <a href="#erkunden">Erkunden</a>
+      <a href="#schreibtischtest">Schreibtischtest</a>
+      <a href="#fehlersuche">Fehlersuche</a>
+    </nav>
+  </header>
+
+  <aside class="ai-disclosure" aria-labelledby="ai-title">
+    <span aria-hidden="true">KI</span>
+    <div>
+      <strong id="ai-title">Transparenzhinweis zur KI-Unterstützung</strong>
+      <p>Inhalte und Quellcode wurden mit generativer KI unterstützt. Die Web-App selbst verwendet kein KI-Modell und übermittelt keine Eingaben. Ergebnisse entstehen lokal aus nachvollziehbaren Algorithmen und Regeln.</p>
+    </div>
+  </aside>
+
+  <main id="main-content" tabindex="-1">
+    <section class="hero" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">Unterrichtsmaterial · Fachinformatik</p>
+        <h1 id="page-title">Algorithmen Schritt für Schritt verstehen.</h1>
+        <p>Verfolge Pseudocode zeilenweise, führe Schreibtischtests durch und finde typische Grenz-, Schleifen- und Zustandsfehler.</p>
+      </div>
+      <div class="progress-card" aria-labelledby="progress-title">
+        <span id="progress-title">Lernfortschritt</span>
+        <strong id="progress-percent">0 %</strong>
+        <div class="progress-track" role="progressbar" aria-label="Gesamter Lernfortschritt" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="progress-fill"></span></div>
+        <small id="progress-detail">Noch keine Aufgabe abgeschlossen</small>
+      </div>
+    </section>
+
+    <noscript><p class="error-box">Für die interaktiven Übungen muss JavaScript aktiviert sein.</p></noscript>
+    <div id="load-error" class="error-box" role="alert" hidden></div>
+
+    <section class="learning-section" id="erkunden" aria-labelledby="explore-title">
+      <div class="section-heading">
+        <div><p class="eyebrow">01 · Erkunden</p><h2 id="explore-title">Algorithmus ausführen</h2></div>
+        <button class="help-button" type="button" data-help="Binäre Suche" aria-label="Erläuterung zur binären Suche öffnen">?</button>
+      </div>
+      <div class="control-grid">
+        <label>Algorithmus<select id="algorithm-select"></select></label>
+        <label>Zahlenliste<input id="values-input" value="3, 7, 11, 18, 24, 31, 42" inputmode="numeric" aria-describedby="values-help"></label>
+        <label id="target-label">Gesuchter Wert<input id="target-input" value="24" inputmode="numeric"></label>
+        <button class="button primary" id="prepare-run" type="button">Ablauf vorbereiten</button>
+      </div>
+      <p class="field-help" id="values-help">Ganze Zahlen durch Kommas trennen; höchstens 12 Werte. Für die binäre Suche wird aufsteigend sortiert.</p>
+
+      <div class="algorithm-layout">
+        <article class="panel code-panel" aria-labelledby="code-title">
+          <div class="panel-title"><h3 id="code-title">Pseudocode</h3><span id="complexity-badge"></span></div>
+          <ol class="pseudocode" id="pseudocode" aria-label="Pseudocodezeilen"></ol>
+        </article>
+        <article class="panel state-panel" aria-labelledby="state-title">
+          <div class="panel-title"><h3 id="state-title">Aktueller Zustand</h3><output id="step-counter">Schritt 0 von 0</output></div>
+          <div class="array-view" id="array-view" role="img" aria-label="Zahlenliste"></div>
+          <dl class="variables" id="variables"></dl>
+          <p class="action-text" id="action-text" aria-live="polite">Bereite einen Ablauf vor.</p>
+          <div class="button-row">
+            <button class="button" id="previous-step" type="button" disabled>Zurück</button>
+            <button class="button primary" id="next-step" type="button" disabled>Nächster Schritt</button>
+            <button class="button" id="auto-run" type="button" disabled>Automatisch</button>
+          </div>
+        </article>
+      </div>
+
+      <details class="explanation" id="algorithm-explanation">
+        <summary>Aufgabe und Eigenschaften des Algorithmus</summary>
+        <div id="algorithm-details"></div>
+      </details>
+    </section>
+
+    <section class="learning-section" id="schreibtischtest" aria-labelledby="desk-title">
+      <div class="section-heading">
+        <div><p class="eyebrow">02 · Anwenden</p><h2 id="desk-title">Geführter Schreibtischtest</h2></div>
+        <button class="help-button" type="button" data-help="Schreibtischtest" aria-label="Erläuterung zum Schreibtischtest öffnen">?</button>
+      </div>
+      <p>Bestimme jeweils, welche Pseudocodezeile als Nächstes ausgeführt wird. Der Zustandsverlauf wird danach in der Tabelle protokolliert.</p>
+      <div class="exercise-toolbar">
+        <label>Aufgabe<select id="desk-select"></select></label>
+        <button class="button" id="restart-desk" type="button">Neu beginnen</button>
+      </div>
+      <div class="panel exercise-panel">
+        <div class="exercise-prompt">
+          <div><span class="difficulty" id="desk-difficulty"></span><h3 id="desk-task-title"></h3><p id="desk-input"></p></div>
+          <strong id="desk-position">Start</strong>
+        </div>
+        <fieldset id="line-choice-fieldset">
+          <legend id="line-choice-legend">Welche Zeile wird zuerst ausgeführt?</legend>
+          <div class="choice-grid" id="line-choices"></div>
+        </fieldset>
+        <div class="feedback" id="desk-feedback" role="status" aria-live="polite" hidden></div>
+        <div class="button-row">
+          <button class="button" id="desk-hint" type="button">Hinweis</button>
+          <button class="button primary" id="check-line" type="button" disabled>Auswahl prüfen</button>
+        </div>
+      </div>
+      <div class="table-wrap" tabindex="0" role="region" aria-label="Protokoll des Schreibtischtests">
+        <table>
+          <caption>Ausgeführte Schritte und Variablenzustände</caption>
+          <thead><tr><th scope="col">Nr.</th><th scope="col">Zeile</th><th scope="col">Feld A</th><th scope="col">Variablen</th><th scope="col">Beobachtung</th></tr></thead>
+          <tbody id="desk-log"><tr><td colspan="5">Noch kein Schritt protokolliert.</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="learning-section" id="fehlersuche" aria-labelledby="debug-title">
+      <div class="section-heading">
+        <div><p class="eyebrow">03 · Analysieren</p><h2 id="debug-title">Fehler im Pseudocode finden</h2></div>
+        <button class="help-button" type="button" data-help="Sicher testen" aria-label="Erläuterung zu Testfällen öffnen">?</button>
+      </div>
+      <div class="exercise-toolbar">
+        <label>Fehlerfall<select id="debug-select"></select></label>
+      </div>
+      <div class="debug-layout">
+        <article class="panel">
+          <h3 id="debug-task-title"></h3>
+          <p id="debug-input"></p>
+          <ol class="pseudocode buggy" id="buggy-code"></ol>
+        </article>
+        <form class="panel" id="debug-form">
+          <fieldset><legend id="debug-question"></legend><div class="choice-grid" id="debug-options"></div></fieldset>
+          <button class="button primary" type="submit" id="check-debug" disabled>Fehleranalyse prüfen</button>
+          <div class="feedback" id="debug-feedback" role="status" aria-live="polite" hidden></div>
+        </form>
+      </div>
+    </section>
+
+    <section class="learning-section compact" aria-labelledby="notes-title">
+      <p class="eyebrow">Merkhilfe</p><h2 id="notes-title">Was gehört in einen Schreibtischtest?</h2>
+      <div class="help-grid" id="help-grid"></div>
+    </section>
+  </main>
+
+  <dialog id="help-dialog" aria-labelledby="help-dialog-title">
+    <form method="dialog"><button class="dialog-close" aria-label="Dialog schließen">×</button></form>
+    <p class="eyebrow">Lernhinweis</p><h2 id="help-dialog-title"></h2><p id="help-dialog-text"></p>
+  </dialog>
+
+  <footer><p>AlgoDesk · Unterrichtsmaterial für Fachinformatik-Berufe · Daten werden nur lokal beziehungsweise im verbundenen Lernmanagementsystem gespeichert.</p></footer>
+  <script src="scorm.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

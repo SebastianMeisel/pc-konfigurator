@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "algorithms": [
+    {
+      "id": "binary-search",
+      "name": "Binäre Suche",
+      "kind": "search",
+      "summary": "Halbiert in jedem Schritt den noch möglichen Suchbereich.",
+      "requirement": "Die Eingabeliste muss aufsteigend sortiert sein.",
+      "complexity": { "best": "O(1)", "average": "O(log n)", "worst": "O(log n)", "memory": "O(1)" },
+      "concepts": ["Teile und herrsche", "Intervallgrenzen", "Abbruchbedingung"],
+      "lines": [
+        "FUNKTION BinäreSuche(A, gesucht)",
+        "  links ← 0",
+        "  rechts ← LÄNGE(A) - 1",
+        "  SOLANGE links ≤ rechts",
+        "    mitte ← GANZZAHL((links + rechts) / 2)",
+        "    WENN A[mitte] = gesucht: GIB mitte ZURÜCK",
+        "    WENN A[mitte] < gesucht",
+        "      links ← mitte + 1",
+        "    SONST",
+        "      rechts ← mitte - 1",
+        "  GIB -1 ZURÜCK"
+      ]
+    },
+    {
+      "id": "bubble-sort",
+      "name": "Bubble Sort",
+      "kind": "sort",
+      "summary": "Vergleicht benachbarte Werte und schiebt große Werte schrittweise nach rechts.",
+      "requirement": "Keine Vorsortierung erforderlich; gleiche Werte sind zulässig.",
+      "complexity": { "best": "O(n)", "average": "O(n²)", "worst": "O(n²)", "memory": "O(1)" },
+      "concepts": ["Nachbarvergleich", "Tausch", "vorzeitiger Abbruch"],
+      "lines": [
+        "PROZEDUR BubbleSort(A)",
+        "  FÜR ende ← LÄNGE(A) - 1 BIS 1",
+        "    getauscht ← FALSCH",
+        "    FÜR i ← 0 BIS ende - 1",
+        "      WENN A[i] > A[i + 1]",
+        "        TAUSCHE A[i] MIT A[i + 1]",
+        "        getauscht ← WAHR",
+        "    WENN getauscht = FALSCH: ABBRUCH",
+        "  GIB A ZURÜCK"
+      ]
+    },
+    {
+      "id": "insertion-sort",
+      "name": "Insertion Sort",
+      "kind": "sort",
+      "summary": "Fügt jeden neuen Wert an der passenden Stelle in den bereits sortierten linken Bereich ein.",
+      "requirement": "Besonders anschaulich und effizient bei kleinen oder fast sortierten Listen.",
+      "complexity": { "best": "O(n)", "average": "O(n²)", "worst": "O(n²)", "memory": "O(1)" },
+      "concepts": ["sortierter Teilbereich", "Verschieben", "Einfügen"],
+      "lines": [
+        "PROZEDUR InsertionSort(A)",
+        "  FÜR i ← 1 BIS LÄNGE(A) - 1",
+        "    wert ← A[i]",
+        "    j ← i - 1",
+        "    SOLANGE j ≥ 0 UND A[j] > wert",
+        "      A[j + 1] ← A[j]",
+        "      j ← j - 1",
+        "    A[j + 1] ← wert",
+        "  GIB A ZURÜCK"
+      ]
+    },
+    {
+      "id": "selection-sort",
+      "name": "Selection Sort",
+      "kind": "sort",
+      "summary": "Sucht im unsortierten Rest jeweils das kleinste Element und setzt es nach vorn.",
+      "requirement": "Benötigt unabhängig von der Vorsortierung ungefähr gleich viele Vergleiche.",
+      "complexity": { "best": "O(n²)", "average": "O(n²)", "worst": "O(n²)", "memory": "O(1)" },
+      "concepts": ["Minimumsuche", "Teilbereiche", "Tausch"],
+      "lines": [
+        "PROZEDUR SelectionSort(A)",
+        "  FÜR links ← 0 BIS LÄNGE(A) - 2",
+        "    min ← links",
+        "    FÜR i ← links + 1 BIS LÄNGE(A) - 1",
+        "      WENN A[i] < A[min]",
+        "        min ← i",
+        "    WENN min ≠ links",
+        "      TAUSCHE A[links] MIT A[min]",
+        "  GIB A ZURÜCK"
+      ]
+    }
+  ]
+}

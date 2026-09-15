@@ -42,13 +42,19 @@ jobs:
           node content-check.js
           node content-runtime-check.js
           node a11y-check.js
+          node --check algorithmen-trainer/app.js
+          node --check algorithmen-trainer/scorm.js
+          node algorithmen-trainer/check.js
           python3 -m py_compile tools/quiz_xlsx.py tools/content_xlsx.py tools/package_scorm.py
+          python3 -m py_compile algorithmen-trainer/tools/package_scorm.py
           content_roundtrip_dir=$(mktemp -d)
           python3 tools/content_xlsx.py export --xlsx "$content_roundtrip_dir/buildbench-content.xlsx"
           python3 tools/content_xlsx.py import --xlsx "$content_roundtrip_dir/buildbench-content.xlsx" --content-dir "$content_roundtrip_dir/content" --force
           node content-check.js "$content_roundtrip_dir/content"
           python3 tools/package_scorm.py --force
           unzip -t dist/buildbench-scorm-1.2.zip
+          python3 algorithmen-trainer/tools/package_scorm.py --force
+          unzip -t algorithmen-trainer/dist/algodesk-scorm-1.2.zip
           test -s index.html
           test -s evaluation.html
           test -s styles.css
@@ -64,6 +70,10 @@ jobs:
           test -s assets/svg/inside-view.svg
           test -s assets/svg/ports-view.svg
           test -s dist/buildbench-scorm-1.2.zip
+          test -s algorithmen-trainer/index.html
+          test -s algorithmen-trainer/content/algorithms.json
+          test -s algorithmen-trainer/content/exercises.json
+          test -s algorithmen-trainer/dist/algodesk-scorm-1.2.zip
           test -s favicon.svg
           grep -q 'id="pc-view-host"' index.html
           grep -q 'id="port-view-host"' index.html
@@ -85,6 +95,12 @@ jobs:
         with:
           name: buildbench-scorm-1.2
           path: dist/buildbench-scorm-1.2.zip
+          if-no-files-found: error
+      - name: AlgoDesk-SCORM-Paket bereitstellen
+        uses: actions/upload-artifact@v4
+        with:
+          name: algodesk-scorm-1.2
+          path: algorithmen-trainer/dist/algodesk-scorm-1.2.zip
           if-no-files-found: error
       - name: Pages konfigurieren
         uses: actions/configure-pages@v5

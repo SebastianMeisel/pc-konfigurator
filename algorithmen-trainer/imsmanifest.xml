@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest identifier="AlgoDesk-Pseudocode-Trainer-1" version="1.0"
+  xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2"
+  xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.imsproject.org/xsd/imscp_rootv1p1p2 imscp_rootv1p1p2.xsd http://www.adlnet.org/xsd/adlcp_rootv1p2 adlcp_rootv1p2.xsd">
+  <metadata><schema>ADL SCORM</schema><schemaversion>1.2</schemaversion></metadata>
+  <organizations default="ALGODESK-ORG">
+    <organization identifier="ALGODESK-ORG">
+      <title>AlgoDesk – Pseudocode-Trainer</title>
+      <item identifier="ALGODESK-ITEM" identifierref="ALGODESK-SCO" isvisible="true">
+        <title>Binäre Suche, Sortieralgorithmen und Schreibtischtests</title>
+        <adlcp:masteryscore>80</adlcp:masteryscore>
+      </item>
+    </organization>
+  </organizations>
+  <resources>
+    <resource identifier="ALGODESK-SCO" type="webcontent" adlcp:scormtype="sco" href="index.html">
+      <file href="index.html"/><file href="styles.css"/><file href="app.js"/><file href="scorm.js"/>
+      <file href="content/algorithms.json"/><file href="content/exercises.json"/>
+      <file href="content/algorithms.schema.json"/><file href="content/exercises.schema.json"/>
+    </resource>
+  </resources>
+</manifest>

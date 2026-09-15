@@ -1,0 +1,135 @@
+{
+  "schemaVersion": 1,
+  "deskTests": [
+    { "id": "desk-binary-1", "algorithm": "binary-search", "values": [3, 7, 11, 18, 24, 31, 42], "target": 24, "title": "Treffer im rechten Teil", "difficulty": "leicht" },
+    { "id": "desk-binary-2", "algorithm": "binary-search", "values": [2, 5, 9, 14, 21, 28, 35, 41], "target": 13, "title": "Nicht vorhandener Wert", "difficulty": "mittel" },
+    { "id": "desk-bubble-1", "algorithm": "bubble-sort", "values": [6, 2, 5, 1], "title": "Nachbarn tauschen", "difficulty": "leicht" },
+    { "id": "desk-bubble-2", "algorithm": "bubble-sort", "values": [1, 3, 2, 4], "title": "Vorzeitiger Abbruch", "difficulty": "mittel" },
+    { "id": "desk-insertion-1", "algorithm": "insertion-sort", "values": [7, 3, 5, 2], "title": "Werte einschieben", "difficulty": "mittel" },
+    { "id": "desk-selection-1", "algorithm": "selection-sort", "values": [8, 3, 6, 1], "title": "Minimum verfolgen", "difficulty": "mittel" }
+  ],
+  "debugChallenges": [
+    {
+      "id": "debug-binary-bound",
+      "title": "Der letzte Kandidat wird übersprungen",
+      "algorithm": "binary-search",
+      "values": [2, 6, 10, 14, 18],
+      "target": 18,
+      "buggyLines": [
+        "links ← 0",
+        "rechts ← LÄNGE(A) - 1",
+        "SOLANGE links < rechts",
+        "  mitte ← GANZZAHL((links + rechts) / 2)",
+        "  WENN A[mitte] = gesucht: GIB mitte ZURÜCK",
+        "  WENN A[mitte] < gesucht: links ← mitte + 1",
+        "  SONST: rechts ← mitte - 1",
+        "GIB -1 ZURÜCK"
+      ],
+      "question": "Welche Änderung sorgt dafür, dass auch ein einzelner verbleibender Kandidat geprüft wird?",
+      "options": [
+        { "id": "A", "text": "SOLANGE links ≤ rechts", "correct": true },
+        { "id": "B", "text": "rechts ← LÄNGE(A)", "correct": false },
+        { "id": "C", "text": "mitte ← links + rechts", "correct": false },
+        { "id": "D", "text": "links ← mitte", "correct": false }
+      ],
+      "evidence": "Nach dem ersten Vergleich gilt links = rechts = 4. Mit links < rechts endet die Schleife, bevor A[4] geprüft wird.",
+      "explanation": "Die Grenzen sind inklusive. Solange links kleiner oder gleich rechts ist, enthält das Intervall noch mindestens einen möglichen Treffer."
+    },
+    {
+      "id": "debug-binary-progress",
+      "title": "Die Suche bleibt stehen",
+      "algorithm": "binary-search",
+      "values": [4, 8, 12, 16, 20, 24],
+      "target": 24,
+      "buggyLines": [
+        "links ← 0; rechts ← LÄNGE(A) - 1",
+        "SOLANGE links ≤ rechts",
+        "  mitte ← GANZZAHL((links + rechts) / 2)",
+        "  WENN A[mitte] < gesucht: links ← mitte",
+        "  SONST WENN A[mitte] > gesucht: rechts ← mitte - 1",
+        "  SONST: GIB mitte ZURÜCK"
+      ],
+      "question": "Welche Korrektur garantiert, dass das Suchintervall kleiner wird?",
+      "options": [
+        { "id": "A", "text": "links ← mitte + 1", "correct": true },
+        { "id": "B", "text": "links ← 0", "correct": false },
+        { "id": "C", "text": "rechts ← rechts + 1", "correct": false },
+        { "id": "D", "text": "mitte ← mitte - 1", "correct": false }
+      ],
+      "evidence": "Bei links = 4 und rechts = 5 ist mitte = 4. Die Zuweisung links ← mitte verändert keine Grenze; derselbe Zustand wiederholt sich.",
+      "explanation": "Der bereits geprüfte mittlere Wert muss ausgeschlossen werden. Deshalb wird die linke Grenze auf mitte + 1 gesetzt."
+    },
+    {
+      "id": "debug-bubble-bound",
+      "title": "Das letzte Paar fehlt",
+      "algorithm": "bubble-sort",
+      "values": [2, 4, 3],
+      "buggyLines": [
+        "FÜR ende ← LÄNGE(A) - 1 BIS 1",
+        "  FÜR i ← 0 BIS ende - 2",
+        "    WENN A[i] > A[i + 1]",
+        "      TAUSCHE A[i] MIT A[i + 1]"
+      ],
+      "question": "Wie muss die innere Schleifengrenze lauten?",
+      "options": [
+        { "id": "A", "text": "i ← 0 BIS ende - 1", "correct": true },
+        { "id": "B", "text": "i ← 1 BIS ende", "correct": false },
+        { "id": "C", "text": "i ← 0 BIS ende + 1", "correct": false },
+        { "id": "D", "text": "i ← ende BIS 0", "correct": false }
+      ],
+      "evidence": "Bei ende = 2 wird nur i = 0 geprüft. Das unsortierte Paar A[1] = 4 und A[2] = 3 bleibt unverglichen.",
+      "explanation": "Der letzte zulässige linke Index eines Nachbarpaares ist ende - 1; der rechte Zugriff erfolgt dann auf ende."
+    },
+    {
+      "id": "debug-insertion-value",
+      "title": "Der einzufügende Wert geht verloren",
+      "algorithm": "insertion-sort",
+      "values": [3, 7, 4],
+      "buggyLines": [
+        "FÜR i ← 1 BIS LÄNGE(A) - 1",
+        "  j ← i - 1",
+        "  SOLANGE j ≥ 0 UND A[j] > A[i]",
+        "    A[j + 1] ← A[j]",
+        "    j ← j - 1",
+        "  A[j + 1] ← A[i]"
+      ],
+      "question": "Welche Ergänzung muss vor dem Verschieben erfolgen?",
+      "options": [
+        { "id": "A", "text": "wert ← A[i] und danach mit wert vergleichen/einfügen", "correct": true },
+        { "id": "B", "text": "i ← i - 1", "correct": false },
+        { "id": "C", "text": "A sortieren", "correct": false },
+        { "id": "D", "text": "j ← 0", "correct": false }
+      ],
+      "evidence": "Beim Verschieben wird A[i] überschrieben. Ohne Hilfsvariable steht der ursprüngliche Wert 4 danach nicht mehr zur Verfügung.",
+      "explanation": "Der einzufügende Wert wird vor der Verschiebeschleife in einer Hilfsvariable gesichert."
+    },
+    {
+      "id": "debug-selection-reset",
+      "title": "Ein altes Minimum wird wiederverwendet",
+      "algorithm": "selection-sort",
+      "values": [1, 4, 3, 2],
+      "buggyLines": [
+        "min ← 0",
+        "FÜR links ← 0 BIS LÄNGE(A) - 2",
+        "  FÜR i ← links + 1 BIS LÄNGE(A) - 1",
+        "    WENN A[i] < A[min]: min ← i",
+        "  TAUSCHE A[links] MIT A[min]"
+      ],
+      "question": "Wo muss min initialisiert werden?",
+      "options": [
+        { "id": "A", "text": "In jedem äußeren Durchlauf mit min ← links", "correct": true },
+        { "id": "B", "text": "Nach jedem Vergleich mit min ← 0", "correct": false },
+        { "id": "C", "text": "Einmal mit min ← LÄNGE(A)", "correct": false },
+        { "id": "D", "text": "Gar nicht; min ist überflüssig", "correct": false }
+      ],
+      "evidence": "Nach dem ersten Durchlauf zeigt min weiterhin auf Index 0, obwohl der neue unsortierte Bereich erst bei Index 1 beginnt.",
+      "explanation": "Für jeden neuen unsortierten Teilbereich gilt zunächst dessen erstes Element als kleinstes bekanntes Element."
+    }
+  ],
+  "helpCards": [
+    { "title": "Schreibtischtest", "text": "Führe jede Pseudocodezeile von Hand aus. Notiere nach Zustandsänderungen die Variablen, das Feld und die geprüfte Bedingung. So werden Grenz- und Logikfehler sichtbar." },
+    { "title": "Binäre Suche", "text": "Prüfe zuerst die Vorbedingung: Das Feld muss sortiert sein. links und rechts bezeichnen inklusive Grenzen; mitte wird ganzzahlig abgerundet." },
+    { "title": "Sortierverfahren", "text": "Trenne den bereits sortierten vom noch unsortierten Bereich. Beobachte Vergleiche, Verschiebungen und Tausche einzeln." },
+    { "title": "Sicher testen", "text": "Nutze auch leere, ein-elementige, bereits sortierte und doppelte Werte. Kleine Testdaten sind für einen vollständigen Schreibtischtest besser als große." }
+  ]
+}
