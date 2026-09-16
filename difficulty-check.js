@@ -13,9 +13,9 @@ assert(Object.keys(model.modes).length === 3, "Drei Schwierigkeitsgrade werden e
 assert(model.sanitize({ mode: "unbekannt", cpuTuning: 99 }).mode === "standard", "Ungültiger Modus wird nicht abgefangen");
 assert(model.sanitize({ mode: "expert", cpuTuning: 10, gpuTuning: 20 }).gpuTuning === 20, "Gültiges Tuning geht verloren");
 
-const items = [{ id: "a", recommended: true }, { id: "b" }, { id: "c" }];
-assert(model.visibleItems(items, null, { mode: "beginner" }).length === 1, "Einsteigermodus reduziert den Katalog nicht");
-assert(model.visibleItems(items, "b", { mode: "beginner" }).length === 2, "Bestehende Auswahl wird im Einsteigermodus verborgen");
+const items = [{ id: "a", recommended: true }, { id: "b", beginnerContrast: true }, { id: "c" }];
+assert(model.visibleItems(items, null, { mode: "beginner" }).length === 2, "Einsteigermodus zeigt nicht Empfehlung und Lernkontrast");
+assert(model.visibleItems(items, "c", { mode: "beginner" }).length === 3, "Bestehende Auswahl wird im Einsteigermodus verborgen");
 assert(model.visibleItems(items, null, { mode: "standard" }).length === 3, "Standardmodus zeigt nicht alle Varianten");
 
 const base = model.power({ power: 100 }, { power: 200 }, { mode: "standard" });

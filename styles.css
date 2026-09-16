@@ -336,6 +336,10 @@ h2 { margin-bottom: 0; font-size: 1.08rem; letter-spacing: -.02em; }
   background: linear-gradient(150deg, rgba(32,77,75,.73), rgba(16,42,48,.85));
   box-shadow: inset 0 0 0 1px rgba(101,230,196,.16), 0 8px 24px rgba(0,0,0,.2);
 }
+.component-card.contrast-card:not(.blocked):not(.selected) {
+  border-color: rgba(255,190,92,.52);
+  background: linear-gradient(150deg, rgba(73,52,23,.58), rgba(27,31,42,.86));
+}
 .component-card.blocked {
   border-color: rgba(255,107,122,.46);
   opacity: .84;
@@ -344,6 +348,18 @@ h2 { margin-bottom: 0; font-size: 1.08rem; letter-spacing: -.02em; }
 }
 .component-card .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
 .component-card .maker { color: var(--accent); font: 600 .65rem "JetBrains Mono", monospace; letter-spacing: .07em; text-transform: uppercase; }
+.contrast-badge {
+  display: inline-block;
+  margin-left: 7px;
+  padding: 2px 5px;
+  border: 1px solid rgba(255,190,92,.62);
+  border-radius: 4px;
+  color: #ffd18c;
+  background: rgba(255,190,92,.1);
+  font: 700 .58rem "JetBrains Mono", monospace;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
 .component-card h3 { margin: 4px 0 7px; font-size: .98rem; line-height: 1.25; letter-spacing: -.015em; }
 .component-card .price { white-space: nowrap; color: #fff; font: 600 .82rem "JetBrains Mono", monospace; }
 .component-card .specs { display: flex; flex-wrap: wrap; align-content: flex-start; gap: 5px; margin: 0 0 11px; padding: 0; list-style: none; }

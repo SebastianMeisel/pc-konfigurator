@@ -4,7 +4,7 @@
   const modes = Object.freeze({
     beginner: Object.freeze({
       label: "Einsteiger",
-      description: "Zeigt pro Schritt eine kuratierte Empfehlung und reduziert die Zahl der Entscheidungen."
+      description: "Zeigt pro Schritt eine passende Empfehlung und einen bewusst extremen Gegenentwurf zum Vergleichen."
     }),
     standard: Object.freeze({
       label: "Standard",
@@ -65,7 +65,7 @@
   function visibleItems(items, selectedId, settings) {
     const clean = sanitize(settings);
     if (clean.mode !== "beginner") return items;
-    return items.filter(item => item.recommended || item.id === selectedId);
+    return items.filter(item => item.recommended || item.beginnerContrast || item.id === selectedId);
   }
 
   function summary(settings) {

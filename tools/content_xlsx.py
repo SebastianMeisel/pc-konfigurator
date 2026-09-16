@@ -48,7 +48,7 @@ FILES = {
     "network": "network.json",
     "compatibility": "compatibility-rules.json",
 }
-BASE_COMPONENT_FIELDS = ("id", "maker", "name", "price", "generation", "recommended", "specs")
+BASE_COMPONENT_FIELDS = ("id", "maker", "name", "price", "generation", "recommended", "beginnerContrast", "specs")
 ARRAY_FIELDS = {
     "form",
     "psu",
@@ -60,7 +60,7 @@ ARRAY_FIELDS = {
     "driveMounts",
     "provides",
 }
-BOOLEAN_FIELDS = {"recommended", "atx3", "fluid"}
+BOOLEAN_FIELDS = {"recommended", "beginnerContrast", "atx3", "fluid"}
 INTEGER_FIELDS = {
     "price",
     "generation",
@@ -199,8 +199,15 @@ def validate_components(data: object) -> dict:
             generation = normalized.get("generation")
             if generation is not None and generation not in (1, 2):
                 raise ContentDataError(f"{category_id}/{item_id}: generation muss 1 oder 2 sein.")
+            for marker in ("recommended", "beginnerContrast"):
+                if marker in normalized and not isinstance(normalized[marker], bool):
+                    raise ContentDataError(f"{category_id}/{item_id}: {marker} muss wahr oder falsch sein.")
             normalized_items.append(normalized)
         unique(ids, f"Komponentengruppe {category_id}")
+        if sum(item.get("recommended") is True for item in normalized_items) != 1:
+            raise ContentDataError(f"{category_id}: genau eine Einsteigerempfehlung wird benötigt.")
+        if sum(item.get("beginnerContrast") is True for item in normalized_items) != 1:
+            raise ContentDataError(f"{category_id}: genau ein Einsteiger-Lernkontrast wird benötigt.")
         normalized_groups[category_id] = normalized_items
     unique(category_ids, "Kategorien")
     if set(groups) != set(category_ids):
@@ -453,7 +460,7 @@ def content_sheets(data: dict[str, dict]) -> list[tuple[str, list[list[object]],
         for index, field in enumerate(fields):
             if field in {"name", "specs", "sockets", "provides"}:
                 widths[index] = 38
-            elif field in {"recommended", "generation"}:
+            elif field in {"recommended", "beginnerContrast", "generation"}:
                 widths[index] = 14
         sheets.append((component_sheet_name(category["id"]), rows, widths))
     sheets.append(

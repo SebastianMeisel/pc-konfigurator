@@ -182,10 +182,10 @@
     refs.description.textContent = category.description;
     const available = items.filter(item => compatibility(category.id, item).length === 0).length;
     refs.count.textContent = state.difficulty.mode === "beginner"
-      ? `${available} geführte Option${available === 1 ? "" : "en"} · ${allItems.length} im Standardmodus`
+      ? `${items.length} Vergleichsoptionen · ${available} aktuell kompatibel · ${allItems.length} im Standardmodus`
       : `${available} von ${items.length} wählbar`;
     const generationHint = items.some(item => item.generation) ? "Vorgängermodelle sind als Lern- und Budgetoptionen markiert; Verfügbarkeit, Effizienz, Garantie und Firmware-Support gesondert bewerten." : "";
-    const beginnerHint = state.difficulty.mode === "beginner" ? "Der Einsteigermodus zeigt die kuratierte Empfehlung; Lerninfo und Kompatibilitätsprüfung bleiben vollständig aktiv." : "";
+    const beginnerHint = state.difficulty.mode === "beginner" ? "Vergleiche die passende Empfehlung mit dem bewusst extremen Lernkontrast. Rot markierte Varianten passen zur aktuellen Konfiguration nicht; öffne ihre Details, um Ursache, Folge und Lösung zu sehen." : "";
     const context = [beginnerHint, contextMessage(category.id), generationHint].filter(Boolean).join(" ");
     refs.note.hidden = !context;
     refs.note.textContent = context || "";
@@ -193,13 +193,14 @@
     refs.grid.innerHTML = items.map(item => {
       const issues = compatibility(category.id, item);
       const isSelected = state.selections[category.id] === item.id;
-      return `<button class="component-card ${isSelected ? "selected" : ""} ${issues.length ? "blocked" : ""} ${item.generation ? "legacy-card" : ""}"
+      const isBeginnerContrast = state.difficulty.mode === "beginner" && item.beginnerContrast;
+      return `<button class="component-card ${isSelected ? "selected" : ""} ${issues.length ? "blocked" : ""} ${item.generation ? "legacy-card" : ""} ${isBeginnerContrast ? "contrast-card" : ""}"
           data-id="${escapeHtml(item.id)}" type="button" ${issues.length ? `aria-haspopup="dialog" aria-label="Nicht wählbar: ${escapeHtml(item.name)}. Kompatibilitätsdetails anzeigen"` : `aria-pressed="${isSelected}"`}>
-        <span class="card-top"><span><span class="maker">${escapeHtml(item.maker)}</span>${item.generation ? `<span class="generation-badge generation-${item.generation}">${item.generation === 1 ? "1 Gen. zurück" : "2 Gen. zurück"}</span>` : ""}</span><span class="price">${escapeHtml(money(item.price))}</span></span>
+        <span class="card-top"><span><span class="maker">${escapeHtml(item.maker)}</span>${item.generation ? `<span class="generation-badge generation-${item.generation}">${item.generation === 1 ? "1 Gen. zurück" : "2 Gen. zurück"}</span>` : ""}${isBeginnerContrast ? `<span class="contrast-badge">Lernkontrast</span>` : ""}</span><span class="price">${escapeHtml(money(item.price))}</span></span>
         <h3>${escapeHtml(item.name)}</h3>
         <ul class="specs">${item.specs.map(spec => `<li>${escapeHtml(spec)}</li>`).join("")}</ul>
         ${issues.length ? `<span class="block-reason"><span>${escapeHtml(issues.map(entry => entry.title).join(" · "))}</span><span class="block-action">Details anzeigen</span></span>` :
-          `<span class="card-foot"><span>${state.difficulty.mode === "beginner" ? "Geführte Empfehlung" : item.recommended ? "Empfohlene Balance" : isSelected ? "Ausgewählt" : "Auswählen"}</span><span class="select-indicator">${isSelected ? "✓" : ""}</span></span>`}
+          `<span class="card-foot"><span>${state.difficulty.mode === "beginner" ? (item.recommended ? "Passende Empfehlung" : "Extremen Gegenentwurf prüfen") : item.recommended ? "Empfohlene Balance" : isSelected ? "Ausgewählt" : "Auswählen"}</span><span class="select-indicator">${isSelected ? "✓" : ""}</span></span>`}
       </button>`;
     }).join("");
 
