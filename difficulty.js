@@ -4,7 +4,7 @@
   const modes = Object.freeze({
     beginner: Object.freeze({
       label: "Einsteiger",
-      description: "Zeigt pro Schritt eine passende Empfehlung und einen bewusst extremen Gegenentwurf zum Vergleichen."
+      description: "Bietet zwei vollständige, in sich kompatible Baupfade. Die erste Auswahl legt den Pfad fest."
     }),
     standard: Object.freeze({
       label: "Standard",
@@ -22,6 +22,11 @@
     gpuTuning: 0,
     coolingProfile: "sustained",
     leakTest: false
+  });
+
+  const beginnerVariants = Object.freeze({
+    a: Object.freeze({ label: "Pfad A", description: "Erweiterbarer ATX-Tower mit offenem Wasserkreislauf" }),
+    b: Object.freeze({ label: "Pfad B", description: "Kompakter Mini-ITX-PC mit geschlossener Wasserkühlung" })
   });
 
   const allowedTuning = [0, 10, 20];
@@ -65,7 +70,7 @@
   function visibleItems(items, selectedId, settings) {
     const clean = sanitize(settings);
     if (clean.mode !== "beginner") return items;
-    return items.filter(item => item.recommended || item.beginnerContrast || item.id === selectedId);
+    return items.filter(item => beginnerVariants[item.beginnerVariant]);
   }
 
   function summary(settings) {
@@ -75,5 +80,5 @@
     return `CPU-Power-Limit +${clean.cpuTuning} %, GPU-Power-Limit +${clean.gpuTuning} %, Kühlziel: ${profile}.`;
   }
 
-  window.BuildBenchDifficulty = Object.freeze({ modes, defaults, sanitize, power, cooling, visibleItems, summary });
+  window.BuildBenchDifficulty = Object.freeze({ modes, defaults, beginnerVariants, sanitize, power, cooling, visibleItems, summary });
 })();

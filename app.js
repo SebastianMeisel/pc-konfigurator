@@ -42,6 +42,15 @@
     return difficultyModel.power(cpu, gpu, state.difficulty);
   };
   const requiredCooling = (selections = state.selections) => difficultyModel.cooling(selected("cpu", selections), state.difficulty);
+  const beginnerVariant = (selections = state.selections, ignoredCategory = null) => {
+    if (state.difficulty.mode !== "beginner") return null;
+    for (const category of categories) {
+      if (category.id === ignoredCategory) continue;
+      const variant = selected(category.id, selections)?.beginnerVariant;
+      if (difficultyModel.beginnerVariants[variant]) return variant;
+    }
+    return null;
+  };
 
   function issue(code, evidence) {
     const rule = ruleCatalog[code];
@@ -120,6 +129,40 @@
     return issues;
   }
 
+  function beginnerPathIssue(category, item) {
+    if (state.difficulty.mode !== "beginner") return null;
+    const active = beginnerVariant(state.selections, category);
+    if (!active || item.beginnerVariant === active) return null;
+    const chosen = difficultyModel.beginnerVariants[active];
+    const candidate = difficultyModel.beginnerVariants[item.beginnerVariant];
+    return {
+      title: "Anderer Einsteigerpfad",
+      evidence: `${chosen.label} ist bereits begonnen. ${item.name} gehört zu ${candidate?.label || "einem anderen Pfad"}.`,
+      consequence: "Bauteile beider Lernpfade würden vermischt; die geprüfte Gesamtkonfiguration wäre nicht mehr garantiert.",
+      remedy: "Setze die Konfiguration zurück, wenn du stattdessen den anderen vollständigen Baupfad bearbeiten möchtest.",
+      learningHint: "Jeder Einsteigerpfad bildet ein zusammenhängendes System aus Formfaktor, Plattform, Stromversorgung, Kühlung und Montagezubehör."
+    };
+  }
+
+  function selectionIssues(category, item) {
+    const pathIssue = beginnerPathIssue(category, item);
+    return [...(pathIssue ? [pathIssue] : []), ...compatibility(category, item)];
+  }
+
+  function normalizeBeginnerSelections() {
+    if (state.difficulty.mode !== "beginner") return;
+    let active = null;
+    for (const category of categories) {
+      const item = selected(category.id);
+      const variant = item?.beginnerVariant;
+      if (!difficultyModel.beginnerVariants[variant] || (active && variant !== active)) {
+        state.selections[category.id] = null;
+      } else if (!active) {
+        active = variant;
+      }
+    }
+  }
+
   function reconcile(changedCategory) {
     const removed = [];
     let changed = true;
@@ -180,27 +223,28 @@
     refs.kicker.textContent = `Schritt ${state.active + 1} von ${categories.length}`;
     refs.title.textContent = category.title;
     refs.description.textContent = category.description;
-    const available = items.filter(item => compatibility(category.id, item).length === 0).length;
+    const available = items.filter(item => selectionIssues(category.id, item).length === 0).length;
+    const activePath = beginnerVariant();
     refs.count.textContent = state.difficulty.mode === "beginner"
-      ? `${items.length} Vergleichsoptionen · ${available} aktuell kompatibel · ${allItems.length} im Standardmodus`
+      ? `${items.length} Baupfade · ${activePath ? difficultyModel.beginnerVariants[activePath].label + " aktiv" : "noch kein Pfad gewählt"}`
       : `${available} von ${items.length} wählbar`;
     const generationHint = items.some(item => item.generation) ? "Vorgängermodelle sind als Lern- und Budgetoptionen markiert; Verfügbarkeit, Effizienz, Garantie und Firmware-Support gesondert bewerten." : "";
-    const beginnerHint = state.difficulty.mode === "beginner" ? "Vergleiche die passende Empfehlung mit dem bewusst extremen Lernkontrast. Rot markierte Varianten passen zur aktuellen Konfiguration nicht; öffne ihre Details, um Ursache, Folge und Lösung zu sehen." : "";
+    const beginnerHint = state.difficulty.mode === "beginner" ? "Beide Baupfade sind vollständig kompatibel. Deine erste Komponentenwahl legt den Pfad fest; für den anderen Pfad setzt du die Konfiguration zurück. Zu Beginn ist keine Variante vorausgewählt." : "";
     const context = [beginnerHint, contextMessage(category.id), generationHint].filter(Boolean).join(" ");
     refs.note.hidden = !context;
     refs.note.textContent = context || "";
 
     refs.grid.innerHTML = items.map(item => {
-      const issues = compatibility(category.id, item);
+      const issues = selectionIssues(category.id, item);
       const isSelected = state.selections[category.id] === item.id;
-      const isBeginnerContrast = state.difficulty.mode === "beginner" && item.beginnerContrast;
-      return `<button class="component-card ${isSelected ? "selected" : ""} ${issues.length ? "blocked" : ""} ${item.generation ? "legacy-card" : ""} ${isBeginnerContrast ? "contrast-card" : ""}"
+      const variant = state.difficulty.mode === "beginner" ? difficultyModel.beginnerVariants[item.beginnerVariant] : null;
+      return `<button class="component-card ${isSelected ? "selected" : ""} ${issues.length ? "blocked" : ""} ${item.generation ? "legacy-card" : ""}"
           data-id="${escapeHtml(item.id)}" type="button" ${issues.length ? `aria-haspopup="dialog" aria-label="Nicht wählbar: ${escapeHtml(item.name)}. Kompatibilitätsdetails anzeigen"` : `aria-pressed="${isSelected}"`}>
-        <span class="card-top"><span><span class="maker">${escapeHtml(item.maker)}</span>${item.generation ? `<span class="generation-badge generation-${item.generation}">${item.generation === 1 ? "1 Gen. zurück" : "2 Gen. zurück"}</span>` : ""}${isBeginnerContrast ? `<span class="contrast-badge">Lernkontrast</span>` : ""}</span><span class="price">${escapeHtml(money(item.price))}</span></span>
+        <span class="card-top"><span><span class="maker">${escapeHtml(item.maker)}</span>${item.generation ? `<span class="generation-badge generation-${item.generation}">${item.generation === 1 ? "1 Gen. zurück" : "2 Gen. zurück"}</span>` : ""}${variant ? `<span class="beginner-variant-badge">${escapeHtml(variant.label)}</span>` : ""}</span><span class="price">${escapeHtml(money(item.price))}</span></span>
         <h3>${escapeHtml(item.name)}</h3>
         <ul class="specs">${item.specs.map(spec => `<li>${escapeHtml(spec)}</li>`).join("")}</ul>
         ${issues.length ? `<span class="block-reason"><span>${escapeHtml(issues.map(entry => entry.title).join(" · "))}</span><span class="block-action">Details anzeigen</span></span>` :
-          `<span class="card-foot"><span>${state.difficulty.mode === "beginner" ? (item.recommended ? "Passende Empfehlung" : "Extremen Gegenentwurf prüfen") : item.recommended ? "Empfohlene Balance" : isSelected ? "Ausgewählt" : "Auswählen"}</span><span class="select-indicator">${isSelected ? "✓" : ""}</span></span>`}
+          `<span class="card-foot"><span>${variant ? `${variant.label}${isSelected ? " gewählt" : " auswählen"}` : item.recommended ? "Empfohlene Balance" : isSelected ? "Ausgewählt" : "Auswählen"}</span><span class="select-indicator">${isSelected ? "✓" : ""}</span></span>`}
       </button>`;
     }).join("");
 
@@ -215,7 +259,7 @@
     }));
     refs.grid.querySelectorAll(".component-card.blocked").forEach(button => button.addEventListener("click", () => {
       const item = items.find(entry => entry.id === button.dataset.id);
-      if (item) openCompatibilityDialog(category, item, compatibility(category.id, item));
+      if (item) openCompatibilityDialog(category, item, selectionIssues(category.id, item));
     }));
     refs.previous.disabled = state.active === 0;
     refs.next.textContent = state.active === categories.length - 1 ? "Zur Übersicht" : "Weiter";
@@ -294,6 +338,12 @@
 
     const modeLabel = difficultyModel.modes[state.difficulty.mode].label;
     list.push({ type:"info", title:`Modus: ${modeLabel}`, text:difficultyModel.summary(state.difficulty) });
+    if (state.difficulty.mode === "beginner") {
+      const active = beginnerVariant();
+      list.push(active
+        ? { type:"info", title:`${difficultyModel.beginnerVariants[active].label} aktiv`, text:difficultyModel.beginnerVariants[active].description + "." }
+        : { type:"info", title:"Baupfad noch offen", text:"Die erste Komponentenwahl legt Pfad A oder Pfad B fest; beide starten ohne Vorauswahl." });
+    }
     if (state.difficulty.mode === "expert" && (state.difficulty.cpuTuning || state.difficulty.gpuTuning)) {
       list.push({ type:"warning", title:"Power-Limits aktiv", text:`CPU +${state.difficulty.cpuTuning} %, GPU +${state.difficulty.gpuTuning} %. Stabilität, Temperaturen und reale Leistungsaufnahme müssen mit geeigneten Tests geprüft werden.` });
     }
@@ -520,8 +570,13 @@
   });
   refs.example.addEventListener("click", () => {
     if (state.difficulty.mode === "beginner") {
-      for (const category of categories) state.selections[category.id] = data[category.id].find(item => item.recommended)?.id || null;
-      state.active = 0; save(); render(); showToast("Geführten Einsteiger-Build geladen.");
+      const active = beginnerVariant();
+      if (!active) {
+        showToast("Wähle zuerst eine Komponente aus Pfad A oder Pfad B.");
+        return;
+      }
+      for (const category of categories) state.selections[category.id] = data[category.id].find(item => item.beginnerVariant === active)?.id || null;
+      state.active = 0; save(); render(); showToast(`${difficultyModel.beginnerVariants[active].label} vollständig geladen.`);
     } else {
       Object.assign(state.selections, {
         case:"north", motherboard:"x870", cpu:"9800x3d", gpu:"5070", ram:"32-6000", psu:"rm850x",
@@ -551,8 +606,16 @@
   });
 
   document.querySelectorAll('input[name="difficulty"]').forEach(input => input.addEventListener("change", () => {
+    const enteringBeginner = state.difficulty.mode !== "beginner" && input.value === "beginner";
     state.difficulty = difficultyModel.sanitize({ ...state.difficulty, mode: input.value });
-    reconcile("difficulty"); save(); render();
+    if (enteringBeginner) {
+      for (const category of categories) state.selections[category.id] = null;
+      state.active = 0;
+    } else {
+      reconcile("difficulty");
+    }
+    save(); render();
+    if (enteringBeginner) showToast("Einsteigerpfade gestartet – noch keine Variante ausgewählt.");
   }));
   for (const [control, key] of [[refs.cpuTuning,"cpuTuning"],[refs.gpuTuning,"gpuTuning"],[refs.coolingProfile,"coolingProfile"]]) {
     control.addEventListener("change", () => {
@@ -566,5 +629,6 @@
   });
 
   load();
+  normalizeBeginnerSelections();
   render();
 })();

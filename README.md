@@ -13,7 +13,7 @@ Die Anwendung bewertet unter anderem Sockel, Formfaktor, Arbeitsspeicherstandard
 - Hinweise zu PCIe-Steckplätzen, Bluetooth-USB-Headern, Antennen, Kabelkategorien und Netzwerk-Infrastruktur
 - Automatische Berücksichtigung der Netzwerk-Erweiterungen im Gesamtpreis
 - Klar markierte Komponenten aus ein bis zwei Vorgängergenerationen für Plattformvergleich, Budgetplanung und Gebrauchtmarkt-Szenarien
-- Drei Schwierigkeitsgrade: Einsteigerpfad mit passender Empfehlung und extremem Lernkontrast, vollständiger Standardkatalog und Expertenmodus
+- Drei Schwierigkeitsgrade: zwei vollständige und in sich kompatible Einsteiger-Baupfade, vollständiger Standardkatalog und Expertenmodus
 - Expertenparameter für CPU-/GPU-Power-Limits, Dauerlast- oder Lautstärkereserve und dokumentierten Custom-Loop-Dichtheitstest
 - Gemischte AM5-, AM4-, LGA1851- und LGA1700-Plattformen mit DDR5-/DDR4-Prüfung sowie PCIe-Abwärtskompatibilität
 - Zweite Seite „Auswertung“ mit gewichteter Nutzwertanalyse für Office, Entwicklung, CAD, Videoschnitt und lokale KI
@@ -44,7 +44,7 @@ Nach der Bearbeitung werden alle vier JSON-Dateien gemeinsam aktualisiert mit:
 python3 tools/content_xlsx.py import --force
 ```
 
-Listenwerte wie Spezifikationen, Sockel oder unterstützte Formfaktoren stehen innerhalb einer Zelle jeweils in einer eigenen Zeile. Pro Komponentenblatt kennzeichnet `recommended` die passende Einsteigerempfehlung und `beginnerContrast` den bewusst extremen Gegenentwurf; je Kategorie muss genau eine Zeile mit dem jeweiligen Merkmal auf `true` stehen. Beim Import werden Formeln abgewiesen sowie Pflichtfelder, Datentypen, eindeutige IDs und Querverweise geprüft. Ohne `--force` überschreibt das Skript keine vorhandenen Dateien. Abweichende Pfade lassen sich mit `--content-dir` und `--xlsx` angeben.
+Listenwerte wie Spezifikationen, Sockel oder unterstützte Formfaktoren stehen innerhalb einer Zelle jeweils in einer eigenen Zeile. In jedem Komponentenblatt ordnet `beginnerVariant` genau eine Komponente dem Pfad `a` und genau eine dem Pfad `b` zu. Beide Pfade müssen über alle Kategorien hinweg jeweils eine kompatible Gesamtkonfiguration bilden; `recommended` bleibt davon unabhängig die Standardempfehlung. Beim Import werden Formeln abgewiesen sowie Pflichtfelder, Datentypen, eindeutige IDs und Querverweise geprüft. Ohne `--force` überschreibt das Skript keine vorhandenen Dateien. Abweichende Pfade lassen sich mit `--content-dir` und `--xlsx` angeben.
 
 Neue Modelle können ohne Programmänderung in einer vorhandenen Kategorie ergänzt werden, sofern alle von den bestehenden Einträgen verwendeten technischen Felder ausgefüllt sind. Neue Kategorien oder neue technische Eigenschaften benötigen zusätzlich passende Anzeige-, Kompatibilitäts- oder Bewertungslogik.
 

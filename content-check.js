@@ -42,7 +42,9 @@ for (const category of components.categories) {
   assert(category.id && category.label && category.title && category.description && category.lessonId, category.id + ": Kategorietexte oder Lernkartenverweis fehlen");
   assert(Array.isArray(items) && items.length > 0, category.id + ": Komponenten fehlen");
   assert(items.filter(item => item.recommended === true).length === 1, category.id + ": genau eine Einsteigerempfehlung wird benötigt");
-  assert(items.filter(item => item.beginnerContrast === true).length === 1, category.id + ": genau ein Einsteiger-Lernkontrast wird benötigt");
+  for (const variant of ["a", "b"]) {
+    assert(items.filter(item => item.beginnerVariant === variant).length === 1, category.id + ": Einsteigerpfad " + variant.toUpperCase() + " benötigt genau eine Komponente");
+  }
   unique(items.map(item => item.id), category.id);
   for (const item of items) {
     componentCount += 1;
@@ -53,6 +55,53 @@ for (const category of components.categories) {
   }
 }
 assert(componentCount >= 72, "Der Komponentenkatalog enthält weniger als 72 Einträge");
+
+function beginnerConfig(variant) {
+  return Object.fromEntries(
+    categoryIds.map(categoryId => [
+      categoryId,
+      components.components[categoryId].find(item => item.beginnerVariant === variant)
+    ])
+  );
+}
+
+for (const variant of ["a", "b"]) {
+  const config = beginnerConfig(variant);
+  const label = "Einsteigerpfad " + variant.toUpperCase();
+  const pcCase = config.case;
+  const board = config.motherboard;
+  const cpu = config.cpu;
+  const gpu = config.gpu;
+  const ram = config.ram;
+  const psu = config.psu;
+  const cooler = config.cooler;
+  const storage = config.storage;
+  const standoffs = config.standoffs;
+  const screws = config.screws;
+  const cables = config.cables;
+  const coolant = config.coolant;
+  const load = cpu.power + gpu.power + 110;
+  const recommendedPower = Math.ceil(load * 1.3 / 50) * 50;
+
+  assert(pcCase.form.includes(board.form), label + ": Mainboard passt nicht ins Gehäuse");
+  assert(pcCase.maxGpu >= gpu.length, label + ": Grafikkarte ist zu lang");
+  assert(pcCase.psu.includes(psu.form), label + ": Netzteilform passt nicht ins Gehäuse");
+  assert(pcCase.drives.includes(storage.mount), label + ": Laufwerk passt nicht ins Gehäuse");
+  assert(board.socket === cpu.socket, label + ": CPU-Sockel passt nicht zum Mainboard");
+  assert(board.memory === ram.type, label + ": RAM-Typ passt nicht zum Mainboard");
+  assert(storage.mount !== "M.2" || board.m2 > 0, label + ": M.2-Steckplatz fehlt");
+  assert(storage.interface !== "SATA" || board.sata > 0, label + ": SATA-Anschluss fehlt");
+  assert(psu.watts >= recommendedPower, label + ": Netzteilreserve ist zu klein");
+  assert(cooler.sockets.includes(cpu.socket), label + ": Kühler passt nicht zum CPU-Sockel");
+  assert(cooler.capacity >= cpu.power, label + ": Kühlerleistung ist zu klein");
+  assert(cooler.kind === "air" ? cooler.height <= pcCase.maxCooler : pcCase.radiators.includes(cooler.radiator), label + ": Kühler passt nicht ins Gehäuse");
+  assert(standoffs.forms.includes(board.form) && standoffs.count >= board.standoff, label + ": Abstandhalter passen nicht zum Mainboard");
+  assert(standoffs.thread === pcCase.thread, label + ": Abstandhaltergewinde passt nicht zum Gehäuse");
+  assert(screws.thread === standoffs.thread && screws.count >= board.standoff, label + ": Schrauben passen nicht zu den Abstandhaltern");
+  assert(!["2.5", "3.5"].includes(storage.mount) || screws.driveMounts.includes(storage.mount), label + ": Schrauben für das Laufwerk fehlen");
+  assert(storage.interface !== "SATA" || cables.provides.includes("sata"), label + ": SATA-Datenkabel fehlt");
+  assert(cooler.kind === "custom" ? coolant.fluid === true : coolant.fluid === false, label + ": Kühlmittel passt nicht zum Kühlertyp");
+}
 
 assert(Array.isArray(lessons.lessons) && lessons.lessons.length >= 16, "Lernkarten fehlen");
 const lessonIds = lessons.lessons.map(lesson => lesson.id);
