@@ -58,7 +58,8 @@ if (!lms?.connected) throw new Error("SCORM-API wurde nicht initialisiert.");
 if (statusNode.hidden || !classNames.has("lms-connected")) throw new Error("ILIAS-Status wird nicht angezeigt.");
 if (storage.size !== 0) throw new Error("ILIAS-Fortschritt wurde zusätzlich im lokalen Browser gespeichert.");
 
-lms.recordConfigurator({ selected: 12, total: 12, step: 12 });
+lms.recordConfigurator({ selected: 12, total: 12, step: 12, mode: "expert", cpuTuning: 10, gpuTuning: 20, coolingProfile: "quiet" });
+if (lms.getState().config.mode !== "expert" || lms.getState().config.gpuTuning !== 20) throw new Error("Schwierigkeitsgrad wurde nicht gespeichert.");
 lms.recordEvaluation({ scenario: "developer", score: 88, hasConfiguration: true });
 lms.recordQuizProgress({
   answered: 2,

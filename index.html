@@ -12,6 +12,7 @@
   <script src="svg-loader.js" defer></script>
   <script src="content-loader.js" defer></script>
   <script src="scorm.js" defer></script>
+  <script src="difficulty.js" defer></script>
   <script src="app.js" defer></script>
   <script src="education.js" defer></script>
 </head>
@@ -44,6 +45,43 @@
       <p>Inhalte und Quellcode wurden mit Unterstützung generativer KI erstellt. Die Anwendung selbst verwendet kein KI-Modell und übermittelt keine Eingaben an KI-Dienste; Auswahl, Kompatibilitätsprüfung und Quiz-Auswertung erfolgen ausschließlich lokal anhand fest programmierter Regeln. Fachliche Angaben sollten vor dem Unterrichtseinsatz anhand aktueller Herstellerunterlagen geprüft werden.</p>
     </div>
   </aside>
+
+  <section class="difficulty-panel" aria-labelledby="difficulty-title">
+    <div class="difficulty-heading">
+      <div>
+        <p class="eyebrow">Differenzierung</p>
+        <h2 id="difficulty-title">Schwierigkeitsgrad</h2>
+      </div>
+      <p id="difficulty-summary" role="status" aria-live="polite"></p>
+    </div>
+    <fieldset class="difficulty-options">
+      <legend class="visually-hidden">Schwierigkeitsgrad auswählen</legend>
+      <label><input type="radio" name="difficulty" value="beginner"><span><strong>Einsteiger</strong><small>Kuratierte Auswahl</small></span></label>
+      <label><input type="radio" name="difficulty" value="standard" checked><span><strong>Standard</strong><small>Vollständiger Katalog</small></span></label>
+      <label><input type="radio" name="difficulty" value="expert"><span><strong>Experte</strong><small>Tuning &amp; Sonderkühlung</small></span></label>
+    </fieldset>
+    <div class="expert-controls" id="expert-controls" hidden>
+      <label>CPU-Power-Limit
+        <select id="cpu-tuning">
+          <option value="0">Herstellerwert</option><option value="10">+10 %</option><option value="20">+20 %</option>
+        </select>
+      </label>
+      <label>GPU-Power-Limit
+        <select id="gpu-tuning">
+          <option value="0">Herstellerwert</option><option value="10">+10 %</option><option value="20">+20 %</option>
+        </select>
+      </label>
+      <label>Kühlziel
+        <select id="cooling-profile">
+          <option value="performance">Maximale Lüfterleistung</option>
+          <option value="sustained" selected>Dauerlastreserve +10 %</option>
+          <option value="quiet">Leise Kühlung +20 %</option>
+        </select>
+      </label>
+      <label class="leak-test"><input id="leak-test" type="checkbox"><span>Bei Custom Loop: Dichtheitstest dokumentiert</span></label>
+      <p>Power-Limits erhöhen die modellierte Last. Übertaktung kann Garantie, Stabilität, Lautstärke und Lebensdauer beeinflussen und muss mit Stresstest sowie Temperaturmessung geprüft werden.</p>
+    </div>
+  </section>
 
   <main class="workspace" id="main-content" tabindex="-1">
     <aside class="step-panel" aria-label="Komponentengruppen">

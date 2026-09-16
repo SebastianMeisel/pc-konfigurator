@@ -98,6 +98,7 @@
   const networkSelection = readJson("buildbench-network-v1",{ethernet:"onboard",wifi:"onboard"});
   let activeScenario = scenarios.some(item => item.id === location.hash.slice(1)) ? location.hash.slice(1) : "office";
   let evaluations = [];
+  const difficultyLabels = { beginner:"Einsteiger", standard:"Standard", expert:"Experte" };
 
   function component(id) {
     return snapshot?.components?.[id] || null;
@@ -136,9 +137,11 @@
     else if (scenario.id === "video") score = profile.single * .25 + profile.multi * .75;
     else if (scenario.id === "ai") score = profile.single * .35 + profile.multi * .65;
     else score = profile.single * .35 + profile.multi * .65;
+    const tuning = snapshot?.difficulty?.mode === "expert" ? Number(snapshot.difficulty.cpuTuning || 0) : 0;
+    score += tuning * .25;
     return {
       score:clamp(score),
-      reason:`${cpu.name}: ${cpu.cores} Kerne, modellierte Einzelkern-/Mehrkernwerte ${profile.single}/${profile.multi}; ${generationText(cpu)}.`
+      reason:`${cpu.name}: ${cpu.cores} Kerne, modellierte Einzelkern-/Mehrkernwerte ${profile.single}/${profile.multi}; ${generationText(cpu)}.${tuning ? ` Expertensimulation mit +${tuning} % Power-Limit; realer Leistungsgewinn ist meist deutlich kleiner.` : ""}`
     };
   }
 
@@ -161,7 +164,9 @@
         : scenario.id === "video"
           ? "Codec-Unterstützung und Beschleunigung hängen zusätzlich von der Schnittsoftware ab."
           : "Für Standarddarstellung ist die Leistung mehr als ausreichend.";
-    return {score:clamp(score),reason:`${gpu.name} mit ${vram || "unbekanntem"} GB VRAM und ${gpu.power} W Modelllast. ${special}`};
+    const tuning = snapshot?.difficulty?.mode === "expert" ? Number(snapshot.difficulty.gpuTuning || 0) : 0;
+    score += tuning * .2;
+    return {score:clamp(score),reason:`${gpu.name} mit ${vram || "unbekanntem"} GB VRAM und ${gpu.power} W Basislast.${tuning ? ` Expertensimulation mit +${tuning} % Power-Limit; Leistung skaliert nicht proportional.` : ""} ${special}`};
   }
 
   function ramScore(scenario) {
@@ -288,7 +293,7 @@
     state.textContent = missing.length ? `${missing.length} Kernangaben fehlen` : "auswertbar";
     state.className = `snapshot-state ${missing.length ? "warning" : "good"}`;
     chips.innerHTML = selected.map(([key,label])=>`<span class="snapshot-chip"><b>${label}</b> ${escapeHtml(component(key).name)}</span>`).join("") +
-      `<span class="snapshot-chip"><b>Preis</b> ${euro(totalPrice())}</span><span class="snapshot-chip"><b>Last</b> ${snapshot.power?.load || 0} W</span>`;
+      `<span class="snapshot-chip"><b>Modus</b> ${difficultyLabels[snapshot.difficulty?.mode] || "Standard"}</span><span class="snapshot-chip"><b>Preis</b> ${euro(totalPrice())}</span><span class="snapshot-chip"><b>Last</b> ${snapshot.power?.load || 0} W</span>`;
     warning.hidden = !missing.length;
     warning.textContent = missing.length ? `Fehlend: ${missing.join(", ")}. Nicht belegte Kriterien erhalten 0 Punkte und senken die Bewertung.` : "";
   }

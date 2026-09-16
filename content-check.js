@@ -41,6 +41,7 @@ for (const category of components.categories) {
   const items = components.components[category.id];
   assert(category.id && category.label && category.title && category.description && category.lessonId, category.id + ": Kategorietexte oder Lernkartenverweis fehlen");
   assert(Array.isArray(items) && items.length > 0, category.id + ": Komponenten fehlen");
+  assert(items.filter(item => item.recommended === true).length === 1, category.id + ": genau eine Einsteigerempfehlung wird benötigt");
   unique(items.map(item => item.id), category.id);
   for (const item of items) {
     componentCount += 1;

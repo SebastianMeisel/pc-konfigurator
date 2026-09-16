@@ -32,6 +32,7 @@ PACKAGE_FILES = (
     "scorm.js",
     "svg-loader.js",
     "content-loader.js",
+    "difficulty.js",
     *SVG_ASSETS,
     "content/components.json",
     "content/components.schema.json",

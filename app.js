@@ -5,12 +5,15 @@
 
   const content = await window.BuildBenchContent?.ready;
   if (!content) throw new Error("BuildBenchContent ist nicht verfügbar.");
+  const difficultyModel = window.BuildBenchDifficulty;
+  if (!difficultyModel) throw new Error("BuildBenchDifficulty ist nicht verfügbar.");
   const { categories, components: data } = content.components;
   const ruleCatalog = Object.fromEntries(content.compatibility.rules.map(rule => [rule.code, rule]));
 
   const state = {
     active: 0,
-    selections: Object.fromEntries(categories.map(c => [c.id, null]))
+    selections: Object.fromEntries(categories.map(c => [c.id, null])),
+    difficulty: difficultyModel.sanitize()
   };
 
   const $ = selector => document.querySelector(selector);
@@ -25,7 +28,9 @@
     svg: $("#pc-view"), viewLegend: $("#view-legend"), buildName: $("#build-name"),
     reset: $("#reset-button"), example: $("#example-button"), copy: $("#copy-button"), toast: $("#toast"),
     compatibilityDialog: $("#compatibility-dialog"), compatibilityTitle: $("#compatibility-dialog-title"),
-    compatibilityIntro: $("#compatibility-dialog-intro"), compatibilityContent: $("#compatibility-dialog-content")
+    compatibilityIntro: $("#compatibility-dialog-intro"), compatibilityContent: $("#compatibility-dialog-content"),
+    difficultySummary: $("#difficulty-summary"), expertControls: $("#expert-controls"),
+    cpuTuning: $("#cpu-tuning"), gpuTuning: $("#gpu-tuning"), coolingProfile: $("#cooling-profile"), leakTest: $("#leak-test")
   };
   let compatibilityTrigger = null;
 
@@ -34,9 +39,9 @@
   const configWith = (category, id) => ({ ...state.selections, [category]: id });
   const requiredPower = selections => {
     const cpu = selected("cpu", selections), gpu = selected("gpu", selections);
-    const load = (cpu?.power || 0) + (gpu?.power || 0) + ((cpu || gpu) ? 110 : 0);
-    return { load, recommended: load ? Math.ceil(load * 1.3 / 50) * 50 : 0 };
+    return difficultyModel.power(cpu, gpu, state.difficulty);
   };
+  const requiredCooling = (selections = state.selections) => difficultyModel.cooling(selected("cpu", selections), state.difficulty);
 
   function issue(code, evidence) {
     const rule = ruleCatalog[code];
@@ -83,7 +88,8 @@
     }
     if (category === "cooler") {
       if (cpu && !item.sockets.includes(cpu.socket)) issues.push(issue("COOLER_CPU_SOCKET", `CPU-Sockel: ${cpu.socket}. Kühlerfreigaben: ${item.sockets.join(", ")}.`));
-      if (cpu && item.capacity < cpu.power) issues.push(issue("COOLER_CAPACITY", `Modellierte Kühlerleistung: ${item.capacity} W. CPU-Spitze: ${cpu.power} W. Fehlbetrag: ${cpu.power - item.capacity} W.`));
+      const coolingNeed = requiredCooling(selections);
+      if (cpu && item.capacity < coolingNeed) issues.push(issue("COOLER_CAPACITY", `Modellierte Kühlerleistung: ${item.capacity} W. Erforderlich für CPU, Power-Limit und Kühlziel: ${coolingNeed} W. Fehlbetrag: ${coolingNeed - item.capacity} W.`));
       if (c && item.kind === "air" && item.height > c.maxCooler) issues.push(issue("COOLER_CASE_HEIGHT", `Kühler: ${item.height} mm. Gehäusegrenze: ${c.maxCooler} mm. Differenz: ${item.height - c.maxCooler} mm.`));
       if (c && item.kind !== "air" && !c.radiators.includes(item.radiator)) issues.push(issue("COOLER_RADIATOR_SIZE", `Radiator: ${item.radiator} mm. Im Gehäuse unterstützt: ${c.radiators.join(", ")} mm.`));
     }
@@ -135,6 +141,7 @@
 
   function save() {
     try { localStorage.setItem("buildbench-config-v1", JSON.stringify(state.selections)); } catch (_) {}
+    try { localStorage.setItem("buildbench-difficulty-v1", JSON.stringify(state.difficulty)); } catch (_) {}
   }
   function load() {
     try {
@@ -144,6 +151,8 @@
         if (data[category.id].some(item => item.id === saved[category.id])) state.selections[category.id] = saved[category.id];
       }
     } catch (_) {}
+    try { state.difficulty = difficultyModel.sanitize(JSON.parse(localStorage.getItem("buildbench-difficulty-v1"))); }
+    catch (_) { state.difficulty = difficultyModel.sanitize(); }
   }
 
   function renderNav() {
@@ -166,14 +175,18 @@
 
   function renderPicker() {
     const category = categories[state.active];
-    const items = data[category.id];
+    const allItems = data[category.id];
+    const items = difficultyModel.visibleItems(allItems, state.selections[category.id], state.difficulty);
     refs.kicker.textContent = `Schritt ${state.active + 1} von ${categories.length}`;
     refs.title.textContent = category.title;
     refs.description.textContent = category.description;
     const available = items.filter(item => compatibility(category.id, item).length === 0).length;
-    refs.count.textContent = `${available} von ${items.length} wählbar`;
+    refs.count.textContent = state.difficulty.mode === "beginner"
+      ? `${available} geführte Option${available === 1 ? "" : "en"} · ${allItems.length} im Standardmodus`
+      : `${available} von ${items.length} wählbar`;
     const generationHint = items.some(item => item.generation) ? "Vorgängermodelle sind als Lern- und Budgetoptionen markiert; Verfügbarkeit, Effizienz, Garantie und Firmware-Support gesondert bewerten." : "";
-    const context = [contextMessage(category.id), generationHint].filter(Boolean).join(" ");
+    const beginnerHint = state.difficulty.mode === "beginner" ? "Der Einsteigermodus zeigt die kuratierte Empfehlung; Lerninfo und Kompatibilitätsprüfung bleiben vollständig aktiv." : "";
+    const context = [beginnerHint, contextMessage(category.id), generationHint].filter(Boolean).join(" ");
     refs.note.hidden = !context;
     refs.note.textContent = context || "";
 
@@ -186,7 +199,7 @@
         <h3>${escapeHtml(item.name)}</h3>
         <ul class="specs">${item.specs.map(spec => `<li>${escapeHtml(spec)}</li>`).join("")}</ul>
         ${issues.length ? `<span class="block-reason"><span>${escapeHtml(issues.map(entry => entry.title).join(" · "))}</span><span class="block-action">Details anzeigen</span></span>` :
-          `<span class="card-foot"><span>${item.recommended ? "Empfohlene Balance" : isSelected ? "Ausgewählt" : "Auswählen"}</span><span class="select-indicator">${isSelected ? "✓" : ""}</span></span>`}
+          `<span class="card-foot"><span>${state.difficulty.mode === "beginner" ? "Geführte Empfehlung" : item.recommended ? "Empfohlene Balance" : isSelected ? "Ausgewählt" : "Auswählen"}</span><span class="select-indicator">${isSelected ? "✓" : ""}</span></span>`}
       </button>`;
     }).join("");
 
@@ -205,6 +218,18 @@
     }));
     refs.previous.disabled = state.active === 0;
     refs.next.textContent = state.active === categories.length - 1 ? "Zur Übersicht" : "Weiter";
+  }
+
+  function renderDifficulty() {
+    const settings = state.difficulty;
+    document.body.dataset.difficulty = settings.mode;
+    document.querySelectorAll('input[name="difficulty"]').forEach(input => { input.checked = input.value === settings.mode; });
+    refs.expertControls.hidden = settings.mode !== "expert";
+    refs.cpuTuning.value = String(settings.cpuTuning);
+    refs.gpuTuning.value = String(settings.gpuTuning);
+    refs.coolingProfile.value = settings.coolingProfile;
+    refs.leakTest.checked = settings.leakTest;
+    refs.difficultySummary.textContent = difficultyModel.summary(settings);
   }
 
   function detailRow(label, value) {
@@ -251,8 +276,8 @@
       motherboard: c ? `Das Gehäuse unterstützt ${c.form.join(", ")}.` : "",
       cpu: board ? `Benötigter Sockel: ${board.socket}.` : "Ohne Mainboard bleiben AM5, AM4, LGA1851 und LGA1700 wählbar.",
       gpu: c ? `Maximale Grafikkartenlänge: ${c.maxGpu} mm.` : "",
-      psu: power.recommended ? `Für diese CPU/GPU-Kombination werden mindestens ${power.recommended} W empfohlen.` : "CPU und GPU auswählen, um die Reserve zu berechnen.",
-      cooler: [cpu ? `CPU-Spitze: ${cpu.power} W.` : "", c ? `Maximale Kühlerhöhe: ${c.maxCooler} mm.` : ""].filter(Boolean).join(" "),
+      psu: power.recommended ? `Für diese CPU/GPU-Kombination${state.difficulty.mode === "expert" ? " einschließlich Power-Limits" : ""} werden mindestens ${power.recommended} W empfohlen.` : "CPU und GPU auswählen, um die Reserve zu berechnen.",
+      cooler: [cpu ? `Modellierter Kühlbedarf: ${requiredCooling()} W.` : "", c ? `Maximale Kühlerhöhe: ${c.maxCooler} mm.` : ""].filter(Boolean).join(" "),
       coolant: cooler?.kind === "custom" ? "Der offene Kreislauf benötigt mindestens einen Liter gebrauchsfertiges Kühlmittel." : cooler ? "Der ausgewählte Kühler ist geschlossen und benötigt kein separates Kühlmittel." : ""
     };
     return messages[category] || "";
@@ -265,6 +290,17 @@
     const gpu = selected("gpu"), psu = selected("psu"), cooler = selected("cooler");
     const storage = selected("storage"), cables = selected("cables"), ram = selected("ram");
     const power = requiredPower(state.selections);
+
+    const modeLabel = difficultyModel.modes[state.difficulty.mode].label;
+    list.push({ type:"info", title:`Modus: ${modeLabel}`, text:difficultyModel.summary(state.difficulty) });
+    if (state.difficulty.mode === "expert" && (state.difficulty.cpuTuning || state.difficulty.gpuTuning)) {
+      list.push({ type:"warning", title:"Power-Limits aktiv", text:`CPU +${state.difficulty.cpuTuning} %, GPU +${state.difficulty.gpuTuning} %. Stabilität, Temperaturen und reale Leistungsaufnahme müssen mit geeigneten Tests geprüft werden.` });
+    }
+    if (state.difficulty.mode === "expert" && cooler?.kind === "custom") {
+      list.push(state.difficulty.leakTest
+        ? { type:"success", title:"Dichtheitstest dokumentiert", text:"Vor dem Anschluss der übrigen Komponenten den gefüllten Kreislauf erneut visuell prüfen." }
+        : { type:"warning", title:"Dichtheitstest offen", text:"Custom Loop zunächst nur mit der Pumpe betreiben und mindestens Anschlüsse, Pumpe, Reservoir und Radiator auf Leckagen prüfen." });
+    }
 
     if (!missing.length) list.push({ type:"success", title:"Stückliste vollständig", text:"Alle zwölf Gruppen sind gewählt und die modellierten Regeln sind erfüllt." });
     else list.push({ type:"info", title:`${missing.length} Auswahl${missing.length === 1 ? "" : "en"} offen`, text:missing.slice(0,4).map(x => x.label).join(", ") + (missing.length > 4 ? " …" : "") });
@@ -289,8 +325,9 @@
       list.push({ type: reserve < 100 ? "warning" : "success", title: reserve < 100 ? "Netzteilreserve knapp" : "Netzteil ausreichend", text:`${psu.watts} W Nennleistung, etwa ${reserve} W oberhalb der geschätzten Volllast.` });
     }
     if (cpu && cooler) {
-      const margin = cooler.capacity - cpu.power;
-      list.push({ type: margin < 45 ? "warning" : "success", title: margin < 45 ? "Kühlreserve knapp" : "Kühlleistung passend", text:`Modellierte Reserve: ${margin} W.` });
+      const coolingNeed = requiredCooling();
+      const margin = cooler.capacity - coolingNeed;
+      list.push({ type: margin < 45 ? "warning" : "success", title: margin < 45 ? "Kühlreserve knapp" : "Kühlleistung passend", text:`Modellierter Bedarf ${coolingNeed} W, Reserve ${margin} W.` });
     }
     if (storage?.interface === "SATA" && cables?.provides.includes("sata")) list.push({ type:"success", title:"SATA-Verkabelung vorhanden", text:"Datenkabel und Laufwerksmontage wurden berücksichtigt." });
     if (selected("ram")?.speed > 6000 && cpu?.maker === "AMD") list.push({ type:"warning", title:"RAM-Profil prüfen", text:"DDR5 über 6000 MT/s kann auf AM5 eine manuelle Abstimmung oder einen niedrigeren Teiler benötigen." });
@@ -303,7 +340,7 @@
     refs.health.className = `health-badge ${rank}`;
     refs.health.textContent = rank === "error" ? "Fehler" : rank === "warning" ? "Prüfen" : rank === "good" ? "Kompatibel" : "In Arbeit";
     const icons = { success:"✓", warning:"!", error:"×", info:"i" };
-    refs.diagnostics.innerHTML = items.slice(0,5).map(item => `<div class="diagnostic ${item.type}">
+    refs.diagnostics.innerHTML = items.slice(0,7).map(item => `<div class="diagnostic ${item.type}">
       <span class="diagnostic-icon">${icons[item.type]}</span><div><strong>${escapeHtml(item.title)}</strong><p>${escapeHtml(item.text)}</p></div>
     </div>`).join("");
   }
@@ -326,13 +363,18 @@
         updatedAt: new Date().toISOString(),
         total,
         power,
+        difficulty: state.difficulty,
         components: Object.fromEntries(categories.map(category => [category.id, selected(category.id)]))
       }));
     } catch (_) {}
     window.BuildBenchLMS?.recordConfigurator({
       selected: chosen,
       total: categories.length,
-      step: state.active + 1
+      step: state.active + 1,
+      mode: state.difficulty.mode,
+      cpuTuning: state.difficulty.cpuTuning,
+      gpuTuning: state.difficulty.gpuTuning,
+      coolingProfile: state.difficulty.coolingProfile
     });
   }
 
@@ -460,7 +502,7 @@
   }
 
   function render() {
-    renderNav(); renderPicker(); renderSummary(); renderDiagnostics(); renderSvg();
+    renderDifficulty(); renderNav(); renderPicker(); renderSummary(); renderDiagnostics(); renderSvg();
   }
 
   refs.previous.addEventListener("click", () => { if (state.active > 0) { state.active--; render(); window.scrollTo({top:0,behavior:scrollBehavior}); } });
@@ -476,11 +518,16 @@
     }
   });
   refs.example.addEventListener("click", () => {
-    Object.assign(state.selections, {
-      case:"north", motherboard:"x870", cpu:"9800x3d", gpu:"5070", ram:"32-6000", psu:"rm850x",
-      cooler:"nhd15", storage:"990pro", standoffs:"case-set", screws:"case-screws", cables:"modern", coolant:"none"
-    });
-    state.active = 0; save(); render(); showToast("Ausgewogenen Gaming-Build geladen.");
+    if (state.difficulty.mode === "beginner") {
+      for (const category of categories) state.selections[category.id] = data[category.id].find(item => item.recommended)?.id || null;
+      state.active = 0; save(); render(); showToast("Geführten Einsteiger-Build geladen.");
+    } else {
+      Object.assign(state.selections, {
+        case:"north", motherboard:"x870", cpu:"9800x3d", gpu:"5070", ram:"32-6000", psu:"rm850x",
+        cooler:"nhd15", storage:"990pro", standoffs:"case-set", screws:"case-screws", cables:"modern", coolant:"none"
+      });
+      state.active = 0; save(); render(); showToast("Ausgewogenen Gaming-Build geladen.");
+    }
   });
   refs.copy.addEventListener("click", async () => {
     const lines = ["BuildBench PC-Konfiguration", ""];
@@ -488,7 +535,7 @@
       const item = selected(category.id);
       lines.push(`${category.label}: ${item ? item.name + " – " + money(item.price) : "offen"}`);
     });
-    lines.push("", `Gesamt: ${refs.price.textContent}`, `Leistung: ${refs.power.textContent}`);
+    lines.push("", `Schwierigkeitsgrad: ${difficultyModel.modes[state.difficulty.mode].label}`, `Gesamt: ${refs.price.textContent}`, `Leistung: ${refs.power.textContent}`);
     try { await navigator.clipboard.writeText(lines.join("\n")); showToast("Stückliste kopiert."); }
     catch (_) { showToast("Kopieren wurde vom Browser blockiert."); }
   });
@@ -500,6 +547,21 @@
   refs.compatibilityDialog.addEventListener("close", () => {
     if (compatibilityTrigger && typeof compatibilityTrigger.focus === "function") compatibilityTrigger.focus();
     compatibilityTrigger = null;
+  });
+
+  document.querySelectorAll('input[name="difficulty"]').forEach(input => input.addEventListener("change", () => {
+    state.difficulty = difficultyModel.sanitize({ ...state.difficulty, mode: input.value });
+    reconcile("difficulty"); save(); render();
+  }));
+  for (const [control, key] of [[refs.cpuTuning,"cpuTuning"],[refs.gpuTuning,"gpuTuning"],[refs.coolingProfile,"coolingProfile"]]) {
+    control.addEventListener("change", () => {
+      state.difficulty = difficultyModel.sanitize({ ...state.difficulty, [key]: control.value });
+      reconcile("difficulty"); save(); render();
+    });
+  }
+  refs.leakTest.addEventListener("change", () => {
+    state.difficulty = difficultyModel.sanitize({ ...state.difficulty, leakTest: refs.leakTest.checked });
+    save(); render();
   });
 
   load();

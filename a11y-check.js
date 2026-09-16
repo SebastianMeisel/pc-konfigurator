@@ -10,7 +10,7 @@ const portSvgNames = readdirSync("assets/svg/ports")
   .map(name => `assets/svg/ports/${name}`);
 
 const files = Object.fromEntries(
-  ["index.html", "evaluation.html", "quiz.html", "styles.css", "education.css", "evaluation.css", "quiz.css", "app.js", "education.js", "evaluation.js", "quiz.js", "scorm.js", "svg-loader.js", "content-loader.js", "assets/svg/inside-view.svg", "assets/svg/ports-view.svg", ...componentSvgNames, ...portSvgNames, "imsmanifest.xml", "content/components.json", "content/components.schema.json", "content/lessons.json", "content/lessons.schema.json", "content/network.json", "content/network.schema.json", "content/compatibility-rules.json", "content/compatibility-rules.schema.json", "quiz-questions.json", "quiz-questions.schema.json", "tools/quiz_xlsx.py", "tools/content_xlsx.py", "tools/package_scorm.py"]
+  ["index.html", "evaluation.html", "quiz.html", "styles.css", "education.css", "evaluation.css", "quiz.css", "app.js", "difficulty.js", "education.js", "evaluation.js", "quiz.js", "scorm.js", "svg-loader.js", "content-loader.js", "assets/svg/inside-view.svg", "assets/svg/ports-view.svg", ...componentSvgNames, ...portSvgNames, "imsmanifest.xml", "content/components.json", "content/components.schema.json", "content/lessons.json", "content/lessons.schema.json", "content/network.json", "content/network.schema.json", "content/compatibility-rules.json", "content/compatibility-rules.schema.json", "quiz-questions.json", "quiz-questions.schema.json", "tools/quiz_xlsx.py", "tools/content_xlsx.py", "tools/package_scorm.py"]
     .map((name) => [name, readFileSync(name, "utf8")])
 );
 
@@ -63,6 +63,9 @@ for (const name of [...componentSvgNames, ...portSvgNames]) {
 }
 assert(/<dialog[^>]+id="lesson-dialog"[^>]+aria-labelledby="lesson-dialog-title"/.test(files["index.html"]), "index.html: Dialogbezeichnung fehlt");
 assert(/<dialog[^>]+id="compatibility-dialog"[^>]+aria-labelledby="compatibility-dialog-title"[^>]+aria-describedby="compatibility-dialog-intro"/.test(files["index.html"]), "index.html: Kompatibilitätsdialog ist nicht vollständig bezeichnet");
+assert(/<section class="difficulty-panel"[^>]+aria-labelledby="difficulty-title"/.test(files["index.html"]), "index.html: Schwierigkeitsbereich ist nicht bezeichnet");
+assert((files["index.html"].match(/name="difficulty"/g) || []).length === 3, "index.html: drei bedienbare Schwierigkeitsgrade fehlen");
+assert(/id="difficulty-summary"[^>]+role="status"[^>]+aria-live="polite"/.test(files["index.html"]), "index.html: Modusänderungen werden nicht angekündigt");
 assert(/<caption class="visually-hidden">/.test(files["evaluation.html"]), "evaluation.html: Tabellenbeschriftung fehlt");
 assert(/class="criteria-table-wrap"[^>]+role="region"[^>]+aria-label="Tabelle der gewichteten Kriterien; horizontal verschiebbar"/.test(files["evaluation.html"]), "evaluation.html: zugänglicher Tabellenbereich fehlt");
 assert(/id="score-ring"[^>]+role="img"[^>]+aria-label=/.test(files["evaluation.html"]), "evaluation.html: Bezeichnung der Ergebnisgrafik fehlt");
@@ -90,6 +93,7 @@ for (const name of componentSvgNames) {
 }
 assert(!/issues\.length\s*\?\s*"disabled"/.test(files["app.js"]), "app.js: inkompatible Optionen werden aus der Tastaturfolge entfernt");
 assert(/compatibilityTrigger[^\n]+compatibilityTrigger\.focus/.test(files["app.js"]), "app.js: Fokus des Kompatibilitätsdialogs wird nicht zurückgegeben");
+assert(/BuildBenchDifficulty/.test(files["app.js"]) && /difficultyModel\.power/.test(files["app.js"]), "app.js: Schwierigkeitsmodell beeinflusst die Berechnung nicht");
 assert(/dialogTrigger[^\n]+dialogTrigger\.focus/.test(files["education.js"]), "education.js: Dialogfokus wird nicht zurückgegeben");
 assert(/data-lesson-id=/.test(files["app.js"]) && /dataset\.lessonId/.test(files["education.js"]), "Lernkarten: stabile Zuordnung über lessonId fehlt");
 assert(/networkGroups\[type\]\.lessonId/.test(files["education.js"]), "Netzwerkoptionen: Lernkartenverweis aus JSON wird nicht verwendet");

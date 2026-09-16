@@ -35,6 +35,7 @@
       <file href="scorm.js"/>
       <file href="svg-loader.js"/>
       <file href="content-loader.js"/>
+      <file href="difficulty.js"/>
       <file href="assets/svg/inside-view.svg"/>
       <file href="assets/svg/ports-view.svg"/>
       <file href="assets/svg/components/case.svg"/>

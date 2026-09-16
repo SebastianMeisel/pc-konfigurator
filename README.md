@@ -13,6 +13,8 @@ Die Anwendung bewertet unter anderem Sockel, Formfaktor, Arbeitsspeicherstandard
 - Hinweise zu PCIe-Steckplätzen, Bluetooth-USB-Headern, Antennen, Kabelkategorien und Netzwerk-Infrastruktur
 - Automatische Berücksichtigung der Netzwerk-Erweiterungen im Gesamtpreis
 - Klar markierte Komponenten aus ein bis zwei Vorgängergenerationen für Plattformvergleich, Budgetplanung und Gebrauchtmarkt-Szenarien
+- Drei Schwierigkeitsgrade: kuratierter Einsteigerpfad, vollständiger Standardkatalog und Expertenmodus
+- Expertenparameter für CPU-/GPU-Power-Limits, Dauerlast- oder Lautstärkereserve und dokumentierten Custom-Loop-Dichtheitstest
 - Gemischte AM5-, AM4-, LGA1851- und LGA1700-Plattformen mit DDR5-/DDR4-Prüfung sowie PCIe-Abwärtskompatibilität
 - Zweite Seite „Auswertung“ mit gewichteter Nutzwertanalyse für Office, Entwicklung, CAD, Videoschnitt und lokale KI
 - Transparente Teilwertungen, gewichtete Beiträge, Begründungen, Stärken, Verbesserungsbedarf und Druckansicht
@@ -114,7 +116,7 @@ python3 tools/package_scorm.py
 
 Eine vorhandene Datei wird nur mit `--force` ersetzt. Anschließend die ZIP-Datei in ILIAS als „SCORM/AICC-Lernmodul“ importieren. Je nach ILIAS-Konfiguration muss die Lernfortschrittsanzeige zusätzlich für den Kurs beziehungsweise das Objekt aktiviert werden.
 
-Innerhalb von ILIAS verwendet die Anwendung die SCORM-1.2-Laufzeitschnittstelle. Erfasst werden besuchte Bereiche, Anzahl ausgewählter Komponenten, betrachtetes Anwendungsszenario, Quiz-Fortschritt, bestes Quiz-Ergebnis und benötigte Sitzungszeit. Ein begonnenes Quiz wird über `cmi.suspend_data` wiederaufgenommen. Ab 70 Prozent wird der SCORM-Status „bestanden“ gesetzt. Außerhalb eines LMS bleibt die Anwendung vollständig nutzbar und speichert den Arbeitsstand nur lokal im Browser.
+Innerhalb von ILIAS verwendet die Anwendung die SCORM-1.2-Laufzeitschnittstelle. Erfasst werden besuchte Bereiche, Anzahl ausgewählter Komponenten, Schwierigkeitsgrad und Expertenparameter, betrachtetes Anwendungsszenario, Quiz-Fortschritt, bestes Quiz-Ergebnis und benötigte Sitzungszeit. Ein begonnenes Quiz wird über `cmi.suspend_data` wiederaufgenommen. Ab 70 Prozent wird der SCORM-Status „bestanden“ gesetzt. Außerhalb eines LMS bleibt die Anwendung vollständig nutzbar und speichert den Arbeitsstand nur lokal im Browser.
 
 Das SCORM-Paket ist vollständig selbstenthalten; externe Webfont-Aufrufe werden beim Paketieren entfernt. Es übermittelt keine Lerndaten an GitHub oder andere externe Dienste. Bei der SCORM-Nutzung werden die Fortschrittsdaten ausschließlich über die von ILIAS bereitgestellte Schnittstelle gespeichert.
 

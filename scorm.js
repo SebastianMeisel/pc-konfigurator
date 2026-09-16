@@ -18,7 +18,7 @@
     return {
       v: 1,
       pages: { configurator: 0, evaluation: 0, quiz: 0 },
-      config: { selected: 0, total: 12, step: 1 },
+      config: { selected: 0, total: 12, step: 1, mode: "standard", cpuTuning: 0, gpuTuning: 0, coolingProfile: "sustained" },
       evaluation: { scenario: "", score: 0, available: 0 },
       quiz: { answered: 0, total: 20, current: 0, best: 0, attempts: 0 },
       session: { ids: [], choices: [] },
@@ -54,7 +54,11 @@
       config: {
         selected: clamp(source.config?.selected, 0, 12),
         total: clamp(source.config?.total || defaults.config.total, 1, 99),
-        step: clamp(source.config?.step || defaults.config.step, 1, 99)
+        step: clamp(source.config?.step || defaults.config.step, 1, 99),
+        mode: ["beginner","standard","expert"].includes(source.config?.mode) ? source.config.mode : defaults.config.mode,
+        cpuTuning: [0,10,20].includes(number(source.config?.cpuTuning)) ? number(source.config.cpuTuning) : 0,
+        gpuTuning: [0,10,20].includes(number(source.config?.gpuTuning)) ? number(source.config.gpuTuning) : 0,
+        coolingProfile: ["performance","sustained","quiet"].includes(source.config?.coolingProfile) ? source.config.coolingProfile : defaults.config.coolingProfile
       },
       evaluation: {
         scenario: String(source.evaluation?.scenario || "").slice(0, 24),
@@ -215,7 +219,11 @@
     state.config = {
       selected: clamp(details.selected, 0, 12),
       total: clamp(details.total || 12, 1, 99),
-      step: clamp(details.step || 1, 1, 99)
+      step: clamp(details.step || 1, 1, 99),
+      mode: ["beginner","standard","expert"].includes(details.mode) ? details.mode : "standard",
+      cpuTuning: [0,10,20].includes(number(details.cpuTuning)) ? number(details.cpuTuning) : 0,
+      gpuTuning: [0,10,20].includes(number(details.gpuTuning)) ? number(details.gpuTuning) : 0,
+      coolingProfile: ["performance","sustained","quiet"].includes(details.coolingProfile) ? details.coolingProfile : "sustained"
     };
     state.location = `index.html#schritt-${state.config.step}`;
     persist();
