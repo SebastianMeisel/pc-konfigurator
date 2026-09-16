@@ -33,6 +33,7 @@ PACKAGE_FILES = (
     "svg-loader.js",
     "content-loader.js",
     "difficulty.js",
+    "visual-model.js",
     *SVG_ASSETS,
     "content/components.json",
     "content/components.schema.json",

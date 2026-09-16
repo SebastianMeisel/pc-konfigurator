@@ -10,7 +10,7 @@ const portSvgNames = readdirSync("assets/svg/ports")
   .map(name => `assets/svg/ports/${name}`);
 
 const files = Object.fromEntries(
-  ["index.html", "evaluation.html", "quiz.html", "styles.css", "education.css", "evaluation.css", "quiz.css", "app.js", "difficulty.js", "education.js", "evaluation.js", "quiz.js", "scorm.js", "svg-loader.js", "content-loader.js", "assets/svg/inside-view.svg", "assets/svg/ports-view.svg", ...componentSvgNames, ...portSvgNames, "imsmanifest.xml", "content/components.json", "content/components.schema.json", "content/lessons.json", "content/lessons.schema.json", "content/network.json", "content/network.schema.json", "content/compatibility-rules.json", "content/compatibility-rules.schema.json", "quiz-questions.json", "quiz-questions.schema.json", "tools/quiz_xlsx.py", "tools/content_xlsx.py", "tools/package_scorm.py"]
+  ["index.html", "evaluation.html", "quiz.html", "styles.css", "education.css", "evaluation.css", "quiz.css", "app.js", "difficulty.js", "visual-model.js", "education.js", "evaluation.js", "quiz.js", "scorm.js", "svg-loader.js", "content-loader.js", "assets/svg/inside-view.svg", "assets/svg/ports-view.svg", ...componentSvgNames, ...portSvgNames, "imsmanifest.xml", "content/components.json", "content/components.schema.json", "content/lessons.json", "content/lessons.schema.json", "content/network.json", "content/network.schema.json", "content/compatibility-rules.json", "content/compatibility-rules.schema.json", "quiz-questions.json", "quiz-questions.schema.json", "tools/quiz_xlsx.py", "tools/content_xlsx.py", "tools/package_scorm.py"]
     .map((name) => [name, readFileSync(name, "utf8")])
 );
 
@@ -94,6 +94,7 @@ for (const name of componentSvgNames) {
 assert(!/issues\.length\s*\?\s*"disabled"/.test(files["app.js"]), "app.js: inkompatible Optionen werden aus der Tastaturfolge entfernt");
 assert(/compatibilityTrigger[^\n]+compatibilityTrigger\.focus/.test(files["app.js"]), "app.js: Fokus des Kompatibilitätsdialogs wird nicht zurückgegeben");
 assert(/BuildBenchDifficulty/.test(files["app.js"]) && /difficultyModel\.power/.test(files["app.js"]), "app.js: Schwierigkeitsmodell beeinflusst die Berechnung nicht");
+assert(/BuildBenchVisualModel/.test(files["app.js"]) && /visualModel\.layout/.test(files["app.js"]), "app.js: gemeinsames Maßmodell der Innenansicht fehlt");
 assert(/dialogTrigger[^\n]+dialogTrigger\.focus/.test(files["education.js"]), "education.js: Dialogfokus wird nicht zurückgegeben");
 assert(/data-lesson-id=/.test(files["app.js"]) && /dataset\.lessonId/.test(files["education.js"]), "Lernkarten: stabile Zuordnung über lessonId fehlt");
 assert(/networkGroups\[type\]\.lessonId/.test(files["education.js"]), "Netzwerkoptionen: Lernkartenverweis aus JSON wird nicht verwendet");

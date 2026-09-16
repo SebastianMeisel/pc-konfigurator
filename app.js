@@ -7,6 +7,8 @@
   if (!content) throw new Error("BuildBenchContent ist nicht verfügbar.");
   const difficultyModel = window.BuildBenchDifficulty;
   if (!difficultyModel) throw new Error("BuildBenchDifficulty ist nicht verfügbar.");
+  const visualModel = window.BuildBenchVisualModel;
+  if (!visualModel) throw new Error("BuildBenchVisualModel ist nicht verfügbar.");
   const { categories, components: data } = content.components;
   const ruleCatalog = Object.fromEntries(content.compatibility.rules.map(rule => [rule.code, rule]));
 
@@ -438,10 +440,10 @@
     const c = selected("case"), board = selected("motherboard"), cpu = selected("cpu"), gpu = selected("gpu");
     const ram = selected("ram"), psu = selected("psu"), cooler = selected("cooler"), storage = selected("storage");
     const standoffs = selected("standoffs"), screws = selected("screws"), cables = selected("cables"), coolant = selected("coolant");
-    const caseW = c?.size === "Mini-ITX" ? 390 : c?.size === "Micro-Tower" ? 450 : 520;
+    const visual = visualModel.layout(c?.size, board?.form, gpu?.length);
+    const caseW = visual.caseWidth;
     const x = (680-caseW)/2, y = 48, h = 620;
-    const boardW = board?.form === "ITX" ? 190 : board?.form === "mATX" ? 290 : 350;
-    const boardH = board?.form === "ITX" ? 190 : board?.form === "mATX" ? 300 : 390;
+    const boardW = visual.boardWidth, boardH = visual.boardHeight;
     const bx = x+48, by = y+88, cpuX=bx+82, cpuY=by+66;
     const accent = "#65e6c4", blue="#56c8ff", gold="#ffc857", red="#ff6b7a";
     const coolantColor = coolant?.fluid ? coolant.color : blue;
@@ -458,7 +460,7 @@
         ${svgText(bx+12,by+boardH-15,board.form+" · "+board.socket,10,"#8ed8c9")}
       </g>`;
     } else {
-      svg += `<g class="part empty-part"><rect x="${bx}" y="${by}" width="330" height="380" rx="7" fill="none" stroke="#53708c" stroke-width="2" stroke-dasharray="9 8"/>${svgText(bx+165,by+190,"MAINBOARD",14,"#6c829a","middle")}</g>`;
+      svg += `<g class="part empty-part"><rect x="${bx}" y="${by}" width="${boardW}" height="${boardH}" rx="7" fill="none" stroke="#53708c" stroke-width="2" stroke-dasharray="9 8"/>${svgText(bx+boardW/2,by+boardH/2,"MAINBOARD",14,"#6c829a","middle")}</g>`;
     }
 
     if (cpu && board) {
@@ -485,14 +487,15 @@
     }
 
     if (gpu && board) {
-      const gpuW=Math.min(gpu.length*1.08,caseW-92), gx=bx+18, gy=by+Math.min(boardH-105,245);
+      const gpuW=visual.gpuWidth, gpuH=visual.gpuHeight, gx=bx+12, gy=by+Math.min(boardH-96,250);
       svg += `<g class="part active-part">
-        ${svgImage(componentPath+"gpu.svg",gx-14,gy,gpuW+14,92)}
-        <rect x="${gx}" y="${gy+1}" width="${gpuW-2}" height="89" rx="8" fill="none" stroke="${gpu.maker==="AMD"?red:accent}" stroke-width="2"/>
-        ${svgText(gx+gpuW/2,gy+51,gpu.label,12,"#eaf6ff","middle")}
+        ${svgImage(componentPath+"gpu.svg",gx-12,gy,gpuW+12,gpuH)}
+        <rect x="${gx}" y="${gy+1}" width="${gpuW-2}" height="${gpuH-3}" rx="8" fill="none" stroke="${gpu.maker==="AMD"?red:accent}" stroke-width="2"/>
+        ${svgText(gx+gpuW/2,gy+gpuH/2+5,gpu.label,12,"#eaf6ff","middle")}
       </g>`;
     } else {
-      svg += `<g class="part empty-part"><rect x="${bx+18}" y="${by+245}" width="${Math.min(320,caseW-92)}" height="88" rx="8" fill="none" stroke="#53708c" stroke-width="2" stroke-dasharray="9 8"/>${svgText(bx+165,by+294,"GRAFIKKARTE",12,"#6c829a","middle")}</g>`;
+      const gpuY=by+Math.min(boardH-96,250);
+      svg += `<g class="part empty-part"><rect x="${bx+12}" y="${gpuY}" width="${visual.gpuWidth}" height="${visual.gpuHeight}" rx="8" fill="none" stroke="#53708c" stroke-width="2" stroke-dasharray="9 8"/>${svgText(bx+12+visual.gpuWidth/2,gpuY+visual.gpuHeight/2+5,"GRAFIKKARTE",12,"#6c829a","middle")}</g>`;
     }
 
     if (psu) {

@@ -35,6 +35,8 @@ jobs:
           node --check content-loader.js
           node --check difficulty.js
           node --check difficulty-check.js
+          node --check visual-model.js
+          node --check visual-check.js
           node --check content-check.js
           node --check content-runtime-check.js
           node --check scorm-check.js
@@ -44,6 +46,7 @@ jobs:
           node content-check.js
           node content-runtime-check.js
           node difficulty-check.js
+          node visual-check.js
           node a11y-check.js
           node --check algorithmen-trainer/app.js
           node --check algorithmen-trainer/scorm.js
@@ -66,6 +69,7 @@ jobs:
           test -s a11y-check.js
           test -s content-loader.js
           test -s difficulty.js
+          test -s visual-model.js
           test -s content/components.json
           test -s content/lessons.json
           test -s content/network.json
