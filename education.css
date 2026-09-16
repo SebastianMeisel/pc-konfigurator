@@ -181,7 +181,8 @@
   border-bottom: 1px solid var(--line);
 }
 .dialog-heading h2 { font-size: 1.25rem; }
-.dialog-close {
+.dialog-close,
+.compatibility-dialog-close {
   display: grid;
   place-items: center;
   min-width: 44px;
@@ -192,7 +193,8 @@
   background: rgba(255,255,255,.04);
   cursor: pointer;
 }
-.dialog-heading .dialog-close { font-size: 1.35rem; line-height: 1; }
+.dialog-heading .dialog-close,
+.dialog-heading .compatibility-dialog-close { font-size: 1.35rem; line-height: 1; }
 .lesson-content {
   overflow-y: auto;
   padding: 20px 22px;
@@ -239,7 +241,35 @@
   padding: 12px 22px 18px;
   border-top: 1px solid var(--line);
 }
-.dialog-actions .dialog-close { width: auto; padding-inline: 18px; }
+.dialog-actions .dialog-close,
+.dialog-actions .compatibility-dialog-close { width: auto; padding-inline: 18px; }
+.compatibility-intro {
+  margin: 18px 22px 0;
+  padding: 12px 14px;
+  border-left: 3px solid var(--warning);
+  border-radius: 5px 9px 9px 5px;
+  color: #e8eef7;
+  background: rgba(255,200,87,.08);
+  font-size: .82rem;
+}
+.compatibility-content { display: grid; gap: 14px; }
+.compatibility-issue {
+  padding: 15px;
+  border: 1px solid rgba(255,107,122,.42);
+  border-radius: 10px;
+  background: rgba(61,18,29,.22);
+}
+.compatibility-issue h3 { margin: 0 0 12px; color: #ffc0c7; font-size: .94rem; }
+.compatibility-issue dl { display: grid; gap: 10px; margin: 0; }
+.compatibility-issue dl > div {
+  display: grid;
+  grid-template-columns: minmax(95px, .28fr) 1fr;
+  gap: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+}
+.compatibility-issue dt { color: var(--cyan); font: 700 .68rem "JetBrains Mono", monospace; text-transform: uppercase; }
+.compatibility-issue dd { margin: 0; color: var(--muted); font-size: .78rem; line-height: 1.55; }
 
 @media (min-width: 1261px) {
   .workspace {
@@ -268,6 +298,7 @@
   #port-view { min-height: 390px; }
 }
 @media (max-width: 480px) {
+  .compatibility-issue dl > div { grid-template-columns: 1fr; gap: 4px; }
   .header-actions #safety-button { display: none; }
   .view-button { padding-inline: 6px; }
 }

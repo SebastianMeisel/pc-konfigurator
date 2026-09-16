@@ -65,6 +65,7 @@ jobs:
           test -s content/components.json
           test -s content/lessons.json
           test -s content/network.json
+          test -s content/compatibility-rules.json
           test -s buildbench-content.xlsx
           test -s imsmanifest.xml
           test -s assets/svg/inside-view.svg
@@ -80,6 +81,7 @@ jobs:
           grep -q 'id="pc-view"' assets/svg/inside-view.svg
           grep -q 'id="port-view"' assets/svg/ports-view.svg
           grep -q 'id="lesson-dialog"' index.html
+          grep -q 'id="compatibility-dialog"' index.html
           grep -q 'id="network-options"' index.html
           grep -q 'BuildBenchContent?.ready' app.js
           grep -q 'BuildBenchContent?.ready' education.js

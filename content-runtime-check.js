@@ -29,10 +29,10 @@ const vm = require("node:vm");
   if (content.components.categories.length !== 12 || count !== 72) {
     throw new Error("Der Inhalts-Loader liefert einen unvollständigen Komponentenkatalog.");
   }
-  if (content.lessons.lessons.length !== 16 || content.network.groups.length !== 2) {
+  if (content.lessons.lessons.length !== 16 || content.network.groups.length !== 2 || content.compatibility.rules.length < 30) {
     throw new Error("Der Inhalts-Loader liefert unvollständige Lern- oder Netzwerkdaten.");
   }
-  console.log("Inhalts-Loader bestanden (drei JSON-Dateien gemeinsam geladen).");
+  console.log("Inhalts-Loader bestanden (vier JSON-Dateien gemeinsam geladen).");
 })().catch(error => {
   console.error(error);
   process.exit(1);

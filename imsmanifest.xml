@@ -64,6 +64,8 @@
       <file href="content/lessons.schema.json"/>
       <file href="content/network.json"/>
       <file href="content/network.schema.json"/>
+      <file href="content/compatibility-rules.json"/>
+      <file href="content/compatibility-rules.schema.json"/>
       <file href="quiz-questions.json"/>
       <file href="quiz-questions.schema.json"/>
       <file href="favicon.svg"/>

@@ -39,6 +39,8 @@ PACKAGE_FILES = (
     "content/lessons.schema.json",
     "content/network.json",
     "content/network.schema.json",
+    "content/compatibility-rules.json",
+    "content/compatibility-rules.schema.json",
     "quiz-questions.json",
     "quiz-questions.schema.json",
     "favicon.svg",

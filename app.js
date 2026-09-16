@@ -6,6 +6,7 @@
   const content = await window.BuildBenchContent?.ready;
   if (!content) throw new Error("BuildBenchContent ist nicht verfügbar.");
   const { categories, components: data } = content.components;
+  const ruleCatalog = Object.fromEntries(content.compatibility.rules.map(rule => [rule.code, rule]));
 
   const state = {
     active: 0,
@@ -22,8 +23,11 @@
     progress: $("#progress-label"), power: $("#power-label"), price: $("#price-label"),
     diagnostics: $("#diagnostics-list"), health: $("#health-badge"), build: $("#build-list"),
     svg: $("#pc-view"), viewLegend: $("#view-legend"), buildName: $("#build-name"),
-    reset: $("#reset-button"), example: $("#example-button"), copy: $("#copy-button"), toast: $("#toast")
+    reset: $("#reset-button"), example: $("#example-button"), copy: $("#copy-button"), toast: $("#toast"),
+    compatibilityDialog: $("#compatibility-dialog"), compatibilityTitle: $("#compatibility-dialog-title"),
+    compatibilityIntro: $("#compatibility-dialog-intro"), compatibilityContent: $("#compatibility-dialog-content")
   };
+  let compatibilityTrigger = null;
 
   const money = value => value === 0 ? "enthalten" : new Intl.NumberFormat("de-DE", { style:"currency", currency:"EUR", maximumFractionDigits:0 }).format(value);
   const selected = (category, selections = state.selections) => data[category].find(item => item.id === selections[category]) || null;
@@ -34,8 +38,14 @@
     return { load, recommended: load ? Math.ceil(load * 1.3 / 50) * 50 : 0 };
   };
 
+  function issue(code, evidence) {
+    const rule = ruleCatalog[code];
+    if (!rule) throw new Error("Unbekannte Kompatibilitätsregel: " + code);
+    return { ...rule, evidence };
+  }
+
   function compatibility(category, item, selections = configWith(category, item.id)) {
-    const reasons = [];
+    const issues = [];
     const c = selected("case", selections), board = selected("motherboard", selections);
     const cpu = selected("cpu", selections), gpu = selected("gpu", selections);
     const ram = selected("ram", selections), psu = selected("psu", selections);
@@ -43,66 +53,65 @@
     const standoffs = selected("standoffs", selections);
 
     if (category === "case") {
-      if (board && !item.form.includes(board.form)) reasons.push(`${board.form}-Mainboard passt nicht`);
-      if (gpu && gpu.length > item.maxGpu) reasons.push(`GPU ist ${gpu.length - item.maxGpu} mm zu lang`);
-      if (cooler?.kind === "air" && cooler.height > item.maxCooler) reasons.push(`Kühler ist ${cooler.height - item.maxCooler} mm zu hoch`);
-      if (cooler && cooler.kind !== "air" && !item.radiators.includes(cooler.radiator)) reasons.push(`${cooler.radiator}-mm-Radiator nicht möglich`);
-      if (psu && !item.psu.includes(psu.form)) reasons.push(`${psu.form}-Netzteil wird nicht unterstützt`);
-      if (storage && !item.drives.includes(storage.mount)) reasons.push(`kein ${storage.mount}-Laufwerksplatz`);
+      if (board && !item.form.includes(board.form)) issues.push(issue("CASE_BOARD_FORM", `Gewählt: ${board.form}-Mainboard. Das Gehäuse unterstützt: ${item.form.join(", ")}.`));
+      if (gpu && gpu.length > item.maxGpu) issues.push(issue("CASE_GPU_LENGTH", `Grafikkarte: ${gpu.length} mm. Gehäusegrenze: ${item.maxGpu} mm. Differenz: ${gpu.length - item.maxGpu} mm.`));
+      if (cooler?.kind === "air" && cooler.height > item.maxCooler) issues.push(issue("CASE_COOLER_HEIGHT", `Kühler: ${cooler.height} mm. Gehäusegrenze: ${item.maxCooler} mm. Differenz: ${cooler.height - item.maxCooler} mm.`));
+      if (cooler && cooler.kind !== "air" && !item.radiators.includes(cooler.radiator)) issues.push(issue("CASE_RADIATOR_SIZE", `Radiator: ${cooler.radiator} mm. Unterstützt: ${item.radiators.join(", ")} mm.`));
+      if (psu && !item.psu.includes(psu.form)) issues.push(issue("CASE_PSU_FORM", `Netzteil: ${psu.form}. Unterstützt: ${item.psu.join(", ")}.`));
+      if (storage && !item.drives.includes(storage.mount)) issues.push(issue("CASE_DRIVE_MOUNT", `Laufwerk: ${storage.mount}. Vorhandene Plätze: ${item.drives.join(", ") || "keine"}.`));
     }
     if (category === "motherboard") {
-      if (c && !c.form.includes(item.form)) reasons.push(`${item.form} passt nicht in ${c.name}`);
-      if (cpu && cpu.socket !== item.socket) reasons.push(`CPU benötigt ${cpu.socket}`);
-      if (ram && ram.type !== item.memory) reasons.push(`RAM ist ${ram.type}, Board benötigt ${item.memory}`);
-      if (storage?.mount === "M.2" && item.m2 < 1) reasons.push("kein M.2-Steckplatz");
-      if (storage?.interface === "SATA" && item.sata < 1) reasons.push("kein SATA-Anschluss");
+      if (c && !c.form.includes(item.form)) issues.push(issue("BOARD_CASE_FORM", `Mainboard: ${item.form}. Das Gehäuse ${c.name} unterstützt: ${c.form.join(", ")}.`));
+      if (cpu && cpu.socket !== item.socket) issues.push(issue("BOARD_CPU_SOCKET", `CPU-Sockel: ${cpu.socket}. Mainboard-Sockel: ${item.socket}.`));
+      if (ram && ram.type !== item.memory) issues.push(issue("BOARD_RAM_TYPE", `Arbeitsspeicher: ${ram.type}. Mainboard: ${item.memory}.`));
+      if (storage?.mount === "M.2" && item.m2 < 1) issues.push(issue("BOARD_M2_SLOT", `Ausgewählt ist eine M.2-SSD; das Mainboard hat ${item.m2} M.2-Steckplätze.`));
+      if (storage?.interface === "SATA" && item.sata < 1) issues.push(issue("BOARD_SATA_PORT", `Ausgewählt ist ein SATA-Laufwerk; das Mainboard hat ${item.sata} SATA-Ports.`));
     }
     if (category === "cpu") {
-      if (board && board.socket !== item.socket) reasons.push(`Mainboard hat ${board.socket}`);
+      if (board && board.socket !== item.socket) issues.push(issue("CPU_BOARD_SOCKET", `CPU-Sockel: ${item.socket}. Mainboard-Sockel: ${board.socket}.`));
     }
     if (category === "gpu") {
-      if (c && item.length > c.maxGpu) reasons.push(`${item.length} mm überschreiten ${c.maxGpu} mm`);
+      if (c && item.length > c.maxGpu) issues.push(issue("GPU_CASE_LENGTH", `Grafikkarte: ${item.length} mm. Gehäusegrenze: ${c.maxGpu} mm. Differenz: ${item.length - c.maxGpu} mm.`));
     }
     if (category === "ram") {
-      if (board && board.memory !== item.type) reasons.push(`Mainboard benötigt ${board.memory}`);
+      if (board && board.memory !== item.type) issues.push(issue("RAM_BOARD_TYPE", `Arbeitsspeicher: ${item.type}. Mainboard: ${board.memory}.`));
     }
     if (category === "psu") {
-      if (c && !c.psu.includes(item.form)) reasons.push(`Gehäuse unterstützt nur ${c.psu.join("/")}`);
+      if (c && !c.psu.includes(item.form)) issues.push(issue("PSU_CASE_FORM", `Netzteil: ${item.form}. Das Gehäuse unterstützt: ${c.psu.join(", ")}.`));
       const need = requiredPower(selections).recommended;
-      if (need && item.watts < need) reasons.push(`mindestens ${need} W empfohlen`);
+      if (need && item.watts < need) issues.push(issue("PSU_POWER", `Netzteil: ${item.watts} W. Modellierte Empfehlung: mindestens ${need} W. Fehlende Reserve: ${need - item.watts} W.`));
     }
     if (category === "cooler") {
-      if (cpu && !item.sockets.includes(cpu.socket)) reasons.push(`keine Halterung für ${cpu.socket}`);
-      if (cpu && item.capacity < cpu.power) reasons.push(`Kühlleistung unter ${cpu.power} W CPU-Spitze`);
-      if (c && item.kind === "air" && item.height > c.maxCooler) reasons.push(`${item.height} mm überschreiten ${c.maxCooler} mm`);
-      if (c && item.kind !== "air" && !c.radiators.includes(item.radiator)) reasons.push(`kein Platz für ${item.radiator}-mm-Radiator`);
+      if (cpu && !item.sockets.includes(cpu.socket)) issues.push(issue("COOLER_CPU_SOCKET", `CPU-Sockel: ${cpu.socket}. Kühlerfreigaben: ${item.sockets.join(", ")}.`));
+      if (cpu && item.capacity < cpu.power) issues.push(issue("COOLER_CAPACITY", `Modellierte Kühlerleistung: ${item.capacity} W. CPU-Spitze: ${cpu.power} W. Fehlbetrag: ${cpu.power - item.capacity} W.`));
+      if (c && item.kind === "air" && item.height > c.maxCooler) issues.push(issue("COOLER_CASE_HEIGHT", `Kühler: ${item.height} mm. Gehäusegrenze: ${c.maxCooler} mm. Differenz: ${item.height - c.maxCooler} mm.`));
+      if (c && item.kind !== "air" && !c.radiators.includes(item.radiator)) issues.push(issue("COOLER_RADIATOR_SIZE", `Radiator: ${item.radiator} mm. Im Gehäuse unterstützt: ${c.radiators.join(", ")} mm.`));
     }
     if (category === "storage") {
-      if (board && item.mount === "M.2" && board.m2 < 1) reasons.push("Mainboard besitzt keinen M.2-Slot");
-      if (board && item.interface === "SATA" && board.sata < 1) reasons.push("Mainboard besitzt keinen SATA-Port");
-      if (c && !c.drives.includes(item.mount)) reasons.push(`Gehäuse hat keinen ${item.mount}-Platz`);
+      if (board && item.mount === "M.2" && board.m2 < 1) issues.push(issue("STORAGE_BOARD_M2", `Speicher: ${item.mount}. Mainboard: ${board.m2} M.2-Steckplätze.`));
+      if (board && item.interface === "SATA" && board.sata < 1) issues.push(issue("STORAGE_BOARD_SATA", `Speicherinterface: ${item.interface}. Mainboard: ${board.sata} SATA-Ports.`));
+      if (c && !c.drives.includes(item.mount)) issues.push(issue("STORAGE_CASE_MOUNT", `Laufwerk: ${item.mount}. Das Gehäuse bietet: ${c.drives.join(", ") || "keine passenden Plätze"}.`));
     }
     if (category === "standoffs") {
-      if (board && !item.forms.includes(board.form)) reasons.push(`nicht für ${board.form} vorgesehen`);
-      if (board && item.count < board.standoff) reasons.push(`${board.standoff} Stück erforderlich`);
-      if (c && item.thread !== c.thread) reasons.push(`Gehäusegewinde ist ${c.thread}`);
+      if (board && !item.forms.includes(board.form)) issues.push(issue("STANDOFF_BOARD_FORM", `Mainboard: ${board.form}. Satz vorgesehen für: ${item.forms.join(", ")}.`));
+      if (board && item.count < board.standoff) issues.push(issue("STANDOFF_COUNT", `Vorhanden: ${item.count}. Erforderlich: ${board.standoff}. Es fehlen ${board.standoff - item.count}.`));
+      if (c && item.thread !== c.thread) issues.push(issue("STANDOFF_THREAD", `Abstandhalter: ${item.thread}. Gehäusegewinde: ${c.thread}.`));
     }
     if (category === "screws") {
-      if (standoffs && item.thread !== standoffs.thread) reasons.push(`Abstandhalter haben ${standoffs.thread}`);
-      if (board && item.count < board.standoff) reasons.push(`${board.standoff} Mainboard-Schrauben erforderlich`);
-      if (storage && ["2.5","3.5"].includes(storage.mount) && !item.driveMounts.includes(storage.mount)) reasons.push(`keine Schrauben für ${storage.mount} Zoll`);
+      if (standoffs && item.thread !== standoffs.thread) issues.push(issue("SCREW_STANDOFF_THREAD", `Schrauben: ${item.thread}. Abstandhalter: ${standoffs.thread}.`));
+      if (board && item.count < board.standoff) issues.push(issue("SCREW_COUNT", `Vorhanden: ${item.count}. Erforderlich: ${board.standoff}. Es fehlen ${board.standoff - item.count}.`));
+      if (storage && ["2.5","3.5"].includes(storage.mount) && !item.driveMounts.includes(storage.mount)) issues.push(issue("SCREW_DRIVE_MOUNT", `Laufwerk: ${storage.mount} Zoll. Schraubensatz unterstützt: ${item.driveMounts.join(", ") || "keine Laufwerke"}.`));
     }
     if (category === "cables") {
-      if (storage?.interface === "SATA" && !item.provides.includes("sata")) reasons.push("SATA-Datenkabel fehlt");
-      if (gpu?.connector === "12V-2x6" && !psu?.atx3 && !item.provides.includes("12V-2x6")) reasons.push("12V-2x6-GPU-Kabel fehlt");
-      if (gpu?.connector === "12V-2x6" && !item.provides.includes("12V-2x6") && psu?.atx3 !== true) reasons.push("moderner GPU-Stecker nicht enthalten");
+      if (storage?.interface === "SATA" && !item.provides.includes("sata")) issues.push(issue("CABLE_SATA_DATA", `Das gewählte SATA-Laufwerk benötigt ein Datenkabel; dieser Satz enthält keines.`));
+      if (gpu?.connector === "12V-2x6" && !psu?.atx3 && !item.provides.includes("12V-2x6")) issues.push(issue("CABLE_GPU_POWER", `Grafikkarte: ${gpu.connector}. Netzteil ohne nativen ATX-3.x-Anschluss; der Kabelsatz enthält keinen passenden Adapter.`));
     }
     if (category === "coolant") {
-      if (cooler?.kind === "custom" && !item.fluid) reasons.push("Custom Loop benötigt 1 Liter Kühlmittel");
-      if (cooler && cooler.kind !== "custom" && item.fluid) reasons.push("für diesen Kühler nicht erforderlich");
-      if (!cooler && item.fluid) reasons.push("erst einen Custom-Loop-Kühler wählen");
+      if (cooler?.kind === "custom" && !item.fluid) issues.push(issue("COOLANT_REQUIRED", `Ausgewählt ist ein offener Wasserkreislauf; die Option enthält ${item.volume || 0} Liter Kühlmittel.`));
+      if (cooler && cooler.kind !== "custom" && item.fluid) issues.push(issue("COOLANT_UNNECESSARY", `Kühlertyp: ${cooler.kind === "air" ? "Luftkühler" : "geschlossene AIO"}. Gewählt: ${item.volume || 0} Liter separates Kühlmittel.`));
+      if (!cooler && item.fluid) issues.push(issue("COOLANT_NEEDS_COOLER", `Gewählt: ${item.volume || 0} Liter Kühlmittel. Ein passender offener Wasserkreislauf ist noch nicht ausgewählt.`));
     }
-    return reasons;
+    return issues;
   }
 
   function reconcile(changedCategory) {
@@ -113,9 +122,9 @@
       for (const category of categories) {
         if (category.id === changedCategory || !state.selections[category.id]) continue;
         const item = selected(category.id);
-        const reasons = compatibility(category.id, item, state.selections);
-        if (reasons.length) {
-          removed.push(`${category.label}: ${item.name} (${reasons[0]})`);
+        const issues = compatibility(category.id, item, state.selections);
+        if (issues.length) {
+          removed.push(`${category.label}: ${item.name} (${issues[0].title}: ${issues[0].evidence})`);
           state.selections[category.id] = null;
           changed = true;
         }
@@ -169,14 +178,14 @@
     refs.note.textContent = context || "";
 
     refs.grid.innerHTML = items.map(item => {
-      const reasons = compatibility(category.id, item);
+      const issues = compatibility(category.id, item);
       const isSelected = state.selections[category.id] === item.id;
-      return `<button class="component-card ${isSelected ? "selected" : ""} ${reasons.length ? "blocked" : ""} ${item.generation ? "legacy-card" : ""}"
-          data-id="${escapeHtml(item.id)}" type="button" ${reasons.length ? 'aria-disabled="true"' : ""} aria-pressed="${isSelected}">
+      return `<button class="component-card ${isSelected ? "selected" : ""} ${issues.length ? "blocked" : ""} ${item.generation ? "legacy-card" : ""}"
+          data-id="${escapeHtml(item.id)}" type="button" ${issues.length ? `aria-haspopup="dialog" aria-label="Nicht wählbar: ${escapeHtml(item.name)}. Kompatibilitätsdetails anzeigen"` : `aria-pressed="${isSelected}"`}>
         <span class="card-top"><span><span class="maker">${escapeHtml(item.maker)}</span>${item.generation ? `<span class="generation-badge generation-${item.generation}">${item.generation === 1 ? "1 Gen. zurück" : "2 Gen. zurück"}</span>` : ""}</span><span class="price">${escapeHtml(money(item.price))}</span></span>
         <h3>${escapeHtml(item.name)}</h3>
         <ul class="specs">${item.specs.map(spec => `<li>${escapeHtml(spec)}</li>`).join("")}</ul>
-        ${reasons.length ? `<span class="block-reason">${escapeHtml(reasons.join(" · "))}</span>` :
+        ${issues.length ? `<span class="block-reason"><span>${escapeHtml(issues.map(entry => entry.title).join(" · "))}</span><span class="block-action">Details anzeigen</span></span>` :
           `<span class="card-foot"><span>${item.recommended ? "Empfohlene Balance" : isSelected ? "Ausgewählt" : "Auswählen"}</span><span class="select-indicator">${isSelected ? "✓" : ""}</span></span>`}
       </button>`;
     }).join("");
@@ -191,11 +200,48 @@
       refs.grid.querySelector(`[data-id="${targetId}"]`)?.focus();
     }));
     refs.grid.querySelectorAll(".component-card.blocked").forEach(button => button.addEventListener("click", () => {
-      const reason = button.querySelector(".block-reason")?.textContent || "Diese Komponente ist mit der aktuellen Auswahl nicht kompatibel.";
-      showToast(`Nicht wählbar: ${reason}`, 5200);
+      const item = items.find(entry => entry.id === button.dataset.id);
+      if (item) openCompatibilityDialog(category, item, compatibility(category.id, item));
     }));
     refs.previous.disabled = state.active === 0;
     refs.next.textContent = state.active === categories.length - 1 ? "Zur Übersicht" : "Weiter";
+  }
+
+  function detailRow(label, value) {
+    const row = document.createElement("div");
+    const term = document.createElement("dt");
+    const detail = document.createElement("dd");
+    term.textContent = label;
+    detail.textContent = value;
+    row.append(term, detail);
+    return row;
+  }
+
+  function openCompatibilityDialog(category, item, issues) {
+    compatibilityTrigger = document.activeElement;
+    refs.compatibilityTitle.textContent = item.name;
+    refs.compatibilityIntro.textContent = `${issues.length} Kompatibilitätsproblem${issues.length === 1 ? "" : "e"} in der Gruppe ${category.label}. Die Karte bleibt fokussierbar, damit die Begründung mit Tastatur und Screenreader erreichbar ist.`;
+    refs.compatibilityContent.replaceChildren();
+    issues.forEach((entry, index) => {
+      const article = document.createElement("article");
+      article.className = "compatibility-issue";
+      const heading = document.createElement("h3");
+      heading.textContent = `${index + 1}. ${entry.title}`;
+      const details = document.createElement("dl");
+      details.append(
+        detailRow("Prüfung", entry.evidence),
+        detailRow("Auswirkung", entry.consequence),
+        detailRow("Lösung", entry.remedy),
+        detailRow("Lernhinweis", entry.learningHint)
+      );
+      article.append(heading, details);
+      refs.compatibilityContent.append(article);
+    });
+    if (!refs.compatibilityDialog.open) refs.compatibilityDialog.showModal();
+  }
+
+  function closeCompatibilityDialog() {
+    if (refs.compatibilityDialog.open) refs.compatibilityDialog.close();
   }
 
   function contextMessage(category) {
@@ -445,6 +491,15 @@
     lines.push("", `Gesamt: ${refs.price.textContent}`, `Leistung: ${refs.power.textContent}`);
     try { await navigator.clipboard.writeText(lines.join("\n")); showToast("Stückliste kopiert."); }
     catch (_) { showToast("Kopieren wurde vom Browser blockiert."); }
+  });
+
+  document.querySelectorAll("#compatibility-dialog .compatibility-dialog-close").forEach(button => button.addEventListener("click", closeCompatibilityDialog));
+  refs.compatibilityDialog.addEventListener("click", event => {
+    if (event.target === refs.compatibilityDialog) closeCompatibilityDialog();
+  });
+  refs.compatibilityDialog.addEventListener("close", () => {
+    if (compatibilityTrigger && typeof compatibilityTrigger.focus === "function") compatibilityTrigger.focus();
+    compatibilityTrigger = null;
   });
 
   load();

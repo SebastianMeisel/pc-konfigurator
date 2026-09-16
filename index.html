@@ -150,6 +150,23 @@
     </div>
   </dialog>
 
+  <dialog class="lesson-dialog compatibility-dialog" id="compatibility-dialog" aria-labelledby="compatibility-dialog-title" aria-describedby="compatibility-dialog-intro">
+    <div class="dialog-shell">
+      <div class="dialog-heading">
+        <div>
+          <p class="eyebrow">Kompatibilitätsprüfung</p>
+          <h2 id="compatibility-dialog-title">Komponente</h2>
+        </div>
+        <button class="compatibility-dialog-close" type="button" aria-label="Kompatibilitätsdetails schließen">×</button>
+      </div>
+      <p class="compatibility-intro" id="compatibility-dialog-intro"></p>
+      <div id="compatibility-dialog-content" class="lesson-content compatibility-content"></div>
+      <div class="dialog-actions">
+        <button class="btn btn-primary compatibility-dialog-close" type="button">Verstanden</button>
+      </div>
+    </div>
+  </dialog>
+
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <noscript>Für den interaktiven Konfigurator muss JavaScript aktiviert sein.</noscript>
 </body>

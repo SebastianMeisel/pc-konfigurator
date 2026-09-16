@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "compatibility-rules.schema.json",
+  "title": "BuildBench-Kompatibilitätsregeln",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "rules"],
+  "properties": {
+    "$schema": {"type": "string"},
+    "schemaVersion": {"const": 1},
+    "rules": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["code", "title", "consequence", "remedy", "learningHint"],
+        "properties": {
+          "code": {"type": "string", "pattern": "^[A-Z][A-Z0-9_]+$"},
+          "title": {"type": "string", "minLength": 1},
+          "consequence": {"type": "string", "minLength": 1},
+          "remedy": {"type": "string", "minLength": 1},
+          "learningHint": {"type": "string", "minLength": 1}
+        }
+      }
+    }
+  }
+}

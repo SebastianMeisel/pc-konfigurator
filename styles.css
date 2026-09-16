@@ -288,7 +288,7 @@ h2 { margin-bottom: 0; font-size: 1.08rem; letter-spacing: -.02em; }
 .component-card.blocked {
   border-color: rgba(255,107,122,.46);
   opacity: .84;
-  cursor: not-allowed;
+  cursor: help;
   filter: saturate(.65);
 }
 .component-card .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
@@ -316,6 +316,21 @@ h2 { margin-bottom: 0; font-size: 1.08rem; letter-spacing: -.02em; }
   line-height: 1.3;
 }
 .block-reason::before { flex: 0 0 auto; content: "×"; font-weight: 700; }
+.block-reason > span:first-child { flex: 1; }
+.block-action {
+  flex: 0 0 auto;
+  padding-bottom: 1px;
+  border-bottom: 1px solid currentColor;
+  color: #fff;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.component-card.blocked:hover,
+.component-card.blocked:focus-visible {
+  border-color: #ff98a4;
+  opacity: 1;
+  filter: none;
+}
 .select-indicator {
   display: grid;
   place-items: center;

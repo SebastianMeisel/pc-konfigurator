@@ -10,6 +10,7 @@ const readSchema = name => JSON.parse(readFileSync(join(schemaDir, name), "utf8"
 const components = read("components.json");
 const lessons = read("lessons.json");
 const network = read("network.json");
+const compatibility = read("compatibility-rules.json");
 const failures = [];
 let checks = 0;
 
@@ -25,6 +26,7 @@ function unique(values, label) {
 assert(components.schemaVersion === 1, "components.json: falsche Schema-Version");
 assert(lessons.schemaVersion === 1, "lessons.json: falsche Schema-Version");
 assert(network.schemaVersion === 1, "network.json: falsche Schema-Version");
+assert(compatibility.schemaVersion === 1, "compatibility-rules.json: falsche Schema-Version");
 assert(Array.isArray(components.categories) && components.categories.length >= 12, "Komponentenkategorien fehlen");
 
 const categoryIds = components.categories.map(category => category.id);
@@ -84,7 +86,20 @@ for (const [id, board] of Object.entries(network.boards)) {
   assert(board.name && board.form && board.lan && board.wifi, id + ": Mainboard-Netzdaten sind unvollständig");
 }
 
-for (const name of ["components.schema.json", "lessons.schema.json", "network.schema.json"]) {
+assert(Array.isArray(compatibility.rules) && compatibility.rules.length >= 30, "Kompatibilitätsregeln fehlen");
+const ruleCodes = compatibility.rules.map(rule => rule.code);
+unique(ruleCodes, "Kompatibilitätsregeln");
+for (const rule of compatibility.rules) {
+  assert(/^[A-Z][A-Z0-9_]+$/.test(rule.code), String(rule.code) + ": ungültiger Regelcode");
+  assert([rule.title, rule.consequence, rule.remedy, rule.learningHint].every(value => typeof value === "string" && value.trim()), rule.code + ": Erklärung ist unvollständig");
+}
+const appSource = readFileSync("app.js", "utf8");
+const usedRuleCodes = [...appSource.matchAll(/issue\("([A-Z0-9_]+)"/g)].map(match => match[1]);
+unique(usedRuleCodes, "In app.js verwendete Kompatibilitätsregeln");
+assert(usedRuleCodes.every(code => ruleCodes.includes(code)), "app.js verwendet einen unbekannten Regelcode");
+assert(ruleCodes.every(code => usedRuleCodes.includes(code)), "Regelkatalog enthält ungenutzte Codes");
+
+for (const name of ["components.schema.json", "lessons.schema.json", "network.schema.json", "compatibility-rules.schema.json"]) {
   const schema = readSchema(name);
   assert(schema.$schema && schema.$id && schema.type === "object", name + ": JSON-Schema ist unvollständig");
 }
@@ -95,4 +110,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log("Inhaltsprüfung bestanden (" + checks + " Prüfungen, " + componentCount + " Komponenten, " + lessons.lessons.length + " Lernkarten).");
+console.log("Inhaltsprüfung bestanden (" + checks + " Prüfungen, " + componentCount + " Komponenten, " + lessons.lessons.length + " Lernkarten, " + compatibility.rules.length + " Kompatibilitätsregeln).");

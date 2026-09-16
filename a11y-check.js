@@ -10,7 +10,7 @@ const portSvgNames = readdirSync("assets/svg/ports")
   .map(name => `assets/svg/ports/${name}`);
 
 const files = Object.fromEntries(
-  ["index.html", "evaluation.html", "quiz.html", "styles.css", "education.css", "evaluation.css", "quiz.css", "app.js", "education.js", "evaluation.js", "quiz.js", "scorm.js", "svg-loader.js", "content-loader.js", "assets/svg/inside-view.svg", "assets/svg/ports-view.svg", ...componentSvgNames, ...portSvgNames, "imsmanifest.xml", "content/components.json", "content/components.schema.json", "content/lessons.json", "content/lessons.schema.json", "content/network.json", "content/network.schema.json", "quiz-questions.json", "quiz-questions.schema.json", "tools/quiz_xlsx.py", "tools/content_xlsx.py", "tools/package_scorm.py"]
+  ["index.html", "evaluation.html", "quiz.html", "styles.css", "education.css", "evaluation.css", "quiz.css", "app.js", "education.js", "evaluation.js", "quiz.js", "scorm.js", "svg-loader.js", "content-loader.js", "assets/svg/inside-view.svg", "assets/svg/ports-view.svg", ...componentSvgNames, ...portSvgNames, "imsmanifest.xml", "content/components.json", "content/components.schema.json", "content/lessons.json", "content/lessons.schema.json", "content/network.json", "content/network.schema.json", "content/compatibility-rules.json", "content/compatibility-rules.schema.json", "quiz-questions.json", "quiz-questions.schema.json", "tools/quiz_xlsx.py", "tools/content_xlsx.py", "tools/package_scorm.py"]
     .map((name) => [name, readFileSync(name, "utf8")])
 );
 
@@ -62,6 +62,7 @@ for (const name of [...componentSvgNames, ...portSvgNames]) {
   assert(files["imsmanifest.xml"].includes(`<file href="${name}"/>`), `${name}: Eintrag im SCORM-Manifest fehlt`);
 }
 assert(/<dialog[^>]+id="lesson-dialog"[^>]+aria-labelledby="lesson-dialog-title"/.test(files["index.html"]), "index.html: Dialogbezeichnung fehlt");
+assert(/<dialog[^>]+id="compatibility-dialog"[^>]+aria-labelledby="compatibility-dialog-title"[^>]+aria-describedby="compatibility-dialog-intro"/.test(files["index.html"]), "index.html: Kompatibilitätsdialog ist nicht vollständig bezeichnet");
 assert(/<caption class="visually-hidden">/.test(files["evaluation.html"]), "evaluation.html: Tabellenbeschriftung fehlt");
 assert(/class="criteria-table-wrap"[^>]+role="region"[^>]+aria-label="Tabelle der gewichteten Kriterien; horizontal verschiebbar"/.test(files["evaluation.html"]), "evaluation.html: zugänglicher Tabellenbereich fehlt");
 assert(/id="score-ring"[^>]+role="img"[^>]+aria-label=/.test(files["evaluation.html"]), "evaluation.html: Bezeichnung der Ergebnisgrafik fehlt");
@@ -78,7 +79,7 @@ assert(/@media\s*\(forced-colors:\s*active\)/.test(css), "styles.css: erzwungene
 assert(/\.visually-hidden\s*\{/.test(css), "styles.css: Hilfsklasse für Screenreader fehlt");
 assert(/\.ai-disclosure\s*\{/.test(css), "styles.css: Gestaltung des KI-Transparenzhinweises fehlt");
 
-assert(/reasons\.length[^\n]+aria-disabled="true"/.test(files["app.js"]), "app.js: inkompatible Optionen sind nicht zugänglich markiert");
+assert(/issues\.length[^\n]+aria-haspopup="dialog"[^\n]+Kompatibilitätsdetails anzeigen/.test(files["app.js"]), "app.js: inkompatible Optionen verweisen nicht zugänglich auf den Detaildialog");
 assert(/BuildBenchContent\?\.ready/.test(files["app.js"]) && /BuildBenchContent\?\.ready/.test(files["education.js"]), "App: externe Inhaltsdaten werden nicht gemeinsam geladen");
 assert(/fetch\(url,\s*\{\s*cache:\s*"no-store"\s*\}\)/.test(files["content-loader.js"]), "content-loader.js: JSON-Daten werden nicht geladen");
 assert(/const escapeHtml/.test(files["app.js"]) && /escapeHtml\(item\.name\)/.test(files["app.js"]), "app.js: bearbeitbare Inhalte werden nicht maskiert");
@@ -87,7 +88,8 @@ for (const name of componentSvgNames) {
   const basename = name.split("/").pop();
   assert(files["app.js"].includes(`"${basename}"`), `app.js: ${basename} wird nicht aus einer Einzeldatei geladen`);
 }
-assert(!/reasons\.length\s*\?\s*"disabled"/.test(files["app.js"]), "app.js: inkompatible Optionen werden aus der Tastaturfolge entfernt");
+assert(!/issues\.length\s*\?\s*"disabled"/.test(files["app.js"]), "app.js: inkompatible Optionen werden aus der Tastaturfolge entfernt");
+assert(/compatibilityTrigger[^\n]+compatibilityTrigger\.focus/.test(files["app.js"]), "app.js: Fokus des Kompatibilitätsdialogs wird nicht zurückgegeben");
 assert(/dialogTrigger[^\n]+dialogTrigger\.focus/.test(files["education.js"]), "education.js: Dialogfokus wird nicht zurückgegeben");
 assert(/data-lesson-id=/.test(files["app.js"]) && /dataset\.lessonId/.test(files["education.js"]), "Lernkarten: stabile Zuordnung über lessonId fehlt");
 assert(/networkGroups\[type\]\.lessonId/.test(files["education.js"]), "Netzwerkoptionen: Lernkartenverweis aus JSON wird nicht verwendet");
@@ -113,7 +115,7 @@ assert(quizSchema.properties?.questions?.items?.properties?.correctAnswer, "quiz
 assert(/fetch\("quiz-questions\.json"/.test(files["quiz.js"]), "quiz.js: JSON-Fragenpool wird nicht geladen");
 assert(/def export_xlsx/.test(files["tools/quiz_xlsx.py"]) && /def import_xlsx/.test(files["tools/quiz_xlsx.py"]), "tools/quiz_xlsx.py: Import oder Export fehlt");
 assert(/def export_xlsx/.test(files["tools/content_xlsx.py"]) && /def import_xlsx/.test(files["tools/content_xlsx.py"]), "tools/content_xlsx.py: Import oder Export fehlt");
-for (const name of ["components", "lessons", "network"]) {
+for (const name of ["components", "lessons", "network", "compatibility-rules"]) {
   assert(JSON.parse(files["content/" + name + ".json"]).schemaVersion === 1, "content/" + name + ".json: falsche Schema-Version");
   assert(JSON.parse(files["content/" + name + ".schema.json"]).type === "object", "content/" + name + ".schema.json: Schema fehlt");
   assert(files["imsmanifest.xml"].includes('<file href="content/' + name + '.json"/>'), "imsmanifest.xml: content/" + name + ".json fehlt");

@@ -2,7 +2,7 @@
 """BuildBench-Inhaltsdaten zwischen JSON und XLSX austauschen.
 
 Die Arbeitsmappe enthält Kategorien, je ein Blatt pro Komponentengruppe,
-Lernkarten, einzelne Hinweise, Netzwerkoptionen und Mainboard-Netzdaten.
+Lernkarten, Hinweise, Kompatibilitätsregeln und Netzwerkdaten.
 Das Skript verwendet ausschließlich die Python-Standardbibliothek.
 
 Beispiele:
@@ -46,6 +46,7 @@ FILES = {
     "components": "components.json",
     "lessons": "lessons.json",
     "network": "network.json",
+    "compatibility": "compatibility-rules.json",
 }
 BASE_COMPONENT_FIELDS = ("id", "maker", "name", "price", "generation", "recommended", "specs")
 ARRAY_FIELDS = {
@@ -102,6 +103,7 @@ SHEET_HEADERS = {
         "generation",
     ),
     "Mainboard-Netz": ("id", "name", "form", "lan", "wifi"),
+    "Kompatibilität": ("code", "title", "consequence", "remedy", "learningHint"),
 }
 
 
@@ -330,13 +332,48 @@ def validate_network(data: object, components: dict, lessons: dict) -> dict:
     }
 
 
+def validate_compatibility(data: object) -> dict:
+    if not isinstance(data, dict) or data.get("schemaVersion") != 1:
+        raise ContentDataError("compatibility-rules.json benötigt schemaVersion 1.")
+    rules = data.get("rules")
+    if not isinstance(rules, list) or not rules:
+        raise ContentDataError("Kompatibilitätsregeln fehlen.")
+    normalized = []
+    codes = []
+    for row, rule in enumerate(rules, start=2):
+        if not isinstance(rule, dict):
+            raise ContentDataError(f"Kompatibilitätsregel in Zeile {row} ist ungültig.")
+        code = nonempty(rule.get("code"), f"Kompatibilität Zeile {row}, code")
+        if not re.fullmatch(r"[A-Z][A-Z0-9_]+", code):
+            raise ContentDataError(f"Kompatibilität Zeile {row}: ungültiger Code {code!r}.")
+        codes.append(code)
+        normalized.append(
+            {
+                "code": code,
+                "title": nonempty(rule.get("title"), f"{code}, title"),
+                "consequence": nonempty(rule.get("consequence"), f"{code}, consequence"),
+                "remedy": nonempty(rule.get("remedy"), f"{code}, remedy"),
+                "learningHint": nonempty(rule.get("learningHint"), f"{code}, learningHint"),
+            }
+        )
+    unique(codes, "Kompatibilitätsregeln")
+    return {
+        "$schema": "compatibility-rules.schema.json",
+        "schemaVersion": 1,
+        "rules": normalized,
+    }
+
+
 def load_content(content_dir: Path) -> dict[str, dict]:
     components = validate_components(load_json(json_file(content_dir, "components")))
     lessons = validate_lessons(load_json(json_file(content_dir, "lessons")))
     network = validate_network(
         load_json(json_file(content_dir, "network")), components, lessons
     )
-    return {"components": components, "lessons": lessons, "network": network}
+    compatibility = validate_compatibility(
+        load_json(json_file(content_dir, "compatibility"))
+    )
+    return {"components": components, "lessons": lessons, "network": network, "compatibility": compatibility}
 
 
 def xml_attr(value: object) -> str:
@@ -385,6 +422,7 @@ def content_sheets(data: dict[str, dict]) -> list[tuple[str, list[list[object]],
     components = data["components"]
     lessons = data["lessons"]
     network = data["network"]
+    compatibility = data["compatibility"]
     instructions = [
         ["BuildBench-Inhalte bearbeiten", "JSON bleibt die verbindliche Datenquelle."],
         ["Export", "python3 tools/content_xlsx.py export"],
@@ -392,6 +430,7 @@ def content_sheets(data: dict[str, dict]) -> list[tuple[str, list[list[object]],
         ["Listen", "Mehrere Werte innerhalb einer Zelle durch Zeilenumbrüche trennen."],
         ["Komponenten", "Neue Modelle in das passende Blatt K_<Kategorie-ID> eintragen."],
         ["Lernkarten", "Titel und Aufgabe im Blatt Lernkarten, einzelne Anweisungen im Blatt Hinweise bearbeiten."],
+        ["Kompatibilität", "Titel, Auswirkung, Lösung und Lernhinweis im Blatt Kompatibilität bearbeiten. Die Regelcodes nicht ändern."],
         ["Sicherheit", "Formeln und beschädigte Arbeitsmappen werden beim Import abgewiesen."],
         ["Hinweis", "Neue technische Felder benötigen zusätzlich passende Programmlogik."],
     ]
@@ -454,6 +493,11 @@ def content_sheets(data: dict[str, dict]) -> list[tuple[str, list[list[object]],
         for board_id, board in network["boards"].items()
     ]
     sheets.append(("Mainboard-Netz", board_rows, [18, 44, 14, 18, 18]))
+    rule_rows = [list(SHEET_HEADERS["Kompatibilität"])] + [
+        [rule[key] for key in SHEET_HEADERS["Kompatibilität"]]
+        for rule in compatibility["rules"]
+    ]
+    sheets.append(("Kompatibilität", rule_rows, [28, 38, 80, 80, 90]))
     return sheets
 
 
@@ -593,7 +637,10 @@ def export_xlsx(content_dir: Path, xlsx_path: Path, force: bool) -> None:
     finally:
         temp_path.unlink(missing_ok=True)
     component_count = sum(len(items) for items in data["components"]["components"].values())
-    print(f"{component_count} Komponenten und {len(data['lessons']['lessons'])} Lernkarten exportiert: {xlsx_path}")
+    print(
+        f"{component_count} Komponenten, {len(data['lessons']['lessons'])} Lernkarten "
+        f"und {len(data['compatibility']['rules'])} Kompatibilitätsregeln exportiert: {xlsx_path}"
+    )
 
 
 def rows_by_sheet(xlsx_path: Path) -> dict[str, list[list[object]]]:
@@ -775,10 +822,25 @@ def content_from_workbook(xlsx_path: Path) -> dict[str, dict]:
         component_data,
         lesson_data,
     )
+    rules = []
+    for row in nonblank_rows(sheets["Kompatibilität"][1:]):
+        rules.append(
+            {
+                "code": str(value_at(row, 0)).strip(),
+                "title": str(value_at(row, 1)).strip(),
+                "consequence": str(value_at(row, 2)).strip(),
+                "remedy": str(value_at(row, 3)).strip(),
+                "learningHint": str(value_at(row, 4)).strip(),
+            }
+        )
+    compatibility_data = validate_compatibility(
+        {"schemaVersion": 1, "rules": rules}
+    )
     return {
         "components": component_data,
         "lessons": lesson_data,
         "network": network_data,
+        "compatibility": compatibility_data,
     }
 
 
@@ -809,7 +871,7 @@ def import_xlsx(xlsx_path: Path, content_dir: Path, force: bool) -> None:
     finally:
         for temp_path, _ in temporary:
             temp_path.unlink(missing_ok=True)
-    print(f"Drei JSON-Dateien importiert: {content_dir}")
+    print(f"Vier JSON-Dateien importiert: {content_dir}")
 
 
 def parse_args() -> argparse.Namespace:

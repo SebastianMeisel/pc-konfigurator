@@ -21,13 +21,14 @@ Die Anwendung bewertet unter anderem Sockel, Formfaktor, Arbeitsspeicherstandard
 
 ## Komponenten und Erklärtexte bearbeiten
 
-Die Dateien `content/components.json`, `content/lessons.json` und `content/network.json` sind die verbindlichen Datenquellen. Die gleichnamigen Schema-Dateien unterstützen JSON-Editoren bei der Eingabeprüfung. Kompatibilitätsregeln und Bewertungslogik bleiben bewusst in JavaScript, weil sie ausführbare Regeln und keine redaktionellen Inhalte sind.
+Die Dateien `content/components.json`, `content/lessons.json`, `content/network.json` und `content/compatibility-rules.json` sind die verbindlichen Datenquellen. Die gleichnamigen Schema-Dateien unterstützen JSON-Editoren bei der Eingabeprüfung. Die technische Prüfung bleibt in JavaScript; Titel, Auswirkung, Lösung und Lernhinweis jeder Kompatibilitätsregel lassen sich dagegen redaktionell in JSON oder Excel bearbeiten.
 
 Für die Bearbeitung in Excel oder LibreOffice steht die erzeugte Arbeitsmappe [`buildbench-content.xlsx`](buildbench-content.xlsx) bereit. Sie enthält:
 
 - Kategorien und je ein Tabellenblatt `K_<Kategorie-ID>` für die Komponenten
 - Lernkarten mit Titel und Aufgabenbeschreibung sowie ein normalisiertes Blatt für Installations-, Sicherheits- und Prüfanweisungen
 - Ethernet-/WLAN-Optionen und die zugehörigen Mainboard-Netzdaten
+- Kompatibilitätsregeln mit Ursache, Auswirkung, Lösung und Lernhinweis
 
 Eine aktuelle Arbeitsmappe wird aus den JSON-Dateien erzeugt mit:
 
@@ -35,7 +36,7 @@ Eine aktuelle Arbeitsmappe wird aus den JSON-Dateien erzeugt mit:
 python3 tools/content_xlsx.py export --force
 ```
 
-Nach der Bearbeitung werden alle drei JSON-Dateien gemeinsam aktualisiert mit:
+Nach der Bearbeitung werden alle vier JSON-Dateien gemeinsam aktualisiert mit:
 
 ```bash
 python3 tools/content_xlsx.py import --force

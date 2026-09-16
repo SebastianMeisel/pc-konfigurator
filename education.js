@@ -328,7 +328,7 @@
   $("#example-button")?.addEventListener("click", () => setTimeout(resetNetworkDefaults, 0));
   $("#safety-button")?.addEventListener("click", () => openLesson("Grundregeln"));
   $("#lesson-button")?.addEventListener("click", () => openLesson(currentLessonKey()));
-  document.querySelectorAll(".dialog-close").forEach(button => button.addEventListener("click", closeLesson));
+  document.querySelectorAll("#lesson-dialog .dialog-close").forEach(button => button.addEventListener("click", closeLesson));
   $("#lesson-dialog")?.addEventListener("click", event => {
     if (event.target === $("#lesson-dialog")) closeLesson();
   });
