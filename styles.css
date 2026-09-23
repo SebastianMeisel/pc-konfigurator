@@ -295,6 +295,7 @@ h2 { margin-bottom: 0; font-size: 1.08rem; letter-spacing: -.02em; }
 .legend-dot.selected { background: var(--accent); box-shadow: 0 0 9px rgba(101,230,196,.5); }
 .legend-dot.blocked { background: var(--danger); }
 .legend-dot.needed { border: 1px solid var(--warning); background: transparent; }
+body:not([data-difficulty="beginner"]) .beginner-only { display: none; }
 
 .context-note {
   margin: 18px 0 -4px;

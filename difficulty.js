@@ -8,11 +8,11 @@
     }),
     standard: Object.freeze({
       label: "Standard",
-      description: "Zeigt den vollständigen Katalog mit den grundlegenden Kompatibilitätsprüfungen."
+      description: "Freie Auswahl aus dem gesamten Katalog. Die Kompatibilität wird erst in der Auswertung geprüft."
     }),
     expert: Object.freeze({
       label: "Experte",
-      description: "Erweitert die Berechnung um Power-Limits, Dauerlast, Lautstärkeziel und Custom-Loop-Prüfung."
+      description: "Freie Auswahl mit Power-Limits und Sonderkühlung. Die Kompatibilität wird erst in der Auswertung geprüft."
     })
   });
 

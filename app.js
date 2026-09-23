@@ -166,6 +166,7 @@
   }
 
   function reconcile(changedCategory) {
+    if (state.difficulty.mode !== "beginner") return;
     const removed = [];
     let changed = true;
     while (changed) {
@@ -203,7 +204,7 @@
   function renderNav() {
     refs.nav.innerHTML = categories.map((category, index) => {
       const item = selected(category.id);
-      const problem = item && compatibility(category.id, item, state.selections).length;
+      const problem = state.difficulty.mode === "beginner" && item && compatibility(category.id, item, state.selections).length;
       return `<button class="category-button ${index === state.active ? "active" : ""} ${item ? "complete" : ""} ${problem ? "problem" : ""}" data-index="${index}" data-lesson-id="${escapeHtml(category.lessonId)}" type="button" ${index === state.active ? 'aria-current="step"' : ""}>
         <span class="step-index">${String(index + 1).padStart(2,"0")}</span>
         <span class="category-label">${escapeHtml(category.label)}</span>
@@ -225,19 +226,19 @@
     refs.kicker.textContent = `Schritt ${state.active + 1} von ${categories.length}`;
     refs.title.textContent = category.title;
     refs.description.textContent = category.description;
-    const available = items.filter(item => selectionIssues(category.id, item).length === 0).length;
+    const guided = state.difficulty.mode === "beginner";
     const activePath = beginnerVariant();
-    refs.count.textContent = state.difficulty.mode === "beginner"
+    refs.count.textContent = guided
       ? `${items.length} Baupfade · ${activePath ? difficultyModel.beginnerVariants[activePath].label + " aktiv" : "noch kein Pfad gewählt"}`
-      : `${available} von ${items.length} wählbar`;
+      : `${items.length} Varianten · frei wählbar`;
     const generationHint = items.some(item => item.generation) ? "Vorgängermodelle sind als Lern- und Budgetoptionen markiert; Verfügbarkeit, Effizienz, Garantie und Firmware-Support gesondert bewerten." : "";
     const beginnerHint = state.difficulty.mode === "beginner" ? "Beide Baupfade sind vollständig kompatibel. Deine erste Komponentenwahl legt den Pfad fest; für den anderen Pfad setzt du die Konfiguration zurück. Zu Beginn ist keine Variante vorausgewählt." : "";
-    const context = [beginnerHint, contextMessage(category.id), generationHint].filter(Boolean).join(" ");
+    const context = [beginnerHint, guided ? contextMessage(category.id) : "", generationHint].filter(Boolean).join(" ");
     refs.note.hidden = !context;
     refs.note.textContent = context || "";
 
     refs.grid.innerHTML = items.map(item => {
-      const issues = selectionIssues(category.id, item);
+      const issues = guided ? selectionIssues(category.id, item) : [];
       const isSelected = state.selections[category.id] === item.id;
       const variant = state.difficulty.mode === "beginner" ? difficultyModel.beginnerVariants[item.beginnerVariant] : null;
       return `<button class="component-card ${isSelected ? "selected" : ""} ${issues.length ? "blocked" : ""} ${item.generation ? "legacy-card" : ""}"
@@ -388,6 +389,12 @@
   }
 
   function renderDiagnostics() {
+    if (state.difficulty.mode !== "beginner") {
+      refs.health.className = "health-badge neutral";
+      refs.health.textContent = "Auswertung offen";
+      refs.diagnostics.innerHTML = '<div class="diagnostic info"><span class="diagnostic-icon">i</span><div><strong>Arbeitsauftrag</strong><p>Stelle deinen Bauvorschlag zusammen. Öffne anschließend die Auswertung, prüfe die Kompatibilität und korrigiere gefundene Fehler selbstständig.</p></div></div>';
+      return;
+    }
     const items = diagnostics();
     const rank = items.some(x => x.type === "error") ? "error" : items.some(x => x.type === "warning") ? "warning" : items.some(x => x.type === "info") ? "neutral" : "good";
     refs.health.className = `health-badge ${rank}`;
@@ -404,7 +411,7 @@
     const power = requiredPower(state.selections);
     refs.progress.textContent = `${chosen} / ${categories.length}`;
     refs.price.textContent = money(total);
-    refs.power.textContent = power.recommended ? `${power.load} W · ${power.recommended} W empf.` : "–";
+    refs.power.textContent = power.recommended ? (state.difficulty.mode === "beginner" ? `${power.load} W · ${power.recommended} W empf.` : `${power.load} W`) : "–";
     refs.build.innerHTML = categories.map(category => {
       const item = selected(category.id);
       return `<div class="build-row ${item ? "" : "empty"}" role="listitem"><span class="build-category">${escapeHtml(category.label)}</span><span class="build-item">${escapeHtml(item ? item.name : "noch offen")}</span><span class="build-price">${escapeHtml(item ? money(item.price) : "–")}</span></div>`;
@@ -417,7 +424,13 @@
         total,
         power,
         difficulty: state.difficulty,
-        components: Object.fromEntries(categories.map(category => [category.id, selected(category.id)]))
+        components: Object.fromEntries(categories.map(category => [category.id, selected(category.id)])),
+        compatibility: {
+          issueCount: categories.reduce((sum, category) => {
+            const item = selected(category.id);
+            return sum + (item ? compatibility(category.id, item, state.selections).length : 0);
+          }, 0)
+        }
       }));
     } catch (_) {}
     window.BuildBenchLMS?.recordConfigurator({
@@ -562,7 +575,7 @@
   refs.previous.addEventListener("click", () => { if (state.active > 0) { state.active--; render(); window.scrollTo({top:0,behavior:scrollBehavior}); } });
   refs.next.addEventListener("click", () => {
     if (state.active < categories.length - 1) state.active++;
-    else document.querySelector(".diagnostics-panel").scrollIntoView({behavior:scrollBehavior,block:"start"});
+    else (state.difficulty.mode === "beginner" ? document.querySelector(".diagnostics-panel") : document.querySelector('a[href="evaluation.html"]')).scrollIntoView({behavior:scrollBehavior,block:"start"});
     render();
   });
   refs.reset.addEventListener("click", () => {
@@ -614,7 +627,7 @@
     if (enteringBeginner) {
       for (const category of categories) state.selections[category.id] = null;
       state.active = 0;
-    } else {
+    } else if (state.difficulty.mode === "beginner") {
       reconcile("difficulty");
     }
     save(); render();

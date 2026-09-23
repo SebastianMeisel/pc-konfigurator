@@ -104,6 +104,28 @@
     return snapshot?.components?.[id] || null;
   }
 
+  function compatibilityState() {
+    const count = snapshot?.compatibility?.issueCount;
+    if (!Number.isInteger(count) || count < 0) return "unknown";
+    const expansions = ["ethernet", "wifi"].filter(type => networkSelection[type] && networkSelection[type] !== "onboard").length;
+    const freeItxSlots = component("gpu") ? 0 : 1;
+    return count > 0 || (component("motherboard")?.form === "ITX" && expansions > freeItxSlots) ? "problem" : "good";
+  }
+
+  function renderAssignment() {
+    const scenario = scenarios.find(item => item.id === activeScenario) || scenarios[0];
+    $("#customer-brief").textContent = `Ein Kunde benötigt einen ${scenario.title} für ${scenario.description} Der Richtwert für die Beschaffung liegt bei ${euro(scenario.budget)}. Du sollst einen funktionierenden Bauvorschlag abgeben und deine Auswahl begründen.`;
+    const result = $("#compatibility-result");
+    const missing = snapshot?.components && Object.values(snapshot.components).some(item => !item);
+    const state = compatibilityState();
+    result.classList.toggle("good", Boolean(snapshot?.components) && !missing && state === "good");
+    if (!snapshot?.components) result.textContent = "Es liegt noch kein Bauvorschlag vor. Stelle zuerst eine Konfiguration zusammen.";
+    else if (state === "unknown") result.textContent = "Für diesen Bauvorschlag liegt noch keine Kompatibilitätsprüfung vor. Öffne den Konfigurator und starte danach die Auswertung erneut.";
+    else if (state === "problem") result.textContent = "In der Konfiguration sind Bauteile nicht kompatibel. Finde die betroffenen Teile und die Ursache selbstständig, korrigiere den Bauvorschlag und prüfe ihn erneut. Die Eignungspunkte allein bestätigen keine Funktionsfähigkeit.";
+    else if (missing) result.textContent = "Der Bauvorschlag ist unvollständig. Ergänze alle zwölf Komponentengruppen und prüfe ihn erneut.";
+    else result.textContent = "Die gewählten Bauteile erfüllen die modellierten Kompatibilitätsregeln. Prüfe nun, wie gut der Vorschlag zum Kundenauftrag passt.";
+  }
+
   function generationText(item) {
     if (!item?.generation) return "aktuelle Generation";
     return item.generation === 1 ? "eine Generation zurück" : "zwei Generationen zurück";
@@ -334,7 +356,9 @@
     $("#score-ring").style.setProperty("--score-percent",`${result.score}%`);
     $("#score-ring").style.setProperty("--ring-color",resultGrade.color);
     $("#score-ring").setAttribute("aria-label",`Gesamtwertung für ${result.title}: ${result.score} von 100 Punkten, ${resultGrade.label}.`);
-    $("#verdict").innerHTML = `<strong>${resultGrade.label}.</strong> Die Gesamtwertung beträgt ${result.score} von 100 Punkten. Hohe Einzelwerte gleichen schwache Kriterien nur entsprechend ihrer ausgewiesenen Gewichtung aus.`;
+    const unverified = compatibilityState() !== "good" || !snapshot?.components || Object.values(snapshot.components).some(item => !item);
+    $("#verdict").innerHTML = `<strong>${unverified ? "Technische Freigabe offen." : resultGrade.label + "."}</strong> Die Eignungswertung beträgt ${result.score} von 100 Punkten${unverified ? ", gilt aber erst nach Korrektur und erneuter Prüfung als Bauvorschlag." : "."} Hohe Einzelwerte gleichen schwache Kriterien nur entsprechend ihrer ausgewiesenen Gewichtung aus.`;
+    renderAssignment();
 
     $("#criteria-body").innerHTML = result.breakdown.map(item=>{
       const color=grade(item.score).color;

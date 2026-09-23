@@ -33,7 +33,7 @@
     <div class="header-actions">
       <button class="btn btn-ghost" id="safety-button" type="button">Grundregeln</button>
       <button class="btn btn-ghost" id="example-button" type="button">Beispiel-Build</button>
-      <a class="btn btn-outline" href="evaluation.html">Auswertung</a>
+      <a class="btn btn-outline" href="evaluation.html">Auswertung starten</a>
       <a class="btn btn-outline" href="quiz.html">Wissenstest</a>
       <button class="btn btn-outline" id="reset-button" type="button">Zurücksetzen</button>
     </div>
@@ -93,7 +93,7 @@
       <nav id="category-nav" class="category-nav"></nav>
       <div class="legend">
         <span><i class="legend-dot selected" aria-hidden="true"></i> ausgewählt</span>
-        <span><i class="legend-dot blocked" aria-hidden="true"></i> nicht passend</span>
+        <span class="beginner-only"><i class="legend-dot blocked" aria-hidden="true"></i> nicht passend</span>
         <span><i class="legend-dot needed" aria-hidden="true"></i> noch erforderlich</span>
       </div>
     </aside>
@@ -153,8 +153,8 @@
     <section class="diagnostics-panel" aria-labelledby="diagnostics-title">
       <div class="diagnostics-heading">
         <div>
-          <p class="eyebrow">Live-Prüfung</p>
-          <h2 id="diagnostics-title">Kompatibilität</h2>
+          <p class="eyebrow">Arbeitsablauf</p>
+          <h2 id="diagnostics-title">Prüfung der Konfiguration</h2>
         </div>
         <span id="health-badge" class="health-badge neutral">Auswahl beginnen</span>
       </div>
