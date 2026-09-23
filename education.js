@@ -26,6 +26,11 @@
     catch (_) { return {}; }
   }
 
+  function isBeginner() {
+    try { return JSON.parse(localStorage.getItem("buildbench-difficulty-v1"))?.mode === "beginner"; }
+    catch (_) { return false; }
+  }
+
   function loadNetwork() {
     try {
       const saved = JSON.parse(localStorage.getItem("buildbench-network-v1"));
@@ -105,7 +110,7 @@
       return `<section class="network-group">
         <h3 class="network-group-title">${title}<span>eine Option</span></h3>
         <div class="network-card-grid">${catalog[type].map(item => {
-          const reason = blockReason(type,item);
+          const reason = isBeginner() ? blockReason(type,item) : "";
           const selected = networkState[type] === item.id;
           return `<article class="network-card ${selected ? "selected" : ""} ${reason ? "blocked" : ""}">
             <button class="network-select" type="button" data-network-type="${type}" data-network-id="${item.id}" aria-pressed="${selected}" ${reason ? "aria-disabled=\"true\"" : ""}>
@@ -147,6 +152,10 @@
   }
 
   function renderNetworkDiagnostics() {
+    if (!isBeginner()) {
+      $("#network-diagnostics").innerHTML = '<div class="network-note info"><b>i</b><span>Prüfe die Erweiterungskarten nach der Zusammenstellung in der Auswertung zusammen mit den übrigen Bauteilen.</span></div>';
+      return;
+    }
     const base = baseSelections();
     const board = boards[base.motherboard];
     const ethernet = chosen("ethernet");

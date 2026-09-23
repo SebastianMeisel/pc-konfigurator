@@ -2,7 +2,7 @@
 
 Interaktive, vollständig clientseitige Webanwendung zum Zusammenstellen eines Desktop-PCs und als Unterrichtsmaterial für Fachinformatik-Berufe.
 
-Die Anwendung bewertet unter anderem Sockel, Formfaktor, Arbeitsspeicherstandard, GPU-Länge, Kühlerhöhe, Radiatorplätze, Netzteilreserve, Laufwerksplätze und Montagematerial. Nicht passende Varianten bleiben sichtbar und zeigen den Grund ihrer Sperre. Eine dynamische SVG-Schnittansicht visualisiert den aktuellen Bauzustand. Mainboard und Grafikkarte verwenden dabei ein gemeinsames, an realen Millimetermaßen orientiertes Skalierungsmodell für ATX, mATX und Mini-ITX.
+Die Anwendung bewertet unter anderem Sockel, Formfaktor, Arbeitsspeicherstandard, GPU-Länge, Kühlerhöhe, Radiatorplätze, Netzteilreserve, Laufwerksplätze und Montagematerial. Im Einsteigermodus bleiben nicht passende Varianten sichtbar und erklären ihre Sperre. In Standard und Experte können Lernende frei wählen; erst die Auswertung meldet, ob die Bauteile zusammenpassen. Bei Problemen sollen sie die Ursache anhand der Datenblätter selbst finden, den Bauvorschlag korrigieren und erneut auswerten. Eine dynamische SVG-Schnittansicht visualisiert den aktuellen Bauzustand. Mainboard und Grafikkarte verwenden dabei ein gemeinsames, an realen Millimetermaßen orientiertes Skalierungsmodell für ATX, mATX und Mini-ITX.
 
 ## Lernfunktionen
 
@@ -13,7 +13,7 @@ Die Anwendung bewertet unter anderem Sockel, Formfaktor, Arbeitsspeicherstandard
 - Hinweise zu PCIe-Steckplätzen, Bluetooth-USB-Headern, Antennen, Kabelkategorien und Netzwerk-Infrastruktur
 - Automatische Berücksichtigung der Netzwerk-Erweiterungen im Gesamtpreis
 - Klar markierte Komponenten aus ein bis zwei Vorgängergenerationen für Plattformvergleich, Budgetplanung und Gebrauchtmarkt-Szenarien
-- Drei Schwierigkeitsgrade: zwei vollständige und in sich kompatible Einsteiger-Baupfade, vollständiger Standardkatalog und Expertenmodus
+- Drei Schwierigkeitsgrade: zwei angeleitete Einsteiger-Baupfade mit unmittelbarem Feedback, freier Standardkatalog und Expertenmodus mit Fehlersuche in der Auswertung
 - Expertenparameter für CPU-/GPU-Power-Limits, Dauerlast- oder Lautstärkereserve und dokumentierten Custom-Loop-Dichtheitstest
 - Gemischte AM5-, AM4-, LGA1851- und LGA1700-Plattformen mit DDR5-/DDR4-Prüfung sowie PCIe-Abwärtskompatibilität
 - Zweite Seite „Auswertung“ mit gewichteter Nutzwertanalyse für Office, Entwicklung, CAD, Videoschnitt und lokale KI

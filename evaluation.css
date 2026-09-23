@@ -74,6 +74,17 @@
   background:rgba(255,200,87,.07);
   font-size:.78rem;
 }
+.assignment-panel {
+  padding:20px 22px;
+  border:1px solid rgba(54,79,111,.7);
+  border-radius:var(--radius);
+  background:linear-gradient(145deg,rgba(17,34,56,.94),rgba(11,23,40,.94));
+  box-shadow:var(--shadow);
+}
+.assignment-panel h2 { margin:4px 0 10px; }
+.assignment-panel p { max-width:900px; color:var(--muted); line-height:1.55; }
+.assignment-panel #compatibility-result { margin:14px 0; padding:12px 14px; border-left:3px solid var(--warning); background:rgba(255,200,87,.07); border-radius:5px; }
+.assignment-panel #compatibility-result.good { border-color:var(--accent); background:rgba(101,230,196,.07); }
 .scenario-grid { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:10px; }
 .scenario-card {
   position:relative;
