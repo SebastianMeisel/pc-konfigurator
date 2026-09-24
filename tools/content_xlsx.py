@@ -49,7 +49,7 @@ FILES = {
     "compatibility": "compatibility-rules.json",
 }
 BASE_COMPONENT_FIELDS = ("id", "maker", "name", "price", "generation", "recommended", "beginnerVariant", "specs")
-SOURCE_FIELDS = ("modelNumber", "sourceUrl", "datasheetUrl", "manualUrl", "sourceCheckedAt")
+SOURCE_FIELDS = ("modelNumber", "sourceUrl", "gpuFamilyUrl", "datasheetUrl", "manualUrl", "sourceCheckedAt")
 ARRAY_FIELDS = {
     "form",
     "psu",
