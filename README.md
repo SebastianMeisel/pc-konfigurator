@@ -116,7 +116,7 @@ Für den Abruf der Inhalts- und Quizdaten muss die Anwendung über einen lokalen
 python3 -m http.server 8080
 ```
 
-Danach `http://localhost:8080` aufrufen.
+Danach `http://localhost:8080` aufrufen. Alle für die Oberfläche benötigten Schriften liegen unter `assets/fonts/` und werden lokal geladen. DM Sans und JetBrains Mono stammen aus [google/fonts](https://github.com/google/fonts) (Stand: Commit `23e54b51ddffbc7713c583748e3bd86f62b1fa4a`); die jeweiligen SIL-Open-Font-License-Texte liegen daneben. Nur ausdrücklich angeklickte Hersteller-Produktblätter führen zu externen Webseiten.
 
 ## In ILIAS verwenden
 
@@ -130,7 +130,7 @@ Eine vorhandene Datei wird nur mit `--force` ersetzt. Anschließend die ZIP-Date
 
 Innerhalb von ILIAS verwendet die Anwendung die SCORM-1.2-Laufzeitschnittstelle. Erfasst werden besuchte Bereiche, Anzahl ausgewählter Komponenten, Schwierigkeitsgrad und Expertenparameter, betrachtetes Anwendungsszenario, Quiz-Fortschritt, bestes Quiz-Ergebnis und benötigte Sitzungszeit. Ein begonnenes Quiz wird über `cmi.suspend_data` wiederaufgenommen. Ab 70 Prozent wird der SCORM-Status „bestanden“ gesetzt. Außerhalb eines LMS bleibt die Anwendung vollständig nutzbar und speichert den Arbeitsstand nur lokal im Browser.
 
-Das SCORM-Paket ist vollständig selbstenthalten; externe Webfont-Aufrufe werden beim Paketieren entfernt. Es übermittelt keine Lerndaten an GitHub oder andere externe Dienste. Bei der SCORM-Nutzung werden die Fortschrittsdaten ausschließlich über die von ILIAS bereitgestellte Schnittstelle gespeichert.
+Das SCORM-Paket enthält auch die lokal eingebundenen Schriften und ihre Lizenzen. Es übermittelt keine Lerndaten an GitHub oder andere externe Dienste. Bei der SCORM-Nutzung werden die Fortschrittsdaten ausschließlich über die von ILIAS bereitgestellte Schnittstelle gespeichert.
 
 ## Bereitstellung
 
