@@ -52,6 +52,14 @@ for (const category of components.categories) {
     assert(Number.isInteger(item.price) && item.price >= 0, category.id + "/" + item.id + ": Preis ist ungültig");
     assert(Array.isArray(item.specs) && item.specs.length > 0, category.id + "/" + item.id + ": specs fehlen");
     assert(item.generation === undefined || item.generation === 1 || item.generation === 2, category.id + "/" + item.id + ": generation ist ungültig");
+    if (item.maxGpuWithFront360 !== undefined) assert(Number.isInteger(item.maxGpuWithFront360) && item.maxGpuWithFront360 > 0 && item.maxGpuWithFront360 <= item.maxGpu, `${category.id}/${item.id}: maxGpuWithFront360 ist ungültig`);
+    for (const field of ["sourceUrl", "datasheetUrl", "manualUrl"]) {
+      if (item[field] === undefined) continue;
+      let valid = false;
+      try { valid = new URL(item[field]).protocol === "https:"; } catch (_) {}
+      assert(valid, `${category.id}/${item.id}: ${field} muss eine HTTPS-Adresse sein`);
+    }
+    assert(!item.sourceCheckedAt || /^\d{4}-\d{2}-\d{2}$/.test(item.sourceCheckedAt), `${category.id}/${item.id}: sourceCheckedAt muss YYYY-MM-DD sein`);
   }
 }
 assert(componentCount >= 72, "Der Komponentenkatalog enthält weniger als 72 Einträge");
@@ -84,7 +92,8 @@ for (const variant of ["a", "b"]) {
   const recommendedPower = Math.ceil(load * 1.3 / 50) * 50;
 
   assert(pcCase.form.includes(board.form), label + ": Mainboard passt nicht ins Gehäuse");
-  assert(pcCase.maxGpu >= gpu.length, label + ": Grafikkarte ist zu lang");
+  const gpuLimit = cooler.radiator === 360 && pcCase.maxGpuWithFront360 ? pcCase.maxGpuWithFront360 : pcCase.maxGpu;
+  assert(gpuLimit >= gpu.length, label + ": Grafikkarte ist zu lang");
   assert(pcCase.psu.includes(psu.form), label + ": Netzteilform passt nicht ins Gehäuse");
   assert(pcCase.drives.includes(storage.mount), label + ": Laufwerk passt nicht ins Gehäuse");
   assert(board.socket === cpu.socket, label + ": CPU-Sockel passt nicht zum Mainboard");

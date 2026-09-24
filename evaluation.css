@@ -85,6 +85,25 @@
 .assignment-panel p { max-width:900px; color:var(--muted); line-height:1.55; }
 .assignment-panel #compatibility-result { margin:14px 0; padding:12px 14px; border-left:3px solid var(--warning); background:rgba(255,200,87,.07); border-radius:5px; }
 .assignment-panel #compatibility-result.good { border-color:var(--accent); background:rgba(101,230,196,.07); }
+.diagnosis-print { display:none; }
+.evidence-fields { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; margin:18px 0; }
+.evidence-fields label { display:grid; gap:6px; color:var(--text); font-weight:600; font-size:.78rem; }
+.evidence-fields textarea {
+  box-sizing:border-box;
+  width:100%;
+  min-height:92px;
+  padding:10px;
+  border:1px solid var(--line-bright);
+  border-radius:7px;
+  color:var(--text);
+  background:#0b1728;
+  font:inherit;
+  line-height:1.45;
+  resize:vertical;
+}
+.evidence-fields textarea:focus-visible { outline:3px solid var(--cyan); outline-offset:2px; }
+#diagnosis-save-status { font-size:.68rem; }
+
 .scenario-grid { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:10px; }
 .scenario-card {
   position:relative;
@@ -200,6 +219,7 @@
   .score-ring { width:96px; height:96px; }
   .recommendation-panel { grid-template-columns:1fr; }
 }
+@media (max-width:800px) { .evidence-fields { grid-template-columns:1fr; } }
 @media (max-width:460px) {
   .evaluation-hero { display:block; }
   .method-badge { display:none; }
@@ -213,14 +233,16 @@
 }
 @media print {
   .topbar,.evaluation-nav,.method-panel { display:none!important; }
+  .evidence-fields,#diagnosis-save-status { display:none!important; }
+  .diagnosis-print { display:block; color:#111; white-space:pre-wrap; overflow-wrap:anywhere; }
   body { background:#fff; color:#111; }
   .evaluation-page { width:100%; padding:0; }
-  .evaluation-hero,.snapshot-panel,.detail-panel,.scenario-card,.criteria-panel,.recommendation-panel section {
+  .evaluation-hero,.snapshot-panel,.assignment-panel,.detail-panel,.scenario-card,.criteria-panel,.recommendation-panel section {
     color:#111; background:#fff; box-shadow:none; break-inside:avoid;
   }
   .scenario-card:not(.active) { display:none; }
   .scenario-grid { display:block; }
-  .reason-cell,.evaluation-hero p,.detail-heading p,.recommendation-panel ul,.snapshot-chip { color:#333; }
+  .reason-cell,.evaluation-hero p,.assignment-panel p,.detail-heading p,.recommendation-panel ul,.snapshot-chip { color:#333; }
 }
 
 .criteria-table-wrap:focus-visible {

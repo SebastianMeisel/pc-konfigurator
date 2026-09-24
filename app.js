@@ -37,6 +37,34 @@
   let compatibilityTrigger = null;
 
   const money = value => value === 0 ? "enthalten" : new Intl.NumberFormat("de-DE", { style:"currency", currency:"EUR", maximumFractionDigits:0 }).format(value);
+
+  function sourceLink(item, field, label) {
+    const address = item[field];
+    if (!address) return "";
+    try {
+      const url = new URL(address);
+      if (url.protocol !== "https:") return "";
+      return `<a href="${escapeHtml(url.href)}" target="_blank" rel="noopener noreferrer" aria-label="${escapeHtml(item.name)}: ${label} in neuem Tab öffnen">${label} ↗</a>`;
+    } catch (_) { return ""; }
+  }
+
+  function sourcePanel(category, item) {
+    const links = [
+      sourceLink(item, "sourceUrl", "Herstellerangaben"),
+      sourceLink(item, "datasheetUrl", "Datenblatt (PDF)"),
+      sourceLink(item, "manualUrl", "Handbuch")
+    ].filter(Boolean);
+    const noProduct = item.id === "none" || item.maker === "Gehäusezubehör" || item.maker === "Mainboardzubehör";
+    const missing = category === "gpu"
+      ? "Für Maße und Stromanschlüsse die konkrete Grafikkarte eines Herstellers bestimmen."
+      : noProduct ? "Zu dieser allgemeinen Position gibt es kein eigenes Produktdatenblatt."
+      : "Kein eindeutiges Herstellerdatenblatt hinterlegt: genaue Artikelnummer oder Revision recherchieren.";
+    const checked = item.sourceCheckedAt ? `<small>Link geprüft: ${escapeHtml(item.sourceCheckedAt.split("-").reverse().join("."))}</small>` : "";
+    return `<div class="product-sources" role="group" aria-label="Herstellerquellen zu ${escapeHtml(item.name)}">
+      ${item.modelNumber ? `<small>Art.-Nr. ${escapeHtml(item.modelNumber)}</small>` : ""}
+      ${links.length ? `<div class="source-links">${links.join("")}</div>${checked}` : `<span>${missing}</span>`}
+    </div>`;
+  }
   const selected = (category, selections = state.selections) => data[category].find(item => item.id === selections[category]) || null;
   const configWith = (category, id) => ({ ...state.selections, [category]: id });
   const requiredPower = selections => {
@@ -44,6 +72,7 @@
     return difficultyModel.power(cpu, gpu, state.difficulty);
   };
   const requiredCooling = (selections = state.selections) => difficultyModel.cooling(selected("cpu", selections), state.difficulty);
+  const gpuClearance = (pcCase, cooler) => cooler?.radiator === 360 && pcCase?.maxGpuWithFront360 ? pcCase.maxGpuWithFront360 : pcCase?.maxGpu;
   const beginnerVariant = (selections = state.selections, ignoredCategory = null) => {
     if (state.difficulty.mode !== "beginner") return null;
     for (const category of categories) {
@@ -70,7 +99,7 @@
 
     if (category === "case") {
       if (board && !item.form.includes(board.form)) issues.push(issue("CASE_BOARD_FORM", `Gewählt: ${board.form}-Mainboard. Das Gehäuse unterstützt: ${item.form.join(", ")}.`));
-      if (gpu && gpu.length > item.maxGpu) issues.push(issue("CASE_GPU_LENGTH", `Grafikkarte: ${gpu.length} mm. Gehäusegrenze: ${item.maxGpu} mm. Differenz: ${gpu.length - item.maxGpu} mm.`));
+      if (gpu && gpu.length > gpuClearance(item, cooler)) issues.push(issue("CASE_GPU_LENGTH", `Grafikkarte: ${gpu.length} mm. Gehäusegrenze mit gewählter Kühlung: ${gpuClearance(item, cooler)} mm. Differenz: ${gpu.length - gpuClearance(item, cooler)} mm.`));
       if (cooler?.kind === "air" && cooler.height > item.maxCooler) issues.push(issue("CASE_COOLER_HEIGHT", `Kühler: ${cooler.height} mm. Gehäusegrenze: ${item.maxCooler} mm. Differenz: ${cooler.height - item.maxCooler} mm.`));
       if (cooler && cooler.kind !== "air" && !item.radiators.includes(cooler.radiator)) issues.push(issue("CASE_RADIATOR_SIZE", `Radiator: ${cooler.radiator} mm. Unterstützt: ${item.radiators.join(", ")} mm.`));
       if (psu && !item.psu.includes(psu.form)) issues.push(issue("CASE_PSU_FORM", `Netzteil: ${psu.form}. Unterstützt: ${item.psu.join(", ")}.`));
@@ -87,7 +116,7 @@
       if (board && board.socket !== item.socket) issues.push(issue("CPU_BOARD_SOCKET", `CPU-Sockel: ${item.socket}. Mainboard-Sockel: ${board.socket}.`));
     }
     if (category === "gpu") {
-      if (c && item.length > c.maxGpu) issues.push(issue("GPU_CASE_LENGTH", `Grafikkarte: ${item.length} mm. Gehäusegrenze: ${c.maxGpu} mm. Differenz: ${item.length - c.maxGpu} mm.`));
+      if (c && item.length > gpuClearance(c, cooler)) issues.push(issue("GPU_CASE_LENGTH", `Grafikkarte: ${item.length} mm. Gehäusegrenze mit gewählter Kühlung: ${gpuClearance(c, cooler)} mm. Differenz: ${item.length - gpuClearance(c, cooler)} mm.`));
     }
     if (category === "ram") {
       if (board && board.memory !== item.type) issues.push(issue("RAM_BOARD_TYPE", `Arbeitsspeicher: ${item.type}. Mainboard: ${board.memory}.`));
@@ -233,7 +262,8 @@
       : `${items.length} Varianten · frei wählbar`;
     const generationHint = items.some(item => item.generation) ? "Vorgängermodelle sind als Lern- und Budgetoptionen markiert; Verfügbarkeit, Effizienz, Garantie und Firmware-Support gesondert bewerten." : "";
     const beginnerHint = state.difficulty.mode === "beginner" ? "Beide Baupfade sind vollständig kompatibel. Deine erste Komponentenwahl legt den Pfad fest; für den anderen Pfad setzt du die Konfiguration zurück. Zu Beginn ist keine Variante vorausgewählt." : "";
-    const context = [beginnerHint, guided ? contextMessage(category.id) : "", generationHint].filter(Boolean).join(" ");
+    const sourceHint = guided ? "" : "Nutze die Herstellerquellen unter den Karten. Bei Varianten ohne eindeutiges Datenblatt recherchiere zuerst die konkrete Artikelnummer.";
+    const context = [beginnerHint, guided ? contextMessage(category.id) : sourceHint, generationHint].filter(Boolean).join(" ");
     refs.note.hidden = !context;
     refs.note.textContent = context || "";
 
@@ -241,14 +271,14 @@
       const issues = guided ? selectionIssues(category.id, item) : [];
       const isSelected = state.selections[category.id] === item.id;
       const variant = state.difficulty.mode === "beginner" ? difficultyModel.beginnerVariants[item.beginnerVariant] : null;
-      return `<button class="component-card ${isSelected ? "selected" : ""} ${issues.length ? "blocked" : ""} ${item.generation ? "legacy-card" : ""}"
+      return `<div class="component-option"><button class="component-card ${isSelected ? "selected" : ""} ${issues.length ? "blocked" : ""} ${item.generation ? "legacy-card" : ""}"
           data-id="${escapeHtml(item.id)}" type="button" ${issues.length ? `aria-haspopup="dialog" aria-label="Nicht wählbar: ${escapeHtml(item.name)}. Kompatibilitätsdetails anzeigen"` : `aria-pressed="${isSelected}"`}>
         <span class="card-top"><span><span class="maker">${escapeHtml(item.maker)}</span>${item.generation ? `<span class="generation-badge generation-${item.generation}">${item.generation === 1 ? "1 Gen. zurück" : "2 Gen. zurück"}</span>` : ""}${variant ? `<span class="beginner-variant-badge">${escapeHtml(variant.label)}</span>` : ""}</span><span class="price">${escapeHtml(money(item.price))}</span></span>
         <h3>${escapeHtml(item.name)}</h3>
         <ul class="specs">${item.specs.map(spec => `<li>${escapeHtml(spec)}</li>`).join("")}</ul>
         ${issues.length ? `<span class="block-reason"><span>${escapeHtml(issues.map(entry => entry.title).join(" · "))}</span><span class="block-action">Details anzeigen</span></span>` :
           `<span class="card-foot"><span>${variant ? `${variant.label}${isSelected ? " gewählt" : " auswählen"}` : item.recommended ? "Empfohlene Balance" : isSelected ? "Ausgewählt" : "Auswählen"}</span><span class="select-indicator">${isSelected ? "✓" : ""}</span></span>`}
-      </button>`;
+      </button>${sourcePanel(category.id, item)}</div>`;
     }).join("");
 
     refs.grid.querySelectorAll(".component-card:not(.blocked)").forEach(button => button.addEventListener("click", () => {
@@ -323,7 +353,7 @@
     const messages = {
       motherboard: c ? `Das Gehäuse unterstützt ${c.form.join(", ")}.` : "",
       cpu: board ? `Benötigter Sockel: ${board.socket}.` : "Ohne Mainboard bleiben AM5, AM4, LGA1851 und LGA1700 wählbar.",
-      gpu: c ? `Maximale Grafikkartenlänge: ${c.maxGpu} mm.` : "",
+      gpu: c ? `Maximale Grafikkartenlänge mit gewählter Kühlung: ${gpuClearance(c, cooler)} mm.` : "",
       psu: power.recommended ? `Für diese CPU/GPU-Kombination${state.difficulty.mode === "expert" ? " einschließlich Power-Limits" : ""} werden mindestens ${power.recommended} W empfohlen.` : "CPU und GPU auswählen, um die Reserve zu berechnen.",
       cooler: [cpu ? `Modellierter Kühlbedarf: ${requiredCooling()} W.` : "", c ? `Maximale Kühlerhöhe: ${c.maxCooler} mm.` : ""].filter(Boolean).join(" "),
       coolant: cooler?.kind === "custom" ? "Der offene Kreislauf benötigt mindestens einen Liter gebrauchsfertiges Kühlmittel." : cooler ? "Der ausgewählte Kühler ist geschlossen und benötigt kein separates Kühlmittel." : ""
@@ -373,7 +403,7 @@
 
     if (c && board) list.push({ type:"success", title:"Formfaktor passt", text:`${board.form}-Mainboard kann im ${c.name} montiert werden.` });
     if (board && cpu) list.push({ type:"success", title:"Sockel stimmt überein", text:`${cpu.name} und ${board.name} verwenden ${cpu.socket}.` });
-    if (gpu && c) list.push({ type:"success", title:"Grafikkarte hat Platz", text:`${c.maxGpu - gpu.length} mm Reserve bis zur Gehäusegrenze.` });
+    if (gpu && c) list.push({ type:"success", title:"Grafikkarte hat Platz", text:`${gpuClearance(c, cooler) - gpu.length} mm Reserve bis zur Gehäusegrenze.` });
     if (psu && power.recommended) {
       const reserve = psu.watts - power.load;
       list.push({ type: reserve < 100 ? "warning" : "success", title: reserve < 100 ? "Netzteilreserve knapp" : "Netzteil ausreichend", text:`${psu.watts} W Nennleistung, etwa ${reserve} W oberhalb der geschätzten Volllast.` });
