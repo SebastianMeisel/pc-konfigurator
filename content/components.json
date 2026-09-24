@@ -586,114 +586,135 @@
     "gpu": [
       {
         "id": "5060ti",
-        "maker": "NVIDIA",
-        "name": "GeForce RTX 5060 Ti 16 GB",
+        "maker": "MSI",
+        "name": "MSI GeForce RTX 5060 Ti 16G VENTUS 2X OC PLUS",
         "beginnerVariant": "a",
         "price": 499,
-        "length": 242,
+        "length": 227,
         "power": 180,
         "connector": "8-pin",
         "label": "5060 Ti",
         "specs": [
           "16 GB GDDR7",
-          "242 mm",
+          "227 mm",
           "180 W"
         ],
         "recommended": true,
         "gpuFamilyUrl": "https://www.nvidia.com/de-de/geforce/graphics-cards/50-series/rtx-5060-family/",
-        "sourceCheckedAt": "2026-09-24"
+        "sourceCheckedAt": "2026-09-24",
+        "chipMaker": "NVIDIA",
+        "modelNumber": "G506T-16V2CP",
+        "sourceUrl": "https://www.msi.com/Graphics-Card/GeForce-RTX-5060-Ti-16G-VENTUS-2X-OC-PLUS/Specification",
+        "datasheetUrl": "https://storage-asset.msi.com/datasheet/vga/global/GeForce-RTX-5060-Ti-16G-VENTUS-2X-OC-PLUS.pdf"
       },
       {
         "id": "5070",
-        "maker": "NVIDIA",
-        "name": "GeForce RTX 5070 12 GB",
+        "maker": "MSI",
+        "name": "MSI GeForce RTX 5070 12G VENTUS 2X OC",
         "price": 649,
-        "length": 242,
+        "length": 236,
         "power": 250,
-        "connector": "12V-2x6",
+        "connector": "16-pin",
         "label": "RTX 5070",
         "specs": [
           "12 GB GDDR7",
-          "242 mm",
+          "236 mm",
           "250 W"
         ],
         "gpuFamilyUrl": "https://www.nvidia.com/de-de/geforce/graphics-cards/50-series/rtx-5070-family/",
-        "sourceCheckedAt": "2026-09-24"
+        "sourceCheckedAt": "2026-09-24",
+        "chipMaker": "NVIDIA",
+        "modelNumber": "G5070-12V2C",
+        "sourceUrl": "https://www.msi.com/Graphics-Card/GeForce-RTX-5070-12G-VENTUS-2X-OC/Specification",
+        "datasheetUrl": "https://storage-asset.msi.com/datasheet/vga/global/GeForce-RTX-5070-12G-VENTUS-2X-OC.pdf"
       },
       {
         "id": "5080",
-        "maker": "NVIDIA",
-        "name": "GeForce RTX 5080 16 GB",
+        "maker": "MSI",
+        "name": "MSI GeForce RTX 5080 16G VENTUS 3X OC",
         "price": 1199,
-        "length": 304,
+        "length": 303,
         "power": 360,
-        "connector": "12V-2x6",
+        "connector": "16-pin",
         "label": "RTX 5080",
         "specs": [
           "16 GB GDDR7",
-          "304 mm",
+          "303 mm",
           "360 W"
         ],
         "gpuFamilyUrl": "https://www.nvidia.com/de-de/geforce/graphics-cards/50-series/rtx-5080/",
-        "sourceCheckedAt": "2026-09-24"
+        "sourceCheckedAt": "2026-09-24",
+        "chipMaker": "NVIDIA",
+        "modelNumber": "G5080-16V3C",
+        "sourceUrl": "https://de.msi.com/Graphics-Card/GeForce-RTX-5080-16G-VENTUS-3X-OC/Specification",
+        "datasheetUrl": "https://storage-asset.msi.com/datasheet/vga/de/GeForce-RTX-5080-16G-VENTUS-3X-OC.pdf"
       },
       {
         "id": "9070",
-        "maker": "AMD",
-        "name": "Radeon RX 9070 16 GB",
+        "maker": "Sapphire",
+        "name": "Sapphire PULSE Radeon RX 9070 16G",
         "price": 659,
-        "length": 289,
+        "length": 280,
         "power": 220,
         "connector": "2× 8-pin",
         "label": "RX 9070",
         "specs": [
           "16 GB GDDR6",
-          "289 mm",
+          "280 mm",
           "220 W"
         ],
         "gpuFamilyUrl": "https://www.amd.com/en/products/graphics/desktops/radeon/9000-series/amd-radeon-rx-9070.html",
-        "sourceCheckedAt": "2026-09-24"
+        "sourceCheckedAt": "2026-09-24",
+        "chipMaker": "AMD",
+        "modelNumber": "11349-03-20G",
+        "sourceUrl": "https://www.sapphiretech.com/en/consumer/pulse-radeon-rx-9070-16g-gddr6"
       },
       {
         "id": "9070xt",
-        "maker": "AMD",
-        "name": "Radeon RX 9070 XT 16 GB",
+        "maker": "Sapphire",
+        "name": "Sapphire PULSE Radeon RX 9070 XT 16G",
         "beginnerVariant": "b",
         "price": 759,
-        "length": 304,
+        "length": 320,
         "power": 304,
-        "connector": "3× 8-pin",
+        "connector": "2× 8-pin",
         "label": "9070 XT",
         "specs": [
           "16 GB GDDR6",
-          "304 mm",
+          "320 mm",
           "304 W"
         ],
         "gpuFamilyUrl": "https://www.amd.com/de/products/graphics/desktops/radeon/9000-series/amd-radeon-rx-9070xt.html",
-        "sourceCheckedAt": "2026-09-24"
+        "sourceCheckedAt": "2026-09-24",
+        "chipMaker": "AMD",
+        "modelNumber": "11348-03-20G",
+        "sourceUrl": "https://www.sapphiretech.com/en/consumer/pulse-radeon-rx-9070-xt-16g-gddr6"
       },
       {
         "id": "4070super",
-        "maker": "NVIDIA",
-        "name": "GeForce RTX 4070 SUPER 12 GB",
+        "maker": "MSI",
+        "name": "MSI GeForce RTX 4070 SUPER 12G VENTUS 2X OC",
         "price": 499,
-        "length": 267,
+        "length": 242,
         "power": 220,
-        "connector": "12V-2x6",
+        "connector": "16-pin",
         "label": "4070 S",
         "generation": 1,
         "specs": [
           "12 GB GDDR6X",
-          "267 mm",
+          "242 mm",
           "220 W"
         ],
         "gpuFamilyUrl": "https://www.nvidia.com/de-de/geforce/graphics-cards/40-series/rtx-4070-family/",
-        "sourceCheckedAt": "2026-09-24"
+        "sourceCheckedAt": "2026-09-24",
+        "chipMaker": "NVIDIA",
+        "sourceUrl": "https://www.msi.com/Graphics-Card/GeForce-RTX-4070-SUPER-12G-VENTUS-2X-OC/Specification",
+        "datasheetUrl": "https://storage-asset.msi.com/datasheet/vga/global/GeForce-RTX-4070-SUPER-12G-VENTUS-2X-OC.pdf"
       },
       {
         "id": "7800xt",
-        "maker": "AMD",
-        "name": "Radeon RX 7800 XT 16 GB",
+        "maker": "Sapphire",
+        "name": "Sapphire Radeon RX 7800 XT 16G",
         "price": 449,
         "length": 267,
         "power": 263,
@@ -706,30 +727,36 @@
           "263 W"
         ],
         "gpuFamilyUrl": "https://www.amd.com/de/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7800-xt.html",
-        "sourceCheckedAt": "2026-09-24"
+        "sourceCheckedAt": "2026-09-24",
+        "chipMaker": "AMD",
+        "modelNumber": "21330-01-20G",
+        "sourceUrl": "https://www.sapphiretech.com/en/consumer/21330-01-20g-radeon-rx-7800-xt-16g-gddr6"
       },
       {
         "id": "3080",
-        "maker": "NVIDIA",
-        "name": "GeForce RTX 3080 10 GB",
+        "maker": "MSI",
+        "name": "MSI GeForce RTX 3080 VENTUS 3X 10G OC",
         "price": 349,
-        "length": 285,
+        "length": 305,
         "power": 320,
         "connector": "2× 8-pin",
         "label": "RTX 3080",
         "generation": 2,
         "specs": [
           "10 GB GDDR6X",
-          "285 mm",
+          "305 mm",
           "320 W"
         ],
         "gpuFamilyUrl": "https://www.nvidia.com/de-de/geforce/graphics-cards/30-series/rtx-3080-3080ti/",
-        "sourceCheckedAt": "2026-09-24"
+        "sourceCheckedAt": "2026-09-24",
+        "chipMaker": "NVIDIA",
+        "sourceUrl": "https://de.msi.com/Graphics-Card/GeForce-RTX-3080-VENTUS-3X-10G-OC/Specification",
+        "datasheetUrl": "https://storage-asset.msi.com/datasheet/vga/de/GeForce-RTX-3080-VENTUS-3X-10G-OC.pdf"
       },
       {
         "id": "6800xt",
-        "maker": "AMD",
-        "name": "Radeon RX 6800 XT 16 GB",
+        "maker": "Sapphire",
+        "name": "Sapphire Radeon RX 6800 XT 16G",
         "price": 329,
         "length": 267,
         "power": 300,
@@ -742,7 +769,10 @@
           "300 W"
         ],
         "gpuFamilyUrl": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6800-xt.html",
-        "sourceCheckedAt": "2026-09-24"
+        "sourceCheckedAt": "2026-09-24",
+        "chipMaker": "AMD",
+        "modelNumber": "21304-01-20G",
+        "sourceUrl": "https://nation.sapphiretech.com/en/consumer/21304-01-20g-radeon-rx-6800-xt-16g-gddr6"
       }
     ],
     "ram": [

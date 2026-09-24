@@ -50,6 +50,7 @@ FILES = {
 }
 BASE_COMPONENT_FIELDS = ("id", "maker", "name", "price", "generation", "recommended", "beginnerVariant", "specs")
 SOURCE_FIELDS = ("modelNumber", "sourceUrl", "gpuFamilyUrl", "datasheetUrl", "manualUrl", "sourceCheckedAt")
+PRESERVED_FIELDS = (*SOURCE_FIELDS, "chipMaker")
 ARRAY_FIELDS = {
     "form",
     "psu",
@@ -147,7 +148,7 @@ def load_json(path: Path) -> object:
         ) from exc
 
 
-def validate_components(data: object) -> dict:
+def validate_components(data: object, *, require_gpu_chip_maker: bool = True) -> dict:
     if not isinstance(data, dict) or data.get("schemaVersion") != 1:
         raise ContentDataError("components.json benötigt schemaVersion 1.")
     categories = data.get("categories")
@@ -205,6 +206,8 @@ def validate_components(data: object) -> dict:
                 raise ContentDataError(f"{category_id}/{item_id}: recommended muss wahr oder falsch sein.")
             if normalized.get("beginnerVariant") not in (None, "a", "b"):
                 raise ContentDataError(f"{category_id}/{item_id}: beginnerVariant muss a oder b sein.")
+            if category_id == "gpu" and require_gpu_chip_maker and normalized.get("chipMaker") not in ("AMD", "NVIDIA"):
+                raise ContentDataError(f"{category_id}/{item_id}: chipMaker muss AMD oder NVIDIA sein.")
             for field in SOURCE_FIELDS:
                 value = normalized.get(field)
                 if value is not None and (not isinstance(value, str) or not value.strip()):
@@ -766,7 +769,8 @@ def content_from_workbook(xlsx_path: Path) -> dict[str, dict]:
             items.append(item)
         components[category_id] = items
     component_data = validate_components(
-        {"schemaVersion": 1, "categories": categories, "components": components}
+        {"schemaVersion": 1, "categories": categories, "components": components},
+        require_gpu_chip_maker=False,
     )
 
     lesson_base = {}
@@ -878,10 +882,12 @@ def import_xlsx(xlsx_path: Path, content_dir: Path, force: bool) -> None:
             old_items = {item["id"]: item for item in previous["components"].get(category_id, [])}
             for item in data["components"]["components"][category_id]:
                 old = old_items.get(item["id"], {})
-                for field in SOURCE_FIELDS:
+                if category_id == "gpu" and "sourceUrl" not in headers and old and (item["name"], item["maker"]) != (old["name"], old["maker"]):
+                    raise ContentDataError("Das Grafikkartenblatt enthält alte Modellnamen. Erst eine aktuelle Arbeitsmappe exportieren.")
+                for field in PRESERVED_FIELDS:
                     if field not in headers and field in old:
                         item[field] = old[field]
-        data["components"] = validate_components(data["components"])
+    data["components"] = validate_components(data["components"])
     content_dir.mkdir(parents=True, exist_ok=True)
     targets = [json_file(content_dir, kind) for kind in FILES]
     existing = [path for path in targets if path.exists()]

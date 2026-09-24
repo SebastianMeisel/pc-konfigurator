@@ -46,6 +46,7 @@
       "properties": {
         "id": { "$ref": "#/$defs/id" },
         "maker": { "type": "string", "minLength": 1 },
+        "chipMaker": { "type": "string", "enum": ["NVIDIA", "AMD"] },
         "name": { "type": "string", "minLength": 1 },
         "price": { "type": "number", "minimum": 0 },
         "generation": { "type": "integer", "minimum": 1, "maximum": 2 },

@@ -59,7 +59,13 @@ for (const category of components.categories) {
       try { valid = new URL(item[field]).protocol === "https:"; } catch (_) {}
       assert(valid, `${category.id}/${item.id}: ${field} muss eine HTTPS-Adresse sein`);
     }
-    if (category.id === "gpu") assert(item.gpuFamilyUrl, `${category.id}/${item.id}: Herstellerdaten zur GPU fehlen`);
+    if (category.id === "gpu") {
+      assert(item.gpuFamilyUrl, `${category.id}/${item.id}: Herstellerdaten zur GPU fehlen`);
+      assert(item.sourceUrl, `${category.id}/${item.id}: Produktseite der konkreten Karte fehlt`);
+      assert(item.chipMaker === "AMD" || item.chipMaker === "NVIDIA", `${category.id}/${item.id}: GPU-Hersteller fehlt`);
+      assert(Number.isInteger(item.length) && item.length > 0 && Number.isInteger(item.power) && item.power > 0, `${category.id}/${item.id}: Länge oder Leistungsaufnahme ungültig`);
+      assert(["8-pin", "2× 8-pin", "3× 8-pin", "16-pin", "12V-2x6"].includes(item.connector), `${category.id}/${item.id}: Stromanschluss ungültig`);
+    }
     assert(!item.sourceCheckedAt || /^\d{4}-\d{2}-\d{2}$/.test(item.sourceCheckedAt), `${category.id}/${item.id}: sourceCheckedAt muss YYYY-MM-DD sein`);
   }
 }
