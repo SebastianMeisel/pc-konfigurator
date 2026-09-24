@@ -96,6 +96,7 @@
 
   const snapshot = readJson("buildbench-evaluation-v1",null);
   const networkSelection = readJson("buildbench-network-v1",{ethernet:"onboard",wifi:"onboard"});
+  const diagnosis = readJson("buildbench-diagnosis-v1",{});
   let activeScenario = scenarios.some(item => item.id === location.hash.slice(1)) ? location.hash.slice(1) : "office";
   let evaluations = [];
   const difficultyLabels = { beginner:"Einsteiger", standard:"Standard", expert:"Experte" };
@@ -112,8 +113,15 @@
     return count > 0 || (component("motherboard")?.form === "ITX" && expansions > freeItxSlots) ? "problem" : "good";
   }
 
+  function updatePrintedDiagnosis() {
+    for (const key of ["components", "source", "correction"]) $("#print-" + key).textContent = $("#diagnosis-" + key).value || "—";
+  }
+
   function renderAssignment() {
     const scenario = scenarios.find(item => item.id === activeScenario) || scenarios[0];
+    const notes = diagnosis[scenario.id] || {};
+    for (const key of ["components", "source", "correction"]) $("#diagnosis-" + key).value = notes[key] || "";
+    updatePrintedDiagnosis();
     $("#customer-brief").textContent = `Ein Kunde benötigt einen ${scenario.title} für ${scenario.description} Der Richtwert für die Beschaffung liegt bei ${euro(scenario.budget)}. Du sollst einen funktionierenden Bauvorschlag abgeben und deine Auswahl begründen.`;
     const result = $("#compatibility-result");
     const missing = snapshot?.components && Object.values(snapshot.components).some(item => !item);
@@ -386,6 +394,18 @@
     });
   }
 
+  for (const key of ["components", "source", "correction"]) {
+    $("#diagnosis-" + key).addEventListener("input", event => {
+      diagnosis[activeScenario] = { ...diagnosis[activeScenario], [key]: event.target.value };
+      updatePrintedDiagnosis();
+      try {
+        localStorage.setItem("buildbench-diagnosis-v1", JSON.stringify(diagnosis));
+        $("#diagnosis-save-status").textContent = "Notizen im Browser gespeichert.";
+      } catch (_) {
+        $("#diagnosis-save-status").textContent = "Notizen konnten in diesem Browser nicht gespeichert werden.";
+      }
+    });
+  }
   $("#print-button")?.addEventListener("click",()=>window.print());
   renderSnapshot();
   renderScenarios();

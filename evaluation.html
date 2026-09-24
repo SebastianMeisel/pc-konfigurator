@@ -62,7 +62,24 @@
       <h2 id="assignment-title">Prüfe deinen Bauvorschlag</h2>
       <p id="customer-brief"></p>
       <div id="compatibility-result" role="status" aria-live="polite"></div>
-      <p>Vergleiche die Datenblätter der gewählten Bauteile: Sockel, Formfaktoren, Platzbedarf, Stromversorgung, Kühlung, Anschlüsse und Montagematerial. Finde die Ursache selbst, ändere die betroffenen Teile im Konfigurator und starte die Auswertung erneut. Dokumentiere, was du geändert hast und warum.</p>
+      <p>Vergleiche die Herstellerunterlagen der gewählten Bauteile: Sockel, Formfaktoren, Platzbedarf, Stromversorgung, Kühlung, Anschlüsse und Montagematerial. Nenne die betroffenen Teile, belege den Konflikt mit einer Fundstelle und begründe deine Korrektur. Bei Teilen ohne eindeutiges Produktblatt recherchiere zuerst Modell und Revision.</p>
+      <div class="evidence-fields">
+        <label for="diagnosis-components">Betroffene Bauteile und Ursache
+          <textarea id="diagnosis-components" rows="3" placeholder="Welche Angaben widersprechen sich?"></textarea>
+        </label>
+        <label for="diagnosis-source">Herstellerquelle und Fundstelle
+          <textarea id="diagnosis-source" rows="3" placeholder="Produkt, URL und Abschnitt oder Seite"></textarea>
+        </label>
+        <label for="diagnosis-correction">Korrektur und Begründung
+          <textarea id="diagnosis-correction" rows="3" placeholder="Was änderst du und warum?"></textarea>
+        </label>
+      </div>
+      <div class="diagnosis-print">
+        <p><strong>Bauteile und Ursache:</strong> <span id="print-components"></span></p>
+        <p><strong>Herstellerquelle und Fundstelle:</strong> <span id="print-source"></span></p>
+        <p><strong>Korrektur und Begründung:</strong> <span id="print-correction"></span></p>
+      </div>
+      <p id="diagnosis-save-status" role="status" aria-live="polite">Deine Notizen werden im Browser gespeichert.</p>
       <a class="btn btn-primary" href="index.html">Konfiguration korrigieren</a>
     </section>
 

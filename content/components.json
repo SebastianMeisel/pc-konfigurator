@@ -123,7 +123,12 @@
           "ATX · mATX · ITX",
           "GPU 355 mm",
           "Kühler 170 mm"
-        ]
+        ],
+        "sourceUrl": "https://www.fractal-design.com/products/cases/north/north/",
+        "datasheetUrl": "https://www.fractal-design.com/app/uploads/2022/12/North_Product-Sheet_EN.pdf",
+        "manualUrl": "https://www.fractal-design.com/app/uploads/2022/12/North-Manual-V1.2.pdf",
+        "sourceCheckedAt": "2026-09-24",
+        "maxGpuWithFront360": 300
       },
       {
         "id": "4000d",
@@ -157,7 +162,10 @@
           "ATX · mATX · ITX",
           "GPU 360 mm",
           "360-mm-Radiator"
-        ]
+        ],
+        "sourceUrl": "https://www.corsair.com/de/de/p/pc-cases/cc-9011200-ww/4000d-airflow-tempered-glass-mid-tower-atx-case-black-cc-9011200-ww",
+        "modelNumber": "CC-9011200-WW",
+        "sourceCheckedAt": "2026-09-24"
       },
       {
         "id": "ap201",
@@ -190,7 +198,9 @@
           "mATX · ITX",
           "GPU 338 mm",
           "Mesh"
-        ]
+        ],
+        "sourceUrl": "https://www.asus.com/motherboards-components/cases/prime/asus-prime-ap201-microatx-case/techspec/",
+        "sourceCheckedAt": "2026-09-24"
       },
       {
         "id": "nr200p",
@@ -222,7 +232,9 @@
           "ITX",
           "GPU 356 mm",
           "SFX-Netzteil"
-        ]
+        ],
+        "sourceUrl": "https://www.coolermaster.com/en-global/products/masterbox-nr200p-v2.html",
+        "sourceCheckedAt": "2026-09-24"
       }
     ],
     "motherboard": [
@@ -244,7 +256,10 @@
           "ATX",
           "4× M.2 · Wi-Fi 7"
         ],
-        "recommended": true
+        "recommended": true,
+        "sourceUrl": "https://www.msi.com/Motherboard/MAG-X870-TOMAHAWK-WIFI/Specification",
+        "datasheetUrl": "https://storage-asset.msi.com/datasheet/mb/de/MAG-X870-TOMAHAWK-WIFI.pdf",
+        "sourceCheckedAt": "2026-09-24"
       },
       {
         "id": "b850m",
@@ -262,7 +277,9 @@
           "AM5",
           "mATX",
           "3× M.2 · Wi-Fi 6E"
-        ]
+        ],
+        "sourceUrl": "https://www.asrock.com/mb/amd/B850M%20Pro%20RS%20WiFi/",
+        "sourceCheckedAt": "2026-09-24"
       },
       {
         "id": "z890",
@@ -280,7 +297,9 @@
           "LGA1851",
           "ATX",
           "4× M.2 · Wi-Fi 7"
-        ]
+        ],
+        "sourceUrl": "https://www.gigabyte.com/Motherboard/Z890-AORUS-ELITE-WIFI7/sp",
+        "sourceCheckedAt": "2026-09-24"
       },
       {
         "id": "b860i",
@@ -299,7 +318,9 @@
           "LGA1851",
           "ITX",
           "2× M.2 · Wi-Fi 7"
-        ]
+        ],
+        "sourceUrl": "https://rog.asus.com/de/motherboards/rog-strix/rog-strix-b860-i-gaming-wifi/spec/",
+        "sourceCheckedAt": "2026-09-24"
       },
       {
         "id": "b650",
@@ -318,7 +339,9 @@
           "AM5",
           "ATX · DDR5",
           "PCIe 4.0 · Wi-Fi 6E"
-        ]
+        ],
+        "sourceUrl": "https://www.msi.com/Motherboard/B650-GAMING-PLUS-WIFI/Specification",
+        "sourceCheckedAt": "2026-09-24"
       },
       {
         "id": "z790d4",
@@ -337,7 +360,9 @@
           "LGA1700",
           "ATX · DDR4",
           "4× M.2 · Wi-Fi 6E"
-        ]
+        ],
+        "sourceUrl": "https://www.msi.com/Motherboard/PRO-Z790-P-WIFI-DDR4/Specification",
+        "sourceCheckedAt": "2026-09-24"
       },
       {
         "id": "b550m",
@@ -356,7 +381,9 @@
           "AM4",
           "mATX · DDR4",
           "PCIe 4.0 · Wi-Fi 5"
-        ]
+        ],
+        "sourceUrl": "https://www.msi.com/Motherboard/B550M-PRO-VDH-WIFI/Specification",
+        "sourceCheckedAt": "2026-09-24"
       }
     ],
     "cpu": [
@@ -375,7 +402,9 @@
           "bis 5,4 GHz",
           "88 W PPT"
         ],
-        "recommended": true
+        "recommended": true,
+        "sourceUrl": "https://www.amd.com/en/products/processors/desktops/ryzen/9000-series/amd-ryzen-5-9600x.html",
+        "sourceCheckedAt": "2026-09-24"
       },
       {
         "id": "9800x3d",
@@ -390,7 +419,9 @@
           "8C / 16T",
           "3D V-Cache",
           "162 W PPT"
-        ]
+        ],
+        "sourceUrl": "https://www.amd.com/de/products/processors/desktops/ryzen/9000-series/amd-ryzen-7-9800x3d.html",
+        "sourceCheckedAt": "2026-09-24"
       },
       {
         "id": "9950x3d",
@@ -405,7 +436,9 @@
           "16C / 32T",
           "3D V-Cache",
           "230 W PPT"
-        ]
+        ],
+        "sourceUrl": "https://www.amd.com/en/products/processors/desktops/ryzen/9000-series/amd-ryzen-9-9950x3d.html",
+        "sourceCheckedAt": "2026-09-24"
       },
       {
         "id": "245k",
@@ -421,7 +454,9 @@
           "14 Kerne",
           "bis 5,2 GHz",
           "159 W Turbo"
-        ]
+        ],
+        "sourceUrl": "https://www.intel.com/content/www/us/en/products/sku/241067/intel-core-ultra-5-processor-245k-24m-cache-up-to-5-20-ghz/specifications.html",
+        "sourceCheckedAt": "2026-09-24"
       },
       {
         "id": "265k",
@@ -436,7 +471,9 @@
           "20 Kerne",
           "bis 5,5 GHz",
           "250 W Turbo"
-        ]
+        ],
+        "sourceUrl": "https://www.intel.com/content/www/us/en/products/sku/241063/intel-core-ultra-7-processor-265k-30m-cache-up-to-5-50-ghz/specifications.html",
+        "sourceCheckedAt": "2026-09-24"
       },
       {
         "id": "285k",
@@ -451,7 +488,9 @@
           "24 Kerne",
           "bis 5,7 GHz",
           "250 W Turbo"
-        ]
+        ],
+        "sourceUrl": "https://www.intel.com/content/www/us/en/products/sku/241060/intel-core-ultra-9-processor-285k-36m-cache-up-to-5-70-ghz/specifications.html",
+        "sourceCheckedAt": "2026-09-24"
       },
       {
         "id": "7600",
@@ -467,7 +506,9 @@
           "6C / 12T",
           "Zen 4 · AM5",
           "88 W PPT"
-        ]
+        ],
+        "sourceUrl": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-5-7600.html",
+        "sourceCheckedAt": "2026-09-24"
       },
       {
         "id": "7800x3d",
@@ -483,7 +524,9 @@
           "8C / 16T",
           "Zen 4 · 3D V-Cache",
           "162 W PPT"
-        ]
+        ],
+        "sourceUrl": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-7-7800x3d.html",
+        "sourceCheckedAt": "2026-09-24"
       },
       {
         "id": "14600k",
@@ -499,7 +542,9 @@
           "14 Kerne / 20 Threads",
           "Raptor Lake Refresh",
           "181 W Turbo"
-        ]
+        ],
+        "sourceUrl": "https://www.intel.com/content/www/us/en/products/sku/236799/intel-core-i5-processor-14600k-24m-cache-up-to-5-30-ghz/specifications.html",
+        "sourceCheckedAt": "2026-09-24"
       },
       {
         "id": "5800x3d",
@@ -515,7 +560,9 @@
           "8C / 16T",
           "Zen 3 · 3D V-Cache",
           "142 W PPT"
-        ]
+        ],
+        "sourceUrl": "https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-ryzen-7-5800x3d.html",
+        "sourceCheckedAt": "2026-09-24"
       },
       {
         "id": "12700k",
@@ -531,7 +578,9 @@
           "12 Kerne / 20 Threads",
           "Alder Lake",
           "190 W Turbo"
-        ]
+        ],
+        "sourceUrl": "https://www.intel.com/content/www/us/en/products/sku/134594/intel-core-i712700k-processor-25m-cache-up-to-5-00-ghz/specifications.html",
+        "sourceCheckedAt": "2026-09-24"
       }
     ],
     "gpu": [
@@ -694,7 +743,10 @@
           "DDR5-6000",
           "CL30"
         ],
-        "recommended": true
+        "recommended": true,
+        "sourceUrl": "https://www.gskill.com/specification/165/396/1673491242/F5-6000J3038F16GX2-FX5-Specification",
+        "modelNumber": "F5-6000J3038F16GX2-FX5",
+        "sourceCheckedAt": "2026-09-24"
       },
       {
         "id": "64-6000",
@@ -709,7 +761,11 @@
           "2× 32 GB",
           "DDR5-6000",
           "CL30"
-        ]
+        ],
+        "sourceUrl": "https://www.kingston.com/de/memory/search/discontinuedmodels?partid=KF560C30BBK2-64",
+        "datasheetUrl": "https://www.kingston.com/datasheets/KF560C30BBK2-64.pdf",
+        "modelNumber": "KF560C30BBK2-64",
+        "sourceCheckedAt": "2026-09-24"
       },
       {
         "id": "64-6400",
@@ -725,7 +781,10 @@
           "2× 32 GB",
           "DDR5-6400",
           "RGB"
-        ]
+        ],
+        "sourceUrl": "https://www.corsair.com/de/de/p/memory/cmh64gx5m2b6400c32/vengeance-rgb-64gb-2x32gb-ddr5-dram-6400mts-c32-memory-kit-black-cmh64gx5m2b6400c32",
+        "modelNumber": "CMH64GX5M2B6400C32",
+        "sourceCheckedAt": "2026-09-24"
       },
       {
         "id": "96-6400",
@@ -756,7 +815,10 @@
           "2× 16 GB",
           "DDR4-3600",
           "CL16"
-        ]
+        ],
+        "sourceUrl": "https://www.gskill.com/tw/specification/203/217/1562831784/F4-3600C16D-32GVKC-Specification",
+        "modelNumber": "F4-3600C16D-32GVKC",
+        "sourceCheckedAt": "2026-09-24"
       },
       {
         "id": "64-3200",
@@ -772,7 +834,10 @@
           "2× 32 GB",
           "DDR4-3200",
           "CL16"
-        ]
+        ],
+        "sourceUrl": "https://www.kingston.com/de/memory/search?partid=KF432C16BBK2%2F64",
+        "modelNumber": "KF432C16BBK2/64",
+        "sourceCheckedAt": "2026-09-24"
       }
     ],
     "psu": [
@@ -788,7 +853,10 @@
           "650 W",
           "ATX 3.1",
           "80 Plus Gold"
-        ]
+        ],
+        "sourceUrl": "https://www.corsair.com/ww/de/p/psu/cp-9020302-ww/rme-series-rm650e-fully-modular-low-noise-atx-power-supply-ww-cp-9020302-ww",
+        "modelNumber": "CP-9020302-WW",
+        "sourceCheckedAt": "2026-09-24"
       },
       {
         "id": "pp750",
@@ -804,7 +872,9 @@
           "ATX 3.1",
           "80 Plus Gold"
         ],
-        "recommended": true
+        "recommended": true,
+        "sourceUrl": "https://www.bequiet.com/de/powersupply/4068",
+        "sourceCheckedAt": "2026-09-24"
       },
       {
         "id": "rm850x",
@@ -818,7 +888,10 @@
           "850 W",
           "ATX 3.1",
           "vollmodular"
-        ]
+        ],
+        "sourceUrl": "https://www.corsair.com/eu/de/p/psu/cp-9020270-eu/rmx-series-rm850x-fully-modular-power-supply-eu-cp-9020270-eu",
+        "modelNumber": "CP-9020270-EU",
+        "sourceCheckedAt": "2026-09-24"
       },
       {
         "id": "vertex1000",
@@ -847,7 +920,9 @@
           "750 W",
           "SFX",
           "80 Plus Gold"
-        ]
+        ],
+        "sourceUrl": "https://www.coolermaster.com/de-de/products/v750-sfx-gold.html",
+        "sourceCheckedAt": "2026-09-24"
       },
       {
         "id": "focus750",
@@ -900,7 +975,11 @@
           "159 mm",
           "220 W Klasse"
         ],
-        "recommended": true
+        "recommended": true,
+        "sourceUrl": "https://www.arctic.de/en/Freezer-36/ACFRE00121A",
+        "datasheetUrl": "https://www.arctic.de/media/6b/50/57/1709195123/Spec_Sheet_Freezer_36_EN.pdf",
+        "modelNumber": "ACFRE00121A",
+        "sourceCheckedAt": "2026-09-24"
       },
       {
         "id": "nhd15",
@@ -920,7 +999,10 @@
           "Dual-Tower",
           "168 mm",
           "High-End"
-        ]
+        ],
+        "sourceUrl": "https://www.noctua.at/en/products/nh-d15-g2/specifications",
+        "datasheetUrl": "https://noctua.at/pub/media/blfa_files/infosheet/noctua_nh_d15_g2_datasheet_de_web_1.pdf",
+        "sourceCheckedAt": "2026-09-24"
       },
       {
         "id": "lf240",
@@ -941,7 +1023,11 @@
           "240-mm-AIO",
           "geschlossen",
           "300 W Klasse"
-        ]
+        ],
+        "sourceUrl": "https://www.arctic.de/en/Liquid-Freezer-III-240/ACFRE00134A",
+        "datasheetUrl": "https://www.arctic.de/media/1c/af/b3/1708429821/Spec_Sheet_Liquid_Freezer_III_240_Black_EN.pdf",
+        "modelNumber": "ACFRE00134A",
+        "sourceCheckedAt": "2026-09-24"
       },
       {
         "id": "lf360",
@@ -961,7 +1047,9 @@
           "360-mm-AIO",
           "geschlossen",
           "350 W Klasse"
-        ]
+        ],
+        "sourceUrl": "https://www.arctic.de/en/Liquid-Freezer-III-360/ACFRE00136A",
+        "sourceCheckedAt": "2026-09-24"
       },
       {
         "id": "custom360",
@@ -1001,7 +1089,11 @@
           "PCIe 4.0 NVMe",
           "2 TB"
         ],
-        "recommended": true
+        "recommended": true,
+        "sourceUrl": "https://www.samsung.com/de/memory-storage/nvme-ssd/990-pro-2tb-nvme-pcie-gen-4-mz-v9p2t0bw/",
+        "datasheetUrl": "https://download.semiconductor.samsung.com/resources/data-sheet/samsung_nvme_ssd_990_pro_datasheet_rev.2.0.pdf",
+        "modelNumber": "MZ-V9P2T0BW",
+        "sourceCheckedAt": "2026-09-24"
       },
       {
         "id": "sn850x",
@@ -1016,7 +1108,10 @@
           "M.2 2280",
           "PCIe 4.0 NVMe",
           "4 TB"
-        ]
+        ],
+        "sourceUrl": "https://www.sandisk.com/products/ssd/internal-ssd/wd-black-sn850x-nvme-ssd?sku=wds400t2x0e-00bca0",
+        "modelNumber": "WDS400T2X0E-00BCA0",
+        "sourceCheckedAt": "2026-09-24"
       },
       {
         "id": "t705",
@@ -1031,7 +1126,11 @@
           "M.2 2280",
           "PCIe 5.0 NVMe",
           "2 TB"
-        ]
+        ],
+        "sourceUrl": "https://eu.crucial.com/ssd/t705/ct2000t705ssd3",
+        "datasheetUrl": "https://eu.crucial.com/content/dam/crucial/ssd-products/t705/flyers/b2c/crucial-t705-b2c-product-flyer-en.pdf",
+        "modelNumber": "CT2000T705SSD3",
+        "sourceCheckedAt": "2026-09-24"
       },
       {
         "id": "mx500",
@@ -1046,7 +1145,11 @@
           "2,5 Zoll",
           "SATA 6 Gb/s",
           "2 TB"
-        ]
+        ],
+        "sourceUrl": "https://eu.crucial.com/ssd/mx500/ct2000mx500ssd1",
+        "datasheetUrl": "https://www.crucial.com/content/dam/crucial/ssd-products/mx500/flyer/crucial-mx500-ssd-productflyer-letter-en.pdf",
+        "modelNumber": "CT2000MX500SSD1",
+        "sourceCheckedAt": "2026-09-24"
       },
       {
         "id": "ironwolf",
@@ -1060,7 +1163,11 @@
           "3,5 Zoll HDD",
           "SATA 6 Gb/s",
           "8 TB"
-        ]
+        ],
+        "sourceUrl": "https://www.seagate.com/support/internal-hard-drives/nas-drives/ironwolf/",
+        "manualUrl": "https://www.seagate.com/www-content/product-content/ironwolf/en-us/docs/100844482b.pdf",
+        "modelNumber": "ST8000VN004",
+        "sourceCheckedAt": "2026-09-24"
       },
       {
         "id": "980pro",
@@ -1076,7 +1183,11 @@
           "M.2 2280",
           "PCIe 4.0 NVMe",
           "1 TB"
-        ]
+        ],
+        "sourceUrl": "https://www.samsung.com/uk/memory-storage/nvme-ssd/980-pro-pcle-4-0-nvme-m-2-ssd-1tb-mz-v8p1t0bw/",
+        "datasheetUrl": "https://image.semiconductor.samsung.com/resources/data-sheet/Samsung-NVMe-SSD-980-PRO-Data-Sheet_Rev.2.1.pdf",
+        "modelNumber": "MZ-V8P1T0BW",
+        "sourceCheckedAt": "2026-09-24"
       },
       {
         "id": "970evo",
@@ -1092,7 +1203,10 @@
           "M.2 2280",
           "PCIe 3.0 NVMe",
           "1 TB"
-        ]
+        ],
+        "sourceUrl": "https://www.samsung.com/uk/memory-storage/nvme-ssd/970-evo-plus-nvme-m-2-ssd-1tb-mz-v7s1t0bw/",
+        "modelNumber": "MZ-V7S1T0BW",
+        "sourceCheckedAt": "2026-09-24"
       }
     ],
     "standoffs": [
@@ -1341,7 +1455,10 @@
           "1 Liter",
           "klar",
           "gebrauchsfertig"
-        ]
+        ],
+        "sourceUrl": "https://shop.alphacool.com/shop/kuehlfluessigkeiten/standard-fluessigkeiten/18651-alphacool-tec-protect-2-clear-1000ml",
+        "datasheetUrl": "https://www.alphacool.com/download/DE_1021554_Alphacool_Tec_Protect_2_Clear_1000ml_Datenblatt.pdf",
+        "sourceCheckedAt": "2026-09-24"
       },
       {
         "id": "blue",
@@ -1355,7 +1472,10 @@
           "1 Liter",
           "blau",
           "Korrosionsschutz"
-        ]
+        ],
+        "sourceUrl": "https://www.corsair.com/ww/de/p/custom-liquid-cooling/cx-9060010-ww/hydro-x-series-xl8-performance-coolant-1l-aca-a-blue-cx-9060010-ww",
+        "modelNumber": "CX-9060010-WW",
+        "sourceCheckedAt": "2026-09-24"
       },
       {
         "id": "red",

@@ -49,6 +49,7 @@ FILES = {
     "compatibility": "compatibility-rules.json",
 }
 BASE_COMPONENT_FIELDS = ("id", "maker", "name", "price", "generation", "recommended", "beginnerVariant", "specs")
+SOURCE_FIELDS = ("modelNumber", "sourceUrl", "datasheetUrl", "manualUrl", "sourceCheckedAt")
 ARRAY_FIELDS = {
     "form",
     "psu",
@@ -65,6 +66,7 @@ INTEGER_FIELDS = {
     "price",
     "generation",
     "maxGpu",
+    "maxGpuWithFront360",
     "maxCooler",
     "m2",
     "m2Gen",
@@ -203,6 +205,14 @@ def validate_components(data: object) -> dict:
                 raise ContentDataError(f"{category_id}/{item_id}: recommended muss wahr oder falsch sein.")
             if normalized.get("beginnerVariant") not in (None, "a", "b"):
                 raise ContentDataError(f"{category_id}/{item_id}: beginnerVariant muss a oder b sein.")
+            for field in SOURCE_FIELDS:
+                value = normalized.get(field)
+                if value is not None and (not isinstance(value, str) or not value.strip()):
+                    raise ContentDataError(f"{category_id}/{item_id}: {field} muss Text enthalten.")
+                if field.endswith("Url") and value is not None and not re.fullmatch(r"https://[^\s]+", value):
+                    raise ContentDataError(f"{category_id}/{item_id}: {field} muss eine HTTPS-Adresse sein.")
+            if normalized.get("sourceCheckedAt") and not re.fullmatch(r"\d{4}-\d{2}-\d{2}", normalized["sourceCheckedAt"]):
+                raise ContentDataError(f"{category_id}/{item_id}: sourceCheckedAt muss YYYY-MM-DD sein.")
             normalized_items.append(normalized)
         unique(ids, f"Komponentengruppe {category_id}")
         if sum(item.get("recommended") is True for item in normalized_items) != 1:
@@ -857,6 +867,21 @@ def content_from_workbook(xlsx_path: Path) -> dict[str, dict]:
 
 def import_xlsx(xlsx_path: Path, content_dir: Path, force: bool) -> None:
     data = content_from_workbook(xlsx_path)
+    existing_components = json_file(content_dir, "components")
+    if existing_components.exists():
+        previous = validate_components(load_json(existing_components))
+        workbook_sheets = rows_by_sheet(xlsx_path)
+        for category in data["components"]["categories"]:
+            category_id = category["id"]
+            sheet_name = component_sheet_name(category_id)
+            headers = {str(value).strip() for value in workbook_sheets[sheet_name][0]}
+            old_items = {item["id"]: item for item in previous["components"].get(category_id, [])}
+            for item in data["components"]["components"][category_id]:
+                old = old_items.get(item["id"], {})
+                for field in SOURCE_FIELDS:
+                    if field not in headers and field in old:
+                        item[field] = old[field]
+        data["components"] = validate_components(data["components"])
     content_dir.mkdir(parents=True, exist_ok=True)
     targets = [json_file(content_dir, kind) for kind in FILES]
     existing = [path for path in targets if path.exists()]
