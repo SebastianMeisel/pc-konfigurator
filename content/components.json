@@ -599,7 +599,9 @@
           "242 mm",
           "180 W"
         ],
-        "recommended": true
+        "recommended": true,
+        "gpuFamilyUrl": "https://www.nvidia.com/de-de/geforce/graphics-cards/50-series/rtx-5060-family/",
+        "sourceCheckedAt": "2026-09-24"
       },
       {
         "id": "5070",
@@ -614,7 +616,9 @@
           "12 GB GDDR7",
           "242 mm",
           "250 W"
-        ]
+        ],
+        "gpuFamilyUrl": "https://www.nvidia.com/de-de/geforce/graphics-cards/50-series/rtx-5070-family/",
+        "sourceCheckedAt": "2026-09-24"
       },
       {
         "id": "5080",
@@ -629,7 +633,9 @@
           "16 GB GDDR7",
           "304 mm",
           "360 W"
-        ]
+        ],
+        "gpuFamilyUrl": "https://www.nvidia.com/de-de/geforce/graphics-cards/50-series/rtx-5080/",
+        "sourceCheckedAt": "2026-09-24"
       },
       {
         "id": "9070",
@@ -644,7 +650,9 @@
           "16 GB GDDR6",
           "289 mm",
           "220 W"
-        ]
+        ],
+        "gpuFamilyUrl": "https://www.amd.com/en/products/graphics/desktops/radeon/9000-series/amd-radeon-rx-9070.html",
+        "sourceCheckedAt": "2026-09-24"
       },
       {
         "id": "9070xt",
@@ -660,7 +668,9 @@
           "16 GB GDDR6",
           "304 mm",
           "304 W"
-        ]
+        ],
+        "gpuFamilyUrl": "https://www.amd.com/de/products/graphics/desktops/radeon/9000-series/amd-radeon-rx-9070xt.html",
+        "sourceCheckedAt": "2026-09-24"
       },
       {
         "id": "4070super",
@@ -676,7 +686,9 @@
           "12 GB GDDR6X",
           "267 mm",
           "220 W"
-        ]
+        ],
+        "gpuFamilyUrl": "https://www.nvidia.com/de-de/geforce/graphics-cards/40-series/rtx-4070-family/",
+        "sourceCheckedAt": "2026-09-24"
       },
       {
         "id": "7800xt",
@@ -692,7 +704,9 @@
           "16 GB GDDR6",
           "267 mm",
           "263 W"
-        ]
+        ],
+        "gpuFamilyUrl": "https://www.amd.com/de/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7800-xt.html",
+        "sourceCheckedAt": "2026-09-24"
       },
       {
         "id": "3080",
@@ -708,7 +722,9 @@
           "10 GB GDDR6X",
           "285 mm",
           "320 W"
-        ]
+        ],
+        "gpuFamilyUrl": "https://www.nvidia.com/de-de/geforce/graphics-cards/30-series/rtx-3080-3080ti/",
+        "sourceCheckedAt": "2026-09-24"
       },
       {
         "id": "6800xt",
@@ -724,7 +740,9 @@
           "16 GB GDDR6",
           "267 mm",
           "300 W"
-        ]
+        ],
+        "gpuFamilyUrl": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6800-xt.html",
+        "sourceCheckedAt": "2026-09-24"
       }
     ],
     "ram": [

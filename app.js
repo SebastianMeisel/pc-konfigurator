@@ -51,18 +51,20 @@
   function sourcePanel(category, item) {
     const links = [
       sourceLink(item, "sourceUrl", "Herstellerangaben"),
+      sourceLink(item, "gpuFamilyUrl", "Herstellerdaten zur GPU"),
       sourceLink(item, "datasheetUrl", "Datenblatt (PDF)"),
       sourceLink(item, "manualUrl", "Handbuch")
     ].filter(Boolean);
     const noProduct = item.id === "none" || item.maker === "Gehäusezubehör" || item.maker === "Mainboardzubehör";
-    const missing = category === "gpu"
-      ? "Für Maße und Stromanschlüsse die konkrete Grafikkarte eines Herstellers bestimmen."
-      : noProduct ? "Zu dieser allgemeinen Position gibt es kein eigenes Produktdatenblatt."
+    const missing = noProduct ? "Zu dieser allgemeinen Position gibt es kein eigenes Produktdatenblatt."
       : "Kein eindeutiges Herstellerdatenblatt hinterlegt: genaue Artikelnummer oder Revision recherchieren.";
     const checked = item.sourceCheckedAt ? `<small>Link geprüft: ${escapeHtml(item.sourceCheckedAt.split("-").reverse().join("."))}</small>` : "";
+    const gpuNote = category === "gpu" && item.gpuFamilyUrl
+      ? "<small>GPU-Typ: Herstellerdaten. Kartenlänge, Stromanschlüsse und Kühlung für das konkrete Modell beim Kartenhersteller prüfen.</small>"
+      : "";
     return `<div class="product-sources" role="group" aria-label="Herstellerquellen zu ${escapeHtml(item.name)}">
       ${item.modelNumber ? `<small>Art.-Nr. ${escapeHtml(item.modelNumber)}</small>` : ""}
-      ${links.length ? `<div class="source-links">${links.join("")}</div>${checked}` : `<span>${missing}</span>`}
+      ${links.length ? `<div class="source-links">${links.join("")}</div>${gpuNote}${checked}` : `<span>${missing}</span>`}
     </div>`;
   }
   const selected = (category, selections = state.selections) => data[category].find(item => item.id === selections[category]) || null;

@@ -53,12 +53,13 @@ for (const category of components.categories) {
     assert(Array.isArray(item.specs) && item.specs.length > 0, category.id + "/" + item.id + ": specs fehlen");
     assert(item.generation === undefined || item.generation === 1 || item.generation === 2, category.id + "/" + item.id + ": generation ist ungültig");
     if (item.maxGpuWithFront360 !== undefined) assert(Number.isInteger(item.maxGpuWithFront360) && item.maxGpuWithFront360 > 0 && item.maxGpuWithFront360 <= item.maxGpu, `${category.id}/${item.id}: maxGpuWithFront360 ist ungültig`);
-    for (const field of ["sourceUrl", "datasheetUrl", "manualUrl"]) {
+    for (const field of ["sourceUrl", "gpuFamilyUrl", "datasheetUrl", "manualUrl"]) {
       if (item[field] === undefined) continue;
       let valid = false;
       try { valid = new URL(item[field]).protocol === "https:"; } catch (_) {}
       assert(valid, `${category.id}/${item.id}: ${field} muss eine HTTPS-Adresse sein`);
     }
+    if (category.id === "gpu") assert(item.gpuFamilyUrl, `${category.id}/${item.id}: Herstellerdaten zur GPU fehlen`);
     assert(!item.sourceCheckedAt || /^\d{4}-\d{2}-\d{2}$/.test(item.sourceCheckedAt), `${category.id}/${item.id}: sourceCheckedAt muss YYYY-MM-DD sein`);
   }
 }
