@@ -50,7 +50,7 @@
 
   function sourcePanel(category, item) {
     const links = [
-      sourceLink(item, "sourceUrl", "Herstellerangaben"),
+      sourceLink(item, "sourceUrl", category === "gpu" ? "Kartenmodell / technische Daten" : "Herstellerangaben"),
       sourceLink(item, "gpuFamilyUrl", "Herstellerdaten zur GPU"),
       sourceLink(item, "datasheetUrl", "Datenblatt (PDF)"),
       sourceLink(item, "manualUrl", "Handbuch")
@@ -60,7 +60,7 @@
       : "Kein eindeutiges Herstellerdatenblatt hinterlegt: genaue Artikelnummer oder Revision recherchieren.";
     const checked = item.sourceCheckedAt ? `<small>Link geprüft: ${escapeHtml(item.sourceCheckedAt.split("-").reverse().join("."))}</small>` : "";
     const gpuNote = category === "gpu" && item.gpuFamilyUrl
-      ? "<small>GPU-Typ: Herstellerdaten. Kartenlänge, Stromanschlüsse und Kühlung für das konkrete Modell beim Kartenhersteller prüfen.</small>"
+      ? "<small>Maße und Stromanschluss gelten für das verlinkte Kartenmodell. Die GPU-Daten beschreiben die Chipfamilie.</small>"
       : "";
     return `<div class="product-sources" role="group" aria-label="Herstellerquellen zu ${escapeHtml(item.name)}">
       ${item.modelNumber ? `<small>Art.-Nr. ${escapeHtml(item.modelNumber)}</small>` : ""}
@@ -75,6 +75,7 @@
   };
   const requiredCooling = (selections = state.selections) => difficultyModel.cooling(selected("cpu", selections), state.difficulty);
   const gpuClearance = (pcCase, cooler) => cooler?.radiator === 360 && pcCase?.maxGpuWithFront360 ? pcCase.maxGpuWithFront360 : pcCase?.maxGpu;
+  const needsGpu16Pin = gpu => ["16-pin", "12V-2x6"].includes(gpu?.connector);
   const beginnerVariant = (selections = state.selections, ignoredCategory = null) => {
     if (state.difficulty.mode !== "beginner") return null;
     for (const category of categories) {
@@ -152,7 +153,7 @@
     }
     if (category === "cables") {
       if (storage?.interface === "SATA" && !item.provides.includes("sata")) issues.push(issue("CABLE_SATA_DATA", `Das gewählte SATA-Laufwerk benötigt ein Datenkabel; dieser Satz enthält keines.`));
-      if (gpu?.connector === "12V-2x6" && !psu?.atx3 && !item.provides.includes("12V-2x6")) issues.push(issue("CABLE_GPU_POWER", `Grafikkarte: ${gpu.connector}. Netzteil ohne nativen ATX-3.x-Anschluss; der Kabelsatz enthält keinen passenden Adapter.`));
+      if (needsGpu16Pin(gpu) && !psu?.atx3 && !item.provides.includes("12V-2x6")) issues.push(issue("CABLE_GPU_POWER", `Grafikkarte: ${gpu.connector}. Netzteil ohne nativen ATX-3.x-Anschluss; der Kabelsatz enthält keinen passenden Adapter.`));
     }
     if (category === "coolant") {
       if (cooler?.kind === "custom" && !item.fluid) issues.push(issue("COOLANT_REQUIRED", `Ausgewählt ist ein offener Wasserkreislauf; die Option enthält ${item.volume || 0} Liter Kühlmittel.`));
@@ -399,8 +400,8 @@
     if (board && storage?.pcieGen > board.m2Gen) {
       list.push({ type:"warning", title:"NVMe wird ausgebremst", text:`Die PCIe-${storage.pcieGen}.0-SSD arbeitet im M.2-Steckplatz dieses Boards höchstens mit PCIe ${board.m2Gen}.0. PCIe bleibt abwärtskompatibel.` });
     }
-    if (psu && psu.atx3 === false && gpu?.connector === "12V-2x6") {
-      list.push({ type:"warning", title:"GPU-Stromadapter nötig", text:"Das ältere ATX-2.4-Netzteil besitzt keinen nativen 12V-2x6-Anschluss. Nur den vorgesehenen Adapter mit getrennten PCIe-Leitungen verwenden." });
+    if (psu && psu.atx3 === false && needsGpu16Pin(gpu)) {
+      list.push({ type:"warning", title:"GPU-Stromadapter nötig", text:"Das ältere ATX-2.4-Netzteil besitzt keinen nativen 16-Pin-Anschluss. Nur einen für das Kartenmodell vorgesehenen Adapter mit getrennten PCIe-Leitungen verwenden." });
     }
 
     if (c && board) list.push({ type:"success", title:"Formfaktor passt", text:`${board.form}-Mainboard kann im ${c.name} montiert werden.` });
@@ -535,7 +536,7 @@
       const gpuW=visual.gpuWidth, gpuH=visual.gpuHeight, gx=bx+12, gy=by+Math.min(boardH-96,250);
       svg += `<g class="part active-part">
         ${svgImage(componentPath+"gpu.svg",gx-12,gy,gpuW+12,gpuH)}
-        <rect x="${gx}" y="${gy+1}" width="${gpuW-2}" height="${gpuH-3}" rx="8" fill="none" stroke="${gpu.maker==="AMD"?red:accent}" stroke-width="2"/>
+        <rect x="${gx}" y="${gy+1}" width="${gpuW-2}" height="${gpuH-3}" rx="8" fill="none" stroke="${gpu.chipMaker==="AMD"?red:accent}" stroke-width="2"/>
         ${svgText(gx+gpuW/2,gy+gpuH/2+5,gpu.label,12,"#eaf6ff","middle")}
       </g>`;
     } else {

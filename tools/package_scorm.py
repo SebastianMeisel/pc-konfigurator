@@ -16,6 +16,11 @@ SVG_ASSETS = tuple(
     str(path.relative_to(ROOT))
     for path in sorted((ROOT / "assets" / "svg").rglob("*.svg"))
 )
+FONT_ASSETS = tuple(
+    str(path.relative_to(ROOT))
+    for path in sorted((ROOT / "assets" / "fonts").iterdir())
+    if path.is_file()
+)
 PACKAGE_FILES = (
     "imsmanifest.xml",
     "index.html",
@@ -34,6 +39,7 @@ PACKAGE_FILES = (
     "content-loader.js",
     "difficulty.js",
     "visual-model.js",
+    *FONT_ASSETS,
     *SVG_ASSETS,
     "content/components.json",
     "content/components.schema.json",
@@ -48,7 +54,6 @@ PACKAGE_FILES = (
     "favicon.svg",
 )
 FIXED_TIMESTAMP = (2020, 1, 1, 0, 0, 0)
-EXTERNAL_FONT_HOSTS = ("fonts.googleapis.com", "fonts.gstatic.com")
 
 
 def validate_sources() -> None:
@@ -76,18 +81,6 @@ def validate_sources() -> None:
         raise ValueError("Manifest und Paketdateien stimmen nicht überein (" + "; ".join(details) + ").")
 
 
-def package_data(name: str) -> bytes:
-    data = (ROOT / name).read_bytes()
-    if Path(name).suffix not in {".html", ".css"}:
-        return data
-    text = data.decode("utf-8")
-    lines = [
-        line for line in text.splitlines()
-        if not any(host in line for host in EXTERNAL_FONT_HOSTS)
-    ]
-    return ("\n".join(lines) + "\n").encode("utf-8")
-
-
 def write_package(output: Path, force: bool) -> None:
     output = output.resolve()
     if output.exists() and not force:
@@ -102,7 +95,7 @@ def write_package(output: Path, force: bool) -> None:
     try:
         with zipfile.ZipFile(temporary, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=9) as archive:
             for name in PACKAGE_FILES:
-                data = package_data(name)
+                data = (ROOT / name).read_bytes()
                 info = zipfile.ZipInfo(name, FIXED_TIMESTAMP)
                 info.compress_type = zipfile.ZIP_DEFLATED
                 info.external_attr = 0o100644 << 16

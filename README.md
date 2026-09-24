@@ -27,7 +27,7 @@ Die Anwendung bewertet unter anderem Sockel, Formfaktor, Arbeitsspeicherstandard
 
 Die Dateien `content/components.json`, `content/lessons.json`, `content/network.json` und `content/compatibility-rules.json` sind die verbindlichen Datenquellen. Die gleichnamigen Schema-Dateien unterstützen JSON-Editoren bei der Eingabeprüfung. Die technische Prüfung bleibt in JavaScript; Titel, Auswirkung, Lösung und Lernhinweis jeder Kompatibilitätsregel lassen sich dagegen redaktionell in JSON oder Excel bearbeiten.
 
-Die Quellen stehen optional direkt am Produkt als `sourceUrl` (Herstellerseite zum konkreten Artikel), `datasheetUrl` (PDF), `manualUrl`, `modelNumber` und `sourceCheckedAt` (YYYY-MM-DD). Für alle neun Grafikkarten gibt es zusätzlich `gpuFamilyUrl`: offizielle Daten zum GPU-Typ von NVIDIA bzw. AMD. Diese Quelle beschreibt kein bestimmtes Boardpartner-Modell. Kartenlänge, Stromanschlüsse und Kühlung müssen Lernende anhand eines konkret gewählten Kartenmodells prüfen; die Beispielwerte im Konfigurator sind dafür allein kein Beleg. Nur HTTPS-Adressen verwenden und vor dem Eintrag prüfen, ob Seite, Modell, Speicherkapazität und Revision tatsächlich übereinstimmen. Für 44 eindeutig zuordenbare weitere Einträge sind Herstellerquellen hinterlegt. Allgemeines Montagezubehör zeigt einen Recherchehinweis. Die modellierten Werte der Kompatibilitätsprüfung bleiben eigenständige Unterrichtsdaten; bei Abweichungen haben die aktuellen Herstellerunterlagen Vorrang und die Werte müssen redaktionell korrigiert werden. Beim North berücksichtigt die Prüfung jetzt 300 mm GPU-Länge mit 360-mm-Front-Radiator statt der allgemeinen Grenze von 355 mm.
+Die Quellen stehen optional direkt am Produkt als `sourceUrl` (Herstellerseite zum konkreten Artikel), `datasheetUrl` (PDF), `manualUrl`, `modelNumber` und `sourceCheckedAt` (YYYY-MM-DD). Alle neun Grafikkarten sind konkrete MSI- oder Sapphire-Modelle mit Herstellerseite; für die fünf MSI-Modelle sind zusätzlich PDF-Datenblätter verlinkt. Die Länge, der Stromanschluss und die Leistungsaufnahme der Karten stammen aus den Modellangaben. Die Sapphire RX 6800 XT misst laut Hersteller 266,7 mm; für die ganzzahlige Längenprüfung wird vorsichtshalber auf 267 mm aufgerundet. `chipMaker` kennzeichnet AMD bzw. NVIDIA unabhängig vom Kartenhersteller. `gpuFamilyUrl` führt weiterhin zu den allgemeinen Angaben zum GPU-Typ und ist ausdrücklich keine Quelle für die Abmessungen des Kartenmodells. Nur HTTPS-Adressen verwenden und vor dem Eintrag prüfen, ob Seite, Modell, Speicherkapazität und Revision tatsächlich übereinstimmen. Für 44 weitere eindeutig zuordenbare Einträge sind Herstellerquellen hinterlegt. Allgemeines Montagezubehör zeigt einen Recherchehinweis. Die modellierten Werte der Kompatibilitätsprüfung bleiben eigenständige Unterrichtsdaten; bei Abweichungen haben die aktuellen Herstellerunterlagen Vorrang und die Werte müssen redaktionell korrigiert werden. Beim North berücksichtigt die Prüfung 300 mm GPU-Länge mit 360-mm-Front-Radiator statt der allgemeinen Grenze von 355 mm.
 
 Für die Bearbeitung in Excel oder LibreOffice steht die erzeugte Arbeitsmappe [`buildbench-content.xlsx`](buildbench-content.xlsx) bereit. Sie enthält:
 
@@ -116,7 +116,7 @@ Für den Abruf der Inhalts- und Quizdaten muss die Anwendung über einen lokalen
 python3 -m http.server 8080
 ```
 
-Danach `http://localhost:8080` aufrufen.
+Danach `http://localhost:8080` aufrufen. Alle für die Oberfläche benötigten Schriften liegen unter `assets/fonts/` und werden lokal geladen. DM Sans und JetBrains Mono stammen aus [google/fonts](https://github.com/google/fonts) (Stand: Commit `23e54b51ddffbc7713c583748e3bd86f62b1fa4a`); die jeweiligen SIL-Open-Font-License-Texte liegen daneben. Nur ausdrücklich angeklickte Hersteller-Produktblätter führen zu externen Webseiten.
 
 ## In ILIAS verwenden
 
@@ -130,7 +130,7 @@ Eine vorhandene Datei wird nur mit `--force` ersetzt. Anschließend die ZIP-Date
 
 Innerhalb von ILIAS verwendet die Anwendung die SCORM-1.2-Laufzeitschnittstelle. Erfasst werden besuchte Bereiche, Anzahl ausgewählter Komponenten, Schwierigkeitsgrad und Expertenparameter, betrachtetes Anwendungsszenario, Quiz-Fortschritt, bestes Quiz-Ergebnis und benötigte Sitzungszeit. Ein begonnenes Quiz wird über `cmi.suspend_data` wiederaufgenommen. Ab 70 Prozent wird der SCORM-Status „bestanden“ gesetzt. Außerhalb eines LMS bleibt die Anwendung vollständig nutzbar und speichert den Arbeitsstand nur lokal im Browser.
 
-Das SCORM-Paket ist vollständig selbstenthalten; externe Webfont-Aufrufe werden beim Paketieren entfernt. Es übermittelt keine Lerndaten an GitHub oder andere externe Dienste. Bei der SCORM-Nutzung werden die Fortschrittsdaten ausschließlich über die von ILIAS bereitgestellte Schnittstelle gespeichert.
+Das SCORM-Paket enthält auch die lokal eingebundenen Schriften und ihre Lizenzen. Es übermittelt keine Lerndaten an GitHub oder andere externe Dienste. Bei der SCORM-Nutzung werden die Fortschrittsdaten ausschließlich über die von ILIAS bereitgestellte Schnittstelle gespeichert.
 
 ## Bereitstellung
 
@@ -146,7 +146,7 @@ Unter `algorithmen-trainer/` befindet sich eine eigenständige Web-App für bin�
 
 ## Hinweise
 
-Die hinterlegten Preise sind unverbindliche Orientierungswerte. Abmessungen und elektrische Anforderungen beziehen sich auf die modellierten Referenzvarianten; konkrete Herstellerkarten und Sondereditionen können abweichen. Die Lernhinweise ersetzen keine Herstellerhandbücher, betrieblichen Sicherheitsvorgaben oder Elektrofachkenntnisse. Vor Kauf und Montage sind die Datenblätter der exakten Artikelnummern zu prüfen.
+Die hinterlegten Preise sind unverbindliche Orientierungswerte. Die GPU-Abmessungen und Leistungsangaben beziehen sich auf die namentlich ausgewiesenen Kartenmodelle. Bei anderen Revisionen und Modellen müssen die Angaben erneut geprüft werden. Die Lernhinweise ersetzen keine Herstellerhandbücher, betrieblichen Sicherheitsvorgaben oder Elektrofachkenntnisse. Vor Kauf und Montage sind die Datenblätter der exakten Artikelnummern zu prüfen.
 
 ## Lizenz
 
