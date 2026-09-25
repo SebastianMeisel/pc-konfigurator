@@ -14,6 +14,7 @@
   <script src="scorm.js" defer></script>
   <script src="difficulty.js" defer></script>
   <script src="visual-model.js" defer></script>
+  <script src="research.js" defer></script>
   <script src="app.js" defer></script>
   <script src="education.js" defer></script>
 </head>
@@ -27,8 +28,8 @@
     </a>
     <div class="top-stats" aria-live="polite">
       <div><span>Fortschritt</span><strong id="progress-label">0 / 12</strong></div>
-      <div><span>Leistungsbedarf</span><strong id="power-label">–</strong></div>
-      <div><span>Gesamt</span><strong id="price-label">0 €</strong></div>
+      <div><span>Leistungsbedarf</span><strong id="power-label">Selbst ermitteln</strong></div>
+      <div><span>Gesamtpreis</span><strong id="price-label">Selbst ermitteln</strong></div>
     </div>
     <div class="header-actions">
       <button class="btn btn-ghost" id="safety-button" type="button">Grundregeln</button>
@@ -112,6 +113,10 @@
       </div>
       <div class="context-note" id="context-note" role="status" aria-live="polite" hidden></div>
       <div id="component-grid" class="component-grid"></div>
+      <section class="research-current" aria-labelledby="research-current-title">
+        <h2 id="research-current-title">Daten zum gewählten Bauteil sammeln</h2>
+        <div id="research-current-content"></div>
+      </section>
       <div class="step-actions">
         <button class="btn btn-ghost" id="previous-button" type="button">Zurück</button>
         <button class="btn btn-primary" id="next-button" type="button">Weiter</button>
@@ -147,6 +152,7 @@
       </div>
       <p class="network-intro">Wähle integrierte Schnittstellen oder PCIe-Erweiterungskarten. Freie Steckplätze, Antennen und die Infrastruktur bestimmen den praktischen Nutzen.</p>
       <div id="network-options" class="network-options"></div>
+      <div id="research-network"></div>
       <div id="network-diagnostics" class="network-diagnostics" aria-live="polite"></div>
     </section>
 
@@ -170,6 +176,11 @@
         <button class="btn btn-ghost compact" id="copy-button" type="button">Liste kopieren</button>
       </div>
       <div id="build-list" class="build-list" role="list" aria-label="Ausgewählte Komponenten"></div>
+      <div class="research-overview" aria-labelledby="research-overview-title">
+        <h3 id="research-overview-title">Gesammelte Daten</h3>
+        <p id="research-progress" role="status"></p>
+        <ul id="research-overview-list"></ul>
+      </div>
     </section>
   </main>
 

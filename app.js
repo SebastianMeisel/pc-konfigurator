@@ -281,7 +281,7 @@
         <ul class="specs">${item.specs.map(spec => `<li>${escapeHtml(spec)}</li>`).join("")}</ul>
         ${issues.length ? `<span class="block-reason"><span>${escapeHtml(issues.map(entry => entry.title).join(" · "))}</span><span class="block-action">Details anzeigen</span></span>` :
           `<span class="card-foot"><span>${variant ? `${variant.label}${isSelected ? " gewählt" : " auswählen"}` : item.recommended ? "Empfohlene Balance" : isSelected ? "Ausgewählt" : "Auswählen"}</span><span class="select-indicator">${isSelected ? "✓" : ""}</span></span>`}
-      </button>${sourcePanel(category.id, item)}</div>`;
+      </button>${sourcePanel(category.id, item)}${isSelected ? '<a class="data-collect-link" href="#research-current-title">Daten zu diesem Bauteil erfassen ↓</a>' : ""}</div>`;
     }).join("");
 
     refs.grid.querySelectorAll(".component-card:not(.blocked)").forEach(button => button.addEventListener("click", () => {
@@ -357,7 +357,7 @@
       motherboard: c ? `Das Gehäuse unterstützt ${c.form.join(", ")}.` : "",
       cpu: board ? `Benötigter Sockel: ${board.socket}.` : "Ohne Mainboard bleiben AM5, AM4, LGA1851 und LGA1700 wählbar.",
       gpu: c ? `Maximale Grafikkartenlänge mit gewählter Kühlung: ${gpuClearance(c, cooler)} mm.` : "",
-      psu: power.recommended ? `Für diese CPU/GPU-Kombination${state.difficulty.mode === "expert" ? " einschließlich Power-Limits" : ""} werden mindestens ${power.recommended} W empfohlen.` : "CPU und GPU auswählen, um die Reserve zu berechnen.",
+      psu: power.recommended ? "Sammle die Angaben zu CPU und Grafikkarte und prüfe die Netzteilreserve nach deiner eigenen Lastberechnung." : "CPU und GPU auswählen, um die Reserve zu berechnen.",
       cooler: [cpu ? `Modellierter Kühlbedarf: ${requiredCooling()} W.` : "", c ? `Maximale Kühlerhöhe: ${c.maxCooler} mm.` : ""].filter(Boolean).join(" "),
       coolant: cooler?.kind === "custom" ? "Der offene Kreislauf benötigt mindestens einen Liter gebrauchsfertiges Kühlmittel." : cooler ? "Der ausgewählte Kühler ist geschlossen und benötigt kein separates Kühlmittel." : ""
     };
@@ -409,7 +409,7 @@
     if (gpu && c) list.push({ type:"success", title:"Grafikkarte hat Platz", text:`${gpuClearance(c, cooler) - gpu.length} mm Reserve bis zur Gehäusegrenze.` });
     if (psu && power.recommended) {
       const reserve = psu.watts - power.load;
-      list.push({ type: reserve < 100 ? "warning" : "success", title: reserve < 100 ? "Netzteilreserve knapp" : "Netzteil ausreichend", text:`${psu.watts} W Nennleistung, etwa ${reserve} W oberhalb der geschätzten Volllast.` });
+      list.push({ type: reserve < 100 ? "warning" : "success", title: reserve < 100 ? "Netzteilreserve knapp" : "Netzteil ausreichend", text:`${psu.watts} W Nennleistung. Ermittle die Volllast selbst und begründe deine Reserve.` });
     }
     if (cpu && cooler) {
       const coolingNeed = requiredCooling();
@@ -443,11 +443,12 @@
     const total = categories.reduce((sum, c) => sum + (selected(c.id)?.price || 0), 0);
     const power = requiredPower(state.selections);
     refs.progress.textContent = `${chosen} / ${categories.length}`;
-    refs.price.textContent = money(total);
-    refs.power.textContent = power.recommended ? (state.difficulty.mode === "beginner" ? `${power.load} W · ${power.recommended} W empf.` : `${power.load} W`) : "–";
+    refs.price.textContent = "Selbst ermitteln";
+    refs.power.textContent = "Selbst ermitteln";
     refs.build.innerHTML = categories.map(category => {
       const item = selected(category.id);
-      return `<div class="build-row ${item ? "" : "empty"}" role="listitem"><span class="build-category">${escapeHtml(category.label)}</span><span class="build-item">${escapeHtml(item ? item.name : "noch offen")}</span><span class="build-price">${escapeHtml(item ? money(item.price) : "–")}</span></div>`;
+      const recorded = item && window.BuildBenchResearch?.get(category.id, item.id).price;
+      return `<div class="build-row ${item ? "" : "empty"}" data-category="${escapeHtml(category.id)}" role="listitem"><span class="build-category">${escapeHtml(category.label)}</span><span class="build-item">${escapeHtml(item ? item.name : "noch offen")}</span><span class="build-price">${escapeHtml(recorded !== undefined && recorded !== "" ? `${recorded} € erfasst` : "–")}</span></div>`;
     }).join("");
 
     try {
@@ -603,6 +604,7 @@
 
   function render() {
     renderDifficulty(); renderNav(); renderPicker(); renderSummary(); renderDiagnostics(); renderSvg();
+    window.BuildBenchResearch?.render();
   }
 
   refs.previous.addEventListener("click", () => { if (state.active > 0) { state.active--; render(); window.scrollTo({top:0,behavior:scrollBehavior}); } });
@@ -614,7 +616,7 @@
   refs.reset.addEventListener("click", () => {
     if (!Object.values(state.selections).some(Boolean) || confirm("Die gesamte Auswahl zurücksetzen?")) {
       for (const category of categories) state.selections[category.id] = null;
-      state.active = 0; save(); render(); showToast("Konfiguration zurückgesetzt.");
+      state.active = 0; save(); window.BuildBenchResearch?.clear(); render(); showToast("Konfiguration zurückgesetzt.");
     }
   });
   refs.example.addEventListener("click", () => {
@@ -638,9 +640,9 @@
     const lines = ["BuildBench PC-Konfiguration", ""];
     categories.forEach(category => {
       const item = selected(category.id);
-      lines.push(`${category.label}: ${item ? item.name + " – " + money(item.price) : "offen"}`);
+      lines.push(`${category.label}: ${item ? item.name : "offen"}`);
     });
-    lines.push("", `Schwierigkeitsgrad: ${difficultyModel.modes[state.difficulty.mode].label}`, `Gesamt: ${refs.price.textContent}`, `Leistung: ${refs.power.textContent}`);
+    lines.push("", `Schwierigkeitsgrad: ${difficultyModel.modes[state.difficulty.mode].label}`);
     try { await navigator.clipboard.writeText(lines.join("\n")); showToast("Stückliste kopiert."); }
     catch (_) { showToast("Kopieren wurde vom Browser blockiert."); }
   });
@@ -659,6 +661,7 @@
     state.difficulty = difficultyModel.sanitize({ ...state.difficulty, mode: input.value });
     if (enteringBeginner) {
       for (const category of categories) state.selections[category.id] = null;
+      window.BuildBenchResearch?.clear();
       state.active = 0;
     } else if (state.difficulty.mode === "beginner") {
       reconcile("difficulty");

@@ -36,6 +36,9 @@ jobs:
           node --check difficulty.js
           node --check difficulty-check.js
           node --check visual-model.js
+          node --check research.js
+          node --check research-check.js
+          node --check calculation-check.js
           node --check visual-check.js
           node --check content-check.js
           node --check content-runtime-check.js
@@ -47,6 +50,8 @@ jobs:
           node content-runtime-check.js
           node difficulty-check.js
           node visual-check.js
+          node research-check.js
+          node calculation-check.js
           node a11y-check.js
           node --check algorithmen-trainer/app.js
           node --check algorithmen-trainer/scorm.js

@@ -96,6 +96,15 @@
 
   const snapshot = readJson("buildbench-evaluation-v1",null);
   const networkSelection = readJson("buildbench-network-v1",{ethernet:"onboard",wifi:"onboard"});
+  const research = readJson("buildbench-research-v1",{});
+  const calculationSignature = JSON.stringify({
+    components:Object.fromEntries(Object.entries(snapshot?.components || {}).map(([key,item])=>[key,item?.id || null])),
+    network:networkSelection,
+    difficulty:snapshot?.difficulty,
+    research
+  });
+  const savedCalculation = readJson("buildbench-calculation-v1",{});
+  const calculation = savedCalculation.signature === calculationSignature ? savedCalculation : { signature:calculationSignature, price:"", load:"", verified:false };
   const diagnosis = readJson("buildbench-diagnosis-v1",{});
   let activeScenario = scenarios.some(item => item.id === location.hash.slice(1)) ? location.hash.slice(1) : "office";
   let evaluations = [];
@@ -253,18 +262,85 @@
   function efficiencyScore(scenario) {
     const cpu = component("cpu"), gpu = component("gpu"), psu = component("psu");
     if (!cpu || !psu) return {score:0,reason:"CPU und Netzteil werden für die Effizienzbewertung benötigt."};
-    const load = snapshot?.power?.load || (cpu.power||0)+(gpu?.power||0)+110;
+    const load = calculation.verified ? Number(calculation.load) : snapshot?.power?.load || (cpu.power||0)+(gpu?.power||0)+110;
     const over = Math.max(0,load-scenario.powerTarget);
     const legacyPenalty = ((cpu.generation||0)+(gpu?.generation||0))*3 + (psu.atx3 === false ? 4 : 0);
     const score = clamp(100-over*.16-legacyPenalty);
     return {
       score,
-      reason:`Geschätzte Volllast ${load} W gegenüber ${scenario.powerTarget} W Szenario-Richtwert; Netzteil ${psu.watts} W, ${psu.atx3 ? "ATX 3.x" : "ATX 2.4"}.`
+      reason:`Geschätzte Volllast ${calculation.verified ? load + " W" : "noch selbst zu ermitteln"} gegenüber ${scenario.powerTarget} W Szenario-Richtwert; Netzteil ${psu.watts} W Nennleistung, ${psu.atx3 ? "ATX 3.x" : "ATX 2.4"}.`
     };
   }
 
   function totalPrice() {
-    return (snapshot?.total || 0) + networkDetails().cost;
+    return calculation.verified ? Number(calculation.price) : (snapshot?.total || 0) + networkDetails().cost;
+  }
+
+  function calculationParts() {
+    const labels = {case:"Gehäuse",motherboard:"Mainboard",cpu:"CPU",gpu:"Grafikkarte",ram:"RAM",psu:"Netzteil",cooler:"CPU-Kühler",storage:"Speicher",standoffs:"Abstandhalter",screws:"Schrauben",cables:"Kabel",coolant:"Kühlmittel"};
+    const parts = Object.entries(labels).filter(([key])=>component(key)).map(([key,label])=>({key,label,item:component(key)}));
+    const network = networkDetails();
+    for (const key of ["ethernet","wifi"]) {
+      const id = networkSelection[key];
+      if (id && id !== "onboard") parts.push({key,label:key === "ethernet" ? "Ethernet-Karte" : "WLAN-Karte",item:{...network[key],id}});
+    }
+    return parts;
+  }
+
+  function renderCalculation() {
+    const parts = calculationParts();
+    $("#calculation-rows").innerHTML = parts.map(({key,label,item}) => {
+      const entry = research?.[`${key}:${item.id}`] || {};
+      const power = entry.powerKind === "documented" || entry.powerKind === "estimated"
+        ? `${entry.watts || "offen"} W (${entry.powerKind === "estimated" ? "geschätzt" : "Herstellerwert"})`
+        : entry.powerKind === "none" ? "keine separate Angabe" : "offen";
+      return `<tr><th scope="row">${escapeHtml(label)}: ${escapeHtml(item.name)}</th><td>${entry.price !== undefined && entry.price !== "" ? escapeHtml(entry.price) + " €" : "offen"}</td><td>${escapeHtml(power)}</td><td>${escapeHtml(entry.source || "offen")}</td></tr>`;
+    }).join("") || '<tr><td colspan="4">Noch keine Bauteile gewählt.</td></tr>';
+    $("#calculated-price").value = calculation.price || "";
+    $("#calculated-load").value = calculation.load || "";
+    $("#calculation-feedback").textContent = calculation.verified
+      ? "Rechnung geprüft. Deine Angaben werden für die Szenariobewertung verwendet."
+      : "Trage deine Rechnung ein und prüfe sie.";
+  }
+
+  function saveCalculation() {
+    try { localStorage.setItem("buildbench-calculation-v1", JSON.stringify(calculation)); } catch (_) {}
+  }
+
+  function checkCalculation() {
+    const parts = calculationParts();
+    if (!parts.length) return "Wähle zuerst Bauteile im Konfigurator aus.";
+    let price = 0;
+    for (const {key,item,label} of parts) {
+      const entry = research?.[`${key}:${item.id}`] || {};
+      if (entry.price === "" || entry.price === undefined || !Number.isFinite(Number(entry.price)) || Number(entry.price) < 0)
+        return `Ergänze den Preis für ${label} in der Datensammlung.`;
+      if (!String(entry.source || "").trim()) return `Ergänze die Quelle oder Annahme für ${label}.`;
+      price += Number(entry.price);
+    }
+    let load = 110;
+    for (const key of ["cpu","gpu"]) {
+      const item = component(key);
+      if (!item) return `Wähle eine ${key === "cpu" ? "CPU" : "Grafikkarte"} für die Lastberechnung.`;
+      const entry = research?.[`${key}:${item.id}`] || {};
+      if (!["documented","estimated"].includes(entry.powerKind) || entry.watts === "" || entry.watts === undefined || !Number.isFinite(Number(entry.watts)) || Number(entry.watts) < 0)
+        return `Ergänze die Leistungsangabe für ${key === "cpu" ? "CPU" : "Grafikkarte"} in der Datensammlung.`;
+      const tuning = snapshot?.difficulty?.mode === "expert" ? Number(snapshot.difficulty[key + "Tuning"]) || 0 : 0;
+      load += Math.round(Number(entry.watts) * (1 + tuning / 100));
+    }
+    const priceMatches = Math.abs(Number(calculation.price) - price) < .01;
+    const loadMatches = Number(calculation.load) === load;
+    if (priceMatches && loadMatches) {
+      calculation.verified = true;
+      saveCalculation();
+      renderSnapshot(); renderScenarios(); renderDetail();
+      return "Rechnung geprüft. Deine Angaben werden für die Szenariobewertung verwendet.";
+    }
+    calculation.verified = false;
+    saveCalculation();
+    if (!priceMatches && !loadMatches) return "Prüfe die Addition aller Bauteilpreise einschließlich Netzwerkkarten und die Lastberechnung getrennt.";
+    if (!priceMatches) return "Prüfe die Summe aller erfassten Bauteilpreise einschließlich Netzwerkkarten.";
+    return "Prüfe CPU- und GPU-Angaben, mögliche Power-Limits und die 110-W-Annahme. Die Netzteil-Nennleistung gehört nicht in diese Summe.";
   }
 
   function valueScore(scenario) {
@@ -275,7 +351,7 @@
     if (ratio < .35) score -= 8;
     return {
       score:clamp(score),
-      reason:`Modellpreis ${euro(total)} gegenüber ${euro(scenario.budget)} Orientierungsbudget. Gebrauchtpreise, Lizenzen, Peripherie und Betriebskosten sind nicht enthalten.`
+      reason:`${calculation.verified ? "Ermittelter Preis " + euro(total) : "Preis noch selbst zu ermitteln"} gegenüber ${euro(scenario.budget)} Orientierungsbudget. Gebrauchtpreise, Lizenzen, Peripherie und Betriebskosten sind nicht enthalten.`
     };
   }
 
@@ -323,7 +399,7 @@
     state.textContent = missing.length ? `${missing.length} Kernangaben fehlen` : "auswertbar";
     state.className = `snapshot-state ${missing.length ? "warning" : "good"}`;
     chips.innerHTML = selected.map(([key,label])=>`<span class="snapshot-chip"><b>${label}</b> ${escapeHtml(component(key).name)}</span>`).join("") +
-      `<span class="snapshot-chip"><b>Modus</b> ${difficultyLabels[snapshot.difficulty?.mode] || "Standard"}</span><span class="snapshot-chip"><b>Preis</b> ${euro(totalPrice())}</span><span class="snapshot-chip"><b>Last</b> ${snapshot.power?.load || 0} W</span>`;
+      `<span class="snapshot-chip"><b>Modus</b> ${difficultyLabels[snapshot.difficulty?.mode] || "Standard"}</span><span class="snapshot-chip"><b>Preis</b> ${calculation.verified ? euro(totalPrice()) : "selbst ermitteln"}</span><span class="snapshot-chip"><b>Last</b> ${calculation.verified ? calculation.load + " W" : "selbst ermitteln"}</span>`;
     warning.hidden = !missing.length;
     warning.textContent = missing.length ? `Fehlend: ${missing.join(", ")}. Nicht belegte Kriterien erhalten 0 Punkte und senken die Bewertung.` : "";
   }
@@ -406,7 +482,25 @@
       }
     });
   }
+  $("#calculation-form").addEventListener("submit", event => {
+    event.preventDefault();
+    calculation.price = $("#calculated-price").value;
+    calculation.load = $("#calculated-load").value;
+    $("#calculation-feedback").textContent = checkCalculation();
+  });
+  for (const id of ["calculated-price","calculated-load"]) {
+    $("#" + id).addEventListener("input", () => {
+      calculation[id === "calculated-price" ? "price" : "load"] = $("#" + id).value;
+      if (calculation.verified) {
+        calculation.verified = false;
+        renderSnapshot(); renderScenarios(); renderDetail();
+      }
+      saveCalculation();
+      $("#calculation-feedback").textContent = "Geänderte Rechnung erneut prüfen.";
+    });
+  }
   $("#print-button")?.addEventListener("click",()=>window.print());
+  renderCalculation();
   renderSnapshot();
   renderScenarios();
   renderDetail();

@@ -57,6 +57,26 @@
       <div class="snapshot-warning" id="snapshot-warning" role="status" hidden></div>
     </section>
 
+    <section class="calculation-panel" aria-labelledby="calculation-title">
+      <p class="eyebrow">Eigene Rechnung</p>
+      <h2 id="calculation-title">Preis und Leistungsaufnahme ermitteln</h2>
+      <p>Nutze deine während der Zusammenstellung gesammelten Angaben. Für die modellierte Volllast rechnet BuildBench mit CPU + GPU + 110 W für die übrigen Teile. Im Expertenmodus gelten zusätzlich die gewählten Power-Limits. Die Nennleistung des Netzteils ist kein Verbrauchswert; die Netzwerkerweiterungen gehören zum Preis.</p>
+      <div class="calculation-table-wrap" tabindex="0" role="region" aria-label="Gesammelte Bauteildaten">
+        <table class="calculation-table"><thead><tr><th>Bauteil</th><th>Erfasster Preis</th><th>Erfasste Leistung</th><th>Quelle / Annahme</th></tr></thead><tbody id="calculation-rows"></tbody></table>
+      </div>
+      <form id="calculation-form" class="calculation-form">
+        <label for="calculated-price">Dein Gesamtpreis (€)
+          <input id="calculated-price" type="number" min="0" step="0.01" inputmode="decimal" required>
+        </label>
+        <label for="calculated-load">Deine geschätzte Volllast (W)
+          <input id="calculated-load" type="number" min="0" step="1" inputmode="numeric" required>
+        </label>
+        <button class="btn btn-primary" type="submit">Rechnung prüfen</button>
+      </form>
+      <p id="calculation-feedback" role="status" aria-live="polite">Trage deine Rechnung ein und prüfe sie.</p>
+      <a href="index.html#research-overview-title">Bauteildaten ergänzen</a>
+    </section>
+
     <section class="assignment-panel" aria-labelledby="assignment-title">
       <p class="eyebrow">Kundenauftrag · Fehlersuche</p>
       <h2 id="assignment-title">Prüfe deinen Bauvorschlag</h2>
