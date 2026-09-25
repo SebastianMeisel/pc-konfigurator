@@ -39,6 +39,7 @@ PACKAGE_FILES = (
     "content-loader.js",
     "difficulty.js",
     "visual-model.js",
+    "research.js",
     *FONT_ASSETS,
     *SVG_ASSETS,
     "content/components.json",

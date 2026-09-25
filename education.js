@@ -14,8 +14,6 @@
   const networkState = {ethernet:"onboard", wifi:"onboard"};
   let activeView = "inside";
   let dialogTrigger = null;
-  let basePrice = 0;
-  let renderedPrice = null;
 
   const $ = selector => document.querySelector(selector);
   const escapeHtml = value => String(value).replace(/[&<>"']/g, char => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char]));
@@ -137,7 +135,7 @@
       saveNetwork();
       renderNetwork();
       renderPorts();
-      applyPrice(false);
+      window.BuildBenchResearch?.render();
       root.querySelector(`[data-network-type="${selectedType}"][data-network-id="${selectedId}"]`)?.focus();
     }));
     root.querySelectorAll(".network-info").forEach(button => button.addEventListener("click", () => {
@@ -146,8 +144,7 @@
       openLesson(networkGroups[type].lessonId, item);
     }));
 
-    const extra = chosen("ethernet").price + chosen("wifi").price;
-    $("#network-total").textContent = extra ? `${euro(extra)} zusätzlich` : "0 € zusätzlich";
+    $("#network-total").textContent = "Preis selbst erfassen";
     renderNetworkDiagnostics();
   }
 
@@ -169,22 +166,6 @@
     $("#network-diagnostics").innerHTML = notes.map(([type,icon,text]) =>
       `<div class="network-note ${type}"><b>${icon}</b><span>${escapeHtml(text)}</span></div>`
     ).join("");
-  }
-
-  function parsePrice(text) {
-    const digits = text.replace(/[^0-9]/g,"");
-    return digits ? Number(digits) : 0;
-  }
-
-  function applyPrice(captureBase = true) {
-    const label = $("#price-label");
-    if (!label) return;
-    const current = label.textContent;
-    if (captureBase && current !== renderedPrice) basePrice = parsePrice(current);
-    const extra = chosen("ethernet").price + chosen("wifi").price;
-    const next = new Intl.NumberFormat("de-DE",{style:"currency",currency:"EUR",maximumFractionDigits:0}).format(basePrice + extra);
-    renderedPrice = next;
-    if (label.textContent !== next) label.textContent = next;
   }
 
   function svgText(x,y,text,size=12,fill="#9bb0c8",anchor="start") {
@@ -288,7 +269,7 @@
   function refreshAfterConfiguratorRender() {
     renderNetwork();
     renderPorts();
-    applyPrice(true);
+    window.BuildBenchResearch?.render();
     const button = $("#lesson-button");
     if (button) button.setAttribute("aria-label",`Lerninformationen: ${currentLessonKey()}`);
     if (activeView === "ports") setView("ports");
@@ -298,15 +279,24 @@
     event.preventDefault();
     event.stopImmediatePropagation();
     const lines = ["BuildBench PC-Konfiguration", ""];
+    const choices = baseSelections();
+    function collected(type, id) {
+      if (!id || id === "onboard") return "";
+      const entry = window.BuildBenchResearch?.get(type, id) || {};
+      const parts = [];
+      if (entry.price !== undefined && entry.price !== "") parts.push(`${entry.price} €`);
+      if (entry.watts !== undefined && entry.watts !== "") parts.push(`${entry.watts} W (${entry.powerKind === "estimated" ? "geschätzt" : "Herstellerwert"})`);
+      else if (entry.powerKind === "none") parts.push("keine separate Leistungsangabe");
+      if (entry.source) parts.push(`Quelle/Annahme: ${entry.source}`);
+      return parts.length ? " – " + parts.join(" · ") : "";
+    }
     document.querySelectorAll(".build-row").forEach(row => {
       const category = row.querySelector(".build-category")?.textContent.trim();
       const item = row.querySelector(".build-item")?.textContent.trim();
-      const price = row.querySelector(".build-price")?.textContent.trim();
-      if (category) lines.push(`${category}: ${item || "offen"}${price && price !== "–" ? " – " + price : ""}`);
+      if (category) lines.push(`${category}: ${item || "offen"}${collected(row.dataset.category, choices[row.dataset.category])}`);
     });
-    lines.push(`Ethernet: ${chosen("ethernet").name} – ${euro(chosen("ethernet").price)}`);
-    lines.push(`WLAN: ${chosen("wifi").name} – ${euro(chosen("wifi").price)}`);
-    lines.push("", `Gesamt: ${$("#price-label")?.textContent || "–"}`, `Leistung: ${$("#power-label")?.textContent || "–"}`);
+    lines.push(`Ethernet: ${chosen("ethernet").name}${collected("ethernet", chosen("ethernet").id)}`);
+    lines.push(`WLAN: ${chosen("wifi").name}${collected("wifi", chosen("wifi").id)}`);
     try {
       await navigator.clipboard.writeText(lines.join("\n"));
       showToast("Stückliste einschließlich Netzwerk kopiert.");
@@ -321,13 +311,13 @@
     saveNetwork();
     renderNetwork();
     renderPorts();
-    applyPrice(false);
+    window.BuildBenchResearch?.render();
   }
 
   loadNetwork();
   renderNetwork();
   renderPorts();
-  applyPrice(true);
+  window.BuildBenchResearch?.render();
 
   $("#copy-button")?.addEventListener("click", copyExtended, true);
   $("#reset-button")?.addEventListener("click", () => setTimeout(() => {
@@ -354,9 +344,4 @@
   const observed = $("#build-list");
   if (observed) observer.observe(observed,{childList:true,subtree:true});
 
-  const priceObserver = new MutationObserver(() => {
-    const label = $("#price-label");
-    if (label && label.textContent !== renderedPrice) applyPrice(true);
-  });
-  if ($("#price-label")) priceObserver.observe($("#price-label"),{childList:true,subtree:true,characterData:true});
 })();

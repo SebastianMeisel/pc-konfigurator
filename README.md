@@ -11,7 +11,8 @@ Die Anwendung bewertet unter anderem Sockel, Formfaktor, Arbeitsspeicherstandard
 - Umschaltbare SVG-Innen- und Rückansicht mit beschrifteten Peripherieanschlüssen
 - Auswahl integrierter oder zusätzlicher Ethernet- und WLAN-Schnittstellen
 - Hinweise zu PCIe-Steckplätzen, Bluetooth-USB-Headern, Antennen, Kabelkategorien und Netzwerk-Infrastruktur
-- Automatische Berücksichtigung der Netzwerk-Erweiterungen im Gesamtpreis
+- Sammelkarten für Preis, Leistungsangabe und Quelle jedes ausgewählten Bauteils einschließlich Netzwerk-Erweiterungen
+- Eigene Preis- und Lastberechnung in der Auswertung mit Hinweisen bei Rechenfehlern; die Werte erscheinen erst nach korrekter Eingabe
 - Klar markierte Komponenten aus ein bis zwei Vorgängergenerationen für Plattformvergleich, Budgetplanung und Gebrauchtmarkt-Szenarien
 - Drei Schwierigkeitsgrade: zwei angeleitete Einsteiger-Baupfade mit unmittelbarem Feedback, freier Standardkatalog und Expertenmodus mit Fehlersuche in der Auswertung
 - Herstellerangaben und Datenblätter für eindeutig identifizierte Modelle; im Standard- und Expertenmodus ersetzt Quellenarbeit die technischen Kurzangaben auf den Auswahlkarten
@@ -52,7 +53,9 @@ Listenwerte wie Spezifikationen, Sockel oder unterstützte Formfaktoren stehen i
 
 Neue Modelle können ohne Programmänderung in einer vorhandenen Kategorie ergänzt werden, sofern alle von den bestehenden Einträgen verwendeten technischen Felder ausgefüllt sind. Neue Kategorien oder neue technische Eigenschaften benötigen zusätzlich passende Anzeige-, Kompatibilitäts- oder Bewertungslogik.
 
-Die Notizen der Auswertung werden je Kundenauftrag im aktuellen Browser gespeichert. Für eine Abgabe müssen die Lernenden sie über die Druckansicht oder eine andere vereinbarte Methode einreichen.
+Die Notizen der Auswertung werden je Kundenauftrag im aktuellen Browser gespeichert. Die gesammelten Bauteildaten lassen sich mit „Liste kopieren“ übernehmen; für eine Abgabe können die Lernenden außerdem die Druckansicht oder eine andere vereinbarte Methode nutzen.
+
+Beim Zusammenstellen erfassen Lernende zu jedem Bauteil den Preis, eine dokumentierte oder geschätzte Leistungsangabe und die Quelle beziehungsweise Annahme. Fehlt ein separater Herstellerwert, kann dies ausdrücklich markiert werden. Die Eingaben bleiben lokal im Browser und sind an das konkrete Modell gebunden; bei einem Modellwechsel werden keine Daten eines anderen Teils übernommen. Die Auswertung übernimmt diese Datensammlung. Sie prüft den selbst addierten Gesamtpreis einschließlich gewählter Netzwerkkarten und die modellierte Volllast aus den erfassten CPU- und GPU-Werten, gegebenenfalls mit Power-Limits, plus 110 W als vereinfachte Annahme für übrige Teile. Die Netzteil-Nennleistung ist dabei keine Leistungsaufnahme. Nach einer Änderung der Bauteile oder gesammelten Daten muss die Rechnung erneut geprüft werden.
 
 Ein neu erzeugtes SCORM-Paket enthält die aktuellen Quellen und Oberflächenänderungen:
 

@@ -35,13 +35,26 @@
 }
 .method-badge strong { font:700 2.3rem "JetBrains Mono",monospace; color:var(--accent); line-height:1; }
 .method-badge span { width:80px; color:var(--muted); font-size:.68rem; line-height:1.2; }
-.snapshot-panel,.detail-panel,.method-panel {
+.snapshot-panel,.detail-panel,.method-panel,.calculation-panel {
   border:1px solid rgba(54,79,111,.7);
   border-radius:var(--radius);
   background:linear-gradient(145deg,rgba(17,34,56,.94),rgba(11,23,40,.94));
   box-shadow:var(--shadow);
 }
 .snapshot-panel { padding:20px 22px; }
+.calculation-panel { padding:20px 22px; }
+.calculation-panel h2 { margin:4px 0 10px; }
+.calculation-panel p { color:var(--muted); line-height:1.55; }
+.calculation-panel > a { color:var(--cyan); text-decoration:underline; }
+.calculation-table-wrap { max-width:100%; overflow-x:auto; margin:16px 0; }
+.calculation-table { width:100%; border-collapse:collapse; text-align:left; font-size:.78rem; }
+.calculation-table th,.calculation-table td { padding:9px; border-bottom:1px solid var(--line); vertical-align:top; }
+.calculation-table th { color:var(--text); }
+.calculation-table td { color:var(--muted); overflow-wrap:anywhere; }
+.calculation-form { display:flex; flex-wrap:wrap; align-items:end; gap:12px; }
+.calculation-form label { display:grid; gap:6px; min-width:190px; font-size:.8rem; font-weight:600; }
+.calculation-form input { min-height:44px; padding:8px 10px; border:1px solid var(--line-bright); border-radius:7px; color:var(--text); background:#0b1728; }
+#calculation-feedback { min-height:24px; }
 .section-heading { display:flex; align-items:flex-end; justify-content:space-between; gap:20px; margin-bottom:14px; }
 .section-heading > p { max-width:520px; margin:0; color:var(--muted); font-size:.78rem; text-align:right; }
 .snapshot-state {
@@ -237,7 +250,7 @@
   .diagnosis-print { display:block; color:#111; white-space:pre-wrap; overflow-wrap:anywhere; }
   body { background:#fff; color:#111; }
   .evaluation-page { width:100%; padding:0; }
-  .evaluation-hero,.snapshot-panel,.assignment-panel,.detail-panel,.scenario-card,.criteria-panel,.recommendation-panel section {
+  .evaluation-hero,.snapshot-panel,.calculation-panel,.assignment-panel,.detail-panel,.scenario-card,.criteria-panel,.recommendation-panel section {
     color:#111; background:#fff; box-shadow:none; break-inside:avoid;
   }
   .scenario-card:not(.active) { display:none; }
